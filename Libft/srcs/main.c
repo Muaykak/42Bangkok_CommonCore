@@ -12,15 +12,16 @@
 
 #include <stdio.h>
 #include <ctype.h>
-#include <bsd/string.h>
 #include <string.h>
 #include "libft.h"
 
-
 int	main(void)
 {
-
-//	printf("ft_isalpha Return: %d\n", ft_isalpha('a'));
+	/*
+	char	c = 'a'
+	printf("ft_isalpha Return: %d\n", ft_isalpha(c));
+	printf("isalpha Return: %d\n", isalpha(c))
+	*/
 //	printf("ft_isdigit Return: %d\n", ft_isdigit('b'));
 //	printf("ft_isalnum Return: %d\n", ft_isalnum('c'));
 //	printf("ft_isascii Return: %d\n", ft_isascii('d'));
@@ -70,9 +71,9 @@ int	main(void)
 
 //	ft_strlcpy
 	char	dest[20] = "Hello";
-	char	src[20] = "Hi";
+	char	src[20] = "hi";
 	printf("The dest string: %s\n", dest);
 	printf("The src string: %s\n", dest);
-	strlcpy(dest, src, 3);
+	strlcpy(dest, src, 1);
 	printf("Dest after strlcpy: %s\n", dest);
 }
