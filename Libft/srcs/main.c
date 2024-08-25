@@ -12,15 +12,13 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <bsd/string.h>
 #include <string.h>
 #include "libft.h"
 
 
-int	main(int ac, char **av)
+int	main(void)
 {
-	
-	(void)ac;
-	(void)av;
 
 //	printf("ft_isalpha Return: %d\n", ft_isalpha('a'));
 //	printf("ft_isdigit Return: %d\n", ft_isdigit('b'));
@@ -45,9 +43,36 @@ int	main(int ac, char **av)
 	}
 	*/
 
+	/*
 //	ft_bzero
-	
+	int	k = 10;
+	int	arr[k];
 
-	
+	ft_bzero(&arr[0], k * sizeof(arr[0]));
+	int	i = 0;
+	while (i < k)
+	{
+		printf("arr[%d] = %d\n", i, arr[i]);
+		i++;		
+	}
+	*/
+
+	/*
+//	ft_memcpy and ft_memmove
+	char	str2[20] = "abcdefghijklmnop";
+	printf("Stelen count: %lu\n", strlen(str2));
+	printf("Sizeof str2: %lu\n", sizeof(str2));
+	printf("str2 before memcpy: %s\n", str2);
+	ft_memmove(str2 + 5, str2, 7);
+	printf("str2 after memcpy: %s\n", str2);
 	return (0);
+	*/
+
+//	ft_strlcpy
+	char	dest[20] = "Hello";
+	char	src[20] = "Hi";
+	printf("The dest string: %s\n", dest);
+	printf("The src string: %s\n", dest);
+	strlcpy(dest, src, 3);
+	printf("Dest after strlcpy: %s\n", dest);
 }
