@@ -12,25 +12,42 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
+#include "libft.h"
 
-int	ft_isalpha(int c);
-int	ft_isdigit(int c);
-int	ft_isalnum(int c);
 
 int	main(int ac, char **av)
 {
-	int	i;
+	
+	(void)ac;
+	(void)av;
 
-	if (ac == 2)
+//	printf("ft_isalpha Return: %d\n", ft_isalpha('a'));
+//	printf("ft_isdigit Return: %d\n", ft_isdigit('b'));
+//	printf("ft_isalnum Return: %d\n", ft_isalnum('c'));
+//	printf("ft_isascii Return: %d\n", ft_isascii('d'));
+//	printf("ft_isprint Return: %d\n", ft_isprint('e'));
+//	printf("ft_strlen Return: %lu\n", ft_strlen(""));
+
+	/*
+//	ft_memset
+	int	arr[20];
+
+	ft_memset(arr, 0, 20 * sizeof(arr[0]));
+	int	i = 0;
+	while (i < 20)
 	{
-		i = 0;
-		while (av[1][i] != '\0')
-		{
-			printf("letter: %c\nReturn: %d\n\n"\
-			, av[1][i], ft_isalnum(av[1][i]));
+		printf("arr[%d] = %d\n", i, arr[i]);
+		if(i < 10)
 			i++;
-		}
-		return (0);
+		else
+			break ;
 	}
+	*/
+
+//	ft_bzero
+	
+
+	
 	return (0);
 }

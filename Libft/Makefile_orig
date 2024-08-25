@@ -1,4 +1,4 @@
-SRC			= main.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c
+SRC			= ft_putchar.c ft_swap.c ft_putstr.c ft_strlen.c ft_strcmp.c
 
 SRCS		= ${addprefix ${PRE}, ${SRC}}
 
@@ -8,7 +8,7 @@ PRE			= ./srcs/
 
 HEAD		= ./includes/
 
-NAME		= test
+NAME		= libft.a
 
 RM			= rm -f
 
@@ -22,7 +22,8 @@ all:		${NAME}
 			${CC} ${CFLAGS} -c -I ${HEAD} $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+			ar -rc ${NAME} ${OBJS}
+			ranlib ${NAME}
 
 clean:
 			rm -f ${OBJS}
