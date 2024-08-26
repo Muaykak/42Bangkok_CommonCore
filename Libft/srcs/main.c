@@ -26,6 +26,8 @@ int	main(void)
 //	printf("ft_isalnum Return: %d\n", ft_isalnum('c'));
 //	printf("ft_isascii Return: %d\n", ft_isascii('d'));
 //	printf("ft_isprint Return: %d\n", ft_isprint('e'));
+//	printf("ft_toupper Return: %d\n", ft_toupper('k'));
+//	printf("ft_tolower Return: %d\n", ft_tolower('k'));
 //	printf("ft_strlen Return: %lu\n", ft_strlen(""));
 
 	/*
@@ -92,4 +94,67 @@ int	main(void)
 	printf("Dest after strlcat: %s\n", dest);
 	printf("Return value: %lu\n", return_value);
 	*/
+
+	/*
+//	ft_strchr
+	char	str[] = "Hello";
+	char	c = 'H';
+	char	*ptr;
+
+	printf("the string: %s\n", str);
+	ptr = ft_strchr(str, c);
+	printf("chr: %c\nptr: %s\n", c, ptr);
+	*/
+
+	/*
+//	ft_strrchr
+	char	str[] = "Hello";
+	char	c = 'z';
+	char	*ptr;
+
+	printf("the string: %s\n", str);
+	ptr = ft_strrchr(str, c);
+	printf("chr: %c\nptr: %s\n", c, ptr);
+	*/
+
+	/*
+//	ft_strncmp
+	char	s1[] = "Hello";
+	char	s2[] = "Hellq";
+
+	printf("str1: %s\n", s1);
+	printf("str2: %s\n", s2);
+	printf("ft_strncmp return: %d\n", strncmp(s1, s2, 5));
+	*/
+
+	/*
+//	ft_memchr
+	char	str[] = "Hello";
+	char	c = 'k';
+	void	*ptr;
+
+	printf("String: %s\n", str);
+	printf ("character: %c\n", c);
+	ptr = ft_memchr(str, c, 11);
+	printf ("ptr: %s\n", (char *)ptr);
+	*/
+
+	/*
+//	ft_memcmp
+	char	str1[] = "Hello";
+	char	str2[] = "Hello";
+	int		return_value;
+
+	printf("str1: %s\n", str1);
+	printf("str2: %s\n", str2);
+	return_value = ft_memcmp(str1, str2, 2);
+	printf("ft_memcmp return value: %d\n", return_value);
+	*/
+
+//	ft_strnstr
+	char	big[] = "Hello my name is mark the 42 cadet";
+	char	little[] = "name";
+	char	*ptr;
+
+
 }

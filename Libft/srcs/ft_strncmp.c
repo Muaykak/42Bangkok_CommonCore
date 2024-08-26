@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/25 15:58:22 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/25 15:58:25 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/26 15:14:25 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/26 15:14:27 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+int	strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	index;
+	size_t	i;
+	unsigned char	*p1;
+	unsigned char	*p2;
 
-	if (size == 0)
-		return (ft_strlen(src));
-	index = 0;
-	while (index < size - 1 && *(src + index) != '\0')
-	{
-		*(dst + index) = *(src + index);
-		index++;
-	}
-	*(dst + index) = '\0';
-	return (ft_strlen(src));
+	p1 = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n && p1[i] != '\0' && p1[i] == p2[i])
+		i++;
+	return (p1[i] - p2[i]);
 }

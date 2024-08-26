@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/25 15:58:22 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/25 15:58:25 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/26 14:56:21 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/26 14:56:22 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	index;
+	char	*ptr;
+	size_t	i;
 
-	if (size == 0)
-		return (ft_strlen(src));
-	index = 0;
-	while (index < size - 1 && *(src + index) != '\0')
+	if (s == NULL)
+		return (NULL);
+	i = 0;
+	ptr = NULL;
+	while (*(s + i) != '\0')
 	{
-		*(dst + index) = *(src + index);
-		index++;
+		if (*(s + i) == c)
+			ptr = (char *)(s + i);
+		i++;
 	}
-	*(dst + index) = '\0';
-	return (ft_strlen(src));
+	if (*(s + i) == '\0' && c == '\0')
+		return ((char *)(s + i));
+	else
+		return (ptr);
 }
