@@ -80,7 +80,6 @@ int	main(void)
 	printf("Dest after strlcpy: %s\n", dest);
 	printf("Return value: %lu\n", return_value);
 	*/
-	
 
 	/*
 //	ft_strlcat
