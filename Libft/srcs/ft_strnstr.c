@@ -12,11 +12,12 @@
 
 #include "libft.h"
 
-char	*strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 
+	(void)len;
 	if (*little == '\0')
-		return (big);
+		return ((char *)big);
 	else
 		return (NULL);
 }

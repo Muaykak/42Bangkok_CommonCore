@@ -156,5 +156,8 @@ int	main(void)
 	char	little[] = "name";
 	char	*ptr;
 
-
+	printf("The big string: %s\n", big);
+	printf("The little string: %s\n", little);
+	ptr = strnstr(big, little, 20);
+	printf("ptr: %s\n", ptr);
 }
