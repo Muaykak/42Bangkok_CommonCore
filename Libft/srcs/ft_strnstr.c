@@ -14,10 +14,21 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
+	size_t	i[2];
 
-	(void)len;
 	if (*little == '\0')
 		return ((char *)big);
-	else
-		return (NULL);
+	i[0] = 0;
+	while (i[0] < len && *(big + i[0]) != '\0')
+	{
+		i[1] = 0;
+		while (*(big + i[0] + i[1]) == *(little + i[1]) \
+		&& *(big + i[0] + i[1]) != '\0' && *(little + i[1]) != '\0' \
+		&& i[0] + i[1] < len)
+			i[1]++;
+		if (*(little + i[1]) == '\0')
+			return ((char *)(big + i[0]));
+		i[0]++;
+	}
+	return (NULL);
 }

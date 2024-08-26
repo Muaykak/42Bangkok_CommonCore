@@ -13,15 +13,22 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 #include "libft.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	/*
+	(void)ac;
+	(void)av;
 	char	c = 'a'
 	printf("ft_isalpha Return: %d\n", ft_isalpha(c));
 	printf("isalpha Return: %d\n", isalpha(c))
 	*/
+	
+	/*
+	(void)ac;
+	(void)av;
 //	printf("ft_isdigit Return: %d\n", ft_isdigit('b'));
 //	printf("ft_isalnum Return: %d\n", ft_isalnum('c'));
 //	printf("ft_isascii Return: %d\n", ft_isascii('d'));
@@ -29,11 +36,14 @@ int	main(void)
 //	printf("ft_toupper Return: %d\n", ft_toupper('k'));
 //	printf("ft_tolower Return: %d\n", ft_tolower('k'));
 //	printf("ft_strlen Return: %lu\n", ft_strlen(""));
+	*/
 
 	/*
 //	ft_memset
 	int	arr[20];
 
+	(void)ac;
+	(void)av;
 	ft_memset(arr, 0, 20 * sizeof(arr[0]));
 	int	i = 0;
 	while (i < 20)
@@ -51,6 +61,8 @@ int	main(void)
 	int	k = 10;
 	int	arr[k];
 
+	(void)ac;
+	(void)av;
 	ft_bzero(&arr[0], k * sizeof(arr[0]));
 	int	i = 0;
 	while (i < k)
@@ -63,6 +75,9 @@ int	main(void)
 	/*
 //	ft_memcpy and ft_memmove
 	char	str2[20] = "abcdefghijklmnop";
+
+	(void)ac;
+	(void)av;
 	printf("Stelen count: %lu\n", strlen(str2));
 	printf("Sizeof str2: %lu\n", sizeof(str2));
 	printf("str2 before memcpy: %s\n", str2);
@@ -73,6 +88,8 @@ int	main(void)
 
 	/*	
 //	ft_strlcpy
+	(void)ac;
+	(void)av; 
 	char	dest[20] = "";
 	char	src[20] = "";
 	size_t	return_value;
@@ -88,6 +105,9 @@ int	main(void)
 	char	dest[7] = "";
 	char	src[20] = "";
 	size_t	return_value;
+
+	(void)ac;
+	(void)av;
 	printf("The dest string: %s\n", dest);
 	printf("The src string: %s\n", src);
 	return_value = ft_strlcat(dest, src, 6);
@@ -101,6 +121,8 @@ int	main(void)
 	char	c = 'H';
 	char	*ptr;
 
+	(void)ac;
+	(void)av;
 	printf("the string: %s\n", str);
 	ptr = ft_strchr(str, c);
 	printf("chr: %c\nptr: %s\n", c, ptr);
@@ -112,6 +134,8 @@ int	main(void)
 	char	c = 'z';
 	char	*ptr;
 
+	(void)ac;
+	(void)av;
 	printf("the string: %s\n", str);
 	ptr = ft_strrchr(str, c);
 	printf("chr: %c\nptr: %s\n", c, ptr);
@@ -122,6 +146,8 @@ int	main(void)
 	char	s1[] = "Hello";
 	char	s2[] = "Hellq";
 
+	(void)ac;
+	(void)av;
 	printf("str1: %s\n", s1);
 	printf("str2: %s\n", s2);
 	printf("ft_strncmp return: %d\n", strncmp(s1, s2, 5));
@@ -133,6 +159,8 @@ int	main(void)
 	char	c = 'k';
 	void	*ptr;
 
+	(void)ac;
+	(void)av;
 	printf("String: %s\n", str);
 	printf ("character: %c\n", c);
 	ptr = ft_memchr(str, c, 11);
@@ -145,6 +173,8 @@ int	main(void)
 	char	str2[] = "Hello";
 	int		return_value;
 
+	(void)ac;
+	(void)av;
 	printf("str1: %s\n", str1);
 	printf("str2: %s\n", str2);
 	return_value = ft_memcmp(str1, str2, 2);
@@ -153,11 +183,13 @@ int	main(void)
 
 //	ft_strnstr
 	char	big[] = "Hello my name is mark the 42 cadet";
-	char	little[] = "name";
+	char	little[] = "";
 	char	*ptr;
 
+	if (ac != 2)
+		return (0);
 	printf("The big string: %s\n", big);
 	printf("The little string: %s\n", little);
-	ptr = strnstr(big, little, 20);
+	ptr = strnstr(big, little, atoi(av[1]));
 	printf("ptr: %s\n", ptr);
 }
