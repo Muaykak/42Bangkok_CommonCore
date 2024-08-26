@@ -181,6 +181,7 @@ int	main(int ac, char **av)
 	printf("ft_memcmp return value: %d\n", return_value);
 	*/
 
+	/*
 //	ft_strnstr
 	char	big[] = "Hello my name is mark the 42 cadet";
 	char	little[] = "";
@@ -192,4 +193,59 @@ int	main(int ac, char **av)
 	printf("The little string: %s\n", little);
 	ptr = strnstr(big, little, atoi(av[1]));
 	printf("ptr: %s\n", ptr);
+	*/
+
+	/*
+//	ft_atoi
+	if (ac != 2)
+		return (0);
+	printf("The argument is: %s\n", av[1]);
+	printf("ft_atoi = %d\n", atoi(av[1]));
+	*/
+	
+	/*
+//	ft_strdup
+	char	*ptr;
+
+	if (ac != 2)
+		return (0);
+	printf("The argument: %s\n", av[1]);
+	printf("pos: %p\n", &av[1]);
+	ptr = ft_strdup(av[1]);
+	printf("ptr: %s\n", ptr);
+	printf("pos: %p\n", &ptr);
+	free(ptr);
+	*/
+
+	/*
+//	ft_calloc
+	int	*arr;
+	int	i;
+
+	if (ac != 2)
+		return (0);
+	arr = (int *)calloc(atoi(av[1]), sizeof(int));
+	if (arr == 0)
+	{
+		printf("calloc failed\n");
+		return (1);
+	}
+	i = 0;
+	while (i < atoi(av[1]))
+	{
+		printf("arr[%d]: %d\n", i, arr[i]);
+		i++;
+	}
+	*/
+
+	/*
+//	test
+
+//	(void)ac;
+//	(void)av;
+	if (ac != 3)
+		return (0);
+	printf("%d to the power of %d is %d\n", atoi(av[1]), atoi(av[2]), ft_power(atoi(av[1]), atoi(av[2])));
+//	printf("ft_isspace: %d\n", ft_isspace(' '));
+	*/
 }
