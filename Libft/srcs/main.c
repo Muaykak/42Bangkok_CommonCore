@@ -69,11 +69,28 @@ int	main(void)
 	return (0);
 	*/
 
+	/*	
 //	ft_strlcpy
-	char	dest[20] = "Hello";
-	char	src[20] = "hi";
+	char	dest[20] = "";
+	char	src[20] = "";
+	size_t	return_value;
 	printf("The dest string: %s\n", dest);
-	printf("The src string: %s\n", dest);
-	strlcpy(dest, src, 1);
+	printf("The src string: %s\n", src);
+	return_value = ft_strlcpy(dest, src, 3);
 	printf("Dest after strlcpy: %s\n", dest);
+	printf("Return value: %lu\n", return_value);
+	*/
+	
+
+	/*
+//	ft_strlcat
+	char	dest[7] = "";
+	char	src[20] = "";
+	size_t	return_value;
+	printf("The dest string: %s\n", dest);
+	printf("The src string: %s\n", src);
+	return_value = ft_strlcat(dest, src, 6);
+	printf("Dest after strlcat: %s\n", dest);
+	printf("Return value: %lu\n", return_value);
+	*/
 }
