@@ -12,7 +12,9 @@
 
 #include "libft.h"
 
-int	count_digit(int n);
+int		count_digit(int n);
+void	ft_itoa_positive(char *temp, int n, int m);
+void	ft_itoa_negative(char *temp, int n, int m);
 
 char	*ft_itoa(int n)
 {
@@ -26,18 +28,42 @@ char	*ft_itoa(int n)
 	if (temp == 0)
 		return (0);
 	temp[m] = '\0';
+	if (n < 0)
+		ft_itoa_negative(temp, n, m);
+	else
+		ft_itoa_positive(temp, n, m);
+	return (temp);
+}
+
+void	ft_itoa_negative(char *temp, int n, int m)
+{
+	temp[0] = '-';
+	n = n * -1;
+	if (n < -2147483647)
+	{
+		ft_strlcpy(temp, "-2147483648", 12);
+		return ;
+	}
+	while (m-- > 1)
+	{
+		temp[m] = (n % 10) + 48;
+		n = n / 10;
+	}
+}
+
+void	ft_itoa_positive(char *temp, int n, int m)
+{
 	while (m-- > 0)
 	{
 		temp[m] = (n % 10) + 48;
 		n = n / 10;
 	}
 	temp[m] = (n % 10) + 48;
-	return (temp);
 }
 
 int	count_digit(int n)
 {
-	int count;
+	int	count;
 
 	count = 1;
 	if (n < 0)

@@ -330,13 +330,58 @@ int	main(int ac, char **av)
 	return (0);
 	*/
 
+	/*
 //	ft_itoa
 	int	n;
+	char	*save;
 
 	if (ac != 2)
 		return (1);
 	n = atoi(av[1]);
 	printf("the number: %d\n", n);
+	save = ft_itoa(atoi(av[1]));
+	printf("itoa: \"%s\"\n", save);
+	return (0);
+	*/
+
+	/*
+//	ft_strmapi
+	char	*save;
+
+	if (ac != 2)
+		return (1);
+	printf("str: \"%s\"\n", av[1]);
+	save = ft_strmapi(av[1], &ft_changetoa);
+	printf("ft_strmapi: \"%s\"\n", save);
+	return (0);
+	*/
+
+	/*
+//	ft_putstr_fd
+	if (ac != 2)
+		return (1);
+	ft_putstr_fd("The argument: ", 1);
+	ft_putstr_fd(av[1], 1);
+	ft_putstr_fd("\n", 1);
+	return (0);
+	*/
+
+	/*
+//	ft_putendl_fd
+	if(ac != 2)
+		return (1);
+	ft_putendl_fd(av[1], 1);
+	return (0);
+	*/
+
+	/*
+//	ft_putnbr_fd
+	if(ac != 2)
+		return (1);
+	ft_putnbr_fd(atoi(av[1]), 1);
+	return (0);
+	*/
+
 	/*
 //	test
 
