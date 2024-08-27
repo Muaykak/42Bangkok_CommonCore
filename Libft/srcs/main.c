@@ -239,6 +239,105 @@ int	main(int ac, char **av)
 	*/
 
 	/*
+//	ft_substr
+	char	str[] = "Hello Vsauce Michael here :)";
+	char	*sub;
+
+	if (ac != 3)
+		return (1);
+	printf("String: %s\n", str);
+	sub = ft_substr(str, atoi(av[1]), atoi(av[2]));
+	if (sub == 0)
+	{
+		printf("Allocation Failed.\n");
+		return (1);
+	}
+	printf("sub: \"%s\"\n", sub);
+	printf("index: %d\n", atoi(av[1]));
+	printf("length: %lu\n", ft_strlen(sub));
+	return (0);
+	*/
+
+	/*
+//	ft_strjoin
+	char	*cat;
+
+	if (ac != 3)
+		return (1);
+	printf("str1: \"%s\"\n", av[1]);
+	printf("str2: \"%s\"\n", av[2]);
+	cat = ft_strjoin(av[1], av[2]);
+	if (cat == 0)
+	{
+		printf ("Alloc Failed.\n");
+		return (1);
+	}
+	printf("cat string: \"%s\"\n", cat);
+	return (0);
+	*/
+
+	/*
+//	ft_strtrim
+	char	*trim;
+
+	if (ac != 3)
+		return (1);
+	printf("str: \"%s\"\n", av[1]);
+	printf("set: \"%s\"\n", av[2]);
+	trim = ft_strtrim(av[1], av[2]);
+	if (trim == 0)
+	{
+			printf("Alloc failed.\n");
+			return (1);
+	}
+	printf("trim: \"%s\"\n", trim);
+	return (0);
+	*/
+
+	/*
+//	ft_split
+	char	**save;
+	int		i;
+	size_t	n;
+
+	if (ac != 3)
+		return (1);
+	printf("str1: \"%s\"\n", av[1]);
+	printf("character: \'%c\'\n", av[2][0]);
+	save = ft_split(av[1], av[2][0]);
+	if (save == 0)
+	{
+		printf("Alloc error.\n");
+		return (1);
+	}
+	i = 0;
+	while (save[i] != 0)
+	{
+		printf("save[%d]: \"%s\"\n", i, save[i]);
+		i++;
+	}
+
+	n = ft_split_count(av[1], av[2][0]);
+	while (n > 0)
+	{
+		if (save[n] != 0)
+			free(save[n]);
+		n--;
+	}
+	if (save[n] != 0)
+		free(save[n]);
+	free(save);
+	return (0);
+	*/
+
+//	ft_itoa
+	int	n;
+
+	if (ac != 2)
+		return (1);
+	n = atoi(av[1]);
+	printf("the number: %d\n", n);
+	/*
 //	test
 
 //	(void)ac;
