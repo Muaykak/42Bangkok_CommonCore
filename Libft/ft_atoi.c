@@ -16,27 +16,25 @@ int	ft_atoi(const char *nptr)
 {
 	int		i;
 	int		num;
-	char	*ptr;
+	char	c;
 
 	i = 0;
 	num = 0;
-	ptr = 0;
+	c = 0;
 	while ((*(nptr + i) < '0' || *(nptr + i) > '9') \
 	&& ft_isspace(*(nptr + i)) != 0 && *(nptr + i) != '\0')
 		i++;
 	if (*(nptr + i) == '+' || *(nptr + i) == '-')
 	{
-		ptr = (char *)(nptr + i);
+		c = *(nptr + i);
 		i++;
 	}
-	else
-		return (0);
 	while (*(nptr + i) >= '0' && *(nptr + i) <= '9')
 	{
 		num = (num * 10) + *(nptr + i) - 48;
 		i++;
 	}
-	if (*ptr == '-')
+	if (c == '-')
 		num = num * -1;
 	return (num);
 }

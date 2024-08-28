@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/25 13:52:03 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/25 13:52:05 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/26 14:56:21 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/26 14:56:22 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strrchr(const char *s, int c)
 {
+	char	*ptr;
 	size_t	i;
 
 	i = 0;
-	if (s == 0)
-		return (i);
-	while (s[i] != '\0')
+	ptr = NULL;
+	while (*(s + i) != '\0')
+	{
+		if (*(s + i) == (unsigned char)c)
+			ptr = (char *)(s + i);
 		i++;
-	return (i);
+	}
+	if (*(s + i) == '\0' && (unsigned char)c == '\0')
+		return ((char *)(s + i));
+	else
+		return (ptr);
 }

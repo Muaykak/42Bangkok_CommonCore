@@ -28,9 +28,11 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		*(dst + index[0] + index[1]) = *(src + index[1]);
 		index[1]++;
 	}
-	if (index[0] + index[1] > size)
-		*(dst + index[0] + index[1]) = '\0';
+	*(dst + index[0] + index[1]) = '\0';
 	while (*(src + index[1]) != '\0')
 		index[1]++;
 	return (index[0] + index[1]);
 }
+
+//	if (index[0] + index[1] > size)
+

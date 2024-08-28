@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 14:56:21 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/26 14:56:22 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/25 15:27:11 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/25 15:27:14 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*ptr;
 	size_t	i;
 
-	if (s == NULL)
-		return (NULL);
-	i = 0;
-	ptr = NULL;
-	while (*(s + i) != '\0')
+	if (dest > src)
 	{
-		if (*(s + i) == c)
-			ptr = (char *)(s + i);
-		i++;
+		n--;
+		while (n > 0)
+		{
+			*((unsigned char *)(dest + n)) = *((unsigned char *)(src + n));
+			n--;
+		}
+		*((unsigned char *)(dest + n)) = *((unsigned char *)(src + n));
 	}
-	if (*(s + i) == '\0' && c == '\0')
-		return ((char *)(s + i));
 	else
-		return (ptr);
+	{
+		i = 0;
+		while (i < n)
+		{
+			*((unsigned char *)(dest + i)) = *((unsigned char *)(src + i));
+			i++;
+		}
+	}
+	return (dest);
 }
