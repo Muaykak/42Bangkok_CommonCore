@@ -12,66 +12,77 @@
 
 #include "libft.h"
 
-int		count_digit(int n);
-void	ft_itoa_positive(char *temp, int n, int m);
-void	ft_itoa_negative(char *temp, int n, int m);
+void	ft_assignnum(char *s, int n);
+int		ft_countdigit(int n);
+int		ft_power(int num, int power);
 
 char	*ft_itoa(int n)
 {
-	int		m;
+	int		d;
 	char	*temp;
 
-	m = count_digit(n);
-	if (n < 0)
-		m += 1;
-	temp = (char *)malloc((m + 1) * sizeof(char));
-	if (temp == 0)
-		return (0);
-	temp[m] = '\0';
-	if (n < 0)
-		ft_itoa_negative(temp, n, m);
+	if (n < -2147483647)
+		return (ft_strdup("-2147483648"));
+	d = ft_countdigit(n);
+	if (n >= 0)
+		temp = (char *)malloc(d + 1);
 	else
-		ft_itoa_positive(temp, n, m);
+		temp = (char *)malloc(d + 2);
+	if (!temp)
+		return (0);
+	if (n < 0)
+	{
+		temp[0] = '-';
+		ft_assignnum(&temp[1], (n * -1));
+	}
+	else
+		ft_assignnum(&temp[0], n);
 	return (temp);
 }
 
-void	ft_itoa_negative(char *temp, int n, int m)
+void	ft_assignnum(char *s, int n)
 {
-	temp[0] = '-';
-	n = n * -1;
-	if (n < -2147483647)
+	int	m;
+	int	i;
+
+	m = ft_countdigit(n) - 1;
+	i = 0;
+	while (m >= 0)
 	{
-		ft_strlcpy(temp, "-2147483648", 12);
-		return ;
+		s[i] = (n / ft_power(10, m)) + 48;
+		n = n % ft_power(10, m);
+		m--;
+		i++;
 	}
-	while (m-- > 1)
-	{
-		temp[m] = (n % 10) + 48;
-		n = n / 10;
-	}
+	s[i] = '\0';
 }
 
-void	ft_itoa_positive(char *temp, int n, int m)
+int	ft_power(int num, int power)
 {
-	while (m-- > 0)
+	int	res;
+
+	if (num == 0)
+		return (0);
+	if (power == 0)
+		return (1);
+	res = num;
+	while (power > 1)
 	{
-		temp[m] = (n % 10) + 48;
-		n = n / 10;
+		res *= num;
+		power--;
 	}
-	temp[m] = (n % 10) + 48;
+	return (res);
 }
 
-int	count_digit(int n)
+int	ft_countdigit(int n)
 {
-	int	count;
+	int	i;
 
-	count = 1;
-	if (n < 0)
-		n = -1 * n;
+	i = 1;
 	while (n / 10 != 0)
 	{
-		count++;
+		i++;
 		n = n / 10;
 	}
-	return (count);
+	return (i);
 }

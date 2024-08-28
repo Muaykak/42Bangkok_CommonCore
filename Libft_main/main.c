@@ -100,22 +100,20 @@ int	main(int ac, char **av)
 	printf("Return value: %lu\n", return_value);
 	*/
 
-	
+	/*
 //	ft_strlcat
-	char	dest[30] = "rrrrrr";
-	char	src[20] = "lorem";
+	char	dest[7] = "";
+	char	src[20] = "";
 	size_t	return_value;
 
 	(void)ac;
 	(void)av;
-	dest[11] = 'a';
 	printf("The dest string: %s\n", dest);
 	printf("The src string: %s\n", src);
-	return_value = ft_strlcat(dest, src, 15);
+	return_value = ft_strlcat(dest, src, 6);
 	printf("Dest after strlcat: %s\n", dest);
-	write(1, dest, 15);
 	printf("Return value: %lu\n", return_value);
-	
+	*/
 
 	/*
 //	ft_strchr
@@ -278,7 +276,7 @@ int	main(int ac, char **av)
 	return (0);
 	*/
 
-	/*
+	/*	
 //	ft_strtrim
 	char	*trim;
 
@@ -294,13 +292,13 @@ int	main(int ac, char **av)
 	}
 	printf("trim: \"%s\"\n", trim);
 	return (0);
-	*/
+	*/	
 
-	/*
+	/*		
 //	ft_split
 	char	**save;
 	int		i;
-	size_t	n;
+//	size_t	n;
 
 	if (ac != 3)
 		return (1);
@@ -319,6 +317,7 @@ int	main(int ac, char **av)
 		i++;
 	}
 
+	
 	n = ft_split_count(av[1], av[2][0]);
 	while (n > 0)
 	{
@@ -331,8 +330,9 @@ int	main(int ac, char **av)
 	free(save);
 	return (0);
 	*/
+	
 
-	/*
+		
 //	ft_itoa
 	int	n;
 	char	*save;
@@ -341,10 +341,10 @@ int	main(int ac, char **av)
 		return (1);
 	n = atoi(av[1]);
 	printf("the number: %d\n", n);
-	save = ft_itoa(atoi(av[1]));
+	save = ft_itoa(n);
 	printf("itoa: \"%s\"\n", save);
 	return (0);
-	*/
+		
 
 	/*
 //	ft_strmapi
