@@ -143,13 +143,12 @@ int	main(int ac, char **av)
 
 	
 //	ft_strncmp
+
 	if (ac != 4)
 		return (1);
-
-	printf("str1: \"%s\"\n", av[1]);
-	printf("str2: \"%s\"\n", av[2]);
-	printf("ft_strncmp return: %d\n", strncmp(av[1], av[2], ft_atoi(av[3])));
-	
+	printf("str1: %s\n", av[1]);
+	printf("str2: %s\n", av[2]);
+	printf("ft_strncmp return: %d\n", ft_strncmp(av[1], av[2], ft_atoi(av[3])));
 
 	/*
 //	ft_memchr

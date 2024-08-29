@@ -23,7 +23,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	if (n == 0)
 		return (0);
 	i = 0;
-	while (i < n && *(p1 + i) != '\0' && *(p1 + i) == *(p2 + i))
+	while (i < n - 1 && *(p1 + i) != '\0' && *(p1 + i) == *(p2 + i))
 		i++;
 	return (p1[i] - p2[i]);
 }
