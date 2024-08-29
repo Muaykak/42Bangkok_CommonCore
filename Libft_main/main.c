@@ -141,7 +141,7 @@ int	main(int ac, char **av)
 	printf("chr: %c\nptr: %s\n", c, ptr);
 	*/
 
-	
+	/*
 //	ft_strncmp
 
 	if (ac != 4)
@@ -149,6 +149,7 @@ int	main(int ac, char **av)
 	printf("str1: %s\n", av[1]);
 	printf("str2: %s\n", av[2]);
 	printf("ft_strncmp return: %d\n", ft_strncmp(av[1], av[2], ft_atoi(av[3])));
+	*/
 
 	/*
 //	ft_memchr
@@ -273,7 +274,7 @@ int	main(int ac, char **av)
 	return (0);
 	*/
 
-	/*	
+		
 //	ft_strtrim
 	char	*trim;
 
@@ -289,7 +290,7 @@ int	main(int ac, char **av)
 	}
 	printf("trim: \"%s\"\n", trim);
 	return (0);
-	*/	
+		
 
 	/*		
 //	ft_split
