@@ -141,17 +141,15 @@ int	main(int ac, char **av)
 	printf("chr: %c\nptr: %s\n", c, ptr);
 	*/
 
-	/*
+	
 //	ft_strncmp
-	char	s1[] = "Hello";
-	char	s2[] = "Hellq";
+	if (ac != 4)
+		return (1);
 
-	(void)ac;
-	(void)av;
-	printf("str1: %s\n", s1);
-	printf("str2: %s\n", s2);
-	printf("ft_strncmp return: %d\n", strncmp(s1, s2, 5));
-	*/
+	printf("str1: \"%s\"\n", av[1]);
+	printf("str2: \"%s\"\n", av[2]);
+	printf("ft_strncmp return: %d\n", strncmp(av[1], av[2], ft_atoi(av[3])));
+	
 
 	/*
 //	ft_memchr
