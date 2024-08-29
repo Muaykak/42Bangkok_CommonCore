@@ -12,8 +12,8 @@
 
 #include "libft.h"
 
-size_t	ft_index_no_set(char const *s1, char const *set);
-int		ft_check_isset(char c, char const *set);
+static size_t	ft_index_no_set(char const *s1, char const *set);
+static int		ft_check_isset(char c, char const *set);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -26,8 +26,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	while (ft_check_isset(*(s1 + i), set) == 1 && i < k)
 		i++;
-	if (i == k && ft_check_isset(*(s1 + i), set) == 1)
-		temp = (char *)ft_calloc(1, sizeof(char));
+	if (i == k)
+		temp = (char *)malloc(1 * sizeof(char));
 	else
 		temp = (char *)malloc(((k - i) + 2) * sizeof(char));
 	if (temp == 0)
@@ -42,17 +42,21 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (temp);
 }
 
-size_t	ft_index_no_set(char const *s1, char const *set)
+static size_t	ft_index_no_set(char const *s1, char const *set)
 {
 	size_t	i;
 
-	i = ft_strlen(s1) - 1;
+	if (set == 0 || s1 == 0)
+		return (0);
+	i = ft_strlen(s1);
+	if (i != 0)
+		i--;
 	while (ft_check_isset(*(s1 + i), set) == 1 && i != 0)
 		i--;
 	return (i);
 }
 
-int	ft_check_isset(char c, char const *set)
+static int	ft_check_isset(char c, char const *set)
 {
 	size_t	i;
 

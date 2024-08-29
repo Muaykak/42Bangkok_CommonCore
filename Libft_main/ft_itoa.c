@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-void	ft_assignnum(char *s, int n);
-int		ft_countdigit(int n);
-int		ft_power(int num, int power);
+static void	ft_assignnum(char *s, int n);
+static int	ft_countdigit(int n);
+static int	ft_power(int num, int power);
 
 char	*ft_itoa(int n)
 {
@@ -40,24 +40,24 @@ char	*ft_itoa(int n)
 	return (temp);
 }
 
-void	ft_assignnum(char *s, int n)
+static void	ft_assignnum(char *s, int n)
 {
 	int	m;
 	int	i;
 
 	m = ft_countdigit(n) - 1;
 	i = 0;
-	while(m >= 0)
+	while (m >= 0)
 	{
 		s[i] = (n / ft_power(10, m)) + 48;
 		n = n % ft_power(10, m);
 		m--;
-		i++;		
+		i++;
 	}
 	s[i] = '\0';
 }
 
-int	ft_power(int num, int power)
+static int	ft_power(int num, int power)
 {
 	int	res;
 
@@ -74,7 +74,7 @@ int	ft_power(int num, int power)
 	return (res);
 }
 
-int	ft_countdigit(int n)
+static int	ft_countdigit(int n)
 {
 	int	i;
 

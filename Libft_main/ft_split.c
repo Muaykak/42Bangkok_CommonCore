@@ -12,10 +12,10 @@
 
 #include "libft.h"
 
-size_t	ft_countsplit(char const *s, char c);
-int		ft_malloc_string(char **temp, char const *s, char c);
-void	ft_assign_string(char **temp, char const *s, char c);
-void	ft_free_split(char **save);
+static size_t	ft_countsplit(char const *s, char c);
+static int		ft_malloc_string(char **temp, char const *s, char c);
+static void		ft_assign_string(char **temp, char const *s, char c);
+static void		ft_free_split(char **save);
 
 char	**ft_split(char const *s, char c)
 {
@@ -38,7 +38,7 @@ char	**ft_split(char const *s, char c)
 	return (temp);
 }
 
-void	ft_free_split(char **save)
+static void	ft_free_split(char **save)
 {
 	size_t	i;
 
@@ -51,7 +51,7 @@ void	ft_free_split(char **save)
 	free(save);
 }
 
-void	ft_assign_string(char **temp, char const *s, char c)
+static void	ft_assign_string(char **temp, char const *s, char c)
 {
 	size_t	i[3];
 
@@ -76,7 +76,7 @@ void	ft_assign_string(char **temp, char const *s, char c)
 	}
 }
 
-int	ft_malloc_string(char **temp, char const *s, char c)
+static int	ft_malloc_string(char **temp, char const *s, char c)
 {
 	size_t	i[3];
 
@@ -101,7 +101,7 @@ int	ft_malloc_string(char **temp, char const *s, char c)
 	return (1);
 }
 
-size_t	ft_countsplit(char const *s, char c)
+static size_t	ft_countsplit(char const *s, char c)
 {
 	size_t	count;
 	size_t	i;

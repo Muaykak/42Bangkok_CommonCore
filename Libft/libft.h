@@ -50,5 +50,6 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

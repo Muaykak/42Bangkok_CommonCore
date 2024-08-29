@@ -13,7 +13,7 @@ CFLAGS		= -Wall -Wextra -Werror
 all:		${NAME}
 
 .c.o:
-			${CC} ${CFLAGS} -c -I ./ $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} -c -I ${HEAD} $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 			ar -rc ${NAME} ${OBJS}

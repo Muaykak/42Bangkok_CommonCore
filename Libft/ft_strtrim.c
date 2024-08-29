@@ -12,8 +12,8 @@
 
 #include "libft.h"
 
-size_t	ft_index_no_set(char const *s1, char const *set);
-int		ft_check_isset(char c, char const *set);
+static size_t	ft_index_no_set(char const *s1, char const *set);
+static int		ft_check_isset(char c, char const *set);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -42,7 +42,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (temp);
 }
 
-size_t	ft_index_no_set(char const *s1, char const *set)
+static size_t	ft_index_no_set(char const *s1, char const *set)
 {
 	size_t	i;
 
@@ -56,7 +56,7 @@ size_t	ft_index_no_set(char const *s1, char const *set)
 	return (i);
 }
 
-int	ft_check_isset(char c, char const *set)
+static int	ft_check_isset(char c, char const *set)
 {
 	size_t	i;
 
