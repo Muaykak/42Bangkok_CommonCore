@@ -14,7 +14,7 @@
 # define LIBFTPRINTF_H
 
 # include <stdarg.h>
-# include "libft.h"
+# include <unistd.h>
 
 int		ft_printf(const char *str, ...);
 void	ft_putnbr_count(int	num, int *count);

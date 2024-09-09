@@ -42,18 +42,18 @@ static int	ft_do_printf(const char *str, va_list args, int *count)
 		else
 		{	
 			i++;
-			if (str[i] == '\0')
-				return (-1);
-//			ft_do_printf_sub1(&str[i], args, count);	
 			if (ft_do_printf_sub1(&str[i], args, count) == 0)
 			{
+				if (str[i] == '\0')
+					return (-1);
 				ft_putchar_count('%', count);
+				ft_putchar_count(str[i], count);
 			}
 		}
 		if (str[i] != '\0')
 			i++;
 	}
-	return (i);
+	return (*count);
 }
 
 static int	ft_do_printf_sub1(const char *str, va_list args, int *count)

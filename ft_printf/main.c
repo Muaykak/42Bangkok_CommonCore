@@ -31,8 +31,8 @@ int	main(void)
 //	}
 
 	ft_printf("\nFT_PRINTF\n");
-	ft_printf("\nReturn ft_printf || %d ||\n", ft_printf("%\nkd%"));
+	ft_printf("\nReturn ft_printf || %d ||\n", ft_printf("%%hello%\gtrythis"));
 
 	printf("\nPRINTF\n");
-	printf("\nReturn printf || %d ||\n", printf("%\nkd%"));
+	printf("\nReturn printf || %d ||\n", printf("%%hello%\gtrythis"));
 }
