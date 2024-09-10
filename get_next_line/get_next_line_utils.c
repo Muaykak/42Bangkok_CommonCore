@@ -11,3 +11,37 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+#include <stdio.h>
+
+unsigned int	ft_strlen(char *str)
+{
+	unsigned int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+			return (i + 1);
+		i++;
+	}
+	return (i);
+}
+
+// return the index that found "\n"
+//	if none return return_read
+int	check_readbuffer(char *read_buffer, int return_read)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < return_read)
+	{
+		if (read_buffer[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (i);
+}

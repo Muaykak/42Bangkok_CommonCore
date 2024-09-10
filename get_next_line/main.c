@@ -12,8 +12,15 @@
 
 #include "get_next_line.h"
 #define FILE_NAME "test.txt"
+#include <stdio.h>
 
 int	main(void)
 {
-	return 0;
+
+//	char	str[] = "Hello";
+//
+//	printf("before: \"%s\"\nLength: %u\n", str, ft_strlen(str));
+//	ft_clearstr(str);
+//	printf("after: \"%s\"\nLength: %u\n", str, ft_strlen(str));
+//	return (0);
 }
