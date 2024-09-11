@@ -18,12 +18,20 @@
 
 # define BUFFER_SIZE 3
 
-typedef struct	s_data
+typedef struct	s_gnl_data
 {
 	char	*read_buffer;
 	char	*return_string;
 	int		return_str_size;
-}				t_data;
+}				t_gnl_data;
+
+typedef struct	s_newread_data
+{
+	int		i;
+	int		j;
+	int		check_return;
+	char	*return_newstring;
+}				t_newread_data;
 
 char	*get_next_line(int fd);
 void	ft_clearstr(char *str);
