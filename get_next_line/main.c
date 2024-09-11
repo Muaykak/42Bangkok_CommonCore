@@ -13,7 +13,10 @@
 #include "get_next_line.h"
 #define FILE_NAME "test.txt"
 #include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 
+#define BUFFER_SIZE 40
 int	main(void)
 {
 

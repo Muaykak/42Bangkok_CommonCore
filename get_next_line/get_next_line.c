@@ -25,7 +25,7 @@ char	*get_next_line(int fd)
 {
 	t_gnl_data	gnl_data;
 	static char	*leftover_str;
-	char		*old_leftover_str;
+	char		*leftover_join;
 	static int	leftover_len;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -34,7 +34,6 @@ char	*get_next_line(int fd)
 	gnl_data.read_buffer = (char *)malloc(BUFFER_SIZE);
 	if (!gnl_data.read_buffer)
 		return (0);
-	old_leftover_str = leftover_str;
 	gnl_data.return_string = go_read(fd, &gnl_data, &leftover_str, \
 	&leftover_len);
 	if (gnl_data.return_string == 0)
@@ -42,7 +41,28 @@ char	*get_next_line(int fd)
 		free(gnl_data.read_buffer);
 		return (0);
 	}
+}
 
+int	do_leftover(char **leftover_str, int *leftover_len, char **new_leftover_str)
+{
+	int	i;
+	int	count;
+
+	if (*leftover_str == 0)
+		return(0);
+	i = 0;
+	while (i < *leftover_len)
+	{
+		if (*(*(leftover_str + i)) == '\n')
+			break ;
+		i++;
+	}
+	if (i == *leftover_len || i == *leftover_len - 1)
+		return (1);
+	while (i < *leftover_len)
+	{
+		if (leftover_str[i] == '\n')
+	}
 }
 
 char	*go_read(int fd, t_gnl_data *gnl_data, \
@@ -76,32 +96,6 @@ char	*add_newread(t_gnl_data *gnl_data, \
 		int return_read, int read_count)
 {
 	t_newread_data	nr;
-//	char	*return_newstring;
-//	int		i;
-//	int		j;
-//	int		check_return;
-
-//	if (!gnl_data->return_string && !gnl_data->read_buffer)
-//		return (0);
-//	check_return = check_readbuffer(gnl_data->read_buffer, return_read);
-//	if (check_return < return_read)
-//		check_return += 1;
-//	if (gnl_data->return_string == 0)
-//	{
-//		return_newstring = (char *)malloc(check_return + 1);
-//	}
-//	else
-//	{
-//		return_newstring = (char *)malloc\
-//		(((read_count - 1) * BUFFER_SIZE) + check_return + 1);
-//	}
-//	if (!return_newstring)
-//	{
-//		if (gnl_data->return_string)
-//			free(gnl_data->return_string);
-//		gnl_data->return_string = 0;
-//		return (0);
-//	}
 	nr.return_newstring = malloc_newread(gnl_data, \
 	&nr.check_return, return_read, read_count);
 	if (!nr.return_newstring)

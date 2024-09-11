@@ -31,8 +31,8 @@ int	main(void)
 //	}
 
 	ft_printf("\nFT_PRINTF\n");
-	ft_printf("\nReturn ft_printf || %d ||\n", ft_printf("%p", NULL));
+	ft_printf("\nReturn ft_printf || %d ||\n", ft_printf("%\nHello_world\n%p%s%", &count, "42Bandkok%"));
 
 	printf("\nPRINTF\n");
-	printf("\nReturn printf || %d ||\n", printf("%p", NULL));
+	printf("\nReturn printf || %d ||\n", printf("%\nHello world\n%p%s%", &count, "42Bangkok%"));
 }
