@@ -1,22 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 21:14:00 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/11 16:47:28 by srussame         ###   ########.fr       */
+/*   Created: 2024/09/11 16:42:53 by srussame          #+#    #+#             */
+/*   Updated: 2024/09/11 16:45:49 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-
-# define BUFFER_SIZE 3
-char	*get_next_line(int fd);
-
-#endif
