@@ -16,15 +16,14 @@ static int	do_newleftover(char **leftover, size_t *leftover_len, \
 			size_t start_index);
 void		set_free(char **leftover, size_t *leftover_len);
 size_t		check_readbuff(t_go_read *gr_data);
-int 		check_leftover_sub1(char **return_line, size_t start_index, \
+static int	check_leftover_sub1(char **return_line, size_t start_index, \
 			char **leftover, size_t *leftover_len);
 
 int	check_leftover(char **leftover, size_t *leftover_len, char **return_line)
 {
-	size_t	i;
 	size_t	start_index;
 
-	if(*leftover == 0)
+	if (*leftover == 0)
 		return (0);
 	start_index = 0;
 	while (start_index < *leftover_len)
@@ -39,7 +38,7 @@ int	check_leftover(char **leftover, size_t *leftover_len, char **return_line)
 	start_index, leftover, leftover_len));
 }
 
-int check_leftover_sub1(char **return_line, size_t start_index, \
+static int	check_leftover_sub1(char **return_line, size_t start_index, \
 	char **leftover, size_t *leftover_len)
 {
 	size_t	i;
@@ -52,11 +51,14 @@ int check_leftover_sub1(char **return_line, size_t start_index, \
 	}
 	i = 0;
 	while (i < start_index)
-		*(*(return_line + i++)) = *(*(leftover + i));
+	{
+		*(*(return_line + i)) = *(*(leftover + i));
+		i++;
+	}
 	*(*(return_line + start_index)) = *(*(leftover + start_index));
 	if (do_newleftover(leftover, leftover_len, start_index) == 0)
 	{
-		free(*return_line);		
+		free(*return_line);
 		return (-1);
 	}
 	return (2);

@@ -12,6 +12,15 @@
 
 #include "get_next_line.h"
 
+static int	join_readbuff(t_go_read *gr_data);
+static int	go_read(int fd, char **leftover, size_t *leftover_len, \
+			t_gnl_data *gnl_data);
+static void	go_read_sub1(t_gnl_data *gnl_data, t_go_read *gr_data, \
+		char **leftover, size_t *leftover_len);
+static void	join_leftover(t_go_read *gr_data, char **leftover, \
+		size_t *leftover_len, t_gnl_data *gnl_data);
+
+
 char	*get_next_line(int fd)
 {
 	static char		*leftover;
@@ -24,15 +33,17 @@ char	*get_next_line(int fd)
 	&gnl_data.return_line);
 	if (gnl_data.ret == 2)
 		return (gnl_data.return_line);
-	else if (gnl_data.ret = -1)
+	else if (gnl_data.ret == -1)
 		return (0);
-
+	if (go_read(fd, &leftover, &leftover_len, &gnl_data) == 0)
+		return (0);
+	return (gnl_data.return_line);
 }
 
-int	go_read(int fd, char **leftover, size_t *leftover_len, \
+static int	go_read(int fd, char **leftover, size_t *leftover_len, \
 	t_gnl_data *gnl_data)
 {
-	t_go_read gr_data;
+	t_go_read	gr_data;
 
 	gr_data.read_buffer = (char *)malloc(BUFFER_SIZE);
 	if (!gr_data.read_buffer)
@@ -44,32 +55,62 @@ int	go_read(int fd, char **leftover, size_t *leftover_len, \
 	&& check_readbuff(&gr_data) == gr_data.read_ret)
 	{
 		if (join_readbuff(&gr_data) == 0)
-		{
-			free(gr_data.read_buffer);
-			return (0);
-		}
+			break ;
 		gr_data.read_ret = read(fd, gr_data.read_buffer, BUFFER_SIZE);
 		if (gr_data.read_ret == BUFFER_SIZE)
 			gr_data.loop_count++;
 	}
-	if (join_readbuff(&gr_data) == 0)
+	go_read_sub1(gnl_data, &gr_data, leftover, leftover_len);
+	return (1);
+}
+
+static void	go_read_sub1(t_gnl_data *gnl_data, t_go_read *gr_data, \
+		char **leftover, size_t *leftover_len)
+{
+	if (join_readbuff(gr_data) != 0)
 	{
-		free(gr_data.read_buffer);
-		return (0);
+		if (gnl_data->ret == 1)
+			join_leftover(gr_data, leftover, leftover_len, gnl_data);
+		else
+			gnl_data->return_line = gr_data->read_cat;
 	}
-	if (gnl_data->ret == 1)
-
+	set_free(leftover, leftover_len);
+	gr_data->l_start = check_readbuff(gr_data) + 1;
+	if (gr_data->l_start < gr_data->read_ret)
+	{
+		*leftover = (char *)malloc(gr_data->read_ret - gr_data->l_start);
+		if (*leftover)
+		{
+			while (gr_data->l_start < gr_data->read_ret)
+				*(*(leftover + *leftover_len++)) \
+				= gr_data->read_buffer[gr_data->l_start++];
+		}
+	}
+	free(gr_data->read_buffer);
 }
 
-int join_leftover(t_go_read *gr_data, char **leftover, \
-	size_t leftover_len, t_gnl_data *gnl_data)
+static void	join_leftover(t_go_read *gr_data, char **leftover, \
+		size_t *leftover_len, t_gnl_data *gnl_data)
 {
+	t_join_leftover	jl_data;
 
+	jl_data.old_len = (BUFFER_SIZE * gr_data->loop_count) + gr_data->read_ret;
+	jl_data.joinnew = (char *)malloc(*leftover_len + jl_data.old_len);
+	if (!jl_data.joinnew)
+		return ;
+	jl_data.new_i = 0;
+	while (jl_data.new_i < *leftover_len)
+		jl_data.joinnew[jl_data.new_i++] = *(*(leftover + jl_data.new_i));
+	jl_data.old_i = 0;
+	while (jl_data.old_i < jl_data.old_len)
+		jl_data.joinnew[jl_data.new_i++] = gr_data->read_cat[jl_data.old_i++];
+	gnl_data->return_line = jl_data.joinnew;
+	free(gr_data->read_cat);
 }
 
-int	join_readbuff(t_go_read *gr_data)
+static int	join_readbuff(t_go_read *gr_data)
 {
-	t_join_readbuff j_data;
+	t_join_readbuff	j_data;
 
 	if (gr_data->read_cat == 0)
 		j_data.newcat = (char *)malloc(gr_data->read_ret);
@@ -89,7 +130,7 @@ int	join_readbuff(t_go_read *gr_data)
 	if (gr_data->read_buffer[j_data.r] == '\n')
 		j_data.newcat[j_data.n] = gr_data->read_buffer[j_data.r];
 	if (gr_data->read_cat != 0)
-		free(*gr_data->read_cat);
+		free(gr_data->read_cat);
 	gr_data->read_cat = j_data.newcat;
 	return (1);
 }

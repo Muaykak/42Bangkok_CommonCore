@@ -16,10 +16,28 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#define BUFFER_SIZE 40
+
+void	print_line(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i] != '\n')
+	{
+		write(1, &line[i], 1);
+		i++;
+	}
+}
 int	main(void)
 {
+	char	*line;
+	int		fd;
 
+	fd = open(FILE_NAME, O_RDONLY);
+	line = get_next_line(fd);
+	line = get_next_line(fd);
+	if(line != 0)
+		print_line(line);
 //	char	str[] = "Hello";
 //
 //	printf("before: \"%s\"\nLength: %u\n", str, ft_strlen(str));
