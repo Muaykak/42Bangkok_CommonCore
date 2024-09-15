@@ -27,7 +27,10 @@ void	print_line(char *line)
 		write(1, &line[i], 1);
 		i++;
 	}
+	if (line[i] == '\n')
+		write(1, "\n", 1);
 }
+
 int	main(void)
 {
 	char	*line;
@@ -35,9 +38,30 @@ int	main(void)
 
 	fd = open(FILE_NAME, O_RDONLY);
 	line = get_next_line(fd);
+	print_line(line);
+	write(1, "\n", 1);
 	line = get_next_line(fd);
-	if(line != 0)
-		print_line(line);
+	print_line(line);
+	write(1, "\n", 1);
+	line = get_next_line(fd);
+	print_line(line);
+	write(1, "\n", 1);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	if(line != 0)
+//		print_line(line);
 //	char	str[] = "Hello";
 //
 //	printf("before: \"%s\"\nLength: %u\n", str, ft_strlen(str));

@@ -19,6 +19,8 @@ size_t		check_readbuff(t_go_read *gr_data);
 static int	check_leftover_sub1(char **return_line, size_t start_index, \
 			char **leftover, size_t *leftover_len);
 
+#include <stdio.h>
+
 int	check_leftover(char **leftover, size_t *leftover_len, char **return_line)
 {
 	size_t	start_index;
@@ -28,7 +30,7 @@ int	check_leftover(char **leftover, size_t *leftover_len, char **return_line)
 	start_index = 0;
 	while (start_index < *leftover_len)
 	{
-		if (*(*(leftover + start_index)) == '\n')
+		if ((*leftover)[start_index] == '\n')
 			break ;
 		start_index++;
 	}
@@ -52,10 +54,10 @@ static int	check_leftover_sub1(char **return_line, size_t start_index, \
 	i = 0;
 	while (i < start_index)
 	{
-		*(*(return_line + i)) = *(*(leftover + i));
+		(*return_line)[i] = (*leftover)[i];
 		i++;
 	}
-	*(*(return_line + start_index)) = *(*(leftover + start_index));
+	(*return_line)[i] = (*leftover)[i];
 	if (do_newleftover(leftover, leftover_len, start_index) == 0)
 	{
 		free(*return_line);
@@ -83,7 +85,7 @@ static int	do_newleftover(char **leftover, size_t *leftover_len, \
 	}
 	i = 0;
 	while (start_index < *leftover_len)
-		new_leftover[i++] = *(*(leftover + start_index++));
+		new_leftover[i++] = (*leftover)[start_index++];
 	free(*leftover);
 	*leftover = new_leftover;
 	*leftover_len = *leftover_len - start_index;
@@ -92,7 +94,7 @@ static int	do_newleftover(char **leftover, size_t *leftover_len, \
 
 void	set_free(char **leftover, size_t *leftover_len)
 {
-	if (!(*leftover))
+	if (*leftover)
 	{
 		free(*leftover);
 		*leftover = 0;
