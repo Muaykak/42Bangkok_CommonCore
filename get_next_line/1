@@ -1,0 +1,124 @@
+==2260== Memcheck, a memory error detector
+==2260== Memcheck, a memory error detector
+==2260== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2260== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2260== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2260== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2260== Command: ./test
+==2260== Command: ./test
+==2260== 
+==2260== 
+==2260== Invalid read of size 1
+==2260== Invalid read of size 1
+==2260==    at 0x109891: join_readbuff (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    at 0x109891: join_readbuff (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109497: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109497: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109296: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109296: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==  Address 0x4a76042 is 0 bytes after a block of size 2 alloc'd
+==2260==  Address 0x4a76042 is 0 bytes after a block of size 2 alloc'd
+==2260==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2260==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2260==    by 0x109448: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109448: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109296: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109296: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260== 
+==2260== 
+==2260== Invalid read of size 1
+==2260== Invalid read of size 1
+==2260==    at 0x109891: join_readbuff (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    at 0x109891: join_readbuff (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109497: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109497: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1092DC: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1092DC: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==  Address 0x4a76182 is 0 bytes after a block of size 2 alloc'd
+==2260==  Address 0x4a76182 is 0 bytes after a block of size 2 alloc'd
+==2260==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2260==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2260==    by 0x109448: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109448: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1092DC: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1092DC: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260== 
+==2260== 
+==2260== 
+==2260== 
+==2260== HEAP SUMMARY:
+==2260==     in use at exit: 0 bytes in 0 blocks
+==2260==   total heap usage: 12 allocs, 12 frees, 36 bytes allocated
+==2260== 
+==2260== HEAP SUMMARY:
+==2260==     in use at exit: 0 bytes in 0 blocks
+==2260==   total heap usage: 12 allocs, 12 frees, 36 bytes allocated
+==2260== 
+==2260== All heap blocks were freed -- no leaks are possible
+==2260== All heap blocks were freed -- no leaks are possible
+==2260== 
+==2260== 
+==2260== ERROR SUMMARY: 4 errors from 2 contexts (suppressed: 0 from 0)
+==2260== ERROR SUMMARY: 4 errors from 2 contexts (suppressed: 0 from 0)
+==2260== 
+==2260== 
+==2260== 2 errors in context 1 of 2:
+==2260== 2 errors in context 1 of 2:
+==2260== Invalid read of size 1
+==2260== Invalid read of size 1
+==2260==    at 0x109891: join_readbuff (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    at 0x109891: join_readbuff (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109497: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109497: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1092DC: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1092DC: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==  Address 0x4a76182 is 0 bytes after a block of size 2 alloc'd
+==2260==  Address 0x4a76182 is 0 bytes after a block of size 2 alloc'd
+==2260==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2260==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2260==    by 0x109448: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109448: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1092DC: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1092DC: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260== 
+==2260== 
+==2260== 
+==2260== 
+==2260== 2 errors in context 2 of 2:
+==2260== 2 errors in context 2 of 2:
+==2260== Invalid read of size 1
+==2260== Invalid read of size 1
+==2260==    at 0x109891: join_readbuff (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    at 0x109891: join_readbuff (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109497: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109497: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109296: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109296: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==  Address 0x4a76042 is 0 bytes after a block of size 2 alloc'd
+==2260==  Address 0x4a76042 is 0 bytes after a block of size 2 alloc'd
+==2260==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2260==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2260==    by 0x109448: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109448: go_read (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x1093EF: get_next_line (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109296: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260==    by 0x109296: main (in /home/muaykak/my_cadet/get_next_line/test)
+==2260== 
+==2260== 
+==2260== ERROR SUMMARY: 4 errors from 2 contexts (suppressed: 0 from 0)
+==2260== ERROR SUMMARY: 4 errors from 2 contexts (suppressed: 0 from 0)

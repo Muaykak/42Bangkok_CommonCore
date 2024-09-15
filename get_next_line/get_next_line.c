@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:42:53 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/11 16:45:49 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:33:44 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ static void	join_leftover(t_go_read *gr_data, char **leftover, \
 		return ;
 	jl_data.new_i = 0;
 	while (jl_data.new_i < *leftover_len)
-		jl_data.joinnew[jl_data.new_i++] = (*leftover)[jl_data.new_i];
+	{
+		jl_data.joinnew[jl_data.new_i] = (*leftover)[jl_data.new_i];
+		jl_data.new_i++;
+	}
 	jl_data.old_i = 0;
 	while (jl_data.old_i < jl_data.old_len)
 		jl_data.joinnew[jl_data.new_i++] = gr_data->read_cat[jl_data.old_i++];
