@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:42:53 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/15 13:05:13 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:45:49 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ char	*get_next_line(int fd)
 		return (gnl_data.return_line);
 	else if (gnl_data.ret == -1)
 		return (0);
-	write(1, "leftover: \"", 11);
-	write(1, leftover, leftover_len);
-	write(1, "\"\n", 2);
-	printf("leftover len: %zu\n", leftover_len);
-	printf("gnl_data.ret: %d\n", gnl_data.ret);
+//	write(1, "leftover: \"", 11);
+//	write(1, leftover, leftover_len);
+//	write(1, "\"\n", 2);
+//	printf("leftover len: %zu\n", leftover_len);
+//	printf("gnl_data.ret: %d\n", gnl_data.ret);
 	if (go_read(fd, &leftover, &leftover_len, &gnl_data) == 0)
 		return (0);
 	return (gnl_data.return_line);
@@ -105,10 +105,7 @@ static void	join_leftover(t_go_read *gr_data, char **leftover, \
 		return ;
 	jl_data.new_i = 0;
 	while (jl_data.new_i < *leftover_len)
-	{
-		jl_data.joinnew[jl_data.new_i] = (*leftover)[jl_data.new_i];
-		jl_data.new_i++;
-	}
+		jl_data.joinnew[jl_data.new_i++] = (*leftover)[jl_data.new_i];
 	jl_data.old_i = 0;
 	while (jl_data.old_i < jl_data.old_len)
 		jl_data.joinnew[jl_data.new_i++] = gr_data->read_cat[jl_data.old_i++];
@@ -120,9 +117,9 @@ static int	join_readbuff(t_go_read *gr_data)
 {
 	t_join_readbuff	j_data;
 
-		write(1, "read_buffer: \"", 14);
-		write(1, gr_data->read_buffer, gr_data->read_ret);
-		write(1, "\"\n", 2);
+//	write(1, "read_buffer: \"", 14);
+//	write(1, gr_data->read_buffer, gr_data->read_ret);
+//	write(1, "\"\n", 2);
 	if (gr_data->read_cat == 0)
 		j_data.newcat = (char *)malloc(gr_data->read_ret);
 	else
@@ -146,8 +143,8 @@ static int	join_readbuff(t_go_read *gr_data)
 	if (gr_data->read_cat != 0)
 		free(gr_data->read_cat);
 	gr_data->read_cat = j_data.newcat;
-	write(1, "newcat: \"", 9);
-	write(1, gr_data->read_cat, j_data.n);
-	write(1, "\"\n", 2);
+//	write(1, "newcat: \"", 9);
+//	write(1, gr_data->read_cat, j_data.n);
+//	write(1, "\"\n", 2);
 	return (1);
 }
