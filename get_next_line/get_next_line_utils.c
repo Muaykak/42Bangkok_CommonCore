@@ -107,14 +107,14 @@ static int	put_leftover(t_goread_data *gr_data, t_gnl_data *gnl_data, \
 	if (*leftover)
 		free(*leftover);
 	*leftover = 0;
-	if (gr_data->check_ret + 1 >= gr_data->read_ret)
+	if (gr_data->check_ret + 1 >= (size_t)gr_data->read_ret)
 		return (1);
 	new_leftover = (char *)malloc(gr_data->read_ret \
 	- (gr_data->check_ret + 1) + 1);
 	if (!new_leftover)
 		return (0);
 	new_i = 0;
-	while (gr_data->check_ret + 1 + new_i < gr_data->read_ret)
+	while (gr_data->check_ret + 1 + new_i < (size_t)gr_data->read_ret)
 	{
 		new_leftover[new_i] = \
 		gnl_data->read_buffer[gr_data->check_ret + 1 + new_i];

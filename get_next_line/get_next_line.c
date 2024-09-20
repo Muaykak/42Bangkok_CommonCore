@@ -57,6 +57,12 @@ static int	go_read(int fd, char **leftover, t_gnl_data *gnl_data)
 			return (0);
 		gr_data.loop_count++;
 		gr_data.read_ret = read(fd, gnl_data->read_buffer, BUFFER_SIZE);
+		if (gr_data.read_ret == -1)
+		{
+			if (gr_data.readcat)
+				free(gr_data.readcat);
+			return (0);
+		}
 		gnl_data->read_buffer[gr_data.read_ret] = -1;
 		gr_data.check_ret = check_readbuffer(gnl_data->read_buffer, \
 		gr_data.read_ret);

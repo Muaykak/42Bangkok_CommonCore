@@ -27,10 +27,10 @@ typedef struct s_gnl_data
 
 typedef struct s_goread_data
 {
-	size_t	read_ret;
-	size_t	loop_count;
-	size_t	check_ret;
-	char	*readcat;
+	long long	read_ret;
+	size_t		loop_count;
+	size_t		check_ret;
+	char		*readcat;
 }				t_goread_data;
 
 typedef struct s_buffjoin_data
