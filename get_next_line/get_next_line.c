@@ -5,117 +5,120 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 14:11:20 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/20 11:51:15 by srussame         ###   ########.fr       */
+/*   Created: 2024/09/20 20:54:51 by srussame          #+#    #+#             */
+/*   Updated: 2024/09/20 20:54:53 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	go_read(int fd, char **leftover, t_gnl_data *gnl_data);
-int			buffjoin(char **dest, char *readbuff);
-static void	buffjoin_sub1(char **dest, char *readbuff, t_buffjoin_data *bj);
-size_t	check_readbuffer(char *read_buffer, size_t read_ret);
+static int	buffjoin(char **dest, char *src);
+static int	put_leftover(t_goread_data *gr, char **leftover);
+static int	go_read(int fd, t_gnl_data *gnl, char **leftover);
 
 char	*get_next_line(int fd)
 {
 	static char	*leftover[MAX_FILE];
-	t_gnl_data	gnl_data;
+	t_gnl_data	gnl;
 
-	if (BUFFER_SIZE < 1 || fd < 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
-	gnl_data.cl_ret = check_leftover(&leftover[fd], &gnl_data);
-	if (gnl_data.cl_ret == 2)
-		return (gnl_data.return_line);
-	if (gnl_data.cl_ret == -1)
+	gnl.cl_ret = check_leftover(&leftover[fd], &gnl);
+	if (gnl.cl_ret == -1)
+	{
+		free(leftover[fd]);
+		leftover[fd] = 0;
 		return (0);
-	gnl_data.read_buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!gnl_data.read_buffer)
+	}
+	if (gnl.cl_ret == 2)
+		return (gnl.return_line);
+	if (go_read(fd, &gnl, &leftover[fd]) == 0)
+	{
+		if (gnl.cl_ret == 1)
+			free(gnl.return_line);
 		return (0);
-	gnl_data.read_buffer[BUFFER_SIZE] = 0;
-	gnl_data.gr_ret = go_read(fd, &leftover[fd], &gnl_data);
-	free(gnl_data.read_buffer);
-	if (gnl_data.gr_ret == 0)
-		return (0);
-	return (gnl_data.return_line);
+	}
+	return (gnl.return_line);
 }
 
-static int	go_read(int fd, char **leftover, t_gnl_data *gnl_data)
+static int	go_read(int fd, t_gnl_data *gnl, char **leftover)
 {
-	t_goread_data	gr_data;
+	t_goread_data	gr;
 
-	gr_data.loop_count = 0;
-	gr_data.readcat = 0;
-	gr_data.read_ret = read(fd, gnl_data->read_buffer, BUFFER_SIZE);
-	if (gr_data.read_ret == -1)
+	gr.readcat = 0;
+	gr.read_ret = read(fd, gnl->read_buffer, BUFFER_SIZE);
+	if (gr.read_ret <= 0)
 		return (0);
-	gnl_data->read_buffer[gr_data.read_ret] = 0;
-	gr_data.check_ret = check_readbuffer(gnl_data->read_buffer, \
-	gr_data.read_ret);
-	while (gr_data.check_ret == BUFFER_SIZE)
+	gnl->read_buffer[gr.read_ret] = 0;
+	gr.checkline_ret = check_newline(gnl->read_buffer);
+	while (gr.checkline_ret == BUFFER_SIZE)
 	{
-		if (buffjoin(&gr_data.readcat, gnl_data->read_buffer) == 0)
+		if (buffjoin(&gr.readcat, gnl->read_buffer) == 0)
 			return (0);
-		gr_data.loop_count++;
-		gr_data.read_ret = read(fd, gnl_data->read_buffer, BUFFER_SIZE);
-		gnl_data->read_buffer[gr_data.read_ret] = 0;
-		gr_data.check_ret = check_readbuffer(gnl_data->read_buffer, \
-		gr_data.read_ret);
+		gr.read_ret = read(fd, gnl->read_buffer, BUFFER_SIZE);
+		gnl->read_buffer[gr.read_ret] = 0;
+		gr.checkline_ret = check_newline(gnl->read_buffer);
 	}
-	if (gr_data.read_ret > 0 \
-	&& buffjoin(&gr_data.readcat, gnl_data->read_buffer) == 0)
+	if (buffjoin(&gr.readcat, gnl->read_buffer) == 0)
 		return (0);
-	return (join_leftover(gnl_data, &gr_data, leftover));
+	if (buffjoin(&gnl->return_line, gr.readcat) == 0)
+		return (0);
+	return (put_leftover(&gr, leftover));
 }
 
-int	buffjoin(char **dest, char *readbuff)
+static int	put_leftover(t_goread_data *gr, char **leftover)
 {
-	t_buffjoin_data	bj;
+	t_putleft_data	pl;
 
-	bj.new_len = 0;
-		while ((*dest) && (*dest)[bj.new_len] != 0 && (*dest)[bj.new_len] != '\n')
-			bj.new_len++;
-	bj.buff_len = 0;
-	while (readbuff && readbuff[bj.buff_len] && readbuff[bj.buff_len] != '\n')
-		bj.buff_len++;
-	bj.new_len = bj.new_len + bj.buff_len + 1;
-	bj.newdest = (char *)malloc(bj.new_len);
-	if (!bj.newdest || (bj.buff_len == 0 && readbuff[bj.buff_len] == -1))
+	if (*leftover)
+		free(*leftover);
+	*leftover = 0;
+	if (gr->checkline_ret + 1 >= (size_t)gr->read_ret)
+		return (1);
+	pl.new_len = gr->read_ret - (gr->checkline_ret + 1);
+	pl.new_left = (char *)malloc(pl.new_len + 1);
+	if (!pl.new_left)
 	{
-		if (bj.newdest)
-			free(bj.newdest);
-		if ((*dest))
-			free(*dest);
+		free(gr->readcat);
 		return (0);
 	}
-	buffjoin_sub1(dest, readbuff, &bj);
+	pl.new_len = 0;
+	while (gr->checkline_ret < (size_t)gr->read_ret)
+		pl.new_left[pl.new_len++] = gr->readcat[gr->checkline_ret++];
+	pl.new_left[pl.new_len] = 0;
+	free(gr->readcat);
+	*leftover = pl.new_left;
 	return (1);
 }
 
-static void	buffjoin_sub1(char **dest, char *readbuff, t_buffjoin_data *bj)
+static int	buffjoin(char **dest, char *src)
 {
-	bj->new_i = 0;
-	while ((*dest) && (*dest)[bj->new_i] != 0 \
-	&& (*dest)[bj->new_i] != '\n')
+	t_buffjoin_data	bj;
+
+	bj.old_len = 0;
+	while ((*dest) && (*dest)[bj.old_len] != 0)
+		bj.old_len++;
+	bj.new_len = 0;
+	while (src && src[bj.new_len] != 0 && src[bj.new_len] != '\n')
+		bj.new_len++;
+	bj.new_len = bj.new_len + bj.old_len;
+	bj.new_dest = (char *)malloc(bj.new_len + 1);
+	if (!bj.new_dest)
 	{
-		bj->newdest[bj->new_i] = (*dest)[bj->new_i];
-		bj->new_i++;
+		if (*dest)
+			free(*dest);
+		return (0);
 	}
-	bj->buff_i = 0;
-	while (bj->new_i < bj->new_len)
-		bj->newdest[bj->new_i++] = readbuff[bj->buff_i++];
-	bj->newdest[bj->new_i] = 0;
+	bj.old_len = 0;
+	bj.new_len = 0;
+	while ((*dest) && (*dest)[bj.old_len] != 0)
+		bj.new_dest[bj.new_len++] = (*dest)[bj.old_len++];
+	bj.old_len = 0;
+	while (src && src[bj.old_len] != '\n' && src[bj.old_len] != 0)
+		bj.new_dest[bj.new_len++] = src[bj.old_len++];
+	bj.new_dest[bj.new_len] = src[bj.old_len];
 	if (*dest)
 		free(*dest);
-	*dest = bj->newdest;
-}
-
-size_t	check_readbuffer(char *read_buffer, size_t read_ret)
-{
-	size_t	i;
-
-	i = 0;
-	while (read_buffer[i] != '\n' && i < read_ret)
-		i++;
-	return (i);
+	*dest = bj.new_dest;
+	return (1);
 }
