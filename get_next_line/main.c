@@ -16,19 +16,25 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-
 void	print_line(char *line)
 {
 	size_t	i;
 
 	i = 0;
-	while (line[i] != '\n')
+	if (line == 0)
+	{
+		write(1, "(null)\n", 7);
+		return ;
+	}
+	while (line[i] != '\n' && line[i] != -1)
 	{
 		write(1, &line[i], 1);
 		i++;
 	}
 	if (line[i] == '\n')
-		write(1, "\n", 1);
+		write(1, "\\n\n", 3);
+	if (line[i] == -1)
+		write(1, "\"-1\"\n", 5);
 }
 
 int	main(void)
@@ -39,39 +45,12 @@ int	main(void)
 	fd = open(FILE_NAME, O_RDONLY);
 	line = get_next_line(fd);
 	print_line(line);
-	if (line)
-		free(line);
-	write(1, "\n", 1);
 	line = get_next_line(fd);
 	print_line(line);
-	if (line)
-		free(line);
-	write(1, "\n", 1);
 	line = get_next_line(fd);
 	print_line(line);
-	if (line)
-		free(line);
-	write(1, "\n", 1);
-//	line = get_next_line(fd);
-//	print_line(line);
-//	line = get_next_line(fd);
-//	print_line(line);
-//	line = get_next_line(fd);
-//	print_line(line);
-//	line = get_next_line(fd);
-//	print_line(line);
-//	line = get_next_line(fd);
-//	print_line(line);
-//	line = get_next_line(fd);
-//	print_line(line);
-//	line = get_next_line(fd);
-//	print_line(line);
-//	if(line != 0)
-//		print_line(line);
-//	char	str[] = "Hello";
-//
-//	printf("before: \"%s\"\nLength: %u\n", str, ft_strlen(str));
-//	ft_clearstr(str);
-//	printf("after: \"%s\"\nLength: %u\n", str, ft_strlen(str));
-//	return (0);
+	line = get_next_line(fd);
+	print_line(line);
+	line = get_next_line(fd);
+	print_line(line);
 }
