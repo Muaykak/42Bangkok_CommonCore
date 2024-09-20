@@ -22,6 +22,7 @@ typedef struct s_gnl_data
 	char	*read_buffer;
 	int		cl_ret;
 	int		gr_ret;
+	size_t	buff_size;
 }				t_gnl_data;
 
 typedef struct s_goread_data
@@ -49,6 +50,9 @@ typedef struct s_checkleftover_data
 	size_t	new_i;
 }				t_checkleftover_data;
 
+# ifndef BUFFER_SIZE
+# 	define BUFFER_SIZE 1
+# endif
 # define MAX_FILE 1024
 
 char	*get_next_line(int fd);
