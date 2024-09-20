@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:51 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/16 14:10:52 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/20 08:09:23 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_checkleftover_data
 	size_t	new_i;
 }				t_checkleftover_data;
 
-# define BUFFER_SIZE 5 
 # define MAX_FILE 1024
 
 char	*get_next_line(int fd);

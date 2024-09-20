@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:11:20 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/16 14:11:21 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/20 08:00:57 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void	buffjoin_sub1(char **dest, char *readbuff, t_buffjoin_data *bj)
 		bj->new_i++;
 	}
 	bj->buff_i = 0;
-	while (bj->new_i <= bj->new_len)
+	while (bj->new_i < bj->new_len)
 		bj->newdest[bj->new_i++] = readbuff[bj->buff_i++];
 	if (*dest)
 		free(*dest);

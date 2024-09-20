@@ -6,7 +6,7 @@
 /*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:15:36 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/15 13:08:39 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/20 07:57:03 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,7 @@ int	main(void)
 	fd = open(FILE_NAME, O_RDONLY);
 	line = get_next_line(fd);
 	print_line(line);
-	line = get_next_line(fd);
-	print_line(line);
-	line = get_next_line(fd);
-	print_line(line);
-	line = get_next_line(fd);
-	print_line(line);
-	line = get_next_line(fd);
-	print_line(line);
+	if (line)
+		free(line);
+	close(fd);
 }
