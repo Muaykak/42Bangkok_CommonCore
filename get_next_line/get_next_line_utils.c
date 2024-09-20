@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:11:08 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/16 14:11:09 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:34:03 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	join_leftover(t_gnl_data *gnl_data, t_goread_data *gr_data, \
 	readcat_len = 0;
 	while (gr_data->readcat && gr_data->readcat[readcat_len] != 0)
 		readcat_len++;
-	gnl_data->return_line = (char *)malloc(left_len + readcat_len);
+	gnl_data->return_line = (char *)malloc(left_len + readcat_len + 1);
 	if (!gnl_data->return_line)
 	{
 		if ((*leftover))
@@ -93,6 +93,7 @@ int	join_leftover(t_gnl_data *gnl_data, t_goread_data *gr_data, \
 	readcat_len = 0;
 	while (gr_data->readcat && gr_data->readcat[readcat_len] != 0)
 		gnl_data->return_line[return_i++] = gr_data->readcat[readcat_len++];
+	gnl_data->return_line[return_i] = 0;
 	if (gr_data->readcat)
 		free(gr_data->readcat);
 	if (put_leftover(gr_data, gnl_data, leftover) == 0)
