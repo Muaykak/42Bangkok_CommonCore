@@ -55,6 +55,8 @@ typedef struct s_checkleftover_data
 # endif
 # define MAX_FILE 1024
 
+#include <stdio.h>
+
 char	*get_next_line(int fd);
 int		check_leftover(char **leftover, t_gnl_data *gnl_data);
 size_t	check_readbuffer(char *read_buffer, size_t read_ret);

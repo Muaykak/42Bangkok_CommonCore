@@ -15,6 +15,7 @@
 static int	go_read(int fd, char **leftover, t_gnl_data *gnl_data);
 int			buffjoin(char **dest, char *readbuff);
 static void	buffjoin_sub1(char **dest, char *readbuff, t_buffjoin_data *bj);
+size_t	check_readbuffer(char *read_buffer, size_t read_ret);
 
 char	*get_next_line(int fd)
 {
@@ -30,7 +31,7 @@ char	*get_next_line(int fd)
 		return (0);
 	gnl_data.read_buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!gnl_data.read_buffer)
-		return(0);
+		return (0);
 	gnl_data.read_buffer[BUFFER_SIZE] = -1;
 	gnl_data.gr_ret = go_read(fd, &leftover[fd], &gnl_data);
 	free(gnl_data.read_buffer);
@@ -57,26 +58,19 @@ static int	go_read(int fd, char **leftover, t_gnl_data *gnl_data)
 			return (0);
 		gr_data.loop_count++;
 		gr_data.read_ret = read(fd, gnl_data->read_buffer, BUFFER_SIZE);
-		if (gr_data.read_ret == -1)
-		{
-			if (gr_data.readcat)
-				free(gr_data.readcat);
-			return (0);
-		}
 		gnl_data->read_buffer[gr_data.read_ret] = -1;
 		gr_data.check_ret = check_readbuffer(gnl_data->read_buffer, \
 		gr_data.read_ret);
 	}
-	if (buffjoin(&gr_data.readcat, gnl_data->read_buffer) == 0)
+	if (gr_data.read_ret > 0 \
+	&& buffjoin(&gr_data.readcat, gnl_data->read_buffer) == 0)
 		return (0);
-	if (join_leftover(gnl_data, &gr_data, leftover) == 0)
-		return (0);
-	return (1);
+	return (join_leftover(gnl_data, &gr_data, leftover));
 }
 
 int	buffjoin(char **dest, char *readbuff)
 {
-	t_buffjoin_data bj;
+	t_buffjoin_data	bj;
 
 	bj.new_len = 0;
 	if ((*dest))
@@ -89,11 +83,11 @@ int	buffjoin(char **dest, char *readbuff)
 		bj.buff_len++;
 	bj.new_len = bj.new_len + bj.buff_len + 1;
 	bj.newdest = (char *)malloc(bj.new_len);
-	if (!bj.newdest || bj.buff_len == 0)
+	if (!bj.newdest || (bj.buff_len == 0 && readbuff[bj.buff_len] == -1))
 	{
 		if (bj.newdest)
 			free(bj.newdest);
-		if((*dest))
+		if ((*dest))
 			free(*dest);
 		return (0);
 	}
@@ -116,4 +110,14 @@ static void	buffjoin_sub1(char **dest, char *readbuff, t_buffjoin_data *bj)
 	if (*dest)
 		free(*dest);
 	*dest = bj->newdest;
+}
+
+size_t	check_readbuffer(char *read_buffer, size_t read_ret)
+{
+	size_t	i;
+
+	i = 0;
+	while (read_buffer[i] != '\n' && i < read_ret)
+		i++;
+	return (i);
 }
