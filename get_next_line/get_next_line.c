@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 	gnl_data.read_buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!gnl_data.read_buffer)
 		return (0);
-	gnl_data.read_buffer[BUFFER_SIZE] = -1;
+	gnl_data.read_buffer[BUFFER_SIZE] = 0;
 	gnl_data.gr_ret = go_read(fd, &leftover[fd], &gnl_data);
 	free(gnl_data.read_buffer);
 	if (gnl_data.gr_ret == 0)
@@ -49,7 +49,7 @@ static int	go_read(int fd, char **leftover, t_gnl_data *gnl_data)
 	gr_data.read_ret = read(fd, gnl_data->read_buffer, BUFFER_SIZE);
 	if (gr_data.read_ret == -1)
 		return (0);
-	gnl_data->read_buffer[gr_data.read_ret] = -1;
+	gnl_data->read_buffer[gr_data.read_ret] = 0;
 	gr_data.check_ret = check_readbuffer(gnl_data->read_buffer, \
 	gr_data.read_ret);
 	while (gr_data.check_ret == BUFFER_SIZE)
@@ -58,7 +58,7 @@ static int	go_read(int fd, char **leftover, t_gnl_data *gnl_data)
 			return (0);
 		gr_data.loop_count++;
 		gr_data.read_ret = read(fd, gnl_data->read_buffer, BUFFER_SIZE);
-		gnl_data->read_buffer[gr_data.read_ret] = -1;
+		gnl_data->read_buffer[gr_data.read_ret] = 0;
 		gr_data.check_ret = check_readbuffer(gnl_data->read_buffer, \
 		gr_data.read_ret);
 	}
@@ -73,13 +73,10 @@ int	buffjoin(char **dest, char *readbuff)
 	t_buffjoin_data	bj;
 
 	bj.new_len = 0;
-	if ((*dest))
-	{
-		while ((*dest)[bj.new_len] != -1 && (*dest)[bj.new_len] != '\n')
+		while ((*dest) && (*dest)[bj.new_len] != 0 && (*dest)[bj.new_len] != '\n')
 			bj.new_len++;
-	}
 	bj.buff_len = 0;
-	while (readbuff[bj.buff_len] != -1 && readbuff[bj.buff_len] != '\n')
+	while (readbuff && readbuff[bj.buff_len] && readbuff[bj.buff_len] != '\n')
 		bj.buff_len++;
 	bj.new_len = bj.new_len + bj.buff_len + 1;
 	bj.newdest = (char *)malloc(bj.new_len);
@@ -98,7 +95,7 @@ int	buffjoin(char **dest, char *readbuff)
 static void	buffjoin_sub1(char **dest, char *readbuff, t_buffjoin_data *bj)
 {
 	bj->new_i = 0;
-	while ((*dest) && (*dest)[bj->new_i] != -1 \
+	while ((*dest) && (*dest)[bj->new_i] != 0 \
 	&& (*dest)[bj->new_i] != '\n')
 	{
 		bj->newdest[bj->new_i] = (*dest)[bj->new_i];

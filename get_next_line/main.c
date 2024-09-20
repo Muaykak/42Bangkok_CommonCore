@@ -26,15 +26,15 @@ void	print_line(char *line)
 		write(1, "(null)\n", 7);
 		return ;
 	}
-	while (line[i] != '\n' && line[i] != -1)
+	while (line[i] != '\n' && line[i] != 0)
 	{
 		write(1, &line[i], 1);
 		i++;
 	}
 	if (line[i] == '\n')
 		write(1, "\\n\n", 3);
-	if (line[i] == -1)
-		write(1, "\"-1\"\n", 5);
+	if (line[i] == 0)
+		write(1, "\\0\n", 3);
 }
 
 int	main(void)

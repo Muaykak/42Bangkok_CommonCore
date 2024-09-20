@@ -26,9 +26,9 @@ int	check_leftover(char **leftover, t_gnl_data *gnl_data)
 	if (!(*leftover))
 		return (0);
 	cl.left_i = 0;
-	while ((*leftover)[cl.left_i] != -1 && (*leftover)[cl.left_i] != '\n')
+	while ((*leftover)[cl.left_i] != 0 && (*leftover)[cl.left_i] != '\n')
 		cl.left_i++;
-	if ((*leftover)[cl.left_i] == -1)
+	if ((*leftover)[cl.left_i] == 0)
 		return (1);
 	gnl_data->return_line = (char *)malloc(cl.left_i + 1);
 	if (!gnl_data->return_line)
@@ -46,7 +46,7 @@ static int	check_leftover_sub1(char **leftover, t_checkleftover_data *cl, \
 		cl->new_i++;
 	}
 	gnl_data->read_buffer[cl->new_i] = (*leftover)[cl->new_i];
-	while ((*leftover)[cl->left_i] != -1)
+	while ((*leftover)[cl->left_i] != 0)
 		cl->left_i++;
 	cl->leftnew_len = (cl->left_i - (cl->new_i));
 	cl->new_leftover = (char *)malloc(cl->leftnew_len + 1);
@@ -71,10 +71,10 @@ int	join_leftover(t_gnl_data *gnl_data, t_goread_data *gr_data, \
 	left_len = 0;
 	if (!gr_data->readcat && !(*leftover))
 		return (0);
-	while ((*leftover) && gnl_data->cl_ret == 1 && (*leftover)[left_len] != -1)
+	while ((*leftover) && gnl_data->cl_ret == 1 && (*leftover)[left_len] != 0)
 		left_len++;
 	readcat_len = 0;
-	while (gr_data->readcat && gr_data->readcat[readcat_len] != -1)
+	while (gr_data->readcat && gr_data->readcat[readcat_len] != 0)
 		readcat_len++;
 	gnl_data->return_line = (char *)malloc(left_len + readcat_len);
 	if (!gnl_data->return_line)
@@ -88,10 +88,10 @@ int	join_leftover(t_gnl_data *gnl_data, t_goread_data *gr_data, \
 	}
 	return_i = 0;
 	left_len = 0;
-	while ((*leftover) && (*leftover)[left_len] != -1)
+	while ((*leftover) && (*leftover)[left_len] != 0)
 		gnl_data->return_line[return_i++] = (*leftover)[left_len++];
 	readcat_len = 0;
-	while (gr_data->readcat && gr_data->readcat[readcat_len] != -1)
+	while (gr_data->readcat && gr_data->readcat[readcat_len] != 0)
 		gnl_data->return_line[return_i++] = gr_data->readcat[readcat_len++];
 	if (gr_data->readcat)
 		free(gr_data->readcat);
