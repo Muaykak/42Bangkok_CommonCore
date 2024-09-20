@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:11:20 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/20 08:00:57 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/20 08:29:45 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static int	go_read(int fd, char **leftover, t_gnl_data *gnl_data)
 	gr_data.loop_count = 0;
 	gr_data.readcat = 0;
 	gr_data.read_ret = read(fd, gnl_data->read_buffer, BUFFER_SIZE);
+	if (gr_data.read_ret == -1)
+		return (0);
 	gnl_data->read_buffer[gr_data.read_ret] = -1;
 	gr_data.check_ret = check_readbuffer(gnl_data->read_buffer, \
 	gr_data.read_ret);
