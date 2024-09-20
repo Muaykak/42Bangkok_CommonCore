@@ -47,5 +47,25 @@ int	main(void)
 	print_line(line);
 	if (line)
 		free(line);
+	line = get_next_line(fd);
+	print_line(line);
+	if (line)
+		free(line);
+	line = get_next_line(fd);
+	print_line(line);
+	if (line)
+		free(line);
+	line = get_next_line(fd);
+	print_line(line);
+	if (line)
+		free(line);
+	line = get_next_line(fd);
+	print_line(line);
+	if (line)
+		free(line);
+	line = get_next_line(fd);
+	print_line(line);
+	if (line)
+		free(line);
 	close(fd);
 }
