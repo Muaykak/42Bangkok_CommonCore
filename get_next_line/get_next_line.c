@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 static int	buffjoin(char **dest, char *src);
 static int	go_read(int fd, t_gnl_data *gnl, char **leftover);
@@ -19,22 +19,22 @@ static void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj);
 
 char	*get_next_line(int fd)
 {
-	static char	*leftover[OPEN_MAX];
+	static char	*leftover;
 	t_gnl_data	gnl;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
 	gnl.return_line = 0;
-	gnl.cl_ret = check_leftover(&leftover[fd], &gnl);
+	gnl.cl_ret = check_leftover(&leftover, &gnl);
 	if (gnl.cl_ret == -1)
 	{
-		free(leftover[fd]);
-		leftover[fd] = 0;
+		free(leftover);
+		leftover = 0;
 		return (0);
 	}
 	if (gnl.cl_ret == 2)
 		return (gnl.return_line);
-	if (go_read(fd, &gnl, &leftover[fd]) == 0)
+	if (go_read(fd, &gnl, &leftover) == 0)
 	{
 		free(gnl.read_buffer);
 		if (gnl.cl_ret == 1)
@@ -98,6 +98,8 @@ static int	buffjoin(char **dest, char *src)
 	bj.new_len = 0;
 	while (src && src[bj.new_len] != 0 && src[bj.new_len] != '\n')
 		bj.new_len++;
+	if (src[bj.new_len] == '\n')
+		bj.new_len++;
 	bj.new_len = bj.new_len + bj.old_len;
 	bj.new_dest = (char *)malloc(bj.new_len + 1);
 	if (!bj.new_dest)
@@ -120,6 +122,8 @@ static void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj)
 	while (src != 0 && src[bj->old_len] != '\n' && src[bj->old_len] != 0)
 		bj->new_dest[bj->new_len++] = src[bj->old_len++];
 	bj->new_dest[bj->new_len] = src[bj->old_len];
+	if (src[bj->old_len] == '\n')
+	bj->new_dest[++bj->new_len] = '\0';
 	if (*dest != 0)
 		free(*dest);
 	*dest = bj->new_dest;

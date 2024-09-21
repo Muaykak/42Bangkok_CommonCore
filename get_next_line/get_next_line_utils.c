@@ -25,7 +25,7 @@ int	check_leftover(char **leftover, t_gnl_data *gnl)
 	if (!(*leftover))
 		return (0);
 	cl.old_l = 0;
-	while ((*leftover)[cl.old_l] != 0)
+	while ((*leftover)[cl.old_l] != '\0')
 		cl.old_l++;
 	if (check_newline(*leftover) == cl.old_l)
 	{
@@ -46,23 +46,23 @@ int	check_leftover(char **leftover, t_gnl_data *gnl)
 static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
 			t_check_leftover_data *cl)
 {
-	gnl->return_line = (char *)malloc(cl->old_l - cl->new_l);
+	gnl->return_line = (char *)malloc(cl->old_l - cl->new_l + 1);
 	if (!gnl->return_line)
 		return (-1);
-	cl->new_leftover = (char *)malloc(cl->new_l);
+	cl->new_leftover = (char *)malloc(cl->new_l + 1);
 	if (!cl->new_leftover)
 		return (-1);
 	cl->old_l = 0;
 	cl->new_l = 0;
 	while ((*leftover)[cl->old_l] != '\n')
 		gnl->return_line[cl->new_l++] = (*leftover)[cl->old_l++];
-	gnl->return_line[cl->new_l] = (*leftover)[cl->old_l++];
+	gnl->return_line[cl->new_l++] = (*leftover)[cl->old_l++];
+	gnl->return_line[cl->new_l] = '\0';
 	cl->new_l = 0;
 	while ((*leftover)[cl->old_l] != 0)
 		cl->new_leftover[cl->new_l++] = (*leftover)[cl->old_l++];
 	cl->new_leftover[cl->new_l] = 0;
-	if (*leftover)
-		free(*leftover);
+	free(*leftover);
 	*leftover = cl->new_leftover;
 	return (2);
 }
@@ -72,21 +72,18 @@ int	put_leftover(t_goread_data *gr, char **leftover,
 {
 	t_putleft_data	pl;
 
-	if (*leftover)
-		free(*leftover);
 	*leftover = 0;
-	if (gr->checkline_ret + 1 >= (size_t)gr->read_ret)
+	if (++gr->checkline_ret >= (size_t)gr->read_ret)
 		return (1);
-	pl.new_len = gr->read_ret - (gr->checkline_ret++ + 1);
-	pl.new_left = (char *)malloc(pl.new_len + 1);
-	if (!pl.new_left)
+	pl.new_len = gr->read_ret - gr->checkline_ret;
+	*leftover = (char *)malloc(pl.new_len + 1);
+	if (*leftover == 0)
 		return (0);
-	pl.new_len = 0;
-	while (gr->checkline_ret < (size_t)gr->read_ret)
-		pl.new_left[pl.new_len++] \
+	pl.new_i = 0;
+	while (pl.new_i < pl.new_len)
+		(*leftover)[pl.new_i++] \
 		= gnl->read_buffer[gr->checkline_ret++];
-	pl.new_left[pl.new_len] = 0;
-	*leftover = pl.new_left;
+	(*leftover)[pl.new_i] = '\0';
 	return (1);
 }
 

@@ -10,16 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
 
-# define GET_NEXT_LINE_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
 # endif
 
 typedef struct s_gnl_data
@@ -54,7 +58,7 @@ typedef struct s_buffjoin_data
 typedef struct s_putleft_data
 {
 	size_t	new_len;
-	char	*new_left;
+	size_t	new_i;
 }				t_putleft_data;
 
 char	*get_next_line(int fd);

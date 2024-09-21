@@ -53,7 +53,7 @@ typedef struct s_buffjoin_data
 typedef struct s_putleft_data
 {
 	size_t	new_len;
-	char	*new_left;
+	size_t	new_i;
 }				t_putleft_data;
 
 char	*get_next_line(int fd);

@@ -6,11 +6,11 @@
 /*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:15:36 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/21 03:19:00 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:59:31 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #define FILE_NAME "testfile"
 #include <stdio.h>
 #include <unistd.h>
@@ -26,6 +26,8 @@ void	print_line(char *line)
 //		write(1, "(null)\n", 7);
 //		return ;
 //	}
+	if (line == 0)
+		return ;
 	while (line[i] != '\n' && line[i] != 0)
 	{
 		write(1, &line[i], 1);
@@ -49,10 +51,10 @@ int	main(void)
 	print_line(line);
 	if (line)
 		free(line);
-//	line = get_next_line(fd);
-//	print_line(line);
-//	if (line)
-//		free(line);
+	line = get_next_line(fd);
+	print_line(line);
+	if (line)
+		free(line);
 //	line = get_next_line(fd);
 //	print_line(line);
 //	if (line)
