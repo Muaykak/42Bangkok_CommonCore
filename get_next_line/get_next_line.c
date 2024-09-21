@@ -123,7 +123,7 @@ static void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj)
 		bj->new_dest[bj->new_len++] = src[bj->old_len++];
 	bj->new_dest[bj->new_len] = src[bj->old_len];
 	if (src[bj->old_len] == '\n')
-	bj->new_dest[++bj->new_len] = '\0';
+		bj->new_dest[++bj->new_len] = '\0';
 	if (*dest != 0)
 		free(*dest);
 	*dest = bj->new_dest;
