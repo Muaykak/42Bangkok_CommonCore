@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define FILE_NAME "test.txt"
+#define FILE_NAME "testfile"
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -21,20 +21,22 @@ void	print_line(char *line)
 	size_t	i;
 
 	i = 0;
-	if (line == 0)
-	{
-		write(1, "(null)\n", 7);
-		return ;
-	}
+//	if (line == 0)
+//	{
+//		write(1, "(null)\n", 7);
+//		return ;
+//	}
 	while (line[i] != '\n' && line[i] != 0)
 	{
 		write(1, &line[i], 1);
 		i++;
 	}
 	if (line[i] == '\n')
-		write(1, "\\n\n", 3);
-	if (line[i] == 0)
-		write(1, "\\0\n", 3);
+		write(1, &line[i], 1);
+//	if (line[i] == '\n')
+//		write(1, "\\n\n", 3);
+//	if (line[i] == 0)
+//		write(1, "\\0\n", 3);
 }
 
 int	main(void)
@@ -47,10 +49,6 @@ int	main(void)
 	print_line(line);
 	if (line)
 		free(line);
-	line = get_next_line(fd);
-	print_line(line);
-	if (line)
-		free(line);
 //	line = get_next_line(fd);
 //	print_line(line);
 //	if (line)
@@ -67,5 +65,9 @@ int	main(void)
 //	print_line(line);
 //	if (line)
 //		free(line);
-	close(fd);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	if (line)
+//		free(line);
+//	close(fd);
 }

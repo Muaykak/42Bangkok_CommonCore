@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t		check_newline(char *buffer);
 static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
