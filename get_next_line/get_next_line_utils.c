@@ -15,6 +15,8 @@
 size_t check_newline(char *buffer);
 static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
 			t_check_leftover_data *cl);
+int	put_leftover(t_goread_data *gr, char **leftover,
+			t_gnl_data *gnl);
 
 int	check_leftover(char **leftover, t_gnl_data *gnl)
 {
@@ -23,7 +25,7 @@ int	check_leftover(char **leftover, t_gnl_data *gnl)
 	if (!(*leftover))
 		return (0);
 	cl.old_l = 0;
-	while (!(*leftover)[cl.old_l])
+	while ((*leftover)[cl.old_l] != 0)
 		cl.old_l++;
 	if (check_newline(*leftover) == cl.old_l)
 	{
@@ -63,6 +65,33 @@ static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
 		free(*leftover);
 	*leftover = cl->new_leftover;
 	return (2);
+}
+
+int	put_leftover(t_goread_data *gr, char **leftover,
+			t_gnl_data *gnl)
+{
+	t_putleft_data	pl;
+
+	if (*leftover)
+		free(*leftover);
+	*leftover = 0;
+	if (gr->checkline_ret + 1 >= (size_t)gr->read_ret)
+		return (1);
+	pl.new_len = gr->read_ret - (gr->checkline_ret++ + 1);
+	pl.new_left = (char *)malloc(pl.new_len + 1);
+	if (!pl.new_left)
+	{
+		if (gr->readcat)
+			free(gr->readcat);
+		return (0);
+	}
+	pl.new_len = 0;
+	while (gr->checkline_ret < (size_t)gr->read_ret)
+		pl.new_left[pl.new_len++] \
+		= gnl->read_buffer[gr->checkline_ret++];
+	pl.new_left[pl.new_len] = 0;
+	*leftover = pl.new_left;
+	return (1);
 }
 
 size_t	check_newline(char *buffer)

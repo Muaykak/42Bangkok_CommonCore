@@ -22,7 +22,7 @@
 # endif
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 3
+#  define BUFFER_SIZE 1
 # endif
 
 typedef struct s_gnl_data
@@ -65,5 +65,6 @@ typedef struct s_putleft_data
 char	*get_next_line(int fd);
 int		check_leftover(char **leftover, t_gnl_data *gnl);
 size_t	check_newline(char *buffer);
-
+int		put_leftover(t_goread_data *gr, char **leftover,
+			t_gnl_data *gnl);
 #endif
