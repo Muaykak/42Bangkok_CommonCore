@@ -64,7 +64,11 @@ static int	go_read(int fd, t_gnl_data *gnl, char **leftover)
 	if (buffjoin(&gr.readcat, gnl->read_buffer) == 0)
 		return (0);
 	if (buffjoin(&gnl->return_line, gr.readcat) == 0)
+	{
+		free(gr.readcat);
 		return (0);
+	}
+	free(gr.readcat);
 	return (put_leftover(&gr, leftover, gnl));
 }
 
