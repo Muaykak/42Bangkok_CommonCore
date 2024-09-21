@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:54:51 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/20 20:54:53 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/21 03:21:53 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,6 @@ static int	go_read(int fd, t_gnl_data *gnl, char **leftover)
 	return (put_leftover(&gr, leftover, gnl));
 }
 
-static int	put_leftover(t_goread_data *gr, char **leftover,
-			t_gnl_data *gnl)
-{
-	t_putleft_data	pl;
-
-	if (*leftover)
-		free(*leftover);
-	*leftover = 0;
-	if (gr->checkline_ret + 1 >= (size_t)gr->read_ret)
-		return (1);
-	pl.new_len = gr->read_ret - (gr->checkline_ret + 1);
-	pl.new_left = (char *)malloc(pl.new_len + 1);
-	if (!pl.new_left)
-	{
-		if (gr->readcat)
-			free(gr->readcat);
-		return (0);
-	}
-	pl.new_len = 0;
-	while (gr->checkline_ret < (size_t)gr->read_ret)
-		pl.new_left[pl.new_len++] \
-		= gnl->read_buffer[gr->checkline_ret++];
-	pl.new_left[pl.new_len] = 0;
-	free(gr->readcat);
-	*leftover = pl.new_left;
-	return (1);
-}
-
 static int	buffjoin(char **dest, char *src)
 {
 	t_buffjoin_data	bj;
@@ -127,3 +99,32 @@ static int	buffjoin(char **dest, char *src)
 	*dest = bj.new_dest;
 	return (1);
 }
+
+static int	put_leftover(t_goread_data *gr, char **leftover,
+			t_gnl_data *gnl)
+{
+	t_putleft_data	pl;
+
+	if (*leftover)
+		free(*leftover);
+	*leftover = 0;
+	if (gr->checkline_ret + 1 >= (size_t)gr->read_ret)
+		return (1);
+	pl.new_len = gr->read_ret - (gr->checkline_ret + 1);
+	pl.new_left = (char *)malloc(pl.new_len + 1);
+	if (!pl.new_left)
+	{
+		if (gr->readcat)
+			free(gr->readcat);
+		return (0);
+	}
+	pl.new_len = 0;
+	while (gr->checkline_ret < (size_t)gr->read_ret)
+		pl.new_left[pl.new_len++] \
+		= gnl->read_buffer[gr->checkline_ret++];
+	pl.new_left[pl.new_len] = 0;
+	free(gr->readcat);
+	*leftover = pl.new_left;
+	return (1);
+}
+

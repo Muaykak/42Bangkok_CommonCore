@@ -6,7 +6,7 @@
 /*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:15:36 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/20 11:30:45 by srussame         ###   ########.fr       */
+/*   Updated: 2024/09/21 03:19:00 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	main(void)
 	print_line(line);
 	if (line)
 		free(line);
-	line = get_next_line(fd);
-	print_line(line);
-	if (line)
-		free(line);
+//	line = get_next_line(fd);
+//	print_line(line);
+//	if (line)
+//		free(line);
 //	line = get_next_line(fd);
 //	print_line(line);
 //	if (line)
