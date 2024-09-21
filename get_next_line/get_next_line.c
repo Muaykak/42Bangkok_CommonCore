@@ -23,6 +23,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
+	gnl.return_line = 0;
 	gnl.cl_ret = check_leftover(&leftover[fd], &gnl);
 	if (gnl.cl_ret == -1)
 	{
@@ -79,14 +80,16 @@ static int	put_leftover(t_goread_data *gr, char **leftover)
 	pl.new_left = (char *)malloc(pl.new_len + 1);
 	if (!pl.new_left)
 	{
-		free(gr->readcat);
+		if (gr->readcat)
+			free(gr->readcat);
 		return (0);
 	}
 	pl.new_len = 0;
 	while (gr->checkline_ret < (size_t)gr->read_ret)
 		pl.new_left[pl.new_len++] = gr->readcat[gr->checkline_ret++];
 	pl.new_left[pl.new_len] = 0;
-	free(gr->readcat);
+	if (gr->readcat)
+		free(gr->readcat);
 	*leftover = pl.new_left;
 	return (1);
 }

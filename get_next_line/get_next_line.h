@@ -60,6 +60,8 @@ typedef struct s_putleft_data
 	char	*new_left;
 }				t_putleft_data;
 
+# include <stdio.h>
+
 char	*get_next_line(int fd);
 int		check_leftover(char **leftover, t_gnl_data *gnl);
 size_t	check_newline(char *buffer);

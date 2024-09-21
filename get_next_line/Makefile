@@ -17,7 +17,7 @@ ${NAME}: ${OBJS}
 	ar -rcs ${NAME} ${OBJS}
 
 program: re main.c ${NAME}
-	gcc main.c -g -L./ -lgnl -I${HEADER} -o test
+	cc main.c -L./ -lgnl -I${HEADER} -o test
 
 clean:
 	rm -f ${OBJS}

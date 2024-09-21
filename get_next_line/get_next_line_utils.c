@@ -59,7 +59,8 @@ static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
 	while (!(*leftover)[cl->old_l])
 		cl->new_leftover[cl->new_l++] = (*leftover)[cl->old_l++];
 	cl->new_leftover[cl->new_l] = '\0';
-	free(*leftover);
+	if (*leftover)
+		free(*leftover);
 	*leftover = cl->new_leftover;
 	return (2);
 }
@@ -73,5 +74,5 @@ size_t	check_newline(char *buffer)
 	i = 0;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	return (0);
+	return (i);
 }
