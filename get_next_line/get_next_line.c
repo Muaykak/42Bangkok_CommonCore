@@ -13,7 +13,8 @@
 #include "get_next_line.h"
 
 static int	buffjoin(char **dest, char *src);
-static int	put_leftover(t_goread_data *gr, char **leftover);
+static int	put_leftover(t_goread_data *gr, char **leftover, \
+			t_gnl_data *gnl);
 static int	go_read(int fd, t_gnl_data *gnl, char **leftover);
 
 char	*get_next_line(int fd)
@@ -64,10 +65,11 @@ static int	go_read(int fd, t_gnl_data *gnl, char **leftover)
 		return (0);
 	if (buffjoin(&gnl->return_line, gr.readcat) == 0)
 		return (0);
-	return (put_leftover(&gr, leftover));
+	return (put_leftover(&gr, leftover, gnl));
 }
 
-static int	put_leftover(t_goread_data *gr, char **leftover)
+static int	put_leftover(t_goread_data *gr, char **leftover,
+			t_gnl_data *gnl)
 {
 	t_putleft_data	pl;
 
@@ -86,7 +88,8 @@ static int	put_leftover(t_goread_data *gr, char **leftover)
 	}
 	pl.new_len = 0;
 	while (gr->checkline_ret < (size_t)gr->read_ret)
-		pl.new_left[pl.new_len++] = gr->readcat[gr->checkline_ret++];
+		pl.new_left[pl.new_len++] \
+		= gnl->read_buffer[gr->checkline_ret++];
 	pl.new_left[pl.new_len] = 0;
 	free(gr->readcat);
 	*leftover = pl.new_left;
