@@ -88,8 +88,7 @@ static int	put_leftover(t_goread_data *gr, char **leftover)
 	while (gr->checkline_ret < (size_t)gr->read_ret)
 		pl.new_left[pl.new_len++] = gr->readcat[gr->checkline_ret++];
 	pl.new_left[pl.new_len] = 0;
-	if (gr->readcat)
-		free(gr->readcat);
+	free(gr->readcat);
 	*leftover = pl.new_left;
 	return (1);
 }
