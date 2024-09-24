@@ -3,36 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putaddress_count.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 14:25:02 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/08 14:25:02 by srussame         ###   ########.fr       */
+/*   Created: 2024/09/24 15:33:55 by muaykak           #+#    #+#             */
+/*   Updated: 2024/09/24 18:27:36 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+#include <stdio.h>
 
-static void ft_puthexaddress_count(unsigned long ptr, int *count);
+static int	ft_puthexaddress_count(unsigned long ptr, int *count);
 
-void	ft_putaddress_count(void *ptr, int *count)
+int	ft_putaddress_count(void *ptr, int *count)
 {
 	if (ptr == 0)
 	{
-		write(1, "(nil)", 5);
-		*count = *count + 5;
-		return ;
+		if (ft_putstr_count("(nil)", count) == -1)
+			return (-1);
+		return (1);
 	}
-	write(1, "0x", 2);
-	*count = *count + 2;
-	ft_puthexaddress_count((unsigned long)ptr, count);
+	if (ft_putstr_count("0x", count) == -1)
+		return (-1);
+	if (ft_puthexaddress_count((unsigned long)ptr, count) == -1)
+		return (-1);
+	return (1);
 }
 
-static void	ft_puthexaddress_count(unsigned long ptr, int *count)
+static int	ft_puthexaddress_count(unsigned long ptr, int *count)
 {
 	if (ptr / 16 != 0)
-		ft_puthexaddress_count(ptr / 16, count);
+	{
+		if (ft_puthexaddress_count(ptr / 16, count) == -1)
+			return (-1);
+	}
 	if (ptr % 16 < 10)
-		ft_putchar_count((ptr % 16) + 48, count);
+	{
+		if (ft_putchar_count((ptr % 16) + 48, count) == -1)
+			return (-1);
+	}
 	else
-		ft_putchar_count((ptr % 16) + 87, count);
+	{
+		if (ft_putchar_count((ptr % 16) + 87, count) == -1)
+			return (-1);
+	}
+	return (1);
 }

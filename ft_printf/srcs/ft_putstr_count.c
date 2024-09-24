@@ -3,30 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 13:02:50 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/08 13:02:51 by srussame         ###   ########.fr       */
+/*   Created: 2024/09/24 13:51:47 by muaykak           #+#    #+#             */
+/*   Updated: 2024/09/24 15:01:20 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	ft_putstr_count(char *str, int *count)
+int	ft_putstr_count(char *str, int *count)
 {
 	int	i;
 
-	if (str == 0)
+	if (!str)
 	{
-		write(1, "(null)", 6);
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
 		*count = *count + 6;
-		return ;
+		return (1);
 	}
 	i = 0;
 	while (str[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		if (write(1, &str[i], 1) == -1)
+			return (-1);
 		*count = *count + 1;
 		i++;
 	}
+	return (1);
 }

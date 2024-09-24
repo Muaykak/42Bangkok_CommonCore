@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_count.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 15:34:13 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/08 15:34:14 by srussame         ###   ########.fr       */
+/*   Created: 2024/09/24 13:41:52 by muaykak           #+#    #+#             */
+/*   Updated: 2024/09/24 17:35:21 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	ft_putchar_count(char c, int *count)
+int	ft_putchar_count(char c, int *count)
 {
-	write(1, &c, 1);
+	if (write(1, &c, 1) == -1)
+		return (-1);
 	*count = *count + 1;
+	return (1);
 }

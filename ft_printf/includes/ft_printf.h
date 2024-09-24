@@ -17,13 +17,13 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-int	ft_printf(const char *, ...);
-int ft_putchar_count(char c, int *count);
-int ft_putstr_count(char *str, int *count);
+int	ft_printf(const char *str, ...);
+int	ft_putchar_count(char c, int *count);
+int	ft_putstr_count(char *str, int *count);
 int	ft_putnbr_count(int num, int *count);
 int	ft_putuint_count(unsigned int num, int *count);
 int	ft_putaddress_count(void *ptr, int *count);
 int	ft_puthex_small_count(unsigned int num, int *count);
-int ft_puthex_big_count(unsigned int num, int *count);
+int	ft_puthex_big_count(unsigned int num, int *count);
 
 #endif

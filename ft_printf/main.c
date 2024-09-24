@@ -3,36 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 17:31:25 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/07 17:31:27 by srussame         ###   ########.fr       */
+/*   Created: 2024/09/24 13:28:57 by muaykak           #+#    #+#             */
+/*   Updated: 2024/09/24 18:09:55 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include <stdio.h>
-#include <stdarg.h>
-#include "libftprintf.h"
 
 int	main(void)
 {
-	int	count = 0;
-
-//	ft_putstr_count("Helllooooo", &count);
-//	printf("\ncount: %d\n", count);
-
-	/* Check %c*/
-//	char c;
-//
-//	while (c != 0)
-//	{
-//		printf("|| %c ", c);
-//		c++;
-//	}
-
-	ft_printf("\nFT_PRINTF\n");
-	ft_printf("\nReturn ft_printf || %d ||\n", ft_printf("%\nHello_world\n%p%s%", &count, "42Bandkok%"));
-
-	printf("\nPRINTF\n");
-	printf("\nReturn printf || %d ||\n", printf("%\nHello world\n%p%s%", &count, "42Bangkok%"));
+	printf("\nPrintf: %d\n", printf("%p\n", "hello"));
+	ft_printf("\nft_Printf: %d\n", ft_printf("%p\n", "hello"));
 }

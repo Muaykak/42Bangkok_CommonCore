@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_count.c                                  :+:      :+:    :+:   */
+/*   ft_puthex_big_count.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:51:47 by muaykak           #+#    #+#             */
-/*   Updated: 2024/09/24 15:01:20 by muaykak          ###   ########.fr       */
+/*   Created: 2024/09/24 16:44:13 by muaykak           #+#    #+#             */
+/*   Updated: 2024/09/24 18:28:32 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr_count(char *str, int *count)
+int	ft_puthex_big_count(unsigned int num, int *count)
 {
-	int	i;
-
-	if (!str)
+	if (num / 16 != 0)
 	{
-		if (write(1, "(null)", 6) == -1)
-			return (0);
-		*count = *count + 6;
-		return (1);
+		if (ft_puthex_big_count(num / 16, count) == -1)
+			return (-1);
 	}
-	i = 0;
-	while (str[i] != '\0')
+	if (num % 16 < 10)
 	{
-		if (write(1, &str[i], 1) == -1)
-			return (0);
-		*count = *count + 1;
-		i++;
+		if (ft_putchar_count((num % 16) + 48, count) == -1)
+			return (-1);
+	}
+	else
+	{
+		if (ft_putchar_count((num % 16) + 55, count) == -1)
+			return (-1);
 	}
 	return (1);
 }
