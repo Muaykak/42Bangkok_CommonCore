@@ -18,7 +18,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 7
 # endif
 
 typedef struct s_gnl_data
