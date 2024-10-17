@@ -1,0 +1,67 @@
+Create a simple script called monitoring.sh in bash
+
+by using "#!/bin/bash"
+
+1.display the architecture of our operating system and kernel version
+
+	- to display i used the 'uname' command
+	this command allows me to print system information and has many options 	to use
+		- i use '-a' option which will print all the system information
+		in which it includes : the architecture and kernel version
+
+2.display the number of physical processor
+	- we're gonna look into "/proc/cpuinfo" by using 'grep' command which
+	allow us to filter and pick only the line we want and we will 'grep'
+	filtered by "physical id" what 'grep' does is it will show us all the
+	lines that has "physical id" in their lines which will allow us to
+	count how many physical processor are there in the system by using 'wc'
+	command
+	
+	- we use the 'sort' command which allow me to remove and duplicates
+	we want to count each unique physical id (using 'sort -u')
+
+	- the 'wc' command allows us to count how many lines we got from 'grep'
+	command using '-l' option which counts newline
+
+3.display number of virtual processors
+	- the process is the same as the previous one but changes from 
+	"physical id" to "processor"
+
+	- also this time we don't need to 'sort -u' before 'wc -l' because 
+	each logical processor has unique processor number by default so 
+	we just count newline only
+
+4.display current available RAM and utilization rate as a percentage
+	- 'free' is the command which allow us to see the total, used , and free amount of RAM on our environment
+	- this time we are going to use the 'awk' command
+	
+	- 'awk' is the command that allows pattern scanning and text processing
+	which is a very useful command; allow us to to some arithmetics with the number in the file and display it, and it has many ways to use this command
+	
+	- in 'free' command, we're going to use the '--mega' option which will display the current RAM usage to megabytes
+
+	- in our 'awk' command 
+		- the '$1 == "Mem:" is to determined to the $1 should focus only
+		the line that the 1st column is "Mem:"
+		- the {print $3} will print the column $3 only which will print
+		only the ram used
+		- then the {print $2} will print the column $2 will print the
+		total ram
+	- lastly we want the ram utilization as a percentage which means we have
+	to do some arithmetics to get the percentage 
+		- we are going to use the 'printf' in 'awk' command
+		it behave like the printf we normally use in C programing
+		it just have a little bit differences
+	{printf("%.2f"), ($3*100)/2}
+		-- that is how i did the calculations :3
+
+5. current available storage on our server and its utilization rate 
+as a percentage
+
+	- in this I used the 'df' command which allows me to see the file system space usage 
+	- the command displays the amount of spave availablbe on the file system
+	containing each file name argument, but we dont use this 
+		so it will show us all the currently mounted file systems
+	- we use '-m' option in 'df' command to see all as megabytes
+	
+	- I used the 'grep "/dev/"' to pick only the line that has "/dev/"
