@@ -150,5 +150,55 @@ as a percentage
 	- we're going to use the 'lsblk' command which also shows the disk type
 	and whether there is LVM disk or not
 	- we want to show different result with given conditions
-		thus we're going to use the 'if' command
+		thus we're going to use the 'if' in shell script
+	- the process is we use 'grep "lvm"' to collect any lines that has "lvm"
+	- then we count using 'wc -l' that counts lines
+	- then use the if condition to check whether there is more than zero
+	line or not
+	- print the result by echo
+
+9. number of active connections. (connections TCP)
+
+	- we're gonna use 'ss' command 
+	- the 'ss' is used to dump socket statistics. which showing information
+	similar to netstat. It can display more TCP and state information than
+	other tools.
+	- use the '-ta' option to display all TCP sockets include the LISTENING
+	- then we 'grep "ESTAB"' to grab only the ESTABLISHED coonnections
+	- after that we count how much line using 'wc -l'
+
+10. The number of users using the server.
+	
+	- i used the 'users' command.
+	- the 'users' command will print the user names of users that is
+	currently logged in to the current host
+	- then we count words (because each user is separate by space) 
+	by using 'wc -w' command
+
+11. The IPv4 address of your server and its MAC (Media Access Control) address.
+
+	- for the IPv4 address, we're going to use the 'hostname' command
+	- the 'hostname' command is the command that allow us to display
+	or modify the system's host name.
+	- added the '-I' option
+		This option will displat the network addresses of the host,
+		in this case, the IPv4,
+
+	then the MAC address
+	- we use the command 'ip'
+	- the 'ip' command is to show or manipulate routing, networkk devices, 
+	interfaces and tunnels.
+	- we use the 'link' syntax
+		To show the network device which include the MAC address
+	- we use 'grep "link/ether"' to grab only the line that contain MAC
+	address
+	- then use 'awk' command to print the MAC address
+
+12. The number of commands executed with the sudo program.
+
+	- We using the 'journalctl' command
+	- the 'journalctl' is a utility for querying and displaying logs from
+	journald, systemd's logging service. Since journald stores data in
+	binary format instead of a plaintext format, journalctl is the standard
+	way of reading log messages processed by journald.
 
