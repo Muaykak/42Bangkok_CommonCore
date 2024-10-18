@@ -109,4 +109,46 @@ as a percentage
 	- Disk space monitoring for '/boot' is rarely needed during routine
 	checks, as its size remains fairly constant unless new kernels or 
 	updates are installed.
-	******	
+	******
+
+6. The current utilization rate of your processors as a percentage.
+
+	- in this, i used the 'vmstat' command which allow me to see various
+	information about memory statistics, including the CPU usage
+	- if you use the default, no option 'vmstat'. On the CPU part 
+	you will see how many percentage that CPU is using 
+	which you can look in details with 'man vmstat'
+	- the 'id' column shown the percentage CPU that is on idle, mean it's
+	doing nothing so if we invert that number by using 100 to minus
+	the value, then we are going to get how much CPU utilizaation rate 
+	at the given moment.
+	
+	- we're going to use 'tail' command after the 'vmstat' command
+		- 'tail' command is used to output only the last part of the
+		file. In this case we add '-1' to specify that we want it to
+		output only 1 last line of what given to 'tail' command
+	
+	- after the 'tail' command, then we use 'awk'
+		- by picking the 15th column in the line and do some arithmetics
+		then we get the utilization rate as a percentage.
+
+7. The date and time of the last reboot.
+
+	- I used the 'who -b' command
+	- Normally the 'who' command will show information about users who are
+	currently logged in.
+	- with the option '-b' added, this command will show the time of last
+	system reboot
+	
+	- use the 'awk' command to get the columns we want
+		TIPS: 
+		- in 'awk' {print} we can add space that separate each column by
+		just put " " in between it.
+
+8. Whether LVM is active or not
+
+	- we're going to use the 'lsblk' command which also shows the disk type
+	and whether there is LVM disk or not
+	- we want to show different result with given conditions
+		thus we're going to use the 'if' command
+
