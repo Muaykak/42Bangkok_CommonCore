@@ -65,3 +65,48 @@ as a percentage
 	- we use '-m' option in 'df' command to see all as megabytes
 	
 	- I used the 'grep "/dev/"' to pick only the line that has "/dev/"
+
+	*******
+	Explanation on why i need to use 'grep "/dev/"'
+	- it will filter the output of 'df' and show only lines that related to
+	physical or logical devices
+	- "/dev/" is a special directory in Linux where device files (
+	representing physical and virtual devices) are located.
+	- normally the 'df' command shows information of all mounted filesystems
+	, including:
+		- Physical disk partitions (like "/dev/sda1")
+		- Virtual filesystems (like 'tmpfs', 'devtmpfs', or '/run').
+		- Special mounts (like '/sys', '/proc' or '/dev/shm').
+	Because of that "df -m" command would include entries that aren't
+	physical storage devices,
+
+
+	REASON TO USE 'grep "/dev/"'
+	- Exclude virtual filesystems: Many of the non-physical filesystems (
+	like 'tmpfs', 'udev', and 'proc') don't represent actual disk usage.
+	They are usually RAM-based, or kernel-managed temporary filesystems,
+	so they don't reflect storage usage on physical disks.
+	*******
+
+	- Then i used the 'grep -v "/boot"'
+	
+	******	
+	Explanation on why i need to use 'grep "/boot"'
+
+	The use of 'grep -v "/boot" is to exclude the boot partition from the 
+	output. 
+	
+	- The '/boot' partition in Linux is where the system stores files needed
+	to boot the operating system, such as the bootloader(e.g., GRUB), the
+	kernel, and related files.
+	- It's typically a small partition and separate from the main
+	file system to ensure the boot process has access to critical files.
+
+	REASON TO USE 'grep -v "/boot"'
+	- the 'grep -v' is to exclude any lines that match the string we specify
+	- the '/boot' partition typically doesn't change much in size or usage,
+	since it mostly contains static files like the kernel and bootloader.
+	- Disk space monitoring for '/boot' is rarely needed during routine
+	checks, as its size remains fairly constant unless new kernels or 
+	updates are installed.
+	******	
