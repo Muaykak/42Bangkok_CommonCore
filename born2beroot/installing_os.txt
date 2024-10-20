@@ -1,0 +1,20 @@
+
+Hostname
+
+	- The hostname is a single word that indentifies your system to the
+	network.
+
+Domain name
+
+	- The domain name is the part of your Internet address to the right
+	of your host name. It is often something that ends in .com, .net ,
+	.edu, or .org.
+
+root
+
+	- 'root' is the system administrative account. A malicious or
+	unqualified user with root access can have disastrous results
+	- the 'root' user should not have an empty password. 
+
+Partition disks
+	-
