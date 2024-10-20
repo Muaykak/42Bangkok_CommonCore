@@ -1,3 +1,23 @@
+* Debian was the first Linux distribution to include a package management
+system for easy installation and removal of software. It  was also the
+first Linux distribution that could be upgraded without requiring 
+reinstallation.
+
+* You must have at last 780MB of memory and 1160MB of hard disk space to
+perform a normal installation. Note that these are fairly minimal numbers.
+
+What is Debian?
+	- Debian is an all-volunteer organization dedicated to developing free
+	software and promoting the ideals of the Free Software community. The
+	Debian Project began in 1993, when Ian Murdock issued an open invitation
+	to software developers to contribute to complete and coherent software
+	distributin based on the relatively new Linux kernel. That relatively
+	small band of dedicated enthusiasts, originally funded by the [Free
+	Software Foundation] and influenced by the GNU philosophy, has grown
+	over the years into an organization of around 1000 Debian Developers.
+
+	-Debian Developers are involved in a variety of activities, including
+	Web 
 
 Hostname
 
