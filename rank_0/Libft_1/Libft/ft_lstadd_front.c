@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 14:24:30 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/31 14:24:31 by srussame         ###   ########.fr       */
+/*   Updated: 2024/10/27 08:09:19 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,3 +20,4 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 		*lst = new;
 	}
 }
+
