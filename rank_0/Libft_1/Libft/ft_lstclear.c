@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 16:20:14 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/31 16:20:15 by srussame         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:24:51 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 void	ft_lstclear(t_list **lst, void *(del)(void *))
 {
-	t_
+	t_list	*temp;
+	
+	if (lst == 0 || *lst == 0)
+		return ;
+	while (
 }
