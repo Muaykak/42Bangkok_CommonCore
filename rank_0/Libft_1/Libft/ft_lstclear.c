@@ -12,28 +12,31 @@
 
 #include "libft.h"
 
-//void	ft_lstclear(t_list **lst, void *(del)(void *))
-//{
-//	t_list	*temp;
-//	
-//	if (lst == 0 || *lst == 0)
-//		return ;
-//	while (
-//}
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*temp;
+	
+	if (lst == 0 || *lst == 0 || del == 0)
+		return ;
+	while (lst != 0 && *lst != 0)
+	{
+		temp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = temp;
+	}
+}
 
 #include <stdio.h>
 
-void	delete_malloc(void *ptr)
+void delete_malloc(void *ptr)
 {
-	if (ptr != 0 )
+	if (ptr != 0)
 		free(ptr);
 	ptr = 0;
-	free(ptr);
 }
 
 int main(int ac, char **argv)
 {
-	char	**str_set;
 	int		i;
 	t_list	*word_list;
 	t_list	*start_list;
@@ -41,26 +44,24 @@ int main(int ac, char **argv)
 
 	if (ac < 2)
 		return (0);
-	str_set = (char **)malloc(ac * (sizeof(char *)));
-	if (!str_set)
-		return (0);
-	str_set[ac] = 0;
-	i = 0;
-	while (i < ac - 1)
+	i = 1;
+	word_list = 0;
+	while (i < ac)
 	{
-		str_set[i] = ft_strdup(argv[i + 1]);
-		if (i == 0)
-			word_list = ft_lstnew(str_set[i]);
-		else
-			ft_lstadd_back(&word_list, (void *)str_set[i]);
+		ft_lstadd_back(&word_list, ft_lstnew(ft_strdup(argv[i])));
 		i++;
 	}
 	i = 0;
 	start_list = word_list;
 	while (start_list != 0)
 	{
-		printf("str_set[%d] = \"%s\"\n", i, (char *)start_list->content);
+		printf("word_list[%d] = \"%s\"\n", i, (char *)start_list->content);
 		start_list = start_list->next;
+		i++;
 	}
+
+	printf("\n\nBEGIN DELETE ALL THE LIST");
+
+	ft_lstclear(&word_list, &delete_malloc);
 	return (0);
 }
