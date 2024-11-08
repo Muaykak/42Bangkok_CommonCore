@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: muaykak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:28:57 by muaykak           #+#    #+#             */
-/*   Updated: 2024/09/24 18:09:55 by muaykak          ###   ########.fr       */
+/*   Created: 2024/11/05 08:07:26 by muaykak           #+#    #+#             */
+/*   Updated: 2024/11/05 08:23:34 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	printf("\nPrintf: %d\n", printf("%p\n", "hello"));
-	ft_printf("\nft_Printf: %d\n", ft_printf("%p\n", "hello"));
+	if (lst == 0 || f == 0)
+		return ;
+	while (lst != 0)
+	{
+		(*f)(lst->content)
+		lst = lst->next;
+	}
 }
