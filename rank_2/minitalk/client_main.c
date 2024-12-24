@@ -39,7 +39,7 @@ void	sent_to(pid_t pid)
 			kill(pid, SIGUSR1);
 		else if (bintext[i] == '0')
 			kill(pid, SIGUSR2);
-		usleep(200);
+		usleep(5000);
 		i++;
 	}
 	bintext_zero();

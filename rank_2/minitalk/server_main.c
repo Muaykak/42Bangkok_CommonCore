@@ -26,6 +26,7 @@ void	signal_end_check(int *num)
 		bintext_init(bintext);
 		ft_printf("\n\n\nwaiting for signals\n");
 		ft_printf("pid: %d\n\n", (int)getpid());
+		bintext_init(bintext);
 		*num = 0;
 	}
 }
