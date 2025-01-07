@@ -15,3 +15,6 @@ second option is to be able to create new password list
 Let's try to build one.
 
 1. I tried to bring the get_next_line to here also I need to do the Makefile
+
+2. i will also use the ft_printf function to help printing strings.
+
