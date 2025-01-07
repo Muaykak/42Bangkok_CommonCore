@@ -1,0 +1,17 @@
+
+I planned to write everything i did to this file.
+
+First, I want this program to store my password because I think i won't be able to remember all the password I have.
+
+I will use the "get_next_line" function to help this
+
+I will build two options for this program
+
+first option is to seacrh, It will be able to search any related or similar string,
+For example, If i search "hello", the result "ishelloworld" will be shown
+
+second option is to be able to create new password list
+
+Let's try to build one.
+
+1. I tried to bring the get_next_line to here also I need to do the Makefile
