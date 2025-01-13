@@ -12,13 +12,15 @@
 
 #include "libft.h"
 
+//This function is to apply the (void function that recieve void 
+// pointer argument applied to every content in the list)
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	if (lst == 0 || f == 0)
 		return ;
 	while (lst != 0)
 	{
-		(*f)(lst->content)
+		(*f)(lst->content);
 		lst = lst->next;
 	}
 }

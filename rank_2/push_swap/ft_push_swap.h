@@ -12,10 +12,5 @@
 
 #include "ft_printf.h"
 
-typedef struct s_stacklist
-{
-	int	number;
-	struct s_stacklist *next;
-}				t_stacklist;
 
 
