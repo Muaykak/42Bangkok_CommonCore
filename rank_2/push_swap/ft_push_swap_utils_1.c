@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.h                                     :+:      :+:    :+:   */
+/*   ft_push_swap_utils_1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 08:41:51 by muaykak           #+#    #+#             */
-/*   Updated: 2024/11/05 08:55:24 by muaykak          ###   ########.fr       */
+/*   Created: 2025/01/14 14:34:21 by srussame          #+#    #+#             */
+/*   Updated: 2025/01/14 14:34:22 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PUSH_SWAP_H
-# define FT_PUSH_SWAP_H
+#include "ft_push_swap.h"
 
-# include "ft_printf.h"
-# include "ft_push_swap_utils.h"
-# include "libft.h"
-
-#endif
-
-
-
+void	free_number(void *number)
+{
+	if (number != NULL)
+		free(number);
+	return ;
+}

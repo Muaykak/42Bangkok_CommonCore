@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.h                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muaykak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 08:41:51 by muaykak           #+#    #+#             */
-/*   Updated: 2024/11/05 08:55:24 by muaykak          ###   ########.fr       */
+/*   Created: 2024/11/05 08:48:41 by muaykak           #+#    #+#             */
+/*   Updated: 2024/11/05 09:03:16 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PUSH_SWAP_H
-# define FT_PUSH_SWAP_H
+#include "ft_printf.h"
+#include "ft_push_swap.h"
+#include "libft.h"
+#include "ft_checker.h"
 
-# include "ft_printf.h"
-# include "ft_push_swap_utils.h"
-# include "libft.h"
-
-#endif
-
+int	main(void)
+{
 
 
+}

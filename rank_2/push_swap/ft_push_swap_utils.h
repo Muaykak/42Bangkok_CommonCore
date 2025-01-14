@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_push_swap_utils.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 08:48:41 by muaykak           #+#    #+#             */
-/*   Updated: 2024/11/05 09:03:16 by muaykak          ###   ########.fr       */
+/*   Created: 2025/01/14 12:04:45 by srussame          #+#    #+#             */
+/*   Updated: 2025/01/14 12:04:46 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "ft_push_swap.h"
+#ifndef FT_PUSH_SWAP_UTILS
+# define FT_PUSH_SWAP_UTILS
 
-int	main()
-{
+long	ft_atol(const char *nptr);
+int		ft_isspace(char c);
+void	free_number(void *number);
 
-
-}
+#endif

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.h                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 08:41:51 by muaykak           #+#    #+#             */
-/*   Updated: 2024/11/05 08:55:24 by muaykak          ###   ########.fr       */
+/*   Created: 2024/08/25 13:52:03 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/25 13:52:05 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PUSH_SWAP_H
-# define FT_PUSH_SWAP_H
+#include "libft.h"
 
-# include "ft_printf.h"
-# include "ft_push_swap_utils.h"
-# include "libft.h"
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-#endif
-
-
-
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
