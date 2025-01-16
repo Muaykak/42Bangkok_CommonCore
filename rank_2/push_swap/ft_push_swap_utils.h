@@ -16,5 +16,6 @@
 long	ft_atol(const char *nptr);
 int		ft_isspace(char c);
 void	free_number(void *number);
+void	ft_free_split(char **save);
 
 #endif

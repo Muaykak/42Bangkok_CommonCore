@@ -12,6 +12,19 @@
 
 #include "ft_push_swap.h"
 
+void	ft_free_split(char **save)
+{
+	size_t	i;
+
+	i = 0;
+	while (save[i] != 0)
+	{
+		free(save[i]);
+		i++;
+	}
+	free(save);
+}
+
 void	free_number(void *number)
 {
 	if (number != NULL)
