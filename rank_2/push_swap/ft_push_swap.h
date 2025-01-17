@@ -23,4 +23,12 @@ int		check_int_limit(char *num_set);
 t_list	*put_argument(int argc, char **argv); //Main function
 int		put_argument_sub1(t_list **stack_a, int **number, char **num_set);
 
+void	operation_handler(t_list **stack_a, t_list **stack_b, \
+		void (*operation)(t_list **, t_list **));
+void	op_swap_a(t_list **stack_a, t_list **stack_b);
+void	op_swap_b(t_list **stack_a, t_list ** stack_b);
+void	op_swap_ss(t_list **stack_a, t_list **stack_b);
+void	op_push_b(t_list **stack_a, t_list **stack_b);
+void	op_push_a(t_list **stack_a, t_list **stack_b);
+
 #endif
