@@ -4,8 +4,8 @@ SRCS_FILE = ft_printf.c ft_printf_putchar_count.c ft_printf_putstr_count.c \
 	ft_lstlast.c ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 	ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstsize.c ft_lstnew.c \
 	ft_atol.c ft_push_swap_utils_1.c ft_split.c ft_strlen.c \
-	put_argument.c push_swap_operation_1.c ft_strncmp.c push_swap_operation_2.c\
-	main_checker.c
+	put_argument.c push_swap_operation_1.c ft_strncmp.c push_swap_operation_2.c \
+	push_swap_operation_3.c main_checker.c 
 
 SRC = ${SRCS_FILE}
 

@@ -12,9 +12,8 @@
 
 #include "ft_push_swap.h"
 
-
 void	op_swap_a(t_list **stack_a, t_list **stack_b);
-void	op_swap_b(t_list **stack_a, t_list ** stack_b);
+void	op_swap_b(t_list **stack_a, t_list **stack_b);
 void	op_swap_ss(t_list **stack_a, t_list **stack_b);
 void	operation_handler(t_list **stack_a, t_list **stack_b, \
 		void (*operation)(t_list **, t_list **));
@@ -33,10 +32,25 @@ void	operation_handler(t_list **stack_a, t_list **stack_b, \
 		ft_printf("pa\n");
 	else if (operation == &op_push_b)
 		ft_printf("pb\n");
+	else if (operation == &op_rotate_a)
+		ft_printf("ra\n");
+	else if (operation == &op_rotate_b)
+		ft_printf("rb\n");
+	else if (operation == &op_rotate_rr)
+		ft_printf("rr\n");
+	else if (operation == &op_reverse_a)
+		ft_printf("rra\n");
+	else if (operation == &op_reverse_b)
+		ft_printf("rrb\n");
+	else if (operation == &op_reverse_rrr)
+		ft_printf("rrr\n");
 }
 
 void	op_swap_ss(t_list **stack_a, t_list **stack_b)
 {
+	if ((*stack_a != 0 && (*stack_a)->next != 0) \
+	&& (*stack_b != 0 && (*stack_b)->next != 0))
+		return ;
 	op_swap_a(stack_a, stack_b);
 	op_swap_b(stack_a, stack_b);
 }
@@ -57,7 +71,7 @@ void	op_swap_a(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-void	op_swap_b(t_list **stack_a, t_list ** stack_b)
+void	op_swap_b(t_list **stack_a, t_list **stack_b)
 {
 	t_list	**swap_stack;
 	t_list	*temp;

@@ -55,11 +55,15 @@ int	main(int argc, char **argv)
 		return (0);
 	first_pos = stack_a;
 	stack_display(stack_a, stack_b);
-	operation_handler(&stack_a, &stack_b, &op_push_b);
+	operation_handler(&stack_a, &stack_b, &op_reverse_a);
 	stack_display(stack_a, stack_b);
-	operation_handler(&stack_a, &stack_b, &op_push_b);
+	operation_handler(&stack_a, &stack_b, &op_reverse_a);
 	stack_display(stack_a, stack_b);
-	operation_handler(&stack_a, &stack_b, &op_push_b);
+	operation_handler(&stack_a, &stack_b, &op_reverse_a);
+	stack_display(stack_a, stack_b);
+	operation_handler(&stack_a, &stack_b, &op_reverse_a);
+	stack_display(stack_a, stack_b);
+	operation_handler(&stack_a, &stack_b, &op_reverse_a);
 	stack_display(stack_a, stack_b);
 	ft_lstclear(&first_pos, &free_number);
 }
