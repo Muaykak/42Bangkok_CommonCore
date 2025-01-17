@@ -36,3 +36,13 @@ void	op_push_a(t_list **stack_a, t_list **stack_b)
 	ft_lstadd_front(stack_a, *stack_b);
 	*stack_b = temp;
 }
+
+void	op_rotate_a(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*temp;
+
+	(void)(stack_b);
+	if (*stack_a == 0)
+		return ;
+	
+}
