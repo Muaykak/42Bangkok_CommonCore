@@ -24,14 +24,15 @@ void	del_printed(size_t printed_size)
 		ft_printf("\b");
 		i++;
 	}
+	ft_printf("reach here\n");
 	i = 0;
-	while (i++ < printed_size)
+	while (i < printed_size)
 	{
 		ft_printf(" ");
 		i++;
 	}
 	i = 0;
-	while (i++ < printed_size)
+	while (i < printed_size)
 	{
 		ft_printf("\b");
 		i++;
