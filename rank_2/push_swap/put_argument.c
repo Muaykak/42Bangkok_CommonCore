@@ -55,6 +55,7 @@ t_list	*put_argument(int argc, char **argv)
 		{
 			if (stack_a != 0)
 				ft_lstclear(&stack_a, &free_number);
+			ft_printf("Error\n");
 			return (NULL);
 		}
 		if (put_argument_sub1(&stack_a, &number, num_set) == 0)
@@ -74,9 +75,15 @@ int	check_format_sub1(char *argv, int j)
 	if (argv[j] == '+' || argv[j] == '-')
 	{
 		if (j != 0 && argv[j - 1] != ' ')
+		{
+			ft_printf("Error\n");
 			return (0);
+		}
 		if (argv[j + 1] < '0' || argv[j + 1] > '9')
+		{
+			ft_printf("Error\n");
 			return (0);
+		}
 	}
 	return (1);
 }
