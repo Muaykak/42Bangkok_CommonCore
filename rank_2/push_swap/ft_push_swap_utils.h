@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PUSH_SWAP_UTILS
-# define FT_PUSH_SWAP_UTILS
+#ifndef FT_PUSH_SWAP_UTILS_H
+# define FT_PUSH_SWAP_UTILS_H
 
 long	ft_atol(const char *nptr);
 int		ft_isspace(char c);
