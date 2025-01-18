@@ -10,32 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_checker.h"
+#include "main_checker.h"
 #include "ft_push_swap.h"
 
-/* create a function to print all the list first*/
-
-/* This function will print Both stack a and b*/
-void	stack_display(t_list *stack_a, t_list *stack_b)
-{
-	ft_printf("A = {");
-	while (stack_a != 0)
-	{
-		ft_printf("%d", *((int *)stack_a->content));
-		if (stack_a->next != 0)
-			ft_printf(", ");
-		stack_a = stack_a->next;
-	}
-	ft_printf("}\nB = {");
-	while (stack_b != 0)
-	{
-		ft_printf("%d", *((int *)stack_b->content));
-		if (stack_b->next != 0)
-			ft_printf(", ");
-		stack_b = stack_b->next;
-	}
-	ft_printf("}\n");
-}
 
 int	main(int argc, char **argv)
 {
@@ -55,15 +32,29 @@ int	main(int argc, char **argv)
 		return (0);
 	first_pos = stack_a;
 	stack_display(stack_a, stack_b);
-	operation_handler(&stack_a, &stack_b, &op_reverse_a);
+	op_handler(&stack_a, &stack_b, &op_swap_a, PRINT_OP);
 	stack_display(stack_a, stack_b);
-	operation_handler(&stack_a, &stack_b, &op_reverse_a);
+	op_handler(&stack_a, &stack_b, &op_push_b, PRINT_OP);
 	stack_display(stack_a, stack_b);
-	operation_handler(&stack_a, &stack_b, &op_reverse_a);
+	op_handler(&stack_a, &stack_b, &op_push_b, PRINT_OP);
 	stack_display(stack_a, stack_b);
-	operation_handler(&stack_a, &stack_b, &op_reverse_a);
+	op_handler(&stack_a, &stack_b, &op_push_b, PRINT_OP);
 	stack_display(stack_a, stack_b);
-	operation_handler(&stack_a, &stack_b, &op_reverse_a);
+	op_handler(&stack_a, &stack_b, &op_rotate_a, PRINT_OP);
+	stack_display(stack_a, stack_b);
+	op_handler(&stack_a, &stack_b, &op_rotate_b, PRINT_OP);
+	stack_display(stack_a, stack_b);
+	op_handler(&stack_a, &stack_b, &op_reverse_a, PRINT_OP);
+	stack_display(stack_a, stack_b);
+	op_handler(&stack_a, &stack_b, &op_reverse_b, PRINT_OP);
+	stack_display(stack_a, stack_b);
+	op_handler(&stack_a, &stack_b, &op_swap_a, PRINT_OP);
+	stack_display(stack_a, stack_b);
+	op_handler(&stack_a, &stack_b, &op_push_a, PRINT_OP);
+	stack_display(stack_a, stack_b);
+	op_handler(&stack_a, &stack_b, &op_push_a, PRINT_OP);
+	stack_display(stack_a, stack_b);
+	op_handler(&stack_a, &stack_b, &op_push_a, PRINT_OP);
 	stack_display(stack_a, stack_b);
 	ft_lstclear(&first_pos, &free_number);
 }

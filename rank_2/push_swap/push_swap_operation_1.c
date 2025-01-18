@@ -15,13 +15,15 @@
 void	op_swap_a(t_list **stack_a, t_list **stack_b);
 void	op_swap_b(t_list **stack_a, t_list **stack_b);
 void	op_swap_ss(t_list **stack_a, t_list **stack_b);
-void	operation_handler(t_list **stack_a, t_list **stack_b, \
-		void (*operation)(t_list **, t_list **));
+void	op_handler(t_list **stack_a, t_list **stack_b, \
+		void (*operation)(t_list **, t_list **), int print);
 
-void	operation_handler(t_list **stack_a, t_list **stack_b, \
-		void (*operation)(t_list **, t_list **))
+void	op_handler(t_list **stack_a, t_list **stack_b, \
+		void (*operation)(t_list **, t_list **), int print)
 {
 	(*operation)(stack_a, stack_b);
+	if (print != 1)
+		return ;
 	if (operation == &op_swap_a)
 		ft_printf("sa\n");
 	else if (operation == &op_swap_b)

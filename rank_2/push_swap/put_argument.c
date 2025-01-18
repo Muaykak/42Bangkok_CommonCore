@@ -96,6 +96,8 @@ int	check_format(int argc, char **argv)
 	int	j;
 
 	i = 1;
+	if (argc <= 1)
+		return (0);
 	while (argc > i)
 	{
 		j = 0;

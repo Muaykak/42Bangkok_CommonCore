@@ -10,12 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "ft_push_swap.h"
-#include "libft.h"
-#include "ft_checker.h"
+#include "main_push_swap.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	t_list	*stack_a;
+	t_list	*stack_b;
+
+	stack_b = 0;
+	stack_a = put_argument(argc, argv);
+	if (stack_a == 0)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	my_algor_execute(&stack_a, &stack_b);
 	return (0);
 }

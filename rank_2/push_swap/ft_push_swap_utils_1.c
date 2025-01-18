@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "ft_push_swap_utils.h"
+
+void	stack_display(t_list *stack_a, t_list *stack_b);
+void	ft_free_split(char **save);
+void	free_number(void *number);
 
 void	ft_free_split(char **save)
 {
@@ -30,4 +34,26 @@ void	free_number(void *number)
 	if (number != NULL)
 		free(number);
 	return ;
+}
+
+/* This function will print Both stack a and b*/
+void	stack_display(t_list *stack_a, t_list *stack_b)
+{
+	ft_printf("A = {");
+	while (stack_a != 0)
+	{
+		ft_printf("%d", *((int *)stack_a->content));
+		if (stack_a->next != 0)
+			ft_printf(", ");
+		stack_a = stack_a->next;
+	}
+	ft_printf("}\nB = {");
+	while (stack_b != 0)
+	{
+		ft_printf("%d", *((int *)stack_b->content));
+		if (stack_b->next != 0)
+			ft_printf(", ");
+		stack_b = stack_b->next;
+	}
+	ft_printf("}\n\n");
 }

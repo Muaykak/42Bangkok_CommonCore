@@ -14,8 +14,8 @@
 # define FT_PUSH_SWAP_H
 
 # include "ft_printf.h"
-# include "ft_push_swap_utils.h"
 # include "libft.h"
+# include "ft_push_swap_utils.h"
 
 int		check_format_sub1(char *argv, int j);
 int		check_format(int argc, char **argv);
@@ -23,8 +23,10 @@ int		check_int_limit(char *num_set);
 t_list	*put_argument(int argc, char **argv); //Main function
 int		put_argument_sub1(t_list **stack_a, int **number, char **num_set);
 
-void	operation_handler(t_list **stack_a, t_list **stack_b, \
-		void (*operation)(t_list **, t_list **));
+int		check_stack_sorted(t_list *stack_a, t_list *stack_b);
+
+void	op_handler(t_list **stack_a, t_list **stack_b, \
+		void (*operation)(t_list **, t_list **), int print);
 void	op_swap_a(t_list **stack_a, t_list **stack_b);
 void	op_swap_b(t_list **stack_a, t_list **stack_b);
 void	op_swap_ss(t_list **stack_a, t_list **stack_b);
