@@ -14,7 +14,7 @@
 # define MAIN_PUSH_SWAP_H
 
 # include "ft_push_swap.h"
-# include "push_swap_my_algor.h"
+# include "push_swap_algor_redix.h"
 
 # define PRINT_OP 1
 

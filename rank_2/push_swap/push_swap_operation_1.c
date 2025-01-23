@@ -11,80 +11,103 @@
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
+#include "main_checker.h"
+#include "main_push_swap.h"
 
-void	op_swap_a(t_list **stack_a, t_list **stack_b);
-void	op_swap_b(t_list **stack_a, t_list **stack_b);
-void	op_swap_ss(t_list **stack_a, t_list **stack_b);
-void	op_handler(t_list **stack_a, t_list **stack_b, \
-		void (*operation)(t_list **, t_list **), int print);
+static void	op_handler_sub1(t_list **stack_a, t_list **stack_b,\
+			 char *command, int print_op);
+void		op_handler(t_list **stack_a, t_list **stack_b,\
+			 char *command, int print_op);
+int			op_push(t_list **push, t_list **stack);
+int			op_reverse(t_list **stack);
+int			op_rotate(t_list **stack);
 
-void	op_handler(t_list **stack_a, t_list **stack_b, \
-		void (*operation)(t_list **, t_list **), int print)
+
+static void	op_handler_sub1(t_list **stack_a, t_list **stack_b,\
+			 char *command, int print_op)
 {
-	(*operation)(stack_a, stack_b);
-	if (print != 1)
-		return ;
-	if (operation == &op_swap_a)
-		ft_printf("sa\n");
-	else if (operation == &op_swap_b)
-		ft_printf("sb\n");
-	else if (operation == &op_swap_ss)
-		ft_printf("ss\n");
-	else if (operation == &op_push_a)
-		ft_printf("pa\n");
-	else if (operation == &op_push_b)
-		ft_printf("pb\n");
-	else if (operation == &op_rotate_a)
-		ft_printf("ra\n");
-	else if (operation == &op_rotate_b)
-		ft_printf("rb\n");
-	else if (operation == &op_rotate_rr)
-		ft_printf("rr\n");
-	else if (operation == &op_reverse_a)
-		ft_printf("rra\n");
-	else if (operation == &op_reverse_b)
-		ft_printf("rrb\n");
-	else if (operation == &op_reverse_rrr)
-		ft_printf("rrr\n");
+	if (ft_strncmp(command, "sb", 2) == 0 && op_swap(stack_b) == 0)
+			return ;
+	else if (ft_strncmp(command, "ss", 2) == 0)
+	{
+		if ((*stack_a) == 0 || (*stack_b) == 0 || \
+		op_swap(stack_a)  == 0 || op_swap(stack_b) == 0 )
+			return ;
+	}
+	else if (ft_strncmp(command, "rra", 3 ) == 0 && op_reverse(stack_a) == 0)
+			return ;
+	else if (ft_strncmp(command, "rrb", 3 ) == 0 && op_reverse(stack_b) == 0)
+			return ;
+	else if (ft_strncmp(command, "rrr", 3) == 0)
+	{
+		if ((*stack_a) == 0 || (*stack_b) == 0 || \
+		op_reverse(stack_a)  == 0 || op_reverse(stack_b) == 0 )
+			return ;
+	}
+	if (print_op == 1)
+		ft_printf("%s\n", command);
 }
 
-void	op_swap_ss(t_list **stack_a, t_list **stack_b)
+
+void	op_handler(t_list **stack_a, t_list **stack_b,\
+		 char *command, int print_op)
 {
-	if ((*stack_a != 0 && (*stack_a)->next != 0) \
-	&& (*stack_b != 0 && (*stack_b)->next != 0))
+	if (!stack_a || !stack_b || !command || ft_strlen(command) < 2)
 		return ;
-	op_swap_a(stack_a, stack_b);
-	op_swap_b(stack_a, stack_b);
+	if (ft_strncmp(command, "pa", 2) == 0 && op_push(stack_a, stack_b) == 0)
+			return ;
+	else if (ft_strncmp(command, "pb", 2) == 0 && op_push(stack_b, stack_a) == 0)
+			return ;
+	else if (ft_strncmp(command, "ra", 2) == 0 && op_rotate(stack_a) == 0)
+			return ;
+	else if (ft_strncmp(command, "rb" ,2) == 0 && op_rotate(stack_b) == 0)
+			return ;
+	else if (ft_strncmp(command, "rr\0", 3) == 0)
+	{
+		if ((*stack_a) == 0 || (*stack_b) == 0 \
+		|| op_rotate(stack_a)  == 0 || op_rotate(stack_b) == 0 )
+			return ;
+	}
+	else if (ft_strncmp(command, "sa", 2) == 0 && op_swap(stack_a) == 0)
+			return ;
+	op_handler_sub1(stack_a, stack_b, command, print_op);
 }
 
-void	op_swap_a(t_list **stack_a, t_list **stack_b)
+int	op_push(t_list **push, t_list **stack)
 {
-	t_list	**swap_stack;
+	t_list	*new;
+
+	if (!push || !stack || (*stack) == 0)
+		return (0);
+	new = *stack;
+	*stack = (*stack)->next;
+	ft_lstadd_front(push, new);
+	return (1);
+}
+
+int	op_reverse(t_list **stack)
+{
 	t_list	*temp;
 
-	(void)(stack_b);
-	if (*stack_a != 0 && (*stack_a)->next != 0)
-	{
-		swap_stack = stack_a;
-		temp = (*swap_stack)->next;
-		(*swap_stack)->next = (*swap_stack)->next->next;
-		temp->next = (*swap_stack);
-		*stack_a = temp;
-	}
+	if (!stack || !(*stack) || (*stack)->next == 0)
+		return (0);
+	temp = (*stack);
+	while (temp->next->next != 0)
+		temp = temp->next;
+	ft_lstadd_front(stack, ft_lstlast(*stack));
+	temp->next = 0;
+	return (1);
 }
 
-void	op_swap_b(t_list **stack_a, t_list **stack_b)
+int	op_rotate(t_list **stack)
 {
-	t_list	**swap_stack;
 	t_list	*temp;
 
-	(void)(stack_a);
-	if (*stack_b != 0 && (*stack_b)->next != 0)
-	{
-		swap_stack = stack_b;
-		temp = (*swap_stack)->next;
-		(*swap_stack)->next = (*swap_stack)->next->next;
-		temp->next = (*swap_stack);
-		*stack_b = temp;
-	}
+	if (!stack || !(*stack) || (*stack)->next == 0)
+		return (0);
+	temp = (*stack)->next;
+	ft_lstadd_back(stack, *stack);
+	(*stack)->next = 0;
+	*stack = temp;
+	return (1);
 }

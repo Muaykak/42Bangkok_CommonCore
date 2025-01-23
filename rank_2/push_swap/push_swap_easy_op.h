@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_utils.h                               :+:      :+:    :+:   */
+/*   push_swap_easy_op.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 12:04:45 by srussame          #+#    #+#             */
-/*   Updated: 2025/01/14 12:04:46 by srussame         ###   ########.fr       */
+/*   Created: 2025/01/19 11:44:58 by srussame          #+#    #+#             */
+/*   Updated: 2025/01/19 11:44:59 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PUSH_SWAP_UTILS_H
-# define FT_PUSH_SWAP_UTILS_H
+#ifndef PUSH_SWAP_EASY_OP_H
+# define PUSH_SWAP_EASY_OP_H
 
 # include "ft_push_swap.h"
+# include "main_push_swap.h"
 
-long	ft_atol(const char *nptr);
-int		ft_isspace(char c);
-void	free_number(void *number);
-void	ft_free_split(char **save);
-void	stack_display(t_list *stack_a, t_list *stack_b);
-int		ft_abs(int number);
-int		max_number(t_list *stack);
+void	easy_rotate(char c, t_list **stack, t_list *target);
+int 	(*decide_rotate(t_list *stack, t_list *target))(t_list **);
 
 #endif

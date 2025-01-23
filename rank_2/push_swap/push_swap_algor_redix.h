@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_utils.h                               :+:      :+:    :+:   */
+/*   push_swap_algor_redix.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 12:04:45 by srussame          #+#    #+#             */
-/*   Updated: 2025/01/14 12:04:46 by srussame         ###   ########.fr       */
+/*   Created: 2025/01/19 16:02:15 by srussame          #+#    #+#             */
+/*   Updated: 2025/01/19 16:02:15 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PUSH_SWAP_UTILS_H
-# define FT_PUSH_SWAP_UTILS_H
+#ifndef PUSH_SWAP_ALGOR_REDIX_H
+# define PUSH_SWAP_ALGOR_REDIX_H
 
 # include "ft_push_swap.h"
 
-long	ft_atol(const char *nptr);
-int		ft_isspace(char c);
-void	free_number(void *number);
-void	ft_free_split(char **save);
-void	stack_display(t_list *stack_a, t_list *stack_b);
-int		ft_abs(int number);
-int		max_number(t_list *stack);
+int		number_digit(t_list *target, unsigned long digit);
+t_list	*find_num_digit_high(t_list *stack, int find_num, unsigned long digit);
+t_list	*find_num_digit_low(t_list *stack, int find_num, unsigned long digit);
+void	redix_algor_sort(t_list	**stack_a, t_list **stack_b);
+t_list	*find_min_number(t_list *stack);
 
 #endif

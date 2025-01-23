@@ -15,6 +15,35 @@
 void	stack_display(t_list *stack_a, t_list *stack_b);
 void	ft_free_split(char **save);
 void	free_number(void *number);
+int		ft_abs(int number);
+int		max_number(t_list *stack);
+
+/* return the minmax number in the stack */
+int	max_number(t_list *stack)
+{
+	int i;
+
+	if (stack == 0)
+		return (0);
+	i = ((int *)stack->content)[0];
+	while (stack != 0)
+	{
+		if (ft_abs(i) < ft_abs(((int *)stack->content)[0]))
+			i  = ((int *)stack->content)[0];
+		stack = stack->next;
+	}
+	return (i);
+}
+
+int	ft_abs(int number)
+{
+	if (number == -2147483648)
+		return (2147483647);
+	if (number < 0)
+		return (-1 * number);
+	else
+		return (number);
+}
 
 void	ft_free_split(char **save)
 {

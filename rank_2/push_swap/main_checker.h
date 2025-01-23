@@ -13,6 +13,4 @@
 #ifndef MAIN_CHECKER_H
 # define MAIN_CHECKER_H
 
-# define PRINT_OP 0
-
 #endif
