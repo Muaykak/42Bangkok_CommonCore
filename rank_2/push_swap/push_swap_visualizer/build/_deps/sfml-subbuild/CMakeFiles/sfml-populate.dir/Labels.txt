@@ -1,0 +1,14 @@
+# Target labels
+ sfml-populate
+# Source files and their labels
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate-complete.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test.rule
+/Users/suttawit/Desktop/my_cadet/rank_2/push_swap/push_swap_visualizer/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update.rule

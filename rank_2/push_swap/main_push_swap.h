@@ -15,6 +15,7 @@
 
 # include "ft_push_swap.h"
 # include "push_swap_algor_redix.h"
+# include "push_swap_my_algor.h"
 
 # define PRINT_OP 1
 

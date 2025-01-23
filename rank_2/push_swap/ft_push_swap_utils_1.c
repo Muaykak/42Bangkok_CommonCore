@@ -17,6 +17,8 @@ void	ft_free_split(char **save);
 void	free_number(void *number);
 int		ft_abs(int number);
 int		max_number(t_list *stack);
+int		high_num(t_list *stack);
+int		low_num(t_list *stack);
 
 /* return the minmax number in the stack */
 int	max_number(t_list *stack)
@@ -30,6 +32,40 @@ int	max_number(t_list *stack)
 	{
 		if (ft_abs(i) < ft_abs(((int *)stack->content)[0]))
 			i  = ((int *)stack->content)[0];
+		stack = stack->next;
+	}
+	return (i);
+}
+
+/* return the highest number of the stack*/
+int	high_num(t_list *stack)
+{
+	int i;
+
+	if (!stack)
+		return (0);
+	i = *((int *)stack->content);
+	while (stack != 0)
+	{
+		if (*((int *)stack->content) > i)
+			i = *((int *)stack->content);
+		stack = stack->next;
+	}
+	return (i);
+}
+
+/* return the lowest number of the stack*/
+int	low_num(t_list *stack)
+{
+	int i;
+
+	if (!stack)
+		return (0);
+	i = *((int *)stack->content);
+	while (stack != 0)
+	{
+		if (*((int *)stack->content) < i)
+			i = *((int *)stack->content);
 		stack = stack->next;
 	}
 	return (i);

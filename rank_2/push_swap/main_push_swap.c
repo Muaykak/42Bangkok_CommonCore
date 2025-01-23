@@ -25,6 +25,8 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (1);
 	}
-//	redix_algor_sort(&stack_a, &stack_b);
+	redix_algor_sort(&stack_a, &stack_b, 1);
+//	my_algor(&stack_a, &stack_b, 1);
+	stack_display(stack_a, stack_b);
 	return (0);
 }

@@ -15,4 +15,6 @@
 
 # include "ft_push_swap.h"
 
+void	my_algor(t_list **stack_a, t_list **stack_b, int print_op);
+
 #endif

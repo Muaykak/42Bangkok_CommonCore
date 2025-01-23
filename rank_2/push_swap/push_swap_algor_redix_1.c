@@ -15,13 +15,13 @@
 int		number_digit(t_list *target, unsigned long digit);
 t_list	*find_num_digit_high(t_list *stack, int find_num, unsigned long digit);
 t_list	*find_num_digit_low(t_list *stack, int find_num, unsigned long digit);
-void	redix_algor_sort(t_list	**stack_a, t_list **stack_b);
+void	redix_algor_sort(t_list	**stack_a, t_list **stack_b, int print_op);
 t_list	*find_min_number(t_list *stack);
 int		cut_number(t_list *stack, unsigned long digit);
 
 int		check_stack_sort_unsigned(t_list *stack);
 
-void	redix_algor_sort(t_list	**stack_a, t_list **stack_b)
+void	redix_algor_sort(t_list	**stack_a, t_list **stack_b, int print_op)
 {
 	unsigned long	digit;
 	int				max;
@@ -40,10 +40,14 @@ void	redix_algor_sort(t_list	**stack_a, t_list **stack_b)
 			while (number < 10)
 			{
 				target = find_num_digit_low(*stack_a, number, digit);
+				if (target != 0)
+					easy_rotate('a', stack_a, target, print_op);
 				while (target != NULL)
 				{
-					easy_rotate('a', stack_a, target);
-					op_handler(stack_a, stack_b, "pb");
+					if (number_digit(*stack_a, digit) == number)
+						op_handler(stack_a, stack_b, "pb", print_op);
+					else
+						op_handler(stack_a, stack_b, "ra", print_op);
 					target = find_num_digit_low(*stack_a, number, digit);
 				}
 				number++;
@@ -55,10 +59,14 @@ void	redix_algor_sort(t_list	**stack_a, t_list **stack_b)
 			while (number >= 0)
 			{
 				target = find_num_digit_high(*stack_b, number, digit);
+				if (target != 0)
+					easy_rotate('b', stack_b, target, print_op);
 				while (target != NULL)
 				{
-					easy_rotate('b', stack_b, target);
-					op_handler(stack_a, stack_b, "pa");
+					if (number_digit(*stack_b, digit) == number)
+						op_handler(stack_a, stack_b, "pa", print_op);
+					else
+						op_handler(stack_a, stack_b, "rb", print_op);
 					target = find_num_digit_high(*stack_b, number, digit);
 				}
 				number--;
@@ -69,19 +77,19 @@ void	redix_algor_sort(t_list	**stack_a, t_list **stack_b)
 	}
 	if (*stack_a == 0)
 		while (*stack_b != 0)
-			op_handler(stack_a, stack_b, "pa");
+			op_handler(stack_a, stack_b, "pa", print_op);
 	if (check_stack_sorted(*stack_a, *stack_b) == 1)
 		return ;
 	target = find_min_number(*stack_a);
 	while (target != 0 && ((int *)target->content)[0] < 0)
 	{
-		easy_rotate('a', stack_a, target);
-		op_handler(stack_a, stack_b, "pb");
+		easy_rotate('a', stack_a, target, print_op);
+		op_handler(stack_a, stack_b, "pb", print_op);
 		target = find_min_number(*stack_a);
 	}
-	easy_rotate('a', stack_a, find_min_number(*stack_a));
+	easy_rotate('a', stack_a, find_min_number(*stack_a), print_op);
 	while((*stack_b) != 0)
-		op_handler(stack_a, stack_b, "pa");
+		op_handler(stack_a, stack_b, "pa", print_op);
 }
 
 /* ignore positive or negative number, check if the stack is sorted*/
@@ -139,19 +147,25 @@ int	number_digit(t_list *target, unsigned long digit)
 t_list	*find_num_digit_high(t_list *stack, int find_num, unsigned long digit)
 {
 	t_list	*target;
+	t_list	*orig;
 
 	target = NULL;
+	orig = stack;
 	while (stack != NULL)
 	{
 		if (find_num == number_digit(stack, digit))
 		{
-			if (target == NULL)
+			if (target == NULL || digit == 1)
 				target = stack;
 			else
 			{
-				if (ft_abs(*((int *)stack->content)) >
-					ft_abs(*((int *)target->content)))
-					target = stack;
+				if (number_digit(stack, digit / 10) >
+					number_digit(target, digit / 10))
+				{
+					if (travese_dist(orig, target) <
+					travese_dist(orig, stack))
+						target = stack;
+				}
 			}
 		}
 		stack = stack->next;
@@ -162,19 +176,25 @@ t_list	*find_num_digit_high(t_list *stack, int find_num, unsigned long digit)
 t_list	*find_num_digit_low(t_list *stack, int find_num, unsigned long digit)
 {
 	t_list	*target;
+	t_list	*orig;
 
 	target = NULL;
+	orig = stack;
 	while (stack != NULL)
 	{
 		if (find_num == number_digit(stack, digit))
 		{
-			if (target == NULL)
+			if (target == NULL || digit == 1)
 				target = stack;
 			else
 			{
-				if (ft_abs(*((int *)stack->content)) <
-					ft_abs(*((int *)target->content)))
+				if (number_digit(stack, digit / 10) <
+					number_digit(target, digit / 10))
+				{
+					if (travese_dist(orig, target) <
+					travese_dist(orig, stack))
 					target = stack;
+				}
 			}
 		}
 		stack = stack->next;

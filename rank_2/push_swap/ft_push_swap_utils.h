@@ -22,5 +22,7 @@ void	ft_free_split(char **save);
 void	stack_display(t_list *stack_a, t_list *stack_b);
 int		ft_abs(int number);
 int		max_number(t_list *stack);
+int		high_num(t_list *stack);
+int		low_num(t_list *stack);
 
 #endif
