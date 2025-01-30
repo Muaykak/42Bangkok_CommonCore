@@ -26,11 +26,16 @@ int		put_argument_sub1(t_list **stack_a, int **number, char **num_set);
 
 int		check_stack_sorted(t_list *stack_a, t_list *stack_b);
 
-void	op_handler(t_list **stack_a, t_list **stack_b,\
-		 char *command, int print_op);
-int		op_swap(t_list **stack);
-int		op_push(t_list **push, t_list **stack);
-int		op_reverse(t_list **stack);
-int		op_rotate(t_list **stack);
+int		op_push_b(t_list **stack, t_list **push, int print_op);
+int		op_swap_b(t_list **unused, t_list **stack, int print_op);
+int		op_swap_a(t_list **stack, t_list **unused, int print_op);
+int 	op_swap_all(t_list **stack_a, t_list **stack_b, int print_op);
+int		op_rotate_b(t_list **unused, t_list **stack, int print_op);
+int		op_rotate_a(t_list **unused, t_list **stack, int print_op);
+int		op_reverse_a(t_list **stack, t_list **unused, int print_op);
+int		op_rotate_all(t_list **stack_a, t_list **stack_b, int print_op);
+int		op_reverse_b(t_list **unused, t_list **stack, int print_op);
+int		op_reverse_all(t_list **stack_a, t_list **stack_b, int print_op);
+int		op_push_a(t_list **push, t_list **stack, int print_op);
 
 #endif

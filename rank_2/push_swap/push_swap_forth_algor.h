@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_operation_1.c                            :+:      :+:    :+:   */
+/*   push_swap_forth_algor.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 14:07:23 by srussame          #+#    #+#             */
-/*   Updated: 2025/01/17 14:07:23 by srussame         ###   ########.fr       */
+/*   Created: 2025/01/27 15:04:22 by srussame          #+#    #+#             */
+/*   Updated: 2025/01/27 15:04:24 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
-#include "main_checker.h"
-#include "main_push_swap.h"
+#ifndef PUSH_SWAP_FORTH_ALGOR_H
+# define PUSH_SWAP_FORTH_ALGOR_H
 
-int	op_push_b(t_list **stack, t_list **push, int print_op)
-{
-	t_list	*new;
+# include "ft_push_swap.h"
 
-	if (!push || !stack || (*stack) == 0)
-		return (0);
-	new = *stack;
-	*stack = (*stack)->next;
-	ft_lstadd_front(push, new);
-	if (print_op == 1)
-		ft_printf("pb\n");
-	return (1);
-}
+# ifndef CHUNK_SIZE
+#  define CHUNK_SIZE 3
+# endif
+
+//typedef struct s_fakelist
+//{
+//	t_list 				*list;
+//	int					part;
+//	struct s_fakelist	*next;
+//}				t_fakelist;
+
+void	cost_algor(t_list **stack_a, t_list **stack_b);
+
+#endif

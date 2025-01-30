@@ -6,7 +6,8 @@ SRCS_FILE = ft_printf.c ft_printf_putchar_count.c ft_printf_putstr_count.c \
 	ft_atol.c ft_push_swap_utils_1.c ft_split.c ft_strlen.c \
 	put_argument.c push_swap_operation_1.c ft_strncmp.c push_swap_operation_2.c \
 	push_swap_stack_check.c push_swap_easy_op_1.c push_swap_algor_redix_1.c \
-	push_swap_my_algor_1.c
+	push_swap_my_algor_1.c push_swap_operation_3.c push_swap_quicksort_1.c \
+	push_swap_forth_algor_1.c
 
 
 SRC = ${SRCS_FILE}

@@ -45,9 +45,9 @@ void	redix_algor_sort(t_list	**stack_a, t_list **stack_b, int print_op)
 				while (target != NULL)
 				{
 					if (number_digit(*stack_a, digit) == number)
-						op_handler(stack_a, stack_b, "pb", print_op);
+						op_push_b(stack_a, stack_b, print_op);
 					else
-						op_handler(stack_a, stack_b, "ra", print_op);
+						op_rotate_a(stack_a, stack_b, print_op);
 					target = find_num_digit_low(*stack_a, number, digit);
 				}
 				number++;
@@ -64,9 +64,9 @@ void	redix_algor_sort(t_list	**stack_a, t_list **stack_b, int print_op)
 				while (target != NULL)
 				{
 					if (number_digit(*stack_b, digit) == number)
-						op_handler(stack_a, stack_b, "pa", print_op);
+						op_push_a(stack_a, stack_b, print_op);
 					else
-						op_handler(stack_a, stack_b, "rb", print_op);
+						op_rotate_b(stack_a, stack_b, print_op);
 					target = find_num_digit_high(*stack_b, number, digit);
 				}
 				number--;
@@ -77,19 +77,19 @@ void	redix_algor_sort(t_list	**stack_a, t_list **stack_b, int print_op)
 	}
 	if (*stack_a == 0)
 		while (*stack_b != 0)
-			op_handler(stack_a, stack_b, "pa", print_op);
+			op_push_a(stack_a, stack_b, print_op);
 	if (check_stack_sorted(*stack_a, *stack_b) == 1)
 		return ;
 	target = find_min_number(*stack_a);
 	while (target != 0 && ((int *)target->content)[0] < 0)
 	{
 		easy_rotate('a', stack_a, target, print_op);
-		op_handler(stack_a, stack_b, "pb", print_op);
+		op_push_b(stack_a, stack_b, print_op);
 		target = find_min_number(*stack_a);
 	}
 	easy_rotate('a', stack_a, find_min_number(*stack_a), print_op);
 	while((*stack_b) != 0)
-		op_handler(stack_a, stack_b, "pa", print_op);
+		op_push_a(stack_a, stack_b, print_op);
 }
 
 /* ignore positive or negative number, check if the stack is sorted*/
