@@ -147,84 +147,33 @@ void	remove_lst_one(t_list **top, t_list *target)
 /* clear all the sorted fake_list and leave only the last number of each chunk
 	(highest number on each chunk) the chunk separated by the 
 	CHUNK_SIZE which is defined is the header file */
-t_list *chunk_fakelist(t_list *fake_list)
+t_list *chunk_fakelist(t_list **fake_list)
 {
 	int		chunk_value;
 	int		i;
 	t_list	*temp;
-	t_list	*del;
-	t_list	*chunk_list;
+	t_list	*temp_2;
 
-	if (!fake_list)
+	if (!fake_list || !(*fake_list))
 		return (0);
-	if (CHUNK_SIZE >= ft_lstsize(fake_list))
-		return (fake_list);
-	chunk_value = ft_lstsize(fake_list) / CHUNK_SIZE;
-	temp = fake_list;
-	chunk_list = 0;
+	if (CHUNK_SIZE >= ft_lstsize(*fake_list))
+		return (*fake_list);
+	chunk_value = ft_lstsize(*fake_list) / CHUNK_SIZE;
+	temp = *fake_list;
 	while (temp != 0)
 	{
 		i = 1;
 		while (i < chunk_value && temp->next != 0)
 		{
+			temp_2 = temp->next;
+			remove_lst_one(fake_list, temp);
+			temp = temp_2;
 			i++;
-			del = temp;
-			temp = temp->next;
-			remove_lst_one(&fake_list, del);
 		}
-		del = temp->next;
-		temp->next = 0;
-		ft_lstadd_back(&chunk_list, temp);
-		temp = del;
+		temp = temp->next;
 	}
-	return (chunk_list);
+	return (*fake_list);
 }
-
-/* move all number that need to sort to stack_b until 
-	there is only 1 element left */
-int	move_to_b(t_list **stack_a, t_list **stack_b, t_list **fake_list)
-{
-	int		i;
-	int		cost;
-	t_list	*top;
-	t_list	*fake_top;
-	t_list	*target[2];
-
-	if (!stack_a || !stack_b || !(*stack_a) || !fake_list || !(*fake_list))
-		return (0);
-	if (ft_lstsize(*stack_a) < 2)
-		return (0);
-	top = *stack_a;
-	fake_top = *fake_list;
-	cost = -1;
-	while (*stack_a != 0)
-	{
-		i = 0;
-		*fake_list = fake_top;
-		while (*fake_list != 0 && i < ((ft_lstsize(fake_top)) / 4))
-		{
-			if (*stack_a == *((t_list **)((*fake_list)->content)) 
-			&& (cost == -1 || travese_dist(top, *stack_a) < cost))
-			{
-				target[0] = *stack_a;
-				target[1] = (t_list *)(*fake_list); 
-				cost = travese_dist(top, *stack_a);
-			}
-			i++;
-			*fake_list = (*fake_list)->next;
-		}
-		*stack_a = (*stack_a)->next;
-	}
-	*stack_a = top;
-	*fake_list = fake_top;
-	if (cost == -1)
-		return (0);
-	easy_rotate('a', stack_a, target[0], 1);
-	op_push_b(stack_a, stack_b, 1);
-	remove_lst_one(fake_list, target[1]);
-	return (1);
-}
-
 
 /* show the integer of that list in the stack*/
 int	show_int(t_list *stack)
@@ -233,6 +182,44 @@ int	show_int(t_list *stack)
 		return (0);
 	return (*((int *)stack->content));
 }
+
+/* move all number that need to sort to stack_b until 
+	there is only 1 element left */
+int	move_to_b(t_list **stack_a, t_list **stack_b, t_list *fake_list)
+{
+	int		i;
+	int		cost;
+	t_list	*top;
+	t_list	*target;
+
+	if (!stack_a || !stack_b || !(*stack_a) || !fake_list)
+		return (0);
+	if (ft_lstsize(*stack_a) < 2)
+		return (0);
+	top = *stack_a;
+	cost = -1;
+	i = show_int(find_min_number(*stack_a));
+	while(fake_list != 0 && show_fake_int(fake_list) < i)
+		fake_list = fake_list->next;
+	while (*stack_a != 0 && fake_list != 0)
+	{
+		if (show_int(*stack_a) <= show_fake_int(fake_list)
+		&& (cost == -1 || travese_dist(top, *stack_a) < cost))
+		{
+			target = *stack_a;
+			cost = travese_dist(top, *stack_a);
+		}
+		*stack_a = (*stack_a)->next;
+	}
+	*stack_a = top;
+	if (cost == -1)
+		return (0);
+	easy_rotate('a', stack_a, target, 1);
+	op_push_b(stack_a, stack_b, 1);
+	return (1);
+}
+
+
 
 /* find closest value number on stack a*/
 t_list	*find_closest_value(t_list *stack_a, t_list *to_find)
@@ -316,14 +303,12 @@ void	cost_algor(t_list **stack_a, t_list **stack_b)
 	
 	if (!stack_a || !(*stack_a))
 		return ;
-	fake_a = chunk_fakelist(fake_quicksort(copy_to_fake(*stack_a)));
-	display_fake_stack(fake_a);
-	ft_lstclear(&fake_a, &del_fake_content);
-	return ;
+	fake_a = fake_quicksort(copy_to_fake(*stack_a));
+	chunk_fakelist(&fake_a);
 //	(void)fake_a;
 	while (ft_lstsize(*stack_a) > 2)
 	{
-		if (move_to_b(stack_a, stack_b, &fake_a) == 0)
+		if (move_to_b(stack_a, stack_b, fake_a) == 0)
 			break ;
 	}
 //	while (ft_lstsize(*stack_a) > 2)

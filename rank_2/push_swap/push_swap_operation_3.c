@@ -85,5 +85,5 @@ int	op_rotate_all(t_list **stack_a, t_list **stack_b, int print_op)
 	op_rotate_b(stack_a, stack_b, 0);
 	if (print_op == 1)
 		ft_printf("rr\n");
-		return (1);
+	return (1);
 }

@@ -30,5 +30,6 @@ int	main(int argc, char **argv)
 //	quicksort_main((stack_a), ft_lstlast(stack_a), &stack_a, &stack_b);
 //	stack_display(stack_a, stack_b);
 	cost_algor(&stack_a, &stack_b);
+	ft_lstclear(&stack_a, &free_number);
 	return (0);
 }
