@@ -175,14 +175,6 @@ t_list *chunk_fakelist(t_list **fake_list)
 	return (*fake_list);
 }
 
-/* show the integer of that list in the stack*/
-int	show_int(t_list *stack)
-{
-	if (!stack)
-		return (0);
-	return (*((int *)stack->content));
-}
-
 /* move all number that need to sort to stack_b until 
 	there is only 1 element left */
 int	move_to_b(t_list **stack_a, t_list **stack_b,
@@ -361,15 +353,16 @@ void	cost_algor(t_list **stack_a, t_list **stack_b)
 			op_push_a(stack_a, stack_b, 1);
 		}
 	}
+	ft_lstclear(&fake_a, &del_fake_content);
 	easy_rotate('a', stack_a, find_min_number(*stack_a), 1);
 }
 
-void fifth_algor(t_list	**stack_a, t_list *stack_b)
-{
-	t_list	*fake_a;
-
-	if (!stack_a || !(*stack_a) || !stack_b)
-		return ;
-	fake_a = fake_quicksort(*stack_a);
-
-}
+//void fifth_algor(t_list	**stack_a, t_list *stack_b)
+//{
+//	t_list	*fake_a;
+//
+//	if (!stack_a || !(*stack_a) || !stack_b)
+//		return ;
+//	fake_a = fake_quicksort(*stack_a);
+//
+//}

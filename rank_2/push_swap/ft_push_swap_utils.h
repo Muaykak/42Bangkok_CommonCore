@@ -24,5 +24,6 @@ int		ft_abs(int number);
 int		max_number(t_list *stack);
 int		high_num(t_list *stack);
 int		low_num(t_list *stack);
+int		show_int(t_list *stack);
 
 #endif

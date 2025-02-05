@@ -16,7 +16,7 @@
 # include "ft_push_swap.h"
 
 # ifndef CHUNK_SIZE
-#  define CHUNK_SIZE 4
+#  define CHUNK_SIZE 3
 # endif
 
 //typedef struct s_fakelist

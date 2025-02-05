@@ -19,6 +19,7 @@ int		check_int_limit(char *num_set);
 t_list	*put_argument(int argc, char **argv);
 /* ***************************************************** */
 int		put_argument_sub1(t_list **stack_a, int **number, char **num_set);
+int		dup_check(t_list *stack);
 
 /* This function is to check the given argument 
 	whether they have the correct format 
@@ -63,7 +64,35 @@ t_list	*put_argument(int argc, char **argv)
 		ft_free_split(num_set);
 		i++;
 	}
-	return (stack_a);
+	if (dup_check(stack_a) == 1)
+		return (stack_a);
+	ft_lstclear(&stack_a, &free_number);
+	return (0);
+}
+
+/* function to check duplicate*/
+int	dup_check(t_list *stack)
+{
+	t_list	*temp;
+
+	if (!stack)
+	return (0);
+
+	temp = stack;
+	while (stack != 0)
+	{
+		stack = stack->next;
+		while (stack != 0)
+		{
+			if (show_int(temp) == show_int(stack))
+				return (0);
+			stack = stack->next;
+		}
+		if (temp->next != 0)
+			temp = temp->next;
+		stack = temp->next;
+	}
+	return (1);
 }
 
 /*sub function of check_format*/

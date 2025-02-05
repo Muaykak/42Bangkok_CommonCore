@@ -19,6 +19,7 @@ int		ft_abs(int number);
 int		max_number(t_list *stack);
 int		high_num(t_list *stack);
 int		low_num(t_list *stack);
+int		show_int(t_list *stack);
 
 /* return the minmax number in the stack */
 int	max_number(t_list *stack)
@@ -121,4 +122,12 @@ void	stack_display(t_list *stack_a, t_list *stack_b)
 		stack_b = stack_b->next;
 	}
 	ft_printf("}\n\n");
+}
+
+/* show the integer of that list in the stack*/
+int	show_int(t_list *stack)
+{
+	if (!stack)
+		return (0);
+	return (*((int *)stack->content));
 }
