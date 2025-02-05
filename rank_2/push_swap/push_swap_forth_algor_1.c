@@ -185,7 +185,8 @@ int	show_int(t_list *stack)
 
 /* move all number that need to sort to stack_b until 
 	there is only 1 element left */
-int	move_to_b(t_list **stack_a, t_list **stack_b, t_list *fake_list)
+int	move_to_b(t_list **stack_a, t_list **stack_b,
+	 t_list *fake_list)
 {
 	int		i;
 	int		cost;
@@ -199,11 +200,11 @@ int	move_to_b(t_list **stack_a, t_list **stack_b, t_list *fake_list)
 	top = *stack_a;
 	cost = -1;
 	i = show_int(find_min_number(*stack_a));
-	while(fake_list != 0 && show_fake_int(fake_list) < i)
+	while(fake_list != 0 && show_fake_int(fake_list) <= i)
 		fake_list = fake_list->next;
 	while (*stack_a != 0 && fake_list != 0)
 	{
-		if (show_int(*stack_a) <= show_fake_int(fake_list)
+		if (show_int(*stack_a) < show_fake_int(fake_list)
 		&& (cost == -1 || travese_dist(top, *stack_a) < cost))
 		{
 			target = *stack_a;
@@ -214,12 +215,11 @@ int	move_to_b(t_list **stack_a, t_list **stack_b, t_list *fake_list)
 	*stack_a = top;
 	if (cost == -1)
 		return (0);
-	easy_rotate('a', stack_a, target, 1);
+	while (*stack_a != target)
+		(decide_rotate_a(*stack_a, target))(stack_a, stack_b ,1);
 	op_push_b(stack_a, stack_b, 1);
 	return (1);
 }
-
-
 
 /* find closest value number on stack a*/
 t_list	*find_closest_value(t_list *stack_a, t_list *to_find)
@@ -271,9 +271,37 @@ int	to_a_dist(t_list *stack_a, t_list *stack_b, t_list *to_move_b)
 	return (distance_a + distance_b);
 }
 
+/* check if target is in the range*/
+int	in_range(t_list *stack_b, t_list *target, t_list **fake_list)
+{
+	int		min;
+	int		max;
+	t_list	*top;
+
+	if (!target || !fake_list || !stack_b || !(*fake_list))
+		return (0);
+	if ((*fake_list)->next == 0)
+	{
+		min = show_int(find_min_number(stack_b));
+		max = show_fake_int(*fake_list);
+		if (show_int(target) >= min && show_int(target) <= max)
+			return (1);
+		return (0);
+	}
+	top = *fake_list;
+	while ((*fake_list)->next->next != 0)
+		*fake_list = (*fake_list)->next;
+	min = show_fake_int(*fake_list);
+	max = show_fake_int((*fake_list)->next);
+	*fake_list = top;
+		if (show_int(target) >= min && show_int(target) <= max)
+			return (1);
+		return (0);
+}
+
 /* find the number on the list of stack_b 
 	that has the lowest possible moves to push to stack a*/
-t_list	*find_to_push_a(t_list *stack_a, t_list *stack_b)
+t_list	*find_to_push_a(t_list *stack_a, t_list *stack_b, t_list **fake_list)
 {
 	t_list	*target;
 	t_list	*top;
@@ -284,13 +312,15 @@ t_list	*find_to_push_a(t_list *stack_a, t_list *stack_b)
 	top = stack_b;
 	while (stack_b != 0)
 	{
-		if (target == 0)
+		if (in_range(top, stack_b, fake_list) && target == 0)
 			target = stack_b;
-		else if (target != 0 &&
+		else if (in_range(top, stack_b, fake_list) && target != 0 &&
 		 to_a_dist(stack_a, top, stack_b) < to_a_dist(stack_a, top, target))
 		 	target = stack_b;
 		stack_b = stack_b->next;
 	}
+	if (target == 0)
+		remove_lst_one(fake_list, ft_lstlast(*fake_list));
 	return (target);
 }
 
@@ -323,10 +353,23 @@ void	cost_algor(t_list **stack_a, t_list **stack_b)
 		op_rotate_a(stack_a, stack_b, 1);
 	while (*stack_b != 0)
 	{
-		to_push_a = find_to_push_a(*stack_a, *stack_b);
-		closest_value = find_closest_value(*stack_a, to_push_a);
-		easy_rotate_both(stack_a, stack_b, closest_value, to_push_a);
-		op_push_a(stack_a, stack_b, 1);
+		to_push_a = find_to_push_a(*stack_a, *stack_b, &fake_a);
+		if (to_push_a)
+		{
+			closest_value = find_closest_value(*stack_a, to_push_a);
+			easy_rotate_both(stack_a, stack_b, closest_value, to_push_a);
+			op_push_a(stack_a, stack_b, 1);
+		}
 	}
 	easy_rotate('a', stack_a, find_min_number(*stack_a), 1);
+}
+
+void fifth_algor(t_list	**stack_a, t_list *stack_b)
+{
+	t_list	*fake_a;
+
+	if (!stack_a || !(*stack_a) || !stack_b)
+		return ;
+	fake_a = fake_quicksort(*stack_a);
+
 }

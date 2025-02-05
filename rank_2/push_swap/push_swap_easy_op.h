@@ -16,13 +16,13 @@
 # include "ft_push_swap.h"
 # include "main_push_swap.h"
 
-void	easy_rotate(char c, t_list **stack, t_list *target, int print_op);
+int		easy_rotate(char c, t_list **stack, t_list *target, int print_op);
 int 	(*decide_rotate_b(t_list *stack, t_list *target))
 		(t_list **, t_list **, int);
 int 	(*decide_rotate_a(t_list *stack, t_list *target))
 		(t_list **, t_list **, int);
 int		travese_dist(t_list *start, t_list *end);
-void	easy_rotate_both(t_list **stack_a, t_list **stack_b,
+int		easy_rotate_both(t_list **stack_a, t_list **stack_b,
 		 t_list *target_a, t_list *target_b);
 
 #endif

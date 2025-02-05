@@ -262,5 +262,5 @@ void	quicksort_main(t_list *left, t_list *right,
 //	ft_printf("left= %d\nright= %d\n", *((int *)(top->content)), *((int *)bottom->content));
 //	sleep(1);
 	quicksort_main(pivot->next, bottom, stack_a, stack_b);
-//	quicksort_main(top, pivot, stack_a, stack_b);
+	quicksort_main(top, pivot, stack_a, stack_b);
 }

@@ -14,13 +14,13 @@
 
 /* calculate the distance */
 /* have to be on the same stack*/
-void	easy_rotate(char c, t_list **stack, t_list *target, int print_op);
+int		easy_rotate(char c, t_list **stack, t_list *target, int print_op);
 int 	(*decide_rotate_b(t_list *stack, t_list *target))
 		(t_list **, t_list **, int);
 int 	(*decide_rotate_a(t_list *stack, t_list *target))
 		(t_list **, t_list **, int);
 int		travese_dist(t_list *start, t_list *end);
-void	easy_rotate_both(t_list **stack_a, t_list **stack_b,
+int		easy_rotate_both(t_list **stack_a, t_list **stack_b,
 		 t_list *target_a, t_list *target_b);
 
 int	travese_dist(t_list *start, t_list *end)
@@ -83,34 +83,40 @@ int (*decide_rotate_b(t_list *stack, t_list *target))(t_list **, t_list **, int)
 }
 
 /* rotate the stack until the top of the stack is the same as target*/
-void	easy_rotate(char c, t_list **stack, t_list *target, int print_op)
+int		easy_rotate(char c, t_list **stack, t_list *target, int print_op)
 {
 	int		(*decider)(t_list **, t_list **, int);
+	int		i;
 
 	if (*stack == target || (*stack)->next == 0 || !target)
-		return ;
+		return (0);
 	if (c == 'a')
 		decider = decide_rotate_a(*stack, target);
 	else if (c == 'b')
 		decider = decide_rotate_b(*stack, target);
+	i = 0;
 	while ((*stack) != target)
 	{
+		i++;
 		decider(stack, stack, print_op);
 	}
+	return (i);
 }
 
 /* rotate both of the stack to given position*/
-void	easy_rotate_both(t_list **stack_a, t_list **stack_b,
+int		easy_rotate_both(t_list **stack_a, t_list **stack_b,
 		 t_list *target_a, t_list *target_b)
 {
 	int	(*op_a)(t_list **, t_list **, int);
 	int	(*op_b)(t_list **, t_list **, int);
+	int	i;
 
 	if (!stack_a || !stack_b || !(*stack_a) || !(*stack_b) 
 	|| !target_a || !target_b)
-		return ;
+		return (0);
 	op_a = 0;
 	op_b = 0;
+	i = 0;
 	while (*stack_a != target_a || *stack_b != target_b)
 	{
 		if (*stack_a != target_a)
@@ -130,5 +136,7 @@ void	easy_rotate_both(t_list **stack_a, t_list **stack_b,
 		}
 		op_a = 0;
 		op_b = 0;
+		i++;
 	}
+	return (i);
 }
