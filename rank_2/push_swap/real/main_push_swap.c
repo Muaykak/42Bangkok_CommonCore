@@ -25,13 +25,7 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (1);
 	}
-//	my_algor(&stack_a, &stack_b, 1);
-//	redix_algor_sort(&stack_a, &stack_b, 1);
-//	quicksort_main((stack_a), ft_lstlast(stack_a), &stack_a, &stack_b);
-//	stack_display(stack_a, stack_b);
 	cost_algor(&stack_a, &stack_b);
-//	fifth_algor(&stack_a, &stack_b);
-//	sixth_algor(&stack_a, &stack_b);
 	ft_lstclear(&stack_a, &free_number);
 	return (0);
 }

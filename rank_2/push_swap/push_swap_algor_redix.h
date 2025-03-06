@@ -19,6 +19,5 @@ int		number_digit(t_list *target, unsigned long digit);
 t_list	*find_num_digit_high(t_list *stack, int find_num, unsigned long digit);
 t_list	*find_num_digit_low(t_list *stack, int find_num, unsigned long digit);
 void	redix_algor_sort(t_list	**stack_a, t_list **stack_b, int print_op);
-t_list	*find_min_number(t_list *stack);
 
 #endif

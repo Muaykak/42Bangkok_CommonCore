@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_push_swap.h                                   :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 09:39:19 by srussame          #+#    #+#             */
-/*   Updated: 2025/01/18 09:39:36 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/31 14:44:22 by srussame          #+#    #+#             */
+/*   Updated: 2024/10/30 07:00:29 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_PUSH_SWAP_H
-# define MAIN_PUSH_SWAP_H
+#include "libft.h"
 
-# include "ft_push_swap.h"
-# include "push_swap_algor_redix.h"
-# include "push_swap_my_algor.h"
-# include "push_swap_quicksort.h"
-# include "push_swap_forth_algor.h"
-# include "push_swap_5th.h"
-# include "push_swap_6th.h"
+int	ft_lstsize(t_list *lst)
+{
+	int		i;
+	t_list	*temp;
 
-#endif
+	if (!lst)
+		return (0);
+	temp = lst;
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	lst = temp;
+	return (i);
+}

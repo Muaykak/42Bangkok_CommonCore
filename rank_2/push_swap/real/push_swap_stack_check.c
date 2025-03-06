@@ -20,7 +20,7 @@ int	check_stack_sorted(t_list *stack_a, t_list *stack_b)
 	if (stack_b)
 		(void)stack_b;
 	if (stack_a == 0)
-		return (0); 
+		return (0);
 	while (stack_a->next != 0)
 	{
 		if (((int *)stack_a->content)[0] > ((int *)stack_a->next->content)[0])

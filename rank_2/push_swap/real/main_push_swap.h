@@ -14,11 +14,6 @@
 # define MAIN_PUSH_SWAP_H
 
 # include "ft_push_swap.h"
-# include "push_swap_algor_redix.h"
-# include "push_swap_my_algor.h"
-# include "push_swap_quicksort.h"
 # include "push_swap_forth_algor.h"
-# include "push_swap_5th.h"
-# include "push_swap_6th.h"
 
 #endif

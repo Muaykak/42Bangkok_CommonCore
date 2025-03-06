@@ -20,6 +20,42 @@ int		max_number(t_list *stack);
 int		high_num(t_list *stack);
 int		low_num(t_list *stack);
 int		show_int(t_list *stack);
+t_list	*find_min_number(t_list *stack);
+t_list	*find_max_number(t_list *stack);
+
+/* return the pointer that points to the lowest number on the list*/
+t_list	*find_min_number(t_list *stack)
+{
+	t_list	*target;
+
+	if (stack == 0)
+		return (0);
+	target = stack;
+	while (stack != 0)
+	{
+		if (((int *)stack->content)[0] < ((int *)target->content)[0])
+			target = stack;
+		stack = stack->next;
+	}
+	return (target);
+}
+
+/* return the pointer that points to the lowest number on the list*/
+t_list	*find_max_number(t_list *stack)
+{
+	t_list	*target;
+
+	if (stack == 0)
+		return (0);
+	target = stack;
+	while (stack != 0)
+	{
+		if (((int *)stack->content)[0] > ((int *)target->content)[0])
+			target = stack;
+		stack = stack->next;
+	}
+	return (target);
+}
 
 /* return the minmax number in the stack */
 int	max_number(t_list *stack)

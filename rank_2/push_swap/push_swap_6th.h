@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_push_swap.h                                   :+:      :+:    :+:   */
+/*   push_swap_6th.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 09:39:19 by srussame          #+#    #+#             */
-/*   Updated: 2025/01/18 09:39:36 by srussame         ###   ########.fr       */
+/*   Created: 2025/02/12 18:07:43 by srussame          #+#    #+#             */
+/*   Updated: 2025/02/12 18:07:45 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_PUSH_SWAP_H
-# define MAIN_PUSH_SWAP_H
+#ifndef PUSH_SWAP_6TH_H
+# define PUSH_SWAP_6TH_H
 
 # include "ft_push_swap.h"
-# include "push_swap_algor_redix.h"
-# include "push_swap_my_algor.h"
-# include "push_swap_quicksort.h"
-# include "push_swap_forth_algor.h"
-# include "push_swap_5th.h"
-# include "push_swap_6th.h"
+
+void	sixth_algor(t_list **stack_a, t_list **stack_b);
 
 #endif

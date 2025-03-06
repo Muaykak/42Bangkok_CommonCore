@@ -19,13 +19,14 @@
 #  define CHUNK_SIZE 4
 # endif
 
-//typedef struct s_fakelist
-//{
-//	t_list 				*list;
-//	int					part;
-//	struct s_fakelist	*next;
-//}				t_fakelist;
-
 void	cost_algor(t_list **stack_a, t_list **stack_b);
+int		move_to_b(t_list **stack_a, t_list **stack_b,
+			t_list *fake_list);
+t_list	*find_closest_value(t_list *stack_a, t_list *to_find);
+void	cost_algor(t_list **stack_a, t_list **stack_b);
+t_list	*find_to_push_a(t_list *stack_a, t_list *stack_b,
+			t_list **fake_list);
+int		in_range(t_list *stack_b, t_list *target, t_list **fake_list);
+int		to_a_dist(t_list *stack_a, t_list *stack_b, t_list *to_move_b);
 
 #endif

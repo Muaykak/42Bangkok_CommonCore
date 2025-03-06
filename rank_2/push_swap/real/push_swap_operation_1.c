@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_push_swap.h                                   :+:      :+:    :+:   */
+/*   push_swap_operation_1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 09:39:19 by srussame          #+#    #+#             */
-/*   Updated: 2025/01/18 09:39:36 by srussame         ###   ########.fr       */
+/*   Created: 2025/01/17 14:07:23 by srussame          #+#    #+#             */
+/*   Updated: 2025/01/17 14:07:23 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_PUSH_SWAP_H
-# define MAIN_PUSH_SWAP_H
+#include "ft_push_swap.h"
 
-# include "ft_push_swap.h"
-# include "push_swap_algor_redix.h"
-# include "push_swap_my_algor.h"
-# include "push_swap_quicksort.h"
-# include "push_swap_forth_algor.h"
-# include "push_swap_5th.h"
-# include "push_swap_6th.h"
+int	op_push_b(t_list **stack, t_list **push, int print_op)
+{
+	t_list	*new;
 
-#endif
+	if (!push || !stack || (*stack) == 0)
+		return (0);
+	new = *stack;
+	*stack = (*stack)->next;
+	ft_lstadd_front(push, new);
+	if (print_op == 1)
+		ft_printf("pb\n");
+	return (1);
+}

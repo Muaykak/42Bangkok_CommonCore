@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_push_swap.h                                   :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 09:39:19 by srussame          #+#    #+#             */
-/*   Updated: 2025/01/18 09:39:36 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/31 14:07:29 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/31 14:07:30 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_PUSH_SWAP_H
-# define MAIN_PUSH_SWAP_H
+#include "libft.h"
 
-# include "ft_push_swap.h"
-# include "push_swap_algor_redix.h"
-# include "push_swap_my_algor.h"
-# include "push_swap_quicksort.h"
-# include "push_swap_forth_algor.h"
-# include "push_swap_5th.h"
-# include "push_swap_6th.h"
+// This function is too allocate new list and put it to new list
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new_list;
 
-#endif
+	new_list = (t_list *)malloc(1 * sizeof(t_list));
+	if (!new_list)
+		return (0);
+	new_list[0].content = content;
+	new_list[0].next = 0;
+	return (new_list);
+}

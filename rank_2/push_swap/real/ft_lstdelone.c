@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_push_swap.h                                   :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 09:39:19 by srussame          #+#    #+#             */
-/*   Updated: 2025/01/18 09:39:36 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/31 16:10:14 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/31 16:10:15 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_PUSH_SWAP_H
-# define MAIN_PUSH_SWAP_H
+#include "libft.h"
 
-# include "ft_push_swap.h"
-# include "push_swap_algor_redix.h"
-# include "push_swap_my_algor.h"
-# include "push_swap_quicksort.h"
-# include "push_swap_forth_algor.h"
-# include "push_swap_5th.h"
-# include "push_swap_6th.h"
-
-#endif
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (del && lst)
+	{
+		(*del)(lst -> content);
+		free(lst);
+	}
+}

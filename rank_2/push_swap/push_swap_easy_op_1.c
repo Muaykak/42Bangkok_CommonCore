@@ -22,6 +22,55 @@ int 	(*decide_rotate_a(t_list *stack, t_list *target))
 int		travese_dist(t_list *start, t_list *end);
 int		easy_rotate_both(t_list **stack_a, t_list **stack_b,
 		 t_list *target_a, t_list *target_b);
+int		traverse_dist_both(t_list *top_a, t_list *target_a,
+		 t_list *top_b, t_list *target_b);
+void	easy_rotate_all(t_list **stack_a, t_list **stack_b,
+		t_list *target_a, t_list *target_b);
+int		trav_top(t_list *start, t_list *end);
+int		trav_bot(t_list *start, t_list *end);
+
+int	trav_top(t_list *start, t_list *end)
+{
+	int	i;
+
+	if (!start || !end)
+		return (0);
+	i = 0;
+	while (start && start != end)
+	{
+		start = start->next;
+		i++;
+	}
+	return (i);
+}
+
+int	trav_bot(t_list *start, t_list *end)
+{
+	return (ft_lstsize(start) - trav_top(start, end));
+}
+
+int	traverse_dist_both(t_list *top_a, t_list *target_a,
+	 t_list *top_b, t_list *target_b)
+{
+	int result[4];
+
+	if (!top_a || !top_b || !target_a || !target_b)
+		return (0);
+	result[0] = trav_top(top_a, target_a);
+	if (trav_top(top_b, target_b) > result[0])
+		result[0] = trav_top(top_b, target_b);
+	result[1] = trav_bot(top_a, target_a);
+	if (trav_bot(top_b, target_b) > result[1])
+		result[1] = trav_bot(top_b, target_b);
+	result[2] = travese_dist(top_a, target_a) 
+	+ travese_dist(top_b, target_b);
+	result[3] = result[0];
+	if (result[1] < result[3])
+		result[3] = result[1];
+	if (result[2] < result[3])
+		result[3] = result[2];
+	return (result[3]);
+}
 
 int	travese_dist(t_list *start, t_list *end)
 {
@@ -57,7 +106,7 @@ int (*decide_rotate_a(t_list *stack, t_list *target))(t_list **, t_list **, int)
 		stack = stack->next;
 	}
 	stack = temp;
-	if (i > ((ft_lstsize(stack) + 1) / 2))
+	if (i >= ((ft_lstsize(stack) + 1) / 2))
 		return (&op_reverse_a);
 	else
 		return (&op_rotate_a);
@@ -76,7 +125,7 @@ int (*decide_rotate_b(t_list *stack, t_list *target))(t_list **, t_list **, int)
 		stack = stack->next;
 	}
 	stack = temp;
-	if (i > ((ft_lstsize(stack) + 1) / 2))
+	if (i >= ((ft_lstsize(stack) + 1) / 2))
 		return (&op_reverse_b);
 	else
 		return (&op_rotate_b);
@@ -101,6 +150,44 @@ int		easy_rotate(char c, t_list **stack, t_list *target, int print_op)
 		decider(stack, stack, print_op);
 	}
 	return (i);
+}
+
+void	easy_rotate_all(t_list **stack_a, t_list **stack_b,
+		t_list *target_a, t_list *target_b)
+{
+	int result[3];
+
+	if (!stack_a || !stack_b || !target_a || !target_b)
+		return ;
+	result[0] = trav_top(*stack_a, target_a);
+	if (trav_top(*stack_b, target_b) > result[0])
+		result[0] = trav_top(*stack_b, target_b);
+	result[1] = trav_bot(*stack_a, target_a);
+	if (trav_bot(*stack_b, target_b) > result[1])
+		result[1] = trav_bot(*stack_b, target_b);
+	result[2] = travese_dist(*stack_a, target_a) 
+	+ travese_dist(*stack_b, target_b);
+	if (result[0] < result[1] && result[0] < result[2])
+	{
+		while (*stack_a != target_a && *stack_b != target_b)
+			op_rotate_all(stack_a, stack_b, 1);
+		while (*stack_a != target_a && *stack_b == target_b)
+			op_rotate_a(stack_a, stack_b, 1);
+		while (*stack_a == target_a && *stack_b != target_b)
+			op_rotate_b(stack_a, stack_b, 1);
+		return ;
+	}
+	if (result[1] < result[0] && result[1] < result[2])
+	{
+		while (*stack_a != target_a && *stack_b != target_b)
+			op_reverse_all(stack_a, stack_b, 1);
+		while (*stack_a != target_a && *stack_b == target_b)
+			op_reverse_a(stack_a, stack_b, 1);
+		while (*stack_a == target_a && *stack_b != target_b)
+			op_reverse_b(stack_a, stack_b, 1);
+		return ;
+	}
+	easy_rotate_both(stack_a, stack_b, target_a, target_b);
 }
 
 /* rotate both of the stack to given position*/

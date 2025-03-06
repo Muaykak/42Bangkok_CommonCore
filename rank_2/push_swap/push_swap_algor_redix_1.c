@@ -16,7 +16,6 @@ int		number_digit(t_list *target, unsigned long digit);
 t_list	*find_num_digit_high(t_list *stack, int find_num, unsigned long digit);
 t_list	*find_num_digit_low(t_list *stack, int find_num, unsigned long digit);
 void	redix_algor_sort(t_list	**stack_a, t_list **stack_b, int print_op);
-t_list	*find_min_number(t_list *stack);
 int		cut_number(t_list *stack, unsigned long digit);
 
 int		check_stack_sort_unsigned(t_list *stack);
@@ -109,23 +108,6 @@ int		check_stack_sort_unsigned(t_list *stack)
 		stack = stack->next;
 	}
 	return (1);
-}
-
-/* return the pointer that points to the lowest number on the list*/
-t_list	*find_min_number(t_list *stack)
-{
-	t_list	*target;
-
-	if (stack == 0)
-		return (0);
-	target = stack;
-	while (stack != 0)
-	{
-		if (((int *)stack->content)[0] < ((int *)target->content)[0])
-			target = stack;
-		stack = stack->next;
-	}
-	return (target);
 }
 
 /* return the number of the digit of the number of a content in the stack*/

@@ -17,17 +17,15 @@
 # include "main_push_swap.h"
 
 int		easy_rotate(char c, t_list **stack, t_list *target, int print_op);
-int 	(*decide_rotate_b(t_list *stack, t_list *target))
-		(t_list **, t_list **, int);
-int 	(*decide_rotate_a(t_list *stack, t_list *target))
-		(t_list **, t_list **, int);
-int		easy_rotate_both(t_list **stack_a, t_list **stack_b,
-		 t_list *target_a, t_list *target_b);
+int		(*decide_rotate_b(t_list *stack, t_list *target))(t_list **,
+			t_list **, int);
+int		(*decide_rotate_a(t_list *stack, t_list *target))(t_list **,
+			t_list **, int);
 int		travese_dist(t_list *start, t_list *end);
 int		traverse_dist_both(t_list *top_a, t_list *target_a,
-		 t_list *top_b, t_list *target_b);
+			t_list *top_b, t_list *target_b);
 void	easy_rotate_all(t_list **stack_a, t_list **stack_b,
-		t_list *target_a, t_list *target_b);
+			t_list *target_a, t_list *target_b);
 int		trav_top(t_list *start, t_list *end);
 int		trav_bot(t_list *start, t_list *end);
 
