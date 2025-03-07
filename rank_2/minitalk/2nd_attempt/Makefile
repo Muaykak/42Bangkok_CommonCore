@@ -2,7 +2,7 @@ PRINTF_SRC= ft_printf.c ft_putaddress_count.c ft_putchar_count.c \
 			ft_puthex_big_count.c ft_puthex_small_count.c \
 			ft_putnbr_count.c ft_putstr_count.c ft_putuint_count.c
 
-SRC= ft_atoi.c ft_minitalk_utils_1.c
+SRC= ft_atoi.c ft_minitalk_utils_1.c ft_memset.c
 
 PRINTF_OBJ= ${PRINTF_SRC:.c=.o}
 

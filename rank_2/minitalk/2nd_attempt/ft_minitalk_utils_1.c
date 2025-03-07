@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
-#include "ft_printf.h"
-#include "libft.h"
 
 void	bintext_init(char *str);
 int		bin_to_decimal(char *bin);

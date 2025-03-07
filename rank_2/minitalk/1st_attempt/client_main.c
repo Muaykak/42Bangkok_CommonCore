@@ -27,6 +27,7 @@ void	bintext_zero(void)
 		i++;
 	}
 }
+
 void	sent_to(__pid_t pid)
 {
 	int	i;

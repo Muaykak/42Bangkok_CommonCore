@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minitalk.h                                      :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 13:53:46 by srussame          #+#    #+#             */
-/*   Updated: 2024/11/29 13:53:47 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/25 13:56:55 by srussame          #+#    #+#             */
+/*   Updated: 2024/11/05 08:26:26 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINITALK_H
-# define FT_MINITALK_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
-# include <signal.h>
-# include "libft.h"
-# include "ft_printf.h"
+# include <stddef.h>
 
-void	bintext_init(char *str);
-int		bin_to_decimal(char *bin);
-int		ft_power(int x, int pow);
-int		ft_strcmp(char *s1, char *s2);
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}				t_list;
+
+int		ft_atoi(const char *nptr);
+void	*ft_memset(void *b, int c, size_t len);
 
 #endif
