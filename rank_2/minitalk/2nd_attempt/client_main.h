@@ -22,5 +22,13 @@ typedef struct s_client
 	int		str_index;	
 }	t_client;
 
+int		sent_to(int server_pid);
+void	decimal_to_bin(int dec_num);
+int		check_bintext(void);
+void	bintext_zero(void);
+
+void	sighandlr2(int signum, siginfo_t *info, void *ucontext);
+void	sighandlr1(int signum, siginfo_t *info, void *ucontext);
+void	check_argument(int argc, char **argv);
 
 #endif

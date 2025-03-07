@@ -15,13 +15,6 @@
 
 # include <stddef.h>
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
 int		ft_atoi(const char *nptr);
-void	*ft_memset(void *b, int c, size_t len);
 
 #endif

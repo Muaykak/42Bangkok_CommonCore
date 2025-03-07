@@ -13,7 +13,7 @@
 #include "ft_minitalk.h"
 #include <signal.h>
 
-char bintext[8];
+char	g_bintext[8];
 
 /*
 	1.The server will need to print its process id 
@@ -24,16 +24,16 @@ int	bintext_process(void)
 {
 	char	c;
 
-	c = bin_to_decimal(bintext);
+	c = bin_to_decimal(g_bintext);
 	if (c == '\0')
 	{
-		bintext_init(bintext);
+		bintext_init(g_bintext);
 		ft_printf("\n\nrecieved all\npid: %d\n", (int)getpid());
 		return (0);
 	}
 	else
 		write(1, &c, 1);
-	bintext_init(bintext);
+	bintext_init(g_bintext);
 	return (1);
 }
 
@@ -45,10 +45,10 @@ void	sighandlr1(int signum, siginfo_t *info, void *ucontext)
 		return ;
 	(void)ucontext;
 	i = 0;
-	while (i < 8 && bintext[i] != '\0')
+	while (i < 8 && g_bintext[i] != '\0')
 		i++;
 	if (i < 8)
-		bintext[i] = '0';
+		g_bintext[i] = '0';
 	if (i == 7)
 	{
 		if (bintext_process() == 0)
@@ -68,10 +68,10 @@ void	sighandlr2(int signum, siginfo_t *info, void *ucontext)
 		return ;
 	(void)ucontext;
 	i = 0;
-	while (i < 8 && bintext[i] != '\0')
+	while (i < 8 && g_bintext[i] != '\0')
 		i++;
 	if (i < 8)
-		bintext[i] = '1';
+		g_bintext[i] = '1';
 	if (i == 7)
 	{
 		if (bintext_process() == 0)
@@ -85,8 +85,8 @@ void	sighandlr2(int signum, siginfo_t *info, void *ucontext)
 
 int	main(int argc, char **argv)
 {
-	struct sigaction sigact1;
-	struct sigaction sigact2;
+	struct sigaction	sigact1;
+	struct sigaction	sigact2;
 
 	if (argc != 1)
 	{
@@ -94,7 +94,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	(void)argv;
-	bintext_init(bintext);
+	bintext_init(g_bintext);
 	sigact1.sa_flags = SA_SIGINFO;
 	sigact1.sa_sigaction = sighandlr1;
 	sigemptyset(&sigact1.sa_mask);

@@ -53,14 +53,13 @@ int	bin_to_decimal(char *bin)
 	int	bin_num;
 	int	dec_num;
 	int	n;
-	
+
 	bin_num = ft_atoi(&bin[1]);
 	dec_num = 0;
 	n = 0;
-
 	if (ft_strcmp(bin, "10000000") == 0)
 		return (-128);
-	while (bin_num / 10 != 0|| bin_num != 0)
+	while (bin_num / 10 != 0 || bin_num != 0)
 	{
 		dec_num += (bin_num % 10) * (ft_power(2, n));
 		n++;
