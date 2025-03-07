@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minitalk.h"
+#include "client_main.h"
 
-char	*bintext[1];
+t_client	glob_var;
 
 void	bintext_zero(void)
 {
@@ -21,7 +21,7 @@ void	bintext_zero(void)
 	i = 0;
 	while (i < 8)
 	{
-		bintext[i] = '0';
+		glob_var.bintext[i] = '0';
 		i++;
 	}
 }
@@ -34,7 +34,7 @@ int	check_bintext(void)
 	i = 0;
 	while (i < 8)
 	{
-		if (bintext[i] != 0)
+		if (glob_var.bintext[i] != 0)
 			return (0);
 		i++;
 	}
@@ -49,20 +49,20 @@ void	decimal_to_bin(int dec_num)
 	bintext_zero();
 	if (dec_num == -128)
 	{
-		bintext[0] = '1';
+		glob_var.bintext[0] = '1';
 		return ;
 	}
 	if (dec_num < 0)
 	{
-		bintext[0] = '1';
+		glob_var.bintext[0] = '1';
 		dec_num *= -1;
 	}
 	while (dec_num != 0 && i >= 1)
 	{
 		if (dec_num % 2 == 1)
-			bintext[i] = '1';
+			glob_var.bintext[i] = '1';
 		else
-			bintext[i] = '0';
+			glob_var.bintext[i] = '0';
 		i--;
 		dec_num /= 2;
 	}
@@ -108,17 +108,28 @@ void	check_argument(int argc, char **argv)
 int	sent_to(int server_pid)
 {
 	int i;
+	int	k;
 
+	if (check_bintext() == 1)
+	{
+		glob_var.str_index++;
+		decimal_to_bin(glob_var.str[glob_var.str_index]);
+	}
 	i = 0;
-	while (i < 8 && bintext[i] == '\0')
+	while (i < 8 && glob_var.bintext[i] == '\0')
 		i++;
 	if (i == 8)
 		return (0);
-	if (bintext[i] == '1')
+	if (glob_var.bintext[i] == '1')
+		k = 1;
+	else
+		k = 0;
+	ft_printf("bintext[%d]= %c\n", i, glob_var.bintext[i]);
+	glob_var.bintext[i] = 0;
+	if (k == 1)
 		kill(server_pid, SIGUSR2);
-	else if (bintext[i] == '0')
+	else if (k == 0)
 		kill(server_pid, SIGUSR1);
-	bintext[i] = 0;
 	return (1);
 }
 
@@ -144,9 +155,12 @@ int	main(int argc, char **argv)
 {
 	struct sigaction	sigact1;
 	struct sigaction	sigact2;
-	int					i;
 
 	check_argument(argc, argv);
+	glob_var.str = argv[2];
+	glob_var.bintext = (char *)malloc(9 * sizeof(char));
+	if (glob_var.bintext == 0)
+		exit(EXIT_FAILURE);
 	sigact1.sa_flags = SA_SIGINFO;
 	sigact1.sa_sigaction = sighandlr1;
 	sigemptyset(&sigact1.sa_mask);
@@ -155,19 +169,13 @@ int	main(int argc, char **argv)
 	sigact2.sa_sigaction = sighandlr2;
 	sigemptyset(&sigact2.sa_mask);
 	sigaction(SIGUSR2, &sigact2, NULL);
-	bintext_init(bintext);
-	decimal_to_bin(argv[2][0]);
+	bintext_init(glob_var.bintext);
+	glob_var.str_index = 0;
+	decimal_to_bin(glob_var.str[glob_var.str_index]);
 	sent_to(ft_atoi(argv[1]));
-	i = 1;
 	while (1)
 	{
 		pause();
-		if (check_bintext())
-		{
-			decimal_to_bin(argv[2][i]);
-			i++;
-			sent_to(ft_atoi(argv[1]));
-		}
 	}
 	return (0);
 }

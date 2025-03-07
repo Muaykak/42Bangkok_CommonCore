@@ -26,7 +26,11 @@ int	bintext_process(void)
 
 	c = bin_to_decimal(bintext);
 	if (c == '\0')
+	{
+		bintext_init(bintext);
+		ft_printf("\n\nrecieved all\npid: %d\n", (int)getpid());
 		return (0);
+	}
 	else
 		write(1, &c, 1);
 	bintext_init(bintext);
