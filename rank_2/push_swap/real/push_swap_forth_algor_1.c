@@ -16,7 +16,7 @@ int				move_to_b(t_list **stack_a, t_list **stack_b,
 					t_list *fake_list);
 t_list			*find_closest_value(t_list *stack_a, t_list *to_find);
 
-static t_list	*move_to_b_sub1(t_list *stack_a, t_list *fake_list)
+static t_list	*move_to_b_sub1(t_list *stack_a, t_list **fake_list)
 {
 	t_list	*target;
 	t_list	*top;
@@ -24,12 +24,12 @@ static t_list	*move_to_b_sub1(t_list *stack_a, t_list *fake_list)
 
 	top = stack_a;
 	target = 0;
-	while (fake_list != 0 && show_fake_int(fake_list) <= low_num(stack_a))
-		fake_list = fake_list->next;
-	if (fake_list->next == 0)
-		temp = fake_list;
+	while (*fake_list != 0 && show_fake_int(*fake_list) <= low_num(stack_a))
+		*fake_list = (*fake_list)->next;
+	if ((*fake_list)->next == 0)
+		temp = *fake_list;
 	else
-		temp = fake_list->next;
+		temp = (*fake_list)->next;
 	while (stack_a != 0 && temp != 0)
 	{
 		if (show_int(stack_a) < show_fake_int(temp)
@@ -47,12 +47,14 @@ int	move_to_b(t_list **stack_a, t_list **stack_b,
 	t_list *fake_list)
 {
 	t_list	*target;
+	t_list	*fake_top;
 
 	if (!stack_a || !stack_b || !(*stack_a) || !fake_list)
 		return (0);
 	if (ft_lstsize(*stack_a) < 2)
 		return (0);
-	target = move_to_b_sub1(*stack_a, fake_list);
+	fake_top = fake_list;
+	target = move_to_b_sub1(*stack_a, &fake_list);
 	if (target == 0)
 		return (0);
 	if (target != *stack_a && decide_rotate_a(*stack_a, target) == &op_rotate_a
@@ -64,6 +66,7 @@ int	move_to_b(t_list **stack_a, t_list **stack_b,
 		op_rotate_b(stack_a, stack_b, 1);
 	easy_rotate('a', stack_a, target, 1);
 	op_push_b(stack_a, stack_b, 1);
+	fake_list = fake_top;
 	return (1);
 }
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Number of test iterations
-iterations=1000
+iterations=10000
 total_lines=0
 success_count=0
 count_over_700=0
