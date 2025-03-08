@@ -18,6 +18,8 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 
+	if (argc == 1)
+		return (0);
 	stack_b = 0;
 	stack_a = put_argument(argc, argv);
 	if (stack_a == 0)
