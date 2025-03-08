@@ -61,13 +61,22 @@ int	check_format(int argc, char **argv)
 		-2147483648 to 2147483647*/
 int	check_int_limit(char *num_set)
 {
-	size_t	i;
+	size_t	i[2];
+	int		flag;
 	long	num;
 
-	i = 0;
-	while (num_set[i] != 0)
-		i++;
-	if (i > 11)
+	i[0] = 0;
+	i[1] = 0;
+	flag = 0;
+	while (num_set[i[0]] != 0)
+	{
+		if (num_set[i[0]] != '0')
+			flag = 1;
+		if (flag == 1)
+			i[1]++;
+		i[0]++;
+	}
+	if (i[1] > 11)
 		return (0);
 	num = ft_atol(num_set);
 	if (num < -2147483648 || num > 2147483647)
