@@ -23,16 +23,16 @@ char	**ft_split(char const *s, char c)
 	char	**temp;
 
 	if (!s)
-		return (0);
+		return (NULL);
 	k = ft_countsplit(s, c);
 	temp = (char **)malloc((k + 1) * sizeof(char *));
 	if (!temp)
-		return (0);
+		return (NULL);
 	temp[k] = 0;
 	if (ft_malloc_string(temp, s, c) == 0)
 	{
 		ft_free_split(temp);
-		return (0);
+		return (NULL);
 	}
 	ft_assign_string(temp, s, c);
 	return (temp);

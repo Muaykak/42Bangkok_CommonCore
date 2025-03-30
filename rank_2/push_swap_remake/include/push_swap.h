@@ -36,6 +36,7 @@ typedef struct	s_ps_node
 typedef struct	s_ps_stack
 {
 	enum e_ps_stack_def	stack;
+	int					size;
 	struct s_ps_list	*top;
 	struct s_ps_lsit	*bot;
 }				t_ps_stack;

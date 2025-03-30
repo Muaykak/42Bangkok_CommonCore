@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(char c);
+static int	ft_isspace(char c);
 
 long	ft_atol(const char *nptr)
 {
@@ -40,7 +40,7 @@ long	ft_atol(const char *nptr)
 }
 
 // to check if the given character is whitespace characters
-int	ft_isspace(char c)
+static int	ft_isspace(char c)
 {
 	if (c == 32 || (c >= 9 && c <= 13))
 		return (1);
