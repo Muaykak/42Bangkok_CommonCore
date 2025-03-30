@@ -17,16 +17,19 @@
 # include <limits.h>
 
 
+struct	s_ps_stack;
+struct	s_ps_node;
+
 enum e_ps_stack_def
 {
-	STACK_A,
-	STACK_B
+	A,
+	B
 };
 
 typedef struct	s_ps_node
 {
-	enum e_ps_stack_def	stack;
 	int					number;
+	struct s_ps_stack	*stack;
 	struct s_ps_node	*next;
 	struct s_ps_node	*prev;
 	struct s_ps_node	*target_next;
@@ -37,13 +40,23 @@ typedef struct	s_ps_stack
 {
 	enum e_ps_stack_def	stack;
 	int					size;
-	struct s_ps_list	*top;
-	struct s_ps_lsit	*bot;
+	struct s_ps_node	*top;
+	struct s_ps_node	*bot;
 }				t_ps_stack;
 
-/* ********* CREATE STACK ********** */
+/***************************************/
+/*            CREATE STACK             */
 
-char	***get_numsets(int argc, char **argv);
+char		***get_numsets(int argc, char **argv);
+t_ps_stack	*create_stack_a(char ***numsets);
+
+/*****************************************/
+/*            NODE FUNCTIONS             */
+
+void		ps_node_addback(t_ps_node **node_list, t_ps_node *node);
+t_ps_node	*ps_node_new(t_ps_stack *stack, int num);
+void		ps_node_delone(t_ps_node *node);
+void		ps_node_clearall(t_ps_node **node_list);
 
 /* ******** CHECK ARGUMENT ********* */
 

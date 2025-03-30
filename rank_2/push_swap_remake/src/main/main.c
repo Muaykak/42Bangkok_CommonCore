@@ -14,9 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	char	***numsets;
-	int		i;
-	int		j;
+	char		***numsets;
+	t_ps_stack	*stack_a;
+	t_ps_node	*temp;
 
 	numsets = get_numsets(argc, argv);
 	if (numsets == NULL)
@@ -24,17 +24,19 @@ int	main(int argc, char **argv)
 		ft_printf("Error\n");
 		exit(EXIT_FAILURE);
 	}
-	i = 0;
-	while (numsets[i] != NULL)
+	stack_a = create_stack_a(numsets);
+	if (stack_a == NULL)
 	{
-		j = 0;
-		while (numsets[i][j] != NULL)
-		{
-			ft_printf("num[%d]:\t%s\n", ((i * (j + 1)) + (j + 1)), numsets[i][j]);
-			j++;
-		}
-		i++;
+		ft_printf("Error\n");
+		exit(EXIT_FAILURE);
 	}
-	free_numsets(numsets);
+	temp = stack_a->top;
+	while (temp->next != NULL && temp->next != stack_a->top)
+	{
+		ft_printf("num: %d\n", temp->number);
+		temp = temp->next;
+	}
+	ft_printf("num: %d\n", temp->number);
+	ps_node_clearall(&(stack_a)->top);
 	return (0);
 }

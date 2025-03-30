@@ -9,15 +9,25 @@ CHECK_ARG_SRC_FILE		=	check_format_1.c \
 							check_duplicate_1.c \
 
 CREATE_STACK_SRC_FILE	=	get_numset_1.c \
+							create_stack_a_1.c \
+
+NODE_FUNCTION_SRC_FILE	=	ps_node_new_1.c \
+							ps_node_delone_1.c \
+							ps_node_addback_1.c \
+							ps_node_clearall_1.c \
 
 SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${CREATE_STACK_SRC_DIR}, ${CREATE_STACK_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${CHECK_ARG_SRC_DIR}, ${CHECK_ARG_SRC_FILE}} \
+			${addprefix ${SRC_DIR}${NODE_FUNCTION_SRC_DIR}, ${NODE_FUNCTION_SRC_FILE}} \
+
 
 OBJ			= 	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
 
 #Directories
+
+NODE_FUNCTION_SRC_DIR = node_function/
 
 MAIN_SRC_DIR		= main/
 
