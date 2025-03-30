@@ -1,53 +1,37 @@
-MAIN_SRC_FILE	=	main.c \
+MAIN_SRC_FILE			=	main.c \
 
-SO_LONG_SRC_FILE		=	create_so_long_1.c \
-							create_window_1.c \
-							player_move_1.c \
-							push_map_to_window_1.c \
+UTILS_SRC_FILE			=	ft_atol.c \
+							free_ft_split.c \
+							free_numsets.c \
 
-IMAGE_HANDLE_SRC_FILE	=	image_utils_1.c \
-							image_utils_2.c \
-							img_scaling_1.c \
-							img_scaling_2.c \
-							get_texture_list_1.c \
-							get_texture_1.c
+CHECK_ARG_SRC_FILE		=	check_format_1.c \
+							check_int_limit.c \
+							check_duplicate_1.c \
 
-MAP_PROCESS_SRC_FILE	=	map_read_1.c \
-							map_check_1.c \
-							map_check_2.c \
-							map_data_1.c \
-							map_data_2.c \
-							map_data_3.c \
-							map_check_path_1.c \
-							map_check_path_2.c \
-							map_link_img_1.c \
-							map_first_paint_1.c \
-							map_re_paint_1.c \
-
-UTILS_SRC_FILE			=	so_long_utils_1.c \
-							so_long_utils_2.c \
-							so_long_utils_3.c \
-
-HOOKS_SRC_FILE			=	exit_hooks.c \
-							control_hooks.c \
-							expose_hook.c\
+CREATE_STACK_SRC_FILE	=	get_numset_1.c \
 
 SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \
+			${addprefix ${SRC_DIR}${CREATE_STACK_SRC_DIR}, ${CREATE_STACK_SRC_FILE}} \
+			${addprefix ${SRC_DIR}${CHECK_ARG_SRC_DIR}, ${CHECK_ARG_SRC_FILE}} \
 
 OBJ			= 	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
 
 #Directories
 
-MAIN_SRC_DIR = main/
+MAIN_SRC_DIR		= main/
 
-UTILS_SRC_DIR = utils/
+UTILS_SRC_DIR		= utils/
 
-SRC_DIR		= src/
+CREATE_STACK_SRC_DIR	= create_stack/
 
-OBJ_DIR		= obj/
+CHECK_ARG_SRC_DIR	= check_argument/
 
-LFT_DIR		= libft/
+SRC_DIR				= src/
+
+OBJ_DIR				= obj/
+
+LFT_DIR				= libft/
 
 #lib
 

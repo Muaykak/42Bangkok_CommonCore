@@ -1,40 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_duplicate_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 15:27:09 by srussame          #+#    #+#             */
-/*   Updated: 2025/03/30 15:27:10 by srussame         ###   ########.fr       */
+/*   Created: 2025/03/30 20:40:45 by srussame          #+#    #+#             */
+/*   Updated: 2025/03/30 20:40:58 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
-{
-	char	***numsets;
-	int		i;
-	int		j;
-
-	numsets = get_numsets(argc, argv);
-	if (numsets == NULL)
-	{
-		ft_printf("Error\n");
-		exit(EXIT_FAILURE);
-	}
-	i = 0;
-	while (numsets[i] != NULL)
-	{
-		j = 0;
-		while (numsets[i][j] != NULL)
-		{
-			ft_printf("num[%d]:\t%s\n", ((i * (j + 1)) + (j + 1)), numsets[i][j]);
-			j++;
-		}
-		i++;
-	}
-	free_numsets(numsets);
-	return (0);
-}

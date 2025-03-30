@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_ft_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 15:27:09 by srussame          #+#    #+#             */
-/*   Updated: 2025/03/30 15:27:10 by srussame         ###   ########.fr       */
+/*   Created: 2025/03/30 21:08:55 by srussame          #+#    #+#             */
+/*   Updated: 2025/03/30 21:09:05 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	ft_free_split(char **save)
 {
-	char	***numsets;
-	int		i;
-	int		j;
+	size_t	i;
 
-	numsets = get_numsets(argc, argv);
-	if (numsets == NULL)
-	{
-		ft_printf("Error\n");
-		exit(EXIT_FAILURE);
-	}
 	i = 0;
-	while (numsets[i] != NULL)
+	while (save[i] != 0)
 	{
-		j = 0;
-		while (numsets[i][j] != NULL)
-		{
-			ft_printf("num[%d]:\t%s\n", ((i * (j + 1)) + (j + 1)), numsets[i][j]);
-			j++;
-		}
+		free(save[i]);
 		i++;
 	}
-	free_numsets(numsets);
-	return (0);
+	free(save);
 }
