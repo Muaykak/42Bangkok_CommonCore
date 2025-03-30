@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 		temp = temp->next;
 	}
 	ft_printf("num: %d\n", temp->number);
+	ft_printf("element count: %d\n", stack_a->size);
 	ps_node_clearall(&(stack_a)->top);
 	return (0);
 }
