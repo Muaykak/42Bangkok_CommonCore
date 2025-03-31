@@ -31,5 +31,4 @@ void	ps_node_clearall(t_ps_node **node_list)
 	free(top->stack);
 	top->stack = NULL;
 	ps_node_delone(top);
-	(*node_list) = NULL;
 }

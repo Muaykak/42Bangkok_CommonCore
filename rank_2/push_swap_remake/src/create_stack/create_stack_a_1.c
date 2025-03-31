@@ -12,6 +12,11 @@
 
 #include "push_swap.h"
 
+t_ps_stack	*create_stack_a(char ***numsets);
+static int	create_stack_a_sub1(t_ps_node **new_node, char *numset, 
+				t_ps_stack *stack_a);
+static int	create_stack_a_sub2(char ***numsets, t_ps_stack *stack_a);
+
 static int	create_stack_a_sub2(char ***numsets, t_ps_stack *stack_a)
 {
 	t_ps_node	*new_node;
