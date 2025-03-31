@@ -12,3 +12,31 @@
 
 #include "push_swap.h"
 
+int	check_duplicate(t_ps_stack *stack_a)
+{
+	t_ps_node	*runner;
+	t_ps_node	*check;
+
+	if (stack_a == NULL || stack_a->top == NULL)
+		return (0);
+	check = stack_a->top;
+	while (check->next != stack_a->top)
+	{
+		runner = check->next;
+		while (runner != check)
+		{
+			if (check->number == runner->number)
+				return (0);
+			runner = runner->next;
+		}
+		check = check->next;
+	}
+	runner = check->next;
+	while (runner != check)
+	{
+		if (check->number == runner->number)
+			return (0);
+		runner = runner->next;
+	}
+	return (1);
+}

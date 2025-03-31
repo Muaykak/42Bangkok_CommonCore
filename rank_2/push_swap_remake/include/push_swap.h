@@ -62,6 +62,7 @@ void		ps_node_clearall(t_ps_node **node_list);
 
 int		check_format(int argc, char **argv);
 int		check_int_limit(char *num_set);
+int		check_duplicate(t_ps_stack *stack_a);
 
 /* *************** UTILITY ************** */
 

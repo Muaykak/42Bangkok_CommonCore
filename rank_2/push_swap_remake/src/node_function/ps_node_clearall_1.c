@@ -22,7 +22,6 @@ void	ps_node_clearall(t_ps_node **node_list)
 		return ;
 	top = (*node_list)->stack->top;
 	bot = (*node_list)->stack->bot;
-	(*node_list) = NULL;
 	while (top != bot)
 	{
 		temp = top->next;
@@ -31,5 +30,6 @@ void	ps_node_clearall(t_ps_node **node_list)
 	}
 	free(top->stack);
 	top->stack = NULL;
-	free(top);
+	ps_node_delone(top);
+	(*node_list) = NULL;
 }
