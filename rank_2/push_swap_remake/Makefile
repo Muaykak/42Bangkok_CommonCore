@@ -3,6 +3,9 @@ MAIN_SRC_FILE			=	main.c \
 UTILS_SRC_FILE			=	ft_atol.c \
 							free_ft_split.c \
 							free_numsets.c \
+							display_stacks_1.c \
+							free_pre_sort_content.c \
+							show_pre_sort_num.c \
 
 CHECK_ARG_SRC_FILE		=	check_format_1.c \
 							check_int_limit.c \
@@ -10,22 +13,41 @@ CHECK_ARG_SRC_FILE		=	check_format_1.c \
 
 CREATE_STACK_SRC_FILE	=	get_numset_1.c \
 							create_stack_a_1.c \
+							create_stack_b_1.c \
 
 NODE_FUNCTION_SRC_FILE	=	ps_node_new_1.c \
 							ps_node_delone_1.c \
 							ps_node_addback_1.c \
 							ps_node_clearall_1.c \
+							ps_node_addfront_1.c \
+
+PUSH_SWAP_OP_SRC_FILE	=	op_sa.c \
+							op_sb.c \
+							op_pb.c \
+							op_pa.c \
+							op_ss.c \
+							op_ra.c \
+							op_rb.c \
+							op_rr.c \
+
+PRE_SORT_SRC_FILE		=	create_pre_sort_stack_1.c \
 
 SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${CREATE_STACK_SRC_DIR}, ${CREATE_STACK_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${CHECK_ARG_SRC_DIR}, ${CHECK_ARG_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${NODE_FUNCTION_SRC_DIR}, ${NODE_FUNCTION_SRC_FILE}} \
+			${addprefix ${SRC_DIR}${PUSH_SWAP_OP_SRC_DIR}, ${PUSH_SWAP_OP_SRC_FILE}} \
+			${addprefix ${SRC_DIR}${PRE_SORT_SRC_DIR}, ${PRE_SORT_SRC_FILE}} \
 
 
 OBJ			= 	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
 
 #Directories
+
+PRE_SORT_SRC_DIR = pre_sort/
+
+PUSH_SWAP_OP_SRC_DIR = push_swap_operation/
 
 NODE_FUNCTION_SRC_DIR = node_function/
 
