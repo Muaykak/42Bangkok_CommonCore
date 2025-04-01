@@ -70,5 +70,12 @@ t_ps_stack	*create_stack_a(char ***numsets)
 		ps_node_clearall(&(stack_a->top));
 		return (NULL);
 	}
+	stack_a->all_num_size = stack_a->size;
+	if (fill_pre_sort(pre_quicksort(create_pre_sort_stack(stack_a)),
+		stack_a) == 0)
+	{
+		ps_node_clearall(&(stack_a->top));
+		return (NULL);
+	}
 	return (stack_a);
 }

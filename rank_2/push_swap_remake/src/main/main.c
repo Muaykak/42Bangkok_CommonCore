@@ -17,8 +17,6 @@ int	main(int argc, char **argv)
 	char		***numsets;
 	t_ps_stack	*stack_a;
 	t_ps_stack	*stack_b;
-	t_list		*list;
-	t_list		*temp;
 
 	numsets = get_numsets(argc, argv);
 	if (numsets == NULL)
@@ -27,7 +25,7 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	stack_a = create_stack_a(numsets);
-	stack_b = create_stack_b();
+	stack_b = create_stack_b(stack_a);
 	if (stack_a == NULL || stack_b == NULL)
 	{
 		if (stack_a)
@@ -37,12 +35,8 @@ int	main(int argc, char **argv)
 		ft_printf("Error\n");
 		exit(EXIT_FAILURE);
 	}
-	list = create_pre_sort_stack(stack_a);
-	display_stacks(stack_a, stack_b);
-	op_sa(stack_a, stack_b);
-	display_stacks(stack_a, stack_b);
-	op_ra(stack_a, stack_b);
-	display_stacks(stack_a, stack_b);
+	display_sorted_stack(stack_a);
+	ft_printf("min: %d\nmax: %d\n", stack_a->min->number, stack_a->max->number);
 	ft_printf("element a count: %d\n", stack_a->size);
 	ft_printf("element b count: %d\n", stack_b->size);
 	ps_node_clearall(&(stack_a->top));

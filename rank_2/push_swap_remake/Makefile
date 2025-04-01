@@ -6,6 +6,7 @@ UTILS_SRC_FILE			=	ft_atol.c \
 							display_stacks_1.c \
 							free_pre_sort_content.c \
 							show_pre_sort_num.c \
+							display_sorted_stack.c \
 
 CHECK_ARG_SRC_FILE		=	check_format_1.c \
 							check_int_limit.c \
@@ -20,6 +21,7 @@ NODE_FUNCTION_SRC_FILE	=	ps_node_new_1.c \
 							ps_node_addback_1.c \
 							ps_node_clearall_1.c \
 							ps_node_addfront_1.c \
+							find_node_1.c \
 
 PUSH_SWAP_OP_SRC_FILE	=	op_sa.c \
 							op_sb.c \
@@ -31,6 +33,8 @@ PUSH_SWAP_OP_SRC_FILE	=	op_sa.c \
 							op_rr.c \
 
 PRE_SORT_SRC_FILE		=	create_pre_sort_stack_1.c \
+							pre_quicksort_1.c \
+							fill_pre_sort.c \
 
 SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \

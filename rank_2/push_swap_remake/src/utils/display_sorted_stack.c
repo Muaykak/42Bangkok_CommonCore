@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_stack_b_1.c                                 :+:      :+:    :+:   */
+/*   display_sorted_stack.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 19:48:31 by srussame          #+#    #+#             */
-/*   Updated: 2025/03/31 19:48:32 by srussame         ###   ########.fr       */
+/*   Created: 2025/04/01 15:16:35 by srussame          #+#    #+#             */
+/*   Updated: 2025/04/01 15:16:44 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_ps_stack	*create_stack_b(t_ps_stack *stack_a)
+void	display_sorted_stack(t_ps_stack *stack)
 {
-	t_ps_stack	*stack_b;
+	t_ps_node	*runner;
 
-	if (stack_a == NULL)
-		return (NULL);
-	stack_b = (t_ps_stack *)ft_calloc(1, sizeof(t_ps_stack));
-	if (stack_b == NULL)
-		return (NULL);
-	stack_b->stack = B;
-	stack_b->min = stack_a->min;
-	stack_b->max = stack_a->max;
-	return (stack_b);
+	if (stack == NULL)
+		return ;
+	runner = stack->min;
+	ft_printf("sorted stack\n");
+	while (runner->target_next != stack->min)
+	{
+		ft_printf("[%d]: %d\n", runner->sort_pos, runner->number);
+		runner = runner->target_next;
+	}
+	ft_printf("[%d]: %d\n", runner->sort_pos, runner->number);
+	return ;
 }

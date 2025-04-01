@@ -31,7 +31,7 @@ enum e_ps_stack_def
 typedef struct	s_ps_node
 {
 	int					number;
-	int					sort_pos;
+	int		sort_pos;
 	struct s_ps_stack	*stack;
 	struct s_ps_node	*next;
 	struct s_ps_node	*prev;
@@ -43,6 +43,9 @@ typedef struct	s_ps_stack
 {
 	enum e_ps_stack_def	stack;
 	int					size;
+	int					all_num_size;
+	struct s_ps_node	*min;
+	struct s_ps_node	*max;
 	struct s_ps_node	*top;
 	struct s_ps_node	*bot;
 }				t_ps_stack;
@@ -68,13 +71,15 @@ void 	op_rb_sub1(t_ps_stack *stack_b);
 /*              PRE SORT               */
 
 t_list	*create_pre_sort_stack(t_ps_stack *stack_a);
+int		fill_pre_sort(t_list *pre_sort, t_ps_stack *stack_a);
 
 /***************************************/
 /*            CREATE STACK             */
 
 char		***get_numsets(int argc, char **argv);
 t_ps_stack	*create_stack_a(char ***numsets);
-t_ps_stack	*create_stack_b(void);
+t_ps_stack	*create_stack_b(t_ps_stack *stack_a);
+t_list		*pre_quicksort(t_list *pre_top);
 
 /*****************************************/
 /*            NODE FUNCTIONS             */
@@ -84,6 +89,8 @@ void		ps_node_addfront(t_ps_node **node_list, t_ps_node *node);
 t_ps_node	*ps_node_new(t_ps_stack *stack, int num);
 void		ps_node_delone(t_ps_node *node);
 void		ps_node_clearall(t_ps_node **node_list);
+
+t_ps_node	*find_node(t_ps_node *node_list, int num_pos);
 
 /* ******** CHECK ARGUMENT ********* */
 
@@ -98,6 +105,7 @@ void	ft_free_split(char **save);
 void	free_numsets(char ***numsets);
 void	free_pre_sort_content(void *p);
 void	display_stacks(t_ps_stack *stack_a, t_ps_stack *stack_b);
+void	display_sorted_stack(t_ps_stack *stack);
 int		show_ps_num(t_list *list);
 
 #endif
