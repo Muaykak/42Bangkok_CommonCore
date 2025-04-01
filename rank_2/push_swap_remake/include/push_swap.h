@@ -48,6 +48,7 @@ typedef struct	s_ps_stack
 	struct s_ps_node	*max;
 	struct s_ps_node	*top;
 	struct s_ps_node	*bot;
+	struct s_ps_stack	*link;
 }				t_ps_stack;
 
 /**************************************************************/

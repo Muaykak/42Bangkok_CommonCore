@@ -20,11 +20,13 @@ void	ps_node_clearall(t_ps_node **node_list)
 
 	if (node_list == NULL || *node_list == NULL)
 		return ;
-	top = (*node_list)->stack->top;
-	bot = (*node_list)->stack->bot;
+	if ((*node_list)->stack->link)
+		free((*node_list)->stack->link);
+	top = (*node_list)->stack->min;
+	bot = (*node_list)->stack->max;
 	while (top != bot)
 	{
-		temp = top->next;
+		temp = top->target_next;
 		ps_node_delone(top);
 		top = temp;
 	}

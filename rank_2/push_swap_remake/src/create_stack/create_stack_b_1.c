@@ -24,5 +24,7 @@ t_ps_stack	*create_stack_b(t_ps_stack *stack_a)
 	stack_b->stack = B;
 	stack_b->min = stack_a->min;
 	stack_b->max = stack_a->max;
+	stack_a->link = stack_b;
+	stack_b->link = stack_a;
 	return (stack_b);
 }

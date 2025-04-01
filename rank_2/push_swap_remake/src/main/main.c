@@ -40,6 +40,5 @@ int	main(int argc, char **argv)
 	ft_printf("element a count: %d\n", stack_a->size);
 	ft_printf("element b count: %d\n", stack_b->size);
 	ps_node_clearall(&(stack_a->top));
-	ps_node_clearall(&(stack_b->top));
 	return (0);
 }
