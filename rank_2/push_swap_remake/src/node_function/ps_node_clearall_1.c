@@ -17,12 +17,11 @@ void	ps_node_clearall(t_ps_node **node_list)
 	t_ps_node	*top;
 	t_ps_node	*temp;
 	t_ps_node	*bot;
+	t_ps_stack	*stack;
 
 	if (node_list == NULL || *node_list == NULL)
 		return ;
-	ft_printf("reach here\n");
-	if ((*node_list)->stack->link)
-		free((*node_list)->stack->link);
+	stack = (*node_list)->stack;
 	top = (*node_list)->stack->min;
 	bot = (*node_list)->stack->max;
 	while (top != bot)
@@ -31,7 +30,8 @@ void	ps_node_clearall(t_ps_node **node_list)
 		ps_node_delone(top);
 		top = temp;
 	}
-	free(top->stack);
-	top->stack = NULL;
+	if (stack->link)
+		free(stack->link);
+	free(stack);
 	ps_node_delone(top);
 }

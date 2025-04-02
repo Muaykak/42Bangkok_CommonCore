@@ -44,6 +44,6 @@ int	main(int argc, char **argv)
 		ft_printf("the stack is sorted!\n");
 	else
 		ft_printf("the stack is unsorted!\n");
-	ps_node_clearall(&(stack_a->top));
+	ps_node_clearall(&(stack_a->min));
 	return (0);
 }
