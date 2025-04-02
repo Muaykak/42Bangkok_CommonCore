@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void op_ra_sub1(t_ps_stack *stack_a)
+void	op_ra_sub1(t_ps_stack *stack_a)
 {
 	t_ps_node	*temp;
 	
@@ -22,12 +22,13 @@ void op_ra_sub1(t_ps_stack *stack_a)
 	return ;
 }
 
-void op_ra(t_ps_stack *stack_a, t_ps_stack *stack_b)
+void	op_ra(t_ps_stack *stack_a, t_ps_stack *stack_b)
 {
 	if (stack_a == NULL || stack_b == NULL || stack_a->size < 2)
 		return ;
 	(void)stack_b;
 	op_ra_sub1(stack_a);
+	assign_stack_pos(stack_a);
 	if (PS_PRINT_OP == 1)
 		ft_printf("ra\n");
 }

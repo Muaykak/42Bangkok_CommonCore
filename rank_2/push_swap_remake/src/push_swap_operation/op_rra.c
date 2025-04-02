@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_ss.c                                            :+:      :+:    :+:   */
+/*   op_rra.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 00:29:49 by srussame          #+#    #+#             */
-/*   Updated: 2025/04/01 00:29:58 by srussame         ###   ########.fr       */
+/*   Created: 2025/04/02 00:43:00 by srussame          #+#    #+#             */
+/*   Updated: 2025/04/02 00:43:12 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	op_ss(t_ps_stack *stack_a, t_ps_stack *stack_b)
+void	op_rra_sub1(t_ps_stack *stack_a)
 {
-	if (stack_a == NULL || stack_b == NULL
-		|| stack_a->size < 2 || stack_b->size < 2)
+	t_ps_node	*temp;
+
+	temp = stack_a->bot;
+	stack_a->bot = stack_a->bot->prev;
+	stack_a->top =temp;
+}
+
+void	op_rra(t_ps_stack *stack_a, t_ps_stack *stack_b)
+{
+	if (stack_a == NULL || stack_b == NULL || stack_a->size < 2)
 		return ;
-	op_sa_sub1(stack_a);
-	op_sb_sub1(stack_b);
-	stack_a->top->stack_pos = 1;
-	stack_a->top->next->stack_pos = 2;
-	stack_b->top->stack_pos = 1;
-	stack_b->top->next->stack_pos = 2;
+	(void)stack_b;
+	op_rra_sub1(stack_a);
+	assign_stack_pos(stack_a);
 	if (PS_PRINT_OP == 1)
-		ft_printf("ss\n");
-	return ;
+		ft_printf("rra\n");
 }

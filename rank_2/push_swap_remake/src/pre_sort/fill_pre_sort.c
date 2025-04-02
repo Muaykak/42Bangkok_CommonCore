@@ -54,6 +54,6 @@ static void	fill_pre_sort_sub1(t_list *temp, t_list *pre_sort,
 	curr->target_next = next;
 	next->target_prev = curr;
 	ft_lstclear(&pre_sort, &free_pre_sort_content);
-	stack_a->min = find_node(stack_a->top, 1);
-	stack_a->max = find_node(stack_a->top, pos);
+	stack_a->min = find_node_sort_pos(stack_a->top, 1);
+	stack_a->max = find_node_sort_pos(stack_a->top, pos);
 }

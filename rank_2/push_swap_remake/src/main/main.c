@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 15:27:09 by srussame          #+#    #+#             */
-/*   Updated: 2025/03/30 15:27:10 by srussame         ###   ########.fr       */
+/*   Created: 2025/04/01 16:19:52 by srussame          #+#    #+#             */
+/*   Updated: 2025/04/01 16:19:53 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap.h"	
 
 int	main(int argc, char **argv)
 {
@@ -35,10 +35,15 @@ int	main(int argc, char **argv)
 		ft_printf("Error\n");
 		exit(EXIT_FAILURE);
 	}
-	display_sorted_stack(stack_a);
-	ft_printf("min: %d\nmax: %d\n", stack_a->min->number, stack_a->max->number);
-	ft_printf("element a count: %d\n", stack_a->size);
-	ft_printf("element b count: %d\n", stack_b->size);
+	while (stack_a->size > 1)
+		op_pb(stack_a, stack_b);
+	easy_rotate(stack_a->stack_min);
+	easy_rotate(stack_b->stack_min);
+	display_stacks(stack_a, stack_b);
+	if (check_stack_asc_sorted(stack_a) == 1)
+		ft_printf("the stack is sorted!\n");
+	else
+		ft_printf("the stack is unsorted!\n");
 	ps_node_clearall(&(stack_a->top));
 	return (0);
 }

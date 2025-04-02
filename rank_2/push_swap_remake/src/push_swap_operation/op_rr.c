@@ -19,6 +19,8 @@ void	op_rr(t_ps_stack *stack_a, t_ps_stack *stack_b)
 		return ;
 	op_ra_sub1(stack_a);
 	op_rb_sub1(stack_b);
+	assign_stack_pos(stack_b);
+	assign_stack_pos(stack_a);
 	if (PS_PRINT_OP == 1)
 		ft_printf("rr\n");
 	return ;

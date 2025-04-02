@@ -42,6 +42,8 @@ void	op_sa(t_ps_stack *stack_a, t_ps_stack *stack_b)
 		return ;
 	(void)stack_b;
 	op_sa_sub1(stack_a);
+	stack_a->top->stack_pos = 1;
+	stack_a->top->next->stack_pos = 2;
 	if (PS_PRINT_OP == 1)
 		ft_printf("sa\n");
 	return ;

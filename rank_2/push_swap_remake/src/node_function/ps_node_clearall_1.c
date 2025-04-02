@@ -20,6 +20,7 @@ void	ps_node_clearall(t_ps_node **node_list)
 
 	if (node_list == NULL || *node_list == NULL)
 		return ;
+	ft_printf("reach here\n");
 	if ((*node_list)->stack->link)
 		free((*node_list)->stack->link);
 	top = (*node_list)->stack->min;

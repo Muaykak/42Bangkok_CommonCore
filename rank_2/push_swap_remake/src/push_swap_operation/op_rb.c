@@ -28,6 +28,10 @@ void op_rb(t_ps_stack *stack_a, t_ps_stack *stack_b)
 		return ;
 	(void)stack_a;
 	op_ra_sub1(stack_b);
+	assign_stack_pos(stack_b);
+	stack_b->top->stack_pos = 1;
+	stack_b->top->next->stack_pos = 2;
+	assign_stack_pos(stack_b);
 	if (PS_PRINT_OP == 1)
 		ft_printf("rb\n");
 }

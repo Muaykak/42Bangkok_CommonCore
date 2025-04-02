@@ -31,7 +31,8 @@ enum e_ps_stack_def
 typedef struct	s_ps_node
 {
 	int					number;
-	int		sort_pos;
+	int					sort_pos;
+	int					stack_pos;
 	struct s_ps_stack	*stack;
 	struct s_ps_node	*next;
 	struct s_ps_node	*prev;
@@ -44,6 +45,8 @@ typedef struct	s_ps_stack
 	enum e_ps_stack_def	stack;
 	int					size;
 	int					all_num_size;
+	struct s_ps_node	*stack_min;
+	struct s_ps_node	*stack_max;
 	struct s_ps_node	*min;
 	struct s_ps_node	*max;
 	struct s_ps_node	*top;
@@ -54,6 +57,8 @@ typedef struct	s_ps_stack
 /**************************************************************/
 /*                      PUSH_SWAP OPERATION                   */
 
+void	easy_rotate(t_ps_node *target);
+
 void	op_sa(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void	op_sb(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void	op_pb(t_ps_stack *stack_a, t_ps_stack *stack_b);
@@ -62,11 +67,20 @@ void	op_ss(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void 	op_ra(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void 	op_rb(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void	op_rr(t_ps_stack *stack_a, t_ps_stack *stack_b);
+void	op_rra(t_ps_stack *stack_a, t_ps_stack *stack_b);
+void	op_rrb(t_ps_stack *stack_a, t_ps_stack *stack_b);
+void	op_rrr(t_ps_stack *stack_a, t_ps_stack *stack_b);
+
+int		dist_cal(t_ps_node *start, t_ps_node *end);
+int		dist_cal_rotate(t_ps_node *start, t_ps_node *end);
+int		dist_cal_reverse(t_ps_node *start, t_ps_node *end);
 
 void	op_sa_sub1(t_ps_stack *stack_a);
 void	op_sb_sub1(t_ps_stack *stack_b);
 void 	op_ra_sub1(t_ps_stack *stack_a);
 void 	op_rb_sub1(t_ps_stack *stack_b);
+void	op_rra_sub1(t_ps_stack *stack_a);
+void	op_rrb_sub1(t_ps_stack *stack_b);
 
 /***************************************/
 /*              PRE SORT               */
@@ -91,13 +105,20 @@ t_ps_node	*ps_node_new(t_ps_stack *stack, int num);
 void		ps_node_delone(t_ps_node *node);
 void		ps_node_clearall(t_ps_node **node_list);
 
-t_ps_node	*find_node(t_ps_node *node_list, int num_pos);
+void		assign_stack_pos(t_ps_stack *stack);
+t_ps_node	*find_node_sort_pos(t_ps_node *node_list, int sort_pos);
+t_ps_node	*find_lower_node(t_ps_node *target);
+t_ps_node	*find_higher_node(t_ps_node *target);
 
-/* ******** CHECK ARGUMENT ********* */
+/* ********         CHECK FUNCTIONS         ********* */
+/*                                                    */
 
 int		check_format(int argc, char **argv);
 int		check_int_limit(char *num_set);
 int		check_duplicate(t_ps_stack *stack_a);
+
+int		check_stack_asc_sorted(t_ps_stack *stack);
+int		check_stack_desc_sorted(t_ps_stack *stack);
 
 /* *************** UTILITY ************** */
 

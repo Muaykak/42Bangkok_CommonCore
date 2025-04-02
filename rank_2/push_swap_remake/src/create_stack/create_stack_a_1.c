@@ -16,6 +16,37 @@ t_ps_stack	*create_stack_a(char ***numsets);
 static int	create_stack_a_sub1(t_ps_node **new_node, char *numset, 
 				t_ps_stack *stack_a);
 static int	create_stack_a_sub2(char ***numsets, t_ps_stack *stack_a);
+static void	assign_stack_maxmin(t_ps_stack *stack_a);
+
+/* take numsets from get_numset() */
+t_ps_stack	*create_stack_a(char ***numsets)
+{
+	t_ps_stack	*stack_a;
+
+	if (numsets == NULL)
+		return (NULL);
+	stack_a = (t_ps_stack *)ft_calloc(1, sizeof(t_ps_stack));
+	if (stack_a == NULL)
+		return (NULL);
+	stack_a->stack = A;
+	create_stack_a_sub2(numsets, stack_a);
+	free_numsets(numsets);
+	if (check_duplicate(stack_a) == 0)
+	{
+		ps_node_clearall(&(stack_a->top));
+		return (NULL);
+	}
+	stack_a->all_num_size = stack_a->size;
+	if (fill_pre_sort(pre_quicksort(create_pre_sort_stack(stack_a)),
+		stack_a) == 0)
+	{
+		ps_node_clearall(&(stack_a->top));
+		return (NULL);
+	}
+	assign_stack_pos(stack_a);
+	assign_stack_maxmin(stack_a);
+	return (stack_a);
+}
 
 static int	create_stack_a_sub2(char ***numsets, t_ps_stack *stack_a)
 {
@@ -52,30 +83,8 @@ static int	create_stack_a_sub1(t_ps_node **new_node,
 	return (1);
 }
 
-/* take numsets from get_numset() */
-t_ps_stack	*create_stack_a(char ***numsets)
+static void	assign_stack_maxmin(t_ps_stack *stack_a)
 {
-	t_ps_stack	*stack_a;
-
-	if (numsets == NULL)
-		return (NULL);
-	stack_a = (t_ps_stack *)ft_calloc(1, sizeof(t_ps_stack));
-	if (stack_a == NULL)
-		return (NULL);
-	stack_a->stack = A;
-	create_stack_a_sub2(numsets, stack_a);
-	free_numsets(numsets);
-	if (check_duplicate(stack_a) == 0)
-	{
-		ps_node_clearall(&(stack_a->top));
-		return (NULL);
-	}
-	stack_a->all_num_size = stack_a->size;
-	if (fill_pre_sort(pre_quicksort(create_pre_sort_stack(stack_a)),
-		stack_a) == 0)
-	{
-		ps_node_clearall(&(stack_a->top));
-		return (NULL);
-	}
-	return (stack_a);
+	stack_a->stack_max = stack_a->max;
+	stack_a->stack_min = stack_a->min;
 }
