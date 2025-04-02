@@ -12,20 +12,8 @@
 
 #include "push_swap.h"
 
-static void	op_pa_sub1(t_ps_node *temp, t_ps_stack *stack_a)
+static void	op_pa_sub3(t_ps_node *temp, t_ps_stack *stack_a)
 {
-	temp->stack = stack_a;
-	if (stack_a->size == 0)
-	{
-		temp->next = temp;
-		temp->prev = temp;
-		stack_a->top = temp;
-		stack_a->bot = temp;
-		stack_a->stack_min = temp;
-		stack_a->stack_max = temp;
-	}
-	else
-	{
 		temp->next = stack_a->top;
 		temp->prev = stack_a->bot;
 		stack_a->top->prev = temp;
@@ -35,7 +23,28 @@ static void	op_pa_sub1(t_ps_node *temp, t_ps_stack *stack_a)
 			stack_a->stack_max = stack_a->top;
 		else if (stack_a->top->number < stack_a->stack_min->number)
 			stack_a->stack_min = stack_a->top;
+		temp->st_next = find_higher_node(temp);
+		temp->st_prev = temp->st_next->st_prev;
+		temp->st_next->st_prev->st_next = temp;
+		temp->st_next->st_prev = temp;
+}
+
+static void	op_pa_sub1(t_ps_node *temp, t_ps_stack *stack_a)
+{
+	temp->stack = stack_a;
+	if (stack_a->size == 0)
+	{
+		temp->next = temp;
+		temp->prev = temp;
+		temp->st_next = temp;
+		temp->st_prev = temp;
+		stack_a->top = temp;
+		stack_a->bot = temp;
+		stack_a->stack_min = temp;
+		stack_a->stack_max = temp;
 	}
+	else
+		op_pa_sub3(temp, stack_a);
 }
 
 static void	op_pa_sub2(t_ps_stack *stack_b)
@@ -45,13 +54,17 @@ static void	op_pa_sub2(t_ps_stack *stack_b)
 		stack_b->size = 0;
 		stack_b->bot = NULL;
 		stack_b->top = NULL;
+		stack_b->stack_max = NULL;
+		stack_b->stack_min = NULL;
 	}
 	else
 	{
+		stack_b->top->st_prev->st_next = stack_b->top->st_next;
+		stack_b->top->st_next->st_prev = stack_b->top->st_prev;
 		if (stack_b->top == stack_b->stack_max)
-			stack_b->stack_max = find_lower_node(stack_b->stack_max);
+			stack_b->stack_max = stack_b->stack_max->st_prev;
 		else if (stack_b->bot == stack_b->stack_min)
-			stack_b->stack_min = find_higher_node(stack_b->stack_min);
+			stack_b->stack_min = stack_b->stack_min->st_next;
 		stack_b->top = stack_b->top->next;
 		stack_b->top->prev = stack_b->bot;
 		stack_b->bot->next = stack_b->top;

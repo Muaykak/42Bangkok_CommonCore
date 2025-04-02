@@ -20,7 +20,7 @@ int	check_stack_asc_sorted(t_ps_stack *stack)
 {
 	t_ps_node	*runner;
 
-	if (stack == NULL)
+	if (stack == NULL || stack->top == NULL)
 		return (0);
 	runner = stack->top;
 	while (runner->next != stack->top)

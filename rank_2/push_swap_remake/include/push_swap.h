@@ -19,6 +19,10 @@
 #  define PS_PRINT_OP 1
 # endif
 
+# ifndef CHUNK_SEP
+#  define CHUNK_SEP 4
+# endif
+
 struct	s_ps_stack;
 struct	s_ps_node;
 
@@ -38,6 +42,8 @@ typedef struct	s_ps_node
 	struct s_ps_node	*prev;
 	struct s_ps_node	*target_next;
 	struct s_ps_node	*target_prev;
+	struct s_ps_node	*st_next;
+	struct s_ps_node	*st_prev;
 }				t_ps_node;
 
 typedef struct	s_ps_stack
@@ -55,6 +61,15 @@ typedef struct	s_ps_stack
 }				t_ps_stack;
 
 /**************************************************************/
+/*                      ALGORITHM FUNCTIONS                   */
+
+// Fisrt 1st algorithm
+
+void		first_algor(t_ps_stack *stack_a);
+t_ps_node	*find_closest_to_swap_a(t_ps_stack *stack_a);
+t_ps_node	*find_closest_to_push_b(t_ps_stack *stack);
+
+/**************************************************************/
 /*                      PUSH_SWAP OPERATION                   */
 
 void	easy_rotate(t_ps_node *target);
@@ -70,6 +85,8 @@ void	op_rr(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void	op_rra(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void	op_rrb(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void	op_rrr(t_ps_stack *stack_a, t_ps_stack *stack_b);
+
+void	(*rotate_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *);
 
 int		dist_cal(t_ps_node *start, t_ps_node *end);
 int		dist_cal_rotate(t_ps_node *start, t_ps_node *end);
@@ -119,6 +136,9 @@ int		check_duplicate(t_ps_stack *stack_a);
 
 int		check_stack_asc_sorted(t_ps_stack *stack);
 int		check_stack_desc_sorted(t_ps_stack *stack);
+
+int		check_swapable(t_ps_node *target);
+int		check_unsorted(t_ps_node *target);
 
 /* *************** UTILITY ************** */
 

@@ -35,7 +35,9 @@ int	fill_pre_sort(t_list *pre_sort, t_ps_stack *stack_a)
 		next = (t_ps_node *)(temp->next->content);
 		curr->sort_pos = pos++;
 		curr->target_next = next;
+		curr->st_next = next;
 		next->target_prev = curr;
+		next->st_prev = curr;
 		temp = temp->next;
 	}
 	fill_pre_sort_sub1(temp, pre_sort, pos, stack_a);
@@ -52,7 +54,9 @@ static void	fill_pre_sort_sub1(t_list *temp, t_list *pre_sort,
 	next = (t_ps_node *)(pre_sort->content);
 	curr->sort_pos = pos;
 	curr->target_next = next;
+	curr->st_next = next;
 	next->target_prev = curr;
+	next->st_prev = curr;
 	ft_lstclear(&pre_sort, &free_pre_sort_content);
 	stack_a->min = find_node_sort_pos(stack_a->top, 1);
 	stack_a->max = find_node_sort_pos(stack_a->top, pos);

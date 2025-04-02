@@ -33,32 +33,6 @@ void	op_pb(t_ps_stack *stack_a, t_ps_stack *stack_b)
 	return ;
 }
 
-static void	op_pb_sub1(t_ps_node *temp, t_ps_stack *stack_b)
-{
-	temp->stack = stack_b;
-	if (stack_b->size == 0)
-	{
-		temp->next = temp;
-		temp->prev = temp;
-		stack_b->top = temp;
-		stack_b->bot = temp;
-		stack_b->stack_min = temp;
-		stack_b->stack_max = temp;
-	}
-	else
-	{
-		temp->next = stack_b->top;
-		temp->prev = stack_b->bot;
-		stack_b->top->prev = temp;
-		stack_b->bot->next = temp;
-		stack_b->top = temp;
-		if (stack_b->top->number > stack_b->stack_max->number)
-			stack_b->stack_max = stack_b->top;
-		else if (stack_b->top->number < stack_b->stack_min->number)
-			stack_b->stack_min = stack_b->top;
-	}
-}
-
 static	void	op_pb_sub2(t_ps_stack *stack_a)
 {
 	if (stack_a->size <= 1)
@@ -71,13 +45,50 @@ static	void	op_pb_sub2(t_ps_stack *stack_a)
 	}
 	else
 	{
+		stack_a->top->st_prev->st_next = stack_a->top->st_next;
+		stack_a->top->st_next->st_prev = stack_a->top->st_prev;
 		if (stack_a->top == stack_a->stack_max)
-			stack_a->stack_max = find_lower_node(stack_a->stack_max);
+			stack_a->stack_max = stack_a->stack_max->st_prev;
 		else if (stack_a->top == stack_a->stack_min)
-			stack_a->stack_min = find_higher_node(stack_a->stack_min);
+			stack_a->stack_min = stack_a->stack_min->st_next;
 		stack_a->top = stack_a->top->next;
 		stack_a->top->prev = stack_a->bot;
 		stack_a->bot->next = stack_a->top;
 		stack_a->size--;
 	}
+}
+
+static void	op_pb_sub3(t_ps_node *temp, t_ps_stack *stack_b)
+{
+		temp->next = stack_b->top;
+		temp->prev = stack_b->bot;
+		stack_b->top->prev = temp;
+		stack_b->bot->next = temp;
+		stack_b->top = temp;
+		if (stack_b->top->number > stack_b->stack_max->number)
+			stack_b->stack_max = stack_b->top;
+		else if (stack_b->top->number < stack_b->stack_min->number)
+			stack_b->stack_min = stack_b->top;
+		temp->st_next = find_higher_node(temp);
+		temp->st_prev = temp->st_next->st_prev;
+		temp->st_next->st_prev->st_next = temp;
+		temp->st_next->st_prev = temp;
+}
+
+static void	op_pb_sub1(t_ps_node *temp, t_ps_stack *stack_b)
+{
+	temp->stack = stack_b;
+	if (stack_b->size == 0)
+	{
+		temp->next = temp;
+		temp->prev = temp;
+		temp->st_next = temp;
+		temp->st_prev = temp;
+		stack_b->top = temp;
+		stack_b->bot = temp;
+		stack_b->stack_min = temp;
+		stack_b->stack_max = temp;
+	}
+	else
+		op_pb_sub3(temp, stack_b);
 }

@@ -55,9 +55,11 @@ t_ps_node	*find_lower_node(t_ps_node *target)
 {
 	t_ps_node	*lower;
 
-	if (target == NULL || target->stack->size < 2)
+	if (target == NULL || target->stack->size < 1)
 		return (NULL);
 	lower = target->target_prev;
+	if (target->stack->stack_min == target)
+		return (target->stack->stack_max);
 	while (lower->sort_pos > 1)
 	{
 		if (lower->stack->stack == target->stack->stack)
@@ -69,13 +71,16 @@ t_ps_node	*find_lower_node(t_ps_node *target)
 	return (NULL);
 }
 
+/* find the higher node in the same stack */
 t_ps_node	*find_higher_node(t_ps_node *target)
 {
 	t_ps_node	*higher;
 
-	if (target == NULL || target->stack->size < 2)
+	if (target == NULL || target->stack->size < 1)
 		return (NULL);
 	higher = target->target_next;
+	if (target->stack->stack_max == target)
+		return (target->stack->stack_min);
 	while (higher->sort_pos < higher->stack->all_num_size)
 	{
 		if (higher->stack->stack == target->stack->stack)

@@ -12,6 +12,8 @@ CHECK_ARG_SRC_FILE		=	check_format_1.c \
 							check_int_limit.c \
 							check_duplicate_1.c \
 							check_stack_sorted.c \
+							check_swapable_1.c \
+							check_unsorted.c \
 
 CREATE_STACK_SRC_FILE	=	get_numset_1.c \
 							create_stack_a_1.c \
@@ -38,12 +40,15 @@ PUSH_SWAP_OP_SRC_FILE	=	op_sa.c \
 							op_rrr.c \
 							easy_rotate_1.c \
 							dist_cal_1.c \
+							rotate_decider_1.c \
 
 PRE_SORT_SRC_FILE		=	create_pre_sort_stack_1.c \
 							pre_quicksort_1.c \
 							fill_pre_sort.c \
 
-ALGOR_SRC_FILE			=
+1ST_ALGOR_SRC_FILE			=	1st_algor_1.c \
+								find_closest_to_swap_1.c \
+								find_closest_to_push_1.c \
 
 SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \
@@ -52,14 +57,14 @@ SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${NODE_FUNCTION_SRC_DIR}, ${NODE_FUNCTION_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${PUSH_SWAP_OP_SRC_DIR}, ${PUSH_SWAP_OP_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${PRE_SORT_SRC_DIR}, ${PRE_SORT_SRC_FILE}} \
-			${addprefix ${SRC_DIR}${ALGOR_SRC_DIR}, ${ALGOR_SRC_FILE}} \
+			${addprefix ${SRC_DIR}${1ST_ALGOR_SRC_DIR}, ${1ST_ALGOR_SRC_FILE}} \
 
 
 OBJ			= 	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
 
 #Directories
 
-ALGOR_SRC_DIR = algorithm/
+1ST_ALGOR_SRC_DIR = 1st_algorithm/
 
 PRE_SORT_SRC_DIR = pre_sort/
 
