@@ -26,6 +26,12 @@
 struct	s_ps_stack;
 struct	s_ps_node;
 
+typedef enum e_ps_bool
+{
+	FALSE,
+	TRUE
+}			t_ps_bool;
+
 enum e_ps_stack_def
 {
 	A,
@@ -37,6 +43,10 @@ typedef struct	s_ps_node
 	int					number;
 	int					sort_pos;
 	int					stack_pos;
+	int					optional;
+	t_ps_bool			unorder;
+	t_ps_bool			swap_able;
+	t_ps_bool			swap_top;
 	struct s_ps_stack	*stack;
 	struct s_ps_node	*next;
 	struct s_ps_node	*prev;
@@ -51,6 +61,7 @@ typedef struct	s_ps_stack
 	enum e_ps_stack_def	stack;
 	int					size;
 	int					all_num_size;
+	t_ps_bool			sorted;
 	struct s_ps_node	*stack_min;
 	struct s_ps_node	*stack_max;
 	struct s_ps_node	*min;
@@ -66,8 +77,15 @@ typedef struct	s_ps_stack
 // Fisrt 1st algorithm
 
 void		first_algor(t_ps_stack *stack_a);
-t_ps_node	*find_closest_to_swap_a(t_ps_stack *stack_a);
+t_ps_node	*find_closest_to_swap(t_ps_stack *stack);
 t_ps_node	*find_closest_to_push_b(t_ps_stack *stack);
+t_ps_node	*find_closest_unsorted(t_ps_stack *stack);
+t_ps_node	*find_target_in_a(t_ps_node *target_b);
+t_ps_node	*find_closest_to_push_a(t_ps_stack *stack_b);
+void		(*stack_a_decider(t_ps_stack *stack_a))(t_ps_stack *,
+				t_ps_stack *);
+void		(*stack_b_decider(t_ps_stack *stack_b))(t_ps_stack *,
+				t_ps_stack *);
 
 /**************************************************************/
 /*                      PUSH_SWAP OPERATION                   */
@@ -112,6 +130,9 @@ char		***get_numsets(int argc, char **argv);
 t_ps_stack	*create_stack_a(char ***numsets);
 t_ps_stack	*create_stack_b(t_ps_stack *stack_a);
 t_list		*pre_quicksort(t_list *pre_top);
+void		assign_stack_unsorted(t_ps_stack *stack);
+void		assign_stack_pos(t_ps_stack *stack);
+void		assign_node_unsorted(t_ps_node *node);
 
 /*****************************************/
 /*            NODE FUNCTIONS             */
@@ -122,7 +143,6 @@ t_ps_node	*ps_node_new(t_ps_stack *stack, int num);
 void		ps_node_delone(t_ps_node *node);
 void		ps_node_clearall(t_ps_node **node_list);
 
-void		assign_stack_pos(t_ps_stack *stack);
 t_ps_node	*find_node_sort_pos(t_ps_node *node_list, int sort_pos);
 t_ps_node	*find_lower_node(t_ps_node *target);
 t_ps_node	*find_higher_node(t_ps_node *target);

@@ -18,6 +18,8 @@ CHECK_ARG_SRC_FILE		=	check_format_1.c \
 CREATE_STACK_SRC_FILE	=	get_numset_1.c \
 							create_stack_a_1.c \
 							create_stack_b_1.c \
+							assign_stack_pos.c \
+							assign_stack_unsorted_1.c \
 
 NODE_FUNCTION_SRC_FILE	=	ps_node_new_1.c \
 							ps_node_delone_1.c \
@@ -25,7 +27,6 @@ NODE_FUNCTION_SRC_FILE	=	ps_node_new_1.c \
 							ps_node_clearall_1.c \
 							ps_node_addfront_1.c \
 							find_node_1.c \
-							assign_stack_pos.c \
 
 PUSH_SWAP_OP_SRC_FILE	=	op_sa.c \
 							op_sb.c \
@@ -49,6 +50,7 @@ PRE_SORT_SRC_FILE		=	create_pre_sort_stack_1.c \
 1ST_ALGOR_SRC_FILE			=	1st_algor_1.c \
 								find_closest_to_swap_1.c \
 								find_closest_to_push_1.c \
+								find_closest_unsorted_1.c \
 
 SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \

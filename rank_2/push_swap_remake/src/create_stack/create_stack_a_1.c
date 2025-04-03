@@ -45,6 +45,8 @@ t_ps_stack	*create_stack_a(char ***numsets)
 	}
 	assign_stack_pos(stack_a);
 	assign_stack_maxmin(stack_a);
+	assign_stack_unsorted(stack_a);
+	stack_a->sorted = check_stack_asc_sorted(stack_a);
 	return (stack_a);
 }
 

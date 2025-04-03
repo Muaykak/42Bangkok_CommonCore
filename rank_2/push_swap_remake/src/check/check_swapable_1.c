@@ -15,7 +15,7 @@
 /* check if the target can be sort using the swap opeartion*/
 int	check_swapable(t_ps_node *target)
 {
-	if (target != NULL || target->stack->size <= 1)
+	if (target == NULL || target->stack->size <= 1)
 		return (0);
 	if (target->next == target->st_prev)
 		return (1);

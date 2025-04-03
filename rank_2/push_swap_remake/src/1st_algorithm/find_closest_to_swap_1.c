@@ -12,21 +12,21 @@
 
 #include "push_swap.h"
 
-t_ps_node	*find_closest_to_swap_a(t_ps_stack *stack_a)
+t_ps_node	*find_closest_to_swap(t_ps_stack *stack)
 {
 	t_ps_node	*temptop;
 	t_ps_node	*tempbot;
 
-	if (stack_a == NULL || stack_a->size == 0
-		|| check_stack_asc_sorted(stack_a) == 1)
+	if (stack == NULL || stack->size <= 2
+		|| stack->sorted == TRUE)
 		return (NULL);
-	temptop = stack_a->top;
-	tempbot = stack_a->bot;
+	temptop = stack->top;
+	tempbot = stack->bot;
 	while (1)
 	{
-		if (temptop->st_prev == temptop->next)
+		if (temptop->swap_top == TRUE)
 			return (temptop);
-		if (tempbot->next == tempbot->st_prev)
+		if (tempbot->swap_top == TRUE)
 			return (tempbot);
 		temptop = temptop->next;
 		if (temptop == tempbot)

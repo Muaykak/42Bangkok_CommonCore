@@ -54,6 +54,8 @@ static	void	op_pb_sub2(t_ps_stack *stack_a)
 		stack_a->top = stack_a->top->next;
 		stack_a->top->prev = stack_a->bot;
 		stack_a->bot->next = stack_a->top;
+		assign_node_unsorted(stack_a->top);
+		assign_node_unsorted(stack_a->bot);
 		stack_a->size--;
 	}
 }
@@ -73,6 +75,12 @@ static void	op_pb_sub3(t_ps_node *temp, t_ps_stack *stack_b)
 		temp->st_prev = temp->st_next->st_prev;
 		temp->st_next->st_prev->st_next = temp;
 		temp->st_next->st_prev = temp;
+		assign_node_unsorted(stack_b->top);
+		assign_node_unsorted(stack_b->top->next);
+		assign_node_unsorted(stack_b->bot);
+		assign_node_unsorted(stack_b->top->st_next);
+		assign_node_unsorted(stack_b->top->st_prev);
+		stack_b->sorted = check_stack_desc_sorted(stack_b);
 }
 
 static void	op_pb_sub1(t_ps_node *temp, t_ps_stack *stack_b)

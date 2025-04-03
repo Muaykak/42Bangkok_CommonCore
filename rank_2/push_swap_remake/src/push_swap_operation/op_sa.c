@@ -33,6 +33,11 @@ void	op_sa_sub1(t_ps_stack *stack_a)
 	temp->prev = stack_a->top;
 	stack_a->top = second;
 	stack_a->bot->next = second;
+	assign_node_unsorted(stack_a->top);
+	assign_node_unsorted(stack_a->top->next);
+	assign_node_unsorted(stack_a->top->next->next);
+	assign_node_unsorted(stack_a->bot);
+	stack_a->sorted = check_stack_asc_sorted(stack_a);
 	return ;
 }
 

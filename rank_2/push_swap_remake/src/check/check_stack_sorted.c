@@ -20,24 +20,18 @@ int	check_stack_asc_sorted(t_ps_stack *stack)
 {
 	t_ps_node	*runner;
 
-	if (stack == NULL || stack->top == NULL)
+	if (stack == NULL)
 		return (0);
+	if (stack->size <= 2)
+		return (1);
 	runner = stack->top;
 	while (runner->next != stack->top)
 	{
-		if (runner->sort_pos == stack->all_num_size
-			&& runner->next->sort_pos != 1)
-			return (0);
-		else if (runner->sort_pos != stack->all_num_size
-			&& runner->sort_pos > runner->next->sort_pos)
+		if (runner->st_next != runner->next)
 			return (0);
 		runner = runner->next;
 	}
-	if (runner->sort_pos == stack->all_num_size
-		&& runner->next->sort_pos != 1)
-		return (0);
-	else if (runner->sort_pos > runner->next->sort_pos
-		&& runner->sort_pos != runner->stack->all_num_size)
+	if (runner->st_next != runner->next)
 		return (0);
 	return (1);
 }
@@ -49,20 +43,16 @@ int	check_stack_desc_sorted(t_ps_stack *stack)
 
 	if (stack == NULL)
 		return (0);
+	if (stack->size <= 2)
+		return (1);
 	runner = stack->top;
 	while (runner->next != stack->top)
 	{
-		if (runner->sort_pos == 1
-			&& runner->next->sort_pos != stack->all_num_size)
-			return (0);
-		else if (runner->sort_pos < runner->next->sort_pos)
+		if (runner->st_prev != runner->next)
 			return (0);
 		runner = runner->next;
 	}
-	if (runner->sort_pos == 1
-		&& runner->next->sort_pos != stack->all_num_size)
-		return (0);
-	else if (runner->sort_pos < runner->next->sort_pos)
+	if (runner->st_prev != runner->next)
 		return (0);
 	return (1);
 }

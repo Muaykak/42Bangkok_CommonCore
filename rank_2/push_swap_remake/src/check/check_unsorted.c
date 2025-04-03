@@ -18,8 +18,7 @@ int	check_unsorted(t_ps_node *target)
 {
 	if (target == NULL || target->stack->size < 3)
 		return (0);
-	if (target->st_next == target->next
-		|| target->st_prev == target->prev)
+	if (target->unorder == FALSE)
 		return (0);
 	return (1);
 }
