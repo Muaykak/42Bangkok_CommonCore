@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	numsets = get_numsets(argc, argv);
 	if (numsets == NULL)
 	{
-		write(1 ,"Error\n", 6);
+		write(2 ,"Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 	stack_a = create_stack_a(numsets);
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 			ps_node_clearall(&(stack_a->top));
 		if (stack_b)
 			ps_node_clearall(&(stack_b->top));
-		write(1 ,"Error\n", 6);
+		write(2 ,"Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 	first_algor(stack_a);

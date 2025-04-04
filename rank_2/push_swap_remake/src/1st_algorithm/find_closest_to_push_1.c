@@ -97,7 +97,7 @@ t_ps_node	*find_closest_to_push_a(t_ps_stack *stack_b)
 	t_ps_node	*top;
 
 
-	if (stack_b == NULL || stack_b->size <= 0)
+	if (stack_b == NULL || stack_b->size <= 0 || stack_b->link->sorted != TRUE)
 		return (NULL);
 	if (stack_b->link->size == 0)
 		return (stack_b->top);

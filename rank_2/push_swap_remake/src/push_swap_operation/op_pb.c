@@ -56,6 +56,7 @@ static	void	op_pb_sub2(t_ps_stack *stack_a)
 		stack_a->bot->next = stack_a->top;
 		assign_node_unsorted(stack_a->top);
 		assign_node_unsorted(stack_a->bot);
+		stack_a->sorted = check_stack_asc_sorted(stack_a);
 		stack_a->size--;
 	}
 }
