@@ -51,6 +51,8 @@ PRE_SORT_SRC_FILE		=	create_pre_sort_stack_1.c \
 								find_closest_to_swap_1.c \
 								find_closest_to_push_1.c \
 								find_closest_unsorted_1.c \
+								find_closest_to_push_2.c \
+								range_to_push_1.c \
 
 SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \
@@ -60,7 +62,6 @@ SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${PUSH_SWAP_OP_SRC_DIR}, ${PUSH_SWAP_OP_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${PRE_SORT_SRC_DIR}, ${PRE_SORT_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${1ST_ALGOR_SRC_DIR}, ${1ST_ALGOR_SRC_FILE}} \
-
 
 OBJ			= 	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
 
@@ -94,7 +95,7 @@ LIBFT	= ${LFT_DIR}libft.a
 
 #name
 
-NAME	= push_swap
+NAME	= Push-Swap-Tester/push_swap
 
 CC		= cc
 

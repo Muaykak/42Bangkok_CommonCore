@@ -82,15 +82,15 @@ t_ps_node	*find_closest_to_push_b(t_ps_stack *stack);
 t_ps_node	*find_closest_unsorted(t_ps_stack *stack);
 t_ps_node	*find_target_in_a(t_ps_node *target_b);
 t_ps_node	*find_closest_to_push_a(t_ps_stack *stack_b);
-void		(*stack_a_decider(t_ps_stack *stack_a))(t_ps_stack *,
-				t_ps_stack *);
-void		(*stack_b_decider(t_ps_stack *stack_b))(t_ps_stack *,
-				t_ps_stack *);
+t_ps_node	*find_to_top_b(t_ps_node *target_a);
+int			range_to_push_b(t_ps_stack *stack_a);
+int			range_to_push_a(t_ps_stack *stack_b);
 
 /**************************************************************/
 /*                      PUSH_SWAP OPERATION                   */
 
 void	easy_rotate(t_ps_node *target);
+void	easy_both_rotate(t_ps_node *target_a, t_ps_node *target_b);
 
 void	op_sa(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void	op_sb(t_ps_stack *stack_a, t_ps_stack *stack_b);
@@ -105,6 +105,8 @@ void	op_rrb(t_ps_stack *stack_a, t_ps_stack *stack_b);
 void	op_rrr(t_ps_stack *stack_a, t_ps_stack *stack_b);
 
 void	(*rotate_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *);
+void	(*both_rotate_decider(t_ps_node *target_a, t_ps_node *target_b))(
+			t_ps_stack *, t_ps_stack *);
 
 int		dist_cal(t_ps_node *start, t_ps_node *end);
 int		dist_cal_rotate(t_ps_node *start, t_ps_node *end);

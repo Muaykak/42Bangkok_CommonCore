@@ -65,10 +65,19 @@ static int	dist_cal_same_stack(t_ps_node *start, t_ps_node *end)
 
 static int	dist_cal_diff_stack(t_ps_node *start, t_ps_node *end)
 {
-	int	dist;
-	int	dist1;
+	int	dist_rotate;
+	int	dist_reverse;
+	int	temp;
 
-	dist = dist_cal_same_stack(start, start->stack->top);
-	dist1 = dist_cal_same_stack(end, end->stack->top);
-	return (dist + dist1);
+	dist_rotate = dist_cal_rotate(start, start->stack->top);
+	temp = dist_cal_rotate(end, end->stack->top);
+	if (temp > dist_rotate)
+		dist_rotate = temp;
+	dist_reverse = dist_cal_reverse(start, start->stack->top);
+	temp = dist_cal_reverse(end, end->stack->top);
+	if (temp > dist_reverse)
+		dist_reverse = temp;
+	if (dist_reverse < dist_rotate)
+		return (dist_reverse);
+	return (dist_rotate);
 }

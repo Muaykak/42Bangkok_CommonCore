@@ -12,6 +12,27 @@
 
 #include "push_swap.h"
 
+void	easy_both_rotate(t_ps_node *target_a, t_ps_node *target_b)
+{
+	void	(*op_all)(t_ps_stack *, t_ps_stack *);
+
+	if (target_a == NULL || target_b == NULL)
+		return ;
+	op_all = both_rotate_decider(target_a, target_b);
+	if (op_all == NULL)
+		return ;
+	if (op_all == &op_rr || op_all == &op_rrr)
+	{
+		while (target_a != target_a->stack->top
+			&& target_b != target_b->stack->top)
+				op_all(target_a->stack, target_b->stack);
+	}
+	while (target_a != target_a->stack->top)
+		(rotate_decider(target_a))(target_a->stack, target_b->stack);
+	while (target_b != target_b->stack->top)
+		(rotate_decider(target_b))(target_a->stack, target_b->stack);
+}
+
 /* decide to rotate or reverse the target to the top stack */
 void	easy_rotate(t_ps_node *target)
 {

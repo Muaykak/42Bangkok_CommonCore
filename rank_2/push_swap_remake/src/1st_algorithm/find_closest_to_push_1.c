@@ -24,9 +24,11 @@ t_ps_node	*find_closest_to_push_b(t_ps_stack *stack)
 	bot = stack->bot;
 	while (1)
 	{
-		if (top->unorder == TRUE && top->swap_able == FALSE)
+		if (top->unorder == TRUE
+			&& top->swap_able == FALSE)
 			return (top);
-		if (bot->unorder == TRUE && bot->swap_able == FALSE)
+		if (bot->unorder == TRUE
+			&& bot->swap_able == FALSE)
 			return (bot);
 		top = top->next;
 		if (top == bot)

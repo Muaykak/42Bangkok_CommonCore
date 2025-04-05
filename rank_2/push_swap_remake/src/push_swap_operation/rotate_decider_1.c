@@ -47,3 +47,30 @@ void	(*rotate_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *)
 	else
 		return (rotate_b_decider(target));
 }
+
+void	(*both_rotate_decider(t_ps_node *target_a, t_ps_node *target_b))(
+			t_ps_stack *, t_ps_stack *)
+{
+	int	rotate_dist;
+	int	reverse_dist;
+	int	temp;
+
+	if ((target_a == NULL && target_b == NULL)
+		|| (target_a->stack->size < 2 && target_b->stack->size < 2))
+		return (NULL);
+	if (target_a == target_a->stack->top && target_b != NULL)
+		return (rotate_decider(target_b));
+	if (target_a != NULL && target_b == target_b->stack->top)
+		return (rotate_decider(target_a));
+	rotate_dist = dist_cal_rotate(target_a, target_a->stack->top);
+	temp = dist_cal_rotate(target_b, target_b->stack->top);
+	if (temp > rotate_dist)
+		rotate_dist = temp;
+	reverse_dist = dist_cal_reverse(target_a, target_a->stack->top);
+	temp = dist_cal_reverse(target_b, target_b->stack->top);
+	if (temp > reverse_dist)
+		reverse_dist = temp;
+	if (reverse_dist < rotate_dist)
+		return (&op_rrr);
+	return (&op_rr);
+}
