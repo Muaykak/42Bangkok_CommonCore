@@ -12,11 +12,11 @@
 
 #include "push_swap.h"
 
-void	push_b_all(t_ps_stack *stack_a, t_ps_stack *stack_b);
+void		push_b_all(t_ps_stack *stack_a, t_ps_stack *stack_b);
 
 static void	push_b_all_medium(t_ps_stack *stack_a, t_ps_stack *stack_b);
 static void	push_b_all_small_size(t_ps_stack *stack_a, t_ps_stack *stack_b);
-void	push_b_all_large_size(t_ps_stack *stack_a, t_ps_stack *stack_b);
+void		push_b_all_large_size(t_ps_stack *stack_a, t_ps_stack *stack_b);
 
 void	push_b_all(t_ps_stack *stack_a, t_ps_stack *stack_b)
 {
@@ -24,7 +24,7 @@ void	push_b_all(t_ps_stack *stack_a, t_ps_stack *stack_b)
 		return ;
 	if (stack_a->all_num_size < 100)
 		push_b_all_small_size(stack_a, stack_b);
-	else if (stack_a->all_num_size >= 100 && stack_a->all_num_size < 500)
+	else if (stack_a->all_num_size >= 100 && stack_a->all_num_size < 150)
 		push_b_all_medium(stack_a, stack_b);
 	else
 		push_b_all_large_size(stack_a, stack_b);
@@ -43,22 +43,22 @@ static void	push_b_all_medium(t_ps_stack *stack_a, t_ps_stack *stack_b)
 	op_sa(stack_a, stack_b);
 }
 
-static void push_b_all_large_size_sub1(t_ps_stack *stack_a,t_ps_stack *stack_b)
+static void	push_b_all_large_size_sub1(t_ps_stack *stack_a, t_ps_stack *stack_b)
 {
 	t_ps_node	*swap;
+
 	swap = find_closest_to_swap(stack_a);
 	if (swap == NULL)
 		return ;
 	easy_rotate(swap);
 	op_sa(stack_a, stack_b);
-
 }
 
 void	push_b_all_large_size(t_ps_stack *stack_a, t_ps_stack *stack_b)
 {
 	t_ps_node	*target_a;
-	void		(*op_a)(t_ps_stack *, t_ps_stack *);
-	void		(*op_b)(t_ps_stack *, t_ps_stack *);
+	t_op_funct	op_a;
+	t_op_funct	op_b;
 
 	target_a = find_to_push_b_inrange(stack_a);
 	while (target_a != NULL)
@@ -72,10 +72,10 @@ void	push_b_all_large_size(t_ps_stack *stack_a, t_ps_stack *stack_b)
 		if (op_a != NULL)
 			op_a(stack_a, stack_b);
 		else
-			{
-				op_pb(stack_a, stack_b);
-				target_a = find_to_push_b_inrange(stack_a);
-			}
+		{
+			op_pb(stack_a, stack_b);
+			target_a = find_to_push_b_inrange(stack_a);
+		}
 	}
 	push_b_all_large_size_sub1(stack_a, stack_b);
 }

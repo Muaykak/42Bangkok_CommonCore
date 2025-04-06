@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"	
+#include "push_swap.h"
 
 int	main(int argc, char **argv)
 {
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	numsets = get_numsets(argc, argv);
 	if (numsets == NULL)
 	{
-		write(2 ,"Error\n", 6);
+		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 	stack_a = create_stack_a(numsets);
@@ -32,14 +32,10 @@ int	main(int argc, char **argv)
 			ps_node_clearall(&(stack_a->top));
 		if (stack_b)
 			ps_node_clearall(&(stack_b->top));
-		write(2 ,"Error\n", 6);
+		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 	first_algor(stack_a);
-//	if (check_stack_asc_sorted(stack_a) == 1)
-//		ft_printf("the stack is sorted!\n");
-//	else
-//		ft_printf("the stack is unsorted!\n");
 	ps_node_clearall(&(stack_a->min));
 	return (0);
 }

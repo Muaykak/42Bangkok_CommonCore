@@ -17,8 +17,7 @@ t_ps_node	*find_closest_to_swap(t_ps_stack *stack)
 	t_ps_node	*temptop;
 	t_ps_node	*tempbot;
 
-	if (stack == NULL || stack->size <= 2
-		|| stack->sorted == TRUE)
+	if (stack == NULL || stack->size <= 2 || stack->sorted == TRUE)
 		return (NULL);
 	temptop = stack->top;
 	tempbot = stack->bot;

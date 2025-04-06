@@ -14,7 +14,7 @@
 
 void	free_numsets(char ***numsets)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (numsets == NULL)

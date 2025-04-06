@@ -14,9 +14,9 @@
 
 static t_list	*pivot_partition(t_list *pre_top, t_list *pre_bot)
 {
-	t_list	*pivot;
-	t_list	*pre;
-	t_list	*curr;
+	t_list		*pivot;
+	t_list		*pre;
+	t_list		*curr;
 	t_ps_node	*temp;
 
 	pivot = pre_top;

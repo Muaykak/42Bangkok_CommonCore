@@ -14,7 +14,7 @@
 
 static char	**get_numset(char *str);
 
-/*		use ft_split() to split the given argument into char** 
+/*		use ft_split() to split the given argument into char**
 		return NULL if wrong format, out of range integer, or something error
 */
 char	***get_numsets(int argc, char **argv)
@@ -43,8 +43,8 @@ char	***get_numsets(int argc, char **argv)
 
 /* sub-fuction of get_numset()
 		This function split the string into an array of strings
-			using ft_split()  also check if that number in string 
-			format is in the integer range or not 
+			using ft_split()  also check if that number in string
+			format is in the integer range or not
 		if False return NULL */
 static char	**get_numset(char *str)
 {

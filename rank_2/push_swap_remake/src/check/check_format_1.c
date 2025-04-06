@@ -18,8 +18,8 @@ static int	check_format_sub1(char *argv, int j);
 /*sub function of check_format*/
 static int	check_format_sub1(char *argv, int j)
 {
-	if ((argv[j] < '0' || argv[j] > '9' ) && argv[j] != '-' \
-	&& argv[j] != '+' && argv[j] != ' ')
+	if ((argv[j] < '0' || argv[j] > '9') && argv[j] != '-' && argv[j] != '+'
+		&& argv[j] != ' ')
 		return (0);
 	if (argv[j] == '+' || argv[j] == '-')
 	{

@@ -18,7 +18,7 @@ void	op_rra_sub1(t_ps_stack *stack_a)
 
 	temp = stack_a->bot;
 	stack_a->bot = stack_a->bot->prev;
-	stack_a->top =temp;
+	stack_a->top = temp;
 }
 
 void	op_rra(t_ps_stack *stack_a, t_ps_stack *stack_b)

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-/*	check if the target in the stack is already sort 
+/*	check if the target in the stack is already sort
 	and no need to push to swap*/
 int	check_unsorted(t_ps_node *target)
 {

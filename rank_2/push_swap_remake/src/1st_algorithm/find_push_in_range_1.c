@@ -12,11 +12,9 @@
 
 #include "push_swap.h"
 
-void	(*decide_b_in_range(t_ps_stack *stack_a, t_ps_stack *stack_b))(
-			t_ps_stack *, t_ps_stack *);
+t_op_funct	decide_b_in_range(t_ps_stack *stack_a, t_ps_stack *stack_b);
 
-void	(*decide_b_in_range(t_ps_stack *stack_a, t_ps_stack *stack_b))(
-			t_ps_stack *, t_ps_stack *)
+t_op_funct	decide_b_in_range(t_ps_stack *stack_a, t_ps_stack *stack_b)
 {
 	int	range;
 
@@ -30,7 +28,7 @@ void	(*decide_b_in_range(t_ps_stack *stack_a, t_ps_stack *stack_b))(
 
 t_ps_node	*find_to_push_b_inrange(t_ps_stack *stack_a)
 {
-	int 		range;
+	int			range;
 	t_ps_node	*top;
 	t_ps_node	*bot;
 

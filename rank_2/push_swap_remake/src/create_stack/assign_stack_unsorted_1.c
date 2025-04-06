@@ -17,7 +17,7 @@ void	assign_node_unsorted_b(t_ps_node *node)
 	if (node == NULL)
 		return ;
 	if (node->stack->size <= 2 || (node->prev == node->st_next
-		&& (node->next == node->st_prev)))
+			&& (node->next == node->st_prev)))
 		node->unorder = FALSE;
 	else
 		node->unorder = TRUE;
@@ -36,7 +36,7 @@ void	assign_node_unsorted_a(t_ps_node *node)
 	if (node == NULL)
 		return ;
 	if (node->stack->size <= 2 || ((node->next == node->st_next)
-		&& (node->prev == node->st_prev)))
+			&& (node->prev == node->st_prev)))
 		node->unorder = FALSE;
 	else
 		node->unorder = TRUE;

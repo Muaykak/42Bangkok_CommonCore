@@ -12,8 +12,8 @@
 
 #include "push_swap.h"
 
-static void		op_pb_sub2(t_ps_stack *stack_a);
-static void		op_pb_sub1(t_ps_node *temp, t_ps_stack *stack_b);
+static void	op_pb_sub2(t_ps_stack *stack_a);
+static void	op_pb_sub1(t_ps_node *temp, t_ps_stack *stack_b);
 
 /* Push from stack a to stack b */
 void	op_pb(t_ps_stack *stack_a, t_ps_stack *stack_b)
@@ -33,7 +33,7 @@ void	op_pb(t_ps_stack *stack_a, t_ps_stack *stack_b)
 	return ;
 }
 
-static	void	op_pb_sub2(t_ps_stack *stack_a)
+static void	op_pb_sub2(t_ps_stack *stack_a)
 {
 	if (stack_a->size <= 1)
 	{
@@ -63,25 +63,25 @@ static	void	op_pb_sub2(t_ps_stack *stack_a)
 
 static void	op_pb_sub3(t_ps_node *temp, t_ps_stack *stack_b)
 {
-		temp->next = stack_b->top;
-		temp->prev = stack_b->bot;
-		stack_b->top->prev = temp;
-		stack_b->bot->next = temp;
-		stack_b->top = temp;
-		if (stack_b->top->number > stack_b->stack_max->number)
-			stack_b->stack_max = stack_b->top;
-		else if (stack_b->top->number < stack_b->stack_min->number)
-			stack_b->stack_min = stack_b->top;
-		temp->st_next = find_higher_node(temp);
-		temp->st_prev = temp->st_next->st_prev;
-		temp->st_next->st_prev->st_next = temp;
-		temp->st_next->st_prev = temp;
-		assign_node_unsorted(stack_b->top);
-		assign_node_unsorted(stack_b->top->next);
-		assign_node_unsorted(stack_b->bot);
-		assign_node_unsorted(stack_b->top->st_next);
-		assign_node_unsorted(stack_b->top->st_prev);
-		stack_b->sorted = check_stack_desc_sorted(stack_b);
+	temp->next = stack_b->top;
+	temp->prev = stack_b->bot;
+	stack_b->top->prev = temp;
+	stack_b->bot->next = temp;
+	stack_b->top = temp;
+	if (stack_b->top->number > stack_b->stack_max->number)
+		stack_b->stack_max = stack_b->top;
+	else if (stack_b->top->number < stack_b->stack_min->number)
+		stack_b->stack_min = stack_b->top;
+	temp->st_next = find_higher_node(temp);
+	temp->st_prev = temp->st_next->st_prev;
+	temp->st_next->st_prev->st_next = temp;
+	temp->st_next->st_prev = temp;
+	assign_node_unsorted(stack_b->top);
+	assign_node_unsorted(stack_b->top->next);
+	assign_node_unsorted(stack_b->bot);
+	assign_node_unsorted(stack_b->top->st_next);
+	assign_node_unsorted(stack_b->top->st_prev);
+	stack_b->sorted = check_stack_desc_sorted(stack_b);
 }
 
 static void	op_pb_sub1(t_ps_node *temp, t_ps_stack *stack_b)

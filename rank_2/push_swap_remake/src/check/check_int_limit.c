@@ -27,9 +27,8 @@ int	check_int_limit(char *num_set)
 	flag = 0;
 	while (num_set[i[0]] != 0)
 	{
-		if (num_set[i[0]] != '0'
-		&& num_set[i[0]] != '-'
-		&& num_set[i[0]] != '+')
+		if (num_set[i[0]] != '0' && num_set[i[0]] != '-'
+			&& num_set[i[0]] != '+')
 			flag = 1;
 		if (flag == 1)
 			i[1]++;

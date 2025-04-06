@@ -12,18 +12,18 @@
 
 #include "push_swap.h"
 
-static void	fill_pre_sort_sub1(t_list *temp, t_list *pre_sort,
-				int pos, t_ps_stack *stack_a);
+static void	fill_pre_sort_sub1(t_list *temp, t_list *pre_sort, int pos,
+				t_ps_stack *stack_a);
 
 /* Fill the pre-sorted number list to the stack_a list
 
 	also free the pre_sort after usage*/
 int	fill_pre_sort(t_list *pre_sort, t_ps_stack *stack_a)
 {
-	t_list			*temp;
-	t_ps_node		*curr;
-	t_ps_node		*next;
-	int				pos;
+	t_list		*temp;
+	t_ps_node	*curr;
+	t_ps_node	*next;
+	int			pos;
 
 	if (stack_a == NULL || pre_sort == NULL)
 		return (0);
@@ -44,8 +44,8 @@ int	fill_pre_sort(t_list *pre_sort, t_ps_stack *stack_a)
 	return (1);
 }
 
-static void	fill_pre_sort_sub1(t_list *temp, t_list *pre_sort,
-				int pos, t_ps_stack *stack_a)
+static void	fill_pre_sort_sub1(t_list *temp, t_list *pre_sort, int pos,
+		t_ps_stack *stack_a)
 {
 	t_ps_node	*curr;
 	t_ps_node	*next;

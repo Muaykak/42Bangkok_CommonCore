@@ -12,17 +12,17 @@
 
 #include "push_swap.h"
 
-void op_rb_sub1(t_ps_stack *stack_b)
+void	op_rb_sub1(t_ps_stack *stack_b)
 {
 	t_ps_node	*temp;
-	
+
 	temp = stack_b->top;
 	stack_b->top = stack_b->top->next;
 	stack_b->bot = temp;
 	return ;
 }
 
-void op_rb(t_ps_stack *stack_a, t_ps_stack *stack_b)
+void	op_rb(t_ps_stack *stack_a, t_ps_stack *stack_b)
 {
 	if (stack_a == NULL || stack_b == NULL || stack_b->size < 2)
 		return ;

@@ -18,7 +18,7 @@ void	op_rrb_sub1(t_ps_stack *stack_b)
 
 	temp = stack_b->bot;
 	stack_b->bot = stack_b->bot->prev;
-	stack_b->top =temp;
+	stack_b->top = temp;
 }
 
 void	op_rrb(t_ps_stack *stack_a, t_ps_stack *stack_b)

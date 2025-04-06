@@ -14,8 +14,8 @@
 
 void	op_rrr(t_ps_stack *stack_a, t_ps_stack *stack_b)
 {
-	if (stack_a == NULL || stack_b == NULL
-		|| stack_a->size < 2 || stack_b->size < 2)
+	if (stack_a == NULL || stack_b == NULL || stack_a->size < 2
+		|| stack_b->size < 2)
 		return ;
 	op_rra_sub1(stack_a);
 	op_rrb_sub1(stack_b);

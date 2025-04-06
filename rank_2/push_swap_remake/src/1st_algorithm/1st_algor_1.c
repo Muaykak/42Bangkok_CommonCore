@@ -26,4 +26,3 @@ void	first_algor(t_ps_stack *stack_a)
 	easy_rotate(stack_a->min);
 	return ;
 }
-

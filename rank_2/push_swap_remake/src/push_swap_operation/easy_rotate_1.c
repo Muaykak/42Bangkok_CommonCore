@@ -25,7 +25,7 @@ void	easy_both_rotate(t_ps_node *target_a, t_ps_node *target_b)
 	{
 		while (target_a != target_a->stack->top
 			&& target_b != target_b->stack->top)
-				op_all(target_a->stack, target_b->stack);
+			op_all(target_a->stack, target_b->stack);
 	}
 	while (target_a != target_a->stack->top)
 		(rotate_decider(target_a))(target_a->stack, target_b->stack);
@@ -38,8 +38,8 @@ void	easy_rotate(t_ps_node *target)
 {
 	if (target == NULL || target == target->stack->top)
 		return ;
-	if (dist_cal_reverse(target, target->stack->top)
-		< dist_cal_rotate(target, target->stack->top))
+	if (dist_cal_reverse(target, target->stack->top) < dist_cal_rotate(target,
+			target->stack->top))
 	{
 		if (target->stack->stack == A)
 			while (target != target->stack->top)

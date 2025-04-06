@@ -15,7 +15,7 @@
 void	op_ra_sub1(t_ps_stack *stack_a)
 {
 	t_ps_node	*temp;
-	
+
 	temp = stack_a->top;
 	stack_a->top = stack_a->top->next;
 	stack_a->bot = temp;

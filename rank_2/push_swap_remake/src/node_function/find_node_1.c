@@ -17,7 +17,7 @@ static t_ps_node	*find_node_sort_pos_sub1(t_ps_node *temp, int sort_pos)
 	if (temp->sort_pos < sort_pos)
 	{
 		if (abs(temp->sort_pos - sort_pos) < abs(temp->stack->all_num_size
-			- temp->sort_pos) + sort_pos)
+				- temp->sort_pos) + sort_pos)
 			while (temp->sort_pos != sort_pos)
 				temp = temp->target_next;
 		else
@@ -27,7 +27,7 @@ static t_ps_node	*find_node_sort_pos_sub1(t_ps_node *temp, int sort_pos)
 	else
 	{
 		if (abs(temp->sort_pos - sort_pos) < abs(temp->stack->all_num_size
-			- temp->sort_pos) + sort_pos)
+				- temp->sort_pos) + sort_pos)
 			while (temp->sort_pos != sort_pos)
 				temp = temp->target_prev;
 		else
@@ -40,7 +40,8 @@ static t_ps_node	*find_node_sort_pos_sub1(t_ps_node *temp, int sort_pos)
 t_ps_node	*find_node_sort_pos(t_ps_node *node_list, int sort_pos)
 {
 	t_ps_node	*temp;
-	if (node_list == NULL || sort_pos < 1 
+
+	if (node_list == NULL || sort_pos < 1
 		|| sort_pos > node_list->stack->all_num_size)
 		return (NULL);
 	temp = node_list;

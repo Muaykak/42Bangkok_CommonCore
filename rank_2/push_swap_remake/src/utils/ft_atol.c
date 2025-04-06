@@ -23,8 +23,8 @@ long	ft_atol(const char *nptr)
 	i = 0;
 	num = 0;
 	c = 0;
-	while ((*(nptr + i) < '0' || *(nptr + i) > '9') \
-	&& ft_isspace(*(nptr + i)) != 0 && *(nptr + i) != '\0')
+	while ((*(nptr + i) < '0' || *(nptr + i) > '9') && ft_isspace(*(nptr
+				+ i)) != 0 && *(nptr + i) != '\0')
 		i++;
 	if (*(nptr + i) == '+' || *(nptr + i) == '-')
 	{

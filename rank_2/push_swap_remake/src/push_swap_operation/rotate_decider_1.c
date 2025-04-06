@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	(*rotate_a_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *)
+static t_op_funct	rotate_a_decider(t_ps_node *target)
 {
 	int	rotate_dist;
 	int	reverse_dist;
@@ -25,7 +25,7 @@ static void	(*rotate_a_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *)
 		return (&op_ra);
 }
 
-static void	(*rotate_b_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *)
+static t_op_funct	rotate_b_decider(t_ps_node *target)
 {
 	int	rotate_dist;
 	int	reverse_dist;
@@ -38,7 +38,7 @@ static void	(*rotate_b_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *)
 		return (&op_rb);
 }
 
-void	(*rotate_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *)
+t_op_funct	rotate_decider(t_ps_node *target)
 {
 	if (target == NULL || target->stack->top == target)
 		return (NULL);
@@ -48,15 +48,14 @@ void	(*rotate_decider(t_ps_node *target))(t_ps_stack *, t_ps_stack *)
 		return (rotate_b_decider(target));
 }
 
-void	(*both_rotate_decider(t_ps_node *target_a, t_ps_node *target_b))(
-			t_ps_stack *, t_ps_stack *)
+t_op_funct	both_rotate_decider(t_ps_node *target_a, t_ps_node *target_b)
 {
 	int	rotate_dist;
 	int	reverse_dist;
 	int	temp;
 
-	if ((target_a == NULL && target_b == NULL)
-		|| (target_a->stack->size < 2 && target_b->stack->size < 2))
+	if ((target_a == NULL && target_b == NULL) || (target_a->stack->size < 2
+			&& target_b->stack->size < 2))
 		return (NULL);
 	if (target_a == target_a->stack->top && target_b != NULL)
 		return (rotate_decider(target_b));

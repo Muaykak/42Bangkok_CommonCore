@@ -14,25 +14,25 @@
 
 static void	op_pa_sub3(t_ps_node *temp, t_ps_stack *stack_a)
 {
-		temp->next = stack_a->top;
-		temp->prev = stack_a->bot;
-		stack_a->top->prev = temp;
-		stack_a->bot->next = temp;
-		stack_a->top = temp;
-		if (stack_a->top->number > stack_a->stack_max->number)
-			stack_a->stack_max = stack_a->top;
-		else if (stack_a->top->number < stack_a->stack_min->number)
-			stack_a->stack_min = stack_a->top;
-		temp->st_next = find_higher_node(temp);
-		temp->st_prev = temp->st_next->st_prev;
-		temp->st_next->st_prev->st_next = temp;
-		temp->st_next->st_prev = temp;
-		assign_node_unsorted(stack_a->top);
-		assign_node_unsorted(stack_a->top->next);
-		assign_node_unsorted(stack_a->bot);
-		assign_node_unsorted(stack_a->top->st_next);
-		assign_node_unsorted(stack_a->top->st_prev);
-		stack_a->sorted = check_stack_asc_sorted(stack_a);
+	temp->next = stack_a->top;
+	temp->prev = stack_a->bot;
+	stack_a->top->prev = temp;
+	stack_a->bot->next = temp;
+	stack_a->top = temp;
+	if (stack_a->top->number > stack_a->stack_max->number)
+		stack_a->stack_max = stack_a->top;
+	else if (stack_a->top->number < stack_a->stack_min->number)
+		stack_a->stack_min = stack_a->top;
+	temp->st_next = find_higher_node(temp);
+	temp->st_prev = temp->st_next->st_prev;
+	temp->st_next->st_prev->st_next = temp;
+	temp->st_next->st_prev = temp;
+	assign_node_unsorted(stack_a->top);
+	assign_node_unsorted(stack_a->top->next);
+	assign_node_unsorted(stack_a->bot);
+	assign_node_unsorted(stack_a->top->st_next);
+	assign_node_unsorted(stack_a->top->st_prev);
+	stack_a->sorted = check_stack_asc_sorted(stack_a);
 }
 
 static void	op_pa_sub1(t_ps_node *temp, t_ps_stack *stack_a)
