@@ -24,9 +24,9 @@ t_ps_node	*find_closest_to_swap(t_ps_stack *stack)
 	tempbot = stack->bot;
 	while (1)
 	{
-		if (temptop->swap_top == TRUE)
+		if (temptop->swap_top == TRUE && temptop->unorder == TRUE)
 			return (temptop);
-		if (tempbot->swap_top == TRUE)
+		if (tempbot->swap_top == TRUE && tempbot->unorder == TRUE)
 			return (tempbot);
 		temptop = temptop->next;
 		if (temptop == tempbot)

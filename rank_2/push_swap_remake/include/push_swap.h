@@ -20,7 +20,7 @@
 # endif
 
 # ifndef CHUNK_SEP
-#  define CHUNK_SEP 4
+#  define CHUNK_SEP 6
 # endif
 
 struct	s_ps_stack;
@@ -85,6 +85,12 @@ t_ps_node	*find_closest_to_push_a(t_ps_stack *stack_b);
 t_ps_node	*find_to_top_b(t_ps_node *target_a);
 int			range_to_push_b(t_ps_stack *stack_a);
 int			range_to_push_a(t_ps_stack *stack_b);
+void		push_b_all(t_ps_stack *stack_a, t_ps_stack *stack_b);
+void		push_a_all(t_ps_stack *stack_a, t_ps_stack *stack_b);
+t_ps_node	*find_to_push_b_inrange(t_ps_stack *stack_a);
+void		(*decide_b_in_range(t_ps_stack *stack_a, t_ps_stack *stack_b))(
+			t_ps_stack *, t_ps_stack *);
+t_ps_node	*find_closest_to_push_a_inrange(t_ps_stack *stack_b);
 
 /**************************************************************/
 /*                      PUSH_SWAP OPERATION                   */

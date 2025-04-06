@@ -53,6 +53,9 @@ PRE_SORT_SRC_FILE		=	create_pre_sort_stack_1.c \
 								find_closest_unsorted_1.c \
 								find_closest_to_push_2.c \
 								range_to_push_1.c \
+								push_b_all_1.c \
+								push_a_all_1.c \
+								find_push_in_range_1.c \
 
 SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 			${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \
