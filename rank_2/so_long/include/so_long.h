@@ -45,7 +45,7 @@
 
 # define SOLONG_MAX_WIN_RATIO 0.8
 # define SOLONG_GRID_SIZE_RATIO 0.1
-# define SOLONG_MIN_GRID_SIZE 128
+# define SOLONG_MIN_GRID_SIZE 16
 
 # ifndef SOLONG_MAX_MAP_SIZE
 #  define SOLONG_MAX_MAP_SIZE 100
@@ -99,6 +99,7 @@ typedef struct s_map_data
 {
 	int						x;
 	int						y;
+	enum e_object_status	path_check;
 	enum e_object_type		type;
 	enum e_object_status	status;
 	struct					s_img_coordinate
@@ -239,8 +240,11 @@ int							map_wall_check(t_map_info **map_info);
 int							map_check_path(t_map_info **map_info);
 void						map_check_path_sub1(t_map_info *map_info,
 								int path_x, int path_y);
-int							map_check_path_data(t_list **path_data, int path_x,
-								int path_y);
+//int							map_check_path_data(t_list **path_data, int path_x,
+//								int path_y);
+int							map_check_path_data(t_map_data **map_data,
+								int path_x, int path_y);
+void						reset_check_path(t_map_info *map_info);
 
 /* *********************************************** */
 
@@ -269,5 +273,6 @@ t_list						*find_from_object_lst(t_list *object_list,
 								enum e_object_type type);
 t_img_data					*find_from_img_list(t_list *img_list,
 								enum e_object_type type);
+ssize_t						ft_strerr(char *str);
 
 #endif

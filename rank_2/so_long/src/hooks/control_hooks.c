@@ -21,12 +21,13 @@ void	check_complete(t_so_long **so_long)
 		return ;
 	exit_object = (*so_long)->map_info->exit;
 	player = (*so_long)->map_info->player;
-	if (exit_object == FALSE)
+	if (exit_object->status == FALSE)
 		return ;
 	if (exit_object->x == player->x && exit_object->y == player->y)
 	{
-		free_so_long(so_long);
 		ft_printf("COMPLETE\n");
+		ft_printf("\nNUMBER OF MOVES: %d\n", (*so_long)->num_moves);
+		free_so_long(so_long);
 		exit(EXIT_SUCCESS);
 	}
 	return ;

@@ -18,9 +18,11 @@ static void	main_sub1(t_so_long **so_long, void *mlx_connection)
 			(*so_long)->mlx_ptr);
 	map_data_link_img(so_long);
 	map_first_paint(so_long);
+	ft_printf("painted the map\n");
 	mlx_clear_window((*so_long)->mlx_ptr, (*so_long)->window->win_ptr);
 	push_map_to_window(*so_long);
 	so_long_exit_hooks(*so_long);
+	ft_printf("begin playing\n");
 	mlx_loop(mlx_connection);
 }
 
@@ -32,21 +34,24 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("Error\n\nMust have 1 argument\nThe argument"
+		ft_strerr("Error\n\nMust have 1 argument\nThe argument"
 			" is filepath to a map file\n\n");
 		exit(EXIT_FAILURE);
 	}
 	map_info = new_map_info(argv[1]);
+	ft_printf("loaded map\n");
 	if (map_info == NULL)
 		exit(EXIT_FAILURE);
 	mlx_connection = mlx_init();
 	so_long = create_so_long(mlx_connection, map_info);
+	ft_printf("created mlx_connection\n");
 	so_long->img_list = get_texture_list(so_long);
 	if (so_long->img_list == NULL)
 	{
 		free_so_long(&so_long);
 		exit(EXIT_FAILURE);
 	}
+	ft_printf("loaded texture\n");
 	main_sub1(&so_long, mlx_connection);
 	return (0);
 }

@@ -27,6 +27,8 @@ int	check_all_collect(t_so_long *so_long)
 			count++;
 		lst = lst->next;
 	}
+	ft_printf("COLLECTIBLES %d/%d\n", count,
+		ft_lstsize(so_long->map_info->collects));
 	if (count == ft_lstsize(so_long->map_info->collects))
 		return (-1);
 	return (count);
@@ -73,6 +75,7 @@ void	player_move_sub2(t_so_long **so_long, t_list **new_list, int x, int y)
 	{
 		exit_object = (*so_long)->map_info->exit;
 		exit_object->status = TRUE;
+		ft_printf("collected all collectibles!\n");
 		player->status = TRUE;
 		ft_lstadd_front(new_list, ft_lstnew(&(map[exit_object->y]
 				[exit_object->x])));
