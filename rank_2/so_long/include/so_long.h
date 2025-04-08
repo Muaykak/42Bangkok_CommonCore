@@ -45,7 +45,7 @@
 
 # define SOLONG_MAX_WIN_RATIO 0.8
 # define SOLONG_GRID_SIZE_RATIO 0.1
-# define SOLONG_MIN_GRID_SIZE 16
+# define SOLONG_MIN_GRID_SIZE 32
 
 # ifndef SOLONG_MAX_MAP_SIZE
 #  define SOLONG_MAX_MAP_SIZE 100
@@ -265,9 +265,8 @@ void						free_path_data(void *path_data);
 void						free_so_long(t_so_long **so_long);
 void						free_img_data(void *p);
 
-void						ft_move_to_newlist(t_list **old, t_list *target,
-								t_list **new, void (*lstadd)(t_list **,
-									t_list *));
+void	ft_move_to_newlist(t_list	**old, t_list *target, t_list **new,
+			void (*lstadd)(t_list **, t_list *));
 
 t_list						*find_from_object_lst(t_list *object_list,
 								enum e_object_type type);
