@@ -18,7 +18,7 @@ static void	main_sub1(t_so_long **so_long, void *mlx_connection)
 			(*so_long)->mlx_ptr);
 	map_data_link_img(so_long);
 	ft_printf("img linked\n");
-	paint_map_to_window(*so_long, 15, 15);
+	paint_map_to_window(*so_long);
 //	map_first_paint(so_long);
 	ft_printf("painted the map\n");
 //	mlx_clear_window((*so_long)->mlx_ptr, (*so_long)->window->win_ptr);

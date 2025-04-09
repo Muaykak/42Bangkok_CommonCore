@@ -42,6 +42,10 @@ SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 
 OBJ			= 	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
 
+DEP			= ${OBJ.o=.d}
+
+HEADERS = $(wildcard include/*.h)
+
 #Directories
 
 SO_LONG_SRC_DIR = solong/
@@ -76,21 +80,21 @@ NAME	= so_long
 
 CC		= cc
 
-FLAG	= -Wall -Wextra -Werror
+FLAG	= -Wall -Wextra -Werror -I./include/ -I./${LFT_DIR}include/ -I./${MLX_DIR} -MMD -MP 
 
 LINK	= -L${MLX_DIR} -lmlx_Darwin -L${LFT_DIR} -lft -lX11 -lXext -lm
 all: ${NAME}
 
-${NAME}: ${OBJ} ${LIBFT} ${MLX}
+${NAME}: ${OBJ} ${LIBFT} ${MLX} Makefile
 	@${CC} ${FLAG} ${OBJ} ${LINK} -o ${NAME}
 	@echo "built ${NAME} complete"
 
 ${OBJ_DIR}:
 	@mkdir -p ${OBJ_DIR}
 
-${OBJ_DIR}%.o: ${SRC_DIR}%.c | ${OBJ_DIR}
+${OBJ_DIR}%.o: ${SRC_DIR}%.c ${HEADERS} | ${OBJ_DIR}
 	@mkdir -p $(dir $@)
-	@${CC} ${FLAG} -c -I./include/ -I./${LFT_DIR}include/ -I./${MLX_DIR} $< -o $@
+	@${CC} ${FLAG} -c $< -o $@
 
 ${LIBFT}:
 	@echo "Building LIBFT"
@@ -102,7 +106,10 @@ ${MLX}:
 	@make -C ${MLX_DIR}
 	@echo "Built MLX SUCCESS"
 
+-include $(DEP)
+
 clean:
+	@rm -f ${DEP}
 	@rm -f ${OBJ}
 	@make fclean -C ${LFT_DIR}
 	@make clean -C ${MLX_DIR}

@@ -39,6 +39,7 @@ void	control_hooks_sub1(t_so_long **so_long, int x, int y)
 		return ;
 //	map_re_paint(so_long);
 //	push_map_to_window(*so_long);
+	paint_map_to_window(*so_long);
 	(*so_long)->num_moves++;
 	ft_printf("number of moves: %u\n", (*so_long)->num_moves);
 	check_complete(so_long);

@@ -37,7 +37,7 @@
 # define SOLONG_IMAGE_EXTENSION ".xpm"
 
 # define SOLONG_COLLECT_XPM "assets/textures/collectible/default/collect_"
-# define SOLONG_BACKGROUND_XPM "assets/textures/background/default/bg_"
+//# define SOLONG_BACKGROUND_XPM "assets/textures/background/default/bg_"
 # define SOLONG_EXIT_XPM "assets/textures/exit/default/exit_"
 # define SOLONG_FLOOR_XPM "assets/textures/floor/default/floor_"
 # define SOLONG_WALL_XPM "assets/textures/wall/default/wall_"
@@ -45,7 +45,7 @@
 
 # define SOLONG_MAX_WIN_RATIO 0.8
 # define SOLONG_GRID_SIZE_RATIO 0.1
-# define SOLONG_MIN_GRID_SIZE 128
+# define SOLONG_MIN_GRID_SIZE 32
 
 # ifndef SOLONG_MAX_MAP_SIZE
 #  define SOLONG_MAX_MAP_SIZE 100
@@ -122,7 +122,6 @@ typedef struct s_map_info
 	t_map_object			*player;
 	t_map_object			*exit;
 	t_list					*collects;
-	t_list					*update_map;
 }							t_map_info;
 
 typedef struct s_map_path
@@ -150,14 +149,27 @@ typedef struct s_offset
 	int						y;
 }							t_offset;
 
+typedef struct s_draw_map
+{
+	int						max_off_x;
+	int						max_off_y;
+	int						range_y;
+	int						range_x;
+	int						start_x;
+	int						start_y;
+	int						end_x;
+	int						end_y;
+	int						off_x;
+	int						off_y;
+}							t_draw_map;
+
 typedef struct s_window
 {
 	void					*mlx_ptr;
 	void					*win_ptr;
 	int						width;
 	int						height;
-	int						map_draw_y;
-	int						map_draw_x;
+	t_draw_map				draw;
 	t_offset				offset;
 	t_img_data				*img;
 }							t_window;
@@ -189,9 +201,9 @@ int							player_move(t_so_long **so_long, int x, int y);
 
 void						max_win_size_calculation(t_so_long *so_long);
 
-void						push_map_to_window(t_so_long *so_long);
+// void						push_map_to_window(t_so_long *so_long);
 
-void						paint_map_to_window(t_so_long *so_long, int map_off_x, int map_off_y);
+void						paint_map_to_window(t_so_long *so_long);
 
 /* ***************** IMAGE HANDLING ********************* */
 int							put_pixel_img(t_img_data *img, int x, int y,
@@ -228,8 +240,8 @@ int							get_map_data(char *filepath, t_map_info **map_info);
 t_map_data					**get_empty_map_data(char **map_data);
 t_map_info					*new_map_info(char *file_name);
 int							map_data_link_img(t_so_long **so_long);
-int							map_first_paint(t_so_long **so_long);
-int							map_re_paint(t_so_long **so_long);
+// int							map_first_paint(t_so_long **so_long);
+// int							map_re_paint(t_so_long **so_long);
 
 // Map_check
 int							map_char_check(char **map_char);
