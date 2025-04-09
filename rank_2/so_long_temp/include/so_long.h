@@ -201,8 +201,6 @@ int							player_move(t_so_long **so_long, int x, int y);
 
 void						max_win_size_calculation(t_so_long *so_long);
 
-// void						push_map_to_window(t_so_long *so_long);
-
 void						paint_map_to_window(t_so_long *so_long);
 
 /* ***************** IMAGE HANDLING ********************* */
@@ -235,13 +233,12 @@ void						paint_img_to_img(t_img_data *img_canvas,
 /* ****************************************************** */
 
 /* ************** . Map processing . ************* */
+t_list						*read_list_map(int fd);
 char						**get_map_char(char *filepath);
 int							get_map_data(char *filepath, t_map_info **map_info);
 t_map_data					**get_empty_map_data(char **map_data);
 t_map_info					*new_map_info(char *file_name);
 int							map_data_link_img(t_so_long **so_long);
-// int							map_first_paint(t_so_long **so_long);
-// int							map_re_paint(t_so_long **so_long);
 
 // Map_check
 int							map_char_check(char **map_char);
@@ -254,8 +251,10 @@ int							map_wall_check(t_map_info **map_info);
 int							map_check_path(t_map_info **map_info);
 void						map_check_path_sub1(t_map_info *map_info,
 								int path_x, int path_y);
-//int							map_check_path_data(t_list **path_data, int path_x,
-//								int path_y);
+void						add_fill_list(t_list **fill_list,
+								t_map_info *map_info, t_map_path *mark);
+void						add_fill_list_error(t_list **fill_list,
+								t_map_info *map_info);
 int							map_check_path_data(t_map_data **map_data,
 								int path_x, int path_y);
 void						reset_check_path(t_map_info *map_info);

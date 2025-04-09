@@ -13,13 +13,13 @@
 #include "so_long.h"
 
 int			map_check_path(t_map_info **map_info);
-//int			map_check_path_data(t_list **path_data, int path_x, int path_y);
+// int			map_check_path_data(t_list **path_data, int path_x, int path_y);
 
 int			map_check_path_data(t_map_data **map_data, int path_x, int path_y);
 
 static int	map_check_path_sub2(t_map_info **map_info);
 
-void	reset_check_path(t_map_info *map_info);
+void		reset_check_path(t_map_info *map_info);
 
 static int	map_check_path_sub2(t_map_info **map_info)
 {

@@ -37,16 +37,6 @@ static int	get_texture_list_sub0(t_so_long *so_long, t_list **new_list)
 {
 	t_img_data	*temp;
 
-	// temp = get_texture(so_long, SOLONG_BACKGROUND_XPM, so_long->max_win_x,
-	// 		so_long->max_win_y);
-	// if (temp == NULL)
-	// {
-	// 	if (*new_list != NULL)
-	// 		ft_lstclear(new_list, &free_img_data);
-	// 	return (0);
-	// }
-	// ft_printf("reach here loaded bbackground\n");
-	// ft_lstadd_back(new_list, ft_lstnew(&temp[0]));
 	temp = get_texture(so_long, SOLONG_FLOOR_XPM, so_long->grid_size,
 			so_long->grid_size);
 	if (temp == NULL)

@@ -3,7 +3,6 @@ MAIN_SRC_FILE	=	main.c \
 SO_LONG_SRC_FILE		=	create_so_long_1.c \
 							create_window_1.c \
 							player_move_1.c \
-							push_map_to_window_1.c \
 							paint_map_to_window_1.c \
 
 IMAGE_HANDLE_SRC_FILE	=	image_utils_1.c \
@@ -14,6 +13,7 @@ IMAGE_HANDLE_SRC_FILE	=	image_utils_1.c \
 							get_texture_1.c
 
 MAP_PROCESS_SRC_FILE	=	map_read_1.c \
+							map_read_2.c \
 							map_check_1.c \
 							map_check_2.c \
 							map_data_1.c \
@@ -21,9 +21,8 @@ MAP_PROCESS_SRC_FILE	=	map_read_1.c \
 							map_data_3.c \
 							map_check_path_1.c \
 							map_check_path_2.c \
+							map_check_path_3.c \
 							map_link_img_1.c \
-							map_first_paint_1.c \
-							map_re_paint_1.c \
 
 UTILS_SRC_FILE			=	so_long_utils_1.c \
 							so_long_utils_2.c \
@@ -42,7 +41,7 @@ SRC		=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 
 OBJ			= 	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
 
-DEP			= ${OBJ.o=.d}
+DEP			= ${OBJ:.o=.d}
 
 HEADERS = $(wildcard include/*.h)
 

@@ -34,7 +34,6 @@ int	check_all_collect(t_so_long *so_long)
 	return (count);
 }
 
-
 void	player_move_sub2(t_so_long **so_long, int x, int y)
 {
 	t_map_object	*exit_object;
