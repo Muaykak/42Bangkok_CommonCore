@@ -5,16 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/21 13:13:20 by srussame          #+#    #+#             */
-/*   Updated: 2025/04/21 13:14:36 by srussame         ###   ########.fr       */
+/*   Created: 2025/04/21 21:32:53 by srussame          #+#    #+#             */
+/*   Updated: 2025/04/21 21:39:24 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "philo.h"
 
-int	main(void)
+int	main()
 {
-	printf("hello world\n");
+	printf("Hello world\n");
 	return (0);
 }
-
