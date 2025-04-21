@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_count.c                                 :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:41:52 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:15:36 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/26 14:38:00 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/26 14:38:02 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putchar_count(char c, t_ft_printf *data)
+char	*ft_strchr(const char *s, int c)
 {
-	if (write(data->fd, &c, 1) == -1)
-		return (-1);
-	data->count += 1;
-	return (1);
+	size_t	i;
+
+	i = 0;
+	while (*(s + i) != '\0')
+	{
+		if (*(s + i) == (unsigned char)c)
+			return ((char *)(s + i));
+		i++;
+	}
+	if (*(s + i) == '\0' && (unsigned char)c == '\0')
+		return ((char *)(s + i));
+	return (NULL);
 }

@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_count.c                                  :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:51:47 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:31:44 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/26 14:56:21 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/26 14:56:22 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putstr_count(char *str, t_ft_printf *data)
+char	*ft_strrchr(const char *s, int c)
 {
+	char	*ptr;
 	size_t	i;
 
-	if (!str)
-	{
-		if (write(data->fd, "(null)", 6) == -1)
-			return (-1);
-		data->count += 6;
-		return (1);
-	}
 	i = 0;
-	while (str[i] != '\0')
+	ptr = NULL;
+	while (*(s + i) != '\0')
 	{
-		if (write(1, &str[i], 1) == -1)
-			return (-1);
-		data->count += 1;
+		if (*(s + i) == (unsigned char)c)
+			ptr = (char *)(s + i);
 		i++;
 	}
-	return (1);
+	if (*(s + i) == '\0' && (unsigned char)c == '\0')
+		return ((char *)(s + i));
+	else
+		return (ptr);
 }

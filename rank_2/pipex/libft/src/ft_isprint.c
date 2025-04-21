@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_count.c                                 :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:41:52 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:15:36 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/25 13:51:20 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/25 13:51:23 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_putchar_count(char c, t_ft_printf *data)
+int	ft_isprint(int c)
 {
-	if (write(data->fd, &c, 1) == -1)
-		return (-1);
-	data->count += 1;
-	return (1);
+	if (c >= 32 && c <= 126)
+		return (1);
+	else
+		return (0);
 }

@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_count.c                                 :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:41:52 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:15:36 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/26 19:39:03 by srussame          #+#    #+#             */
+/*   Updated: 2025/04/10 23:57:35 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putchar_count(char c, t_ft_printf *data)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	if (write(data->fd, &c, 1) == -1)
-		return (-1);
-	data->count += 1;
-	return (1);
+	void	*temp;
+
+	temp = (void *)malloc(nmemb * size);
+	if (temp == 0)
+		return (0);
+	ft_bzero(temp, (nmemb * size));
+	return (temp);
 }

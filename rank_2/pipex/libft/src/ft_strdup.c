@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_count.c                                 :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:41:52 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:15:36 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/26 18:56:17 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/26 18:56:18 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putchar_count(char c, t_ft_printf *data)
+char	*ft_strdup(const char *s)
 {
-	if (write(data->fd, &c, 1) == -1)
-		return (-1);
-	data->count += 1;
-	return (1);
+	size_t	i;
+	char	*temp;
+
+	temp = (char *)malloc((ft_strlen(s) + 1) * sizeof (char));
+	if (temp == 0)
+		return (0);
+	i = 0;
+	while (*(s + i) != '\0')
+	{
+		*(temp + i) = *(s + i);
+		i++;
+	}
+	*(temp + i) = '\0';
+	return (temp);
 }

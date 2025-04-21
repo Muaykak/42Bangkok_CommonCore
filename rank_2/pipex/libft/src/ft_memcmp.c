@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_count.c                                  :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 13:51:47 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:31:44 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/26 16:09:55 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/26 16:09:56 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putstr_count(char *str, t_ft_printf *data)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t	i;
 
-	if (!str)
-	{
-		if (write(data->fd, "(null)", 6) == -1)
-			return (-1);
-		data->count += 6;
-		return (1);
-	}
+	if (n == 0)
+		return (0);
 	i = 0;
-	while (str[i] != '\0')
+	while (i < n)
 	{
-		if (write(1, &str[i], 1) == -1)
-			return (-1);
-		data->count += 1;
+		if (*((unsigned char *)(s1 + i)) != *((unsigned char *)(s2 + i)))
+			return (*((unsigned char *)(s1 + i)) \
+			- *((unsigned char *)(s2 + i)));
 		i++;
 	}
-	return (1);
+	return (0);
 }
