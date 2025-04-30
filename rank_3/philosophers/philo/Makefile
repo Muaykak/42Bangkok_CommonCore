@@ -3,12 +3,34 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 MAIN_SRC_DIR = main/
+UTILS_SRC_DIR = utils/
+PARSER_SRC_DIR = parser/
+PHILO_THREAD_DIR = philo_thread/
 
 #SRC FILE
-MAIN_SRC_FILE = main.c
+MAIN_SRC_FILE =		main.c
+
+PARSER_SRC_FILE =	get_philo_args_1.c \
+					get_philo_info_1.c \
+					ft_check_strnum.c \
+					ft_check_digits.c
+
+UTILS_SRC_FILE =	exact_delay.c \
+					ft_isspace.c \
+					ft_putstr_fd.c \
+					ft_strlen.c \
+					ft_atos.c \
+
+PHILO_THREAD_FILE =	create_philo_thread_1.c \
+					create_philo_fork.c \
+					free_philo_array.c
 
 #FILE
-SRC	= ${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
+SRC	=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
+		${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \
+		${addprefix ${SRC_DIR}${PARSER_SRC_DIR}, ${PARSER_SRC_FILE}} \
+		${addprefix ${SRC_DIR}${PHILO_THREAD_DIR}, ${PHILO_THREAD_FILE}}
+
 
 OBJ	= ${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
 
@@ -18,11 +40,10 @@ HEADERS = ${wildcard include/*.h}
 #Src file dependencies
 DEP = ${OBJ:.o=.d}
 
--include ${DEP}
 
 #Compile Option
 CC = cc
-FLAG = -Wall -Wextra -Werror -I./include -MMD -MP
+FLAG = -Wall -Wextra -pthread -Werror -I./include -MMD -MP
 
 #Name
 NAME = philo
@@ -65,6 +86,8 @@ compile_flags:
 	@echo "-I./include" >> compile_flags.txt
 	@echo "-I./src" >> compile_flags.txt
 	@echo "Created compile_flags.txt"
+
+-include ${DEP}
 
 .PHONY: clean fclean re all compile_flags
 
