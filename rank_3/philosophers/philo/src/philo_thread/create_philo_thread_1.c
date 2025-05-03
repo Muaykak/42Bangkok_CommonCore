@@ -21,7 +21,7 @@ static void	create_philo_thread_errmsg1(void)
 /* *return an array of philosophers' thread * */
 int	create_philo_thread(t_philo_info *info, t_philo_thread ***thread_array)
 {
-	size_t			i;
+	unsigned long long	i;
 
 	if (info == NULL || info->fork == NULL || thread_array == NULL)
 		return (0);

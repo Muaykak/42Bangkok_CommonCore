@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-static int	ft_check_strnum_sub1(char *str, size_t i);
+static int	ft_check_strnum_sub1(char *str, unsigned long long i);
 static void	check_strnum_errmsg1(void);
 static void check_strnum_errmsg2(void);
 static void	check_strnum_errmsg3(void);
@@ -36,7 +36,7 @@ int			ft_check_strnum(char *str);
 */
 int	ft_check_strnum(char *str)
 {
-	size_t	i;
+	unsigned long long	i;
 
 	if (str == NULL)
 		return (0);
@@ -57,7 +57,7 @@ int	ft_check_strnum(char *str)
 	return (ft_check_strnum_sub1(str, i));
 }
 
-static int	ft_check_strnum_sub1(char *str, size_t i)
+static int	ft_check_strnum_sub1(char *str, unsigned long long i)
 {
 	int	flag;
 

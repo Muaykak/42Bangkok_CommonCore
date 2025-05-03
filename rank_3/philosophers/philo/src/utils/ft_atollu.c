@@ -17,9 +17,9 @@
 			which is 9223372036854775807
 		- i will skip the signed because size_t can only hold positive integer
 */
-size_t	ft_atos(char *str)
+unsigned long long	ft_atollu(char *str)
 {
-	size_t	result;
+	unsigned long long	result;
 	int		i;
 
 	if (str == NULL)

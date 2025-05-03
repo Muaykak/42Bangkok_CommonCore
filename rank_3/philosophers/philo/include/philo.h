@@ -30,7 +30,11 @@
 /**/
 
 # ifndef PTHREAD_MAX
-#  define PTHREAD_MAX 1024
+#  define PTHREAD_MAX 1000000
+# endif
+
+# ifndef SSIZE_MAX
+#  define SSIZE_MAX 9223372036854775807
 # endif
 
 typedef enum e_bool
@@ -47,42 +51,38 @@ typedef struct	s_philo_fork
 
 typedef struct	s_philo_info
 {
-	size_t			philo_num;
-	struct timeval	time_to_die;
-	struct timeval	time_to_eat;
-	struct timeval	time_to_sleep;
-	int				optional_flag;
-	size_t			eat_count_max;
-	t_philo_fork	**fork;
-	t_bool			death_flag;
+	unsigned long long	philo_num;
+	struct timeval		time_to_die;
+	struct timeval		time_to_eat;
+	struct timeval		time_to_sleep;
+	int					optional_flag;
+	unsigned long long	eat_count_max;
+	t_philo_fork		**fork;
+	t_bool				death_flag;
 }				t_philo_info;
 
 typedef struct	s_philo_thread
 {
-	size_t			thread_num;
-	pthread_t		thread;
-	pthread_mutex_t	*fork_left;
-	pthread_mutex_t	*fork_right;
-	t_philo_info	*philo_info;
-	size_t			eat_max;
+	unsigned long long	thread_num;
+	pthread_t			thread;
+	t_bool				run_flag;
+	pthread_mutex_t		*fork_left;
+	pthread_mutex_t		*fork_right;
+	t_philo_info		*philo_info;
+	unsigned long long	eat_max;
+	t_bool				success_flag;
 }				t_philo_thread;
 
 typedef struct	s_philo_args
 {
 
-	size_t	philo_num;
-	size_t	time_to_die;
-	size_t	time_to_eat;
-	size_t	time_to_sleep;
-	int		optional_flag;
-	size_t	eat_count_max;
+	unsigned long long	philo_num;
+	unsigned long long	time_to_die;
+	unsigned long long	time_to_eat;
+	unsigned long long	time_to_sleep;
+	int					optional_flag;
+	unsigned long long	eat_count_max;
 }	t_philo_args;
-
-typedef struct s_philo
-{
-	pthread_t	thread;
-	size_t		thread_num;
-}				t_philo;
 
 typedef struct s_perform_time
 {
@@ -110,9 +110,10 @@ int	exact_delay_usec(int usec);
 
 int	time_taken_cal(t_perform_time *time);
 
-size_t	ft_atos(char *str);
-size_t	ft_strlen(const char *str);
+unsigned long long	ft_atollu(char *str);
+unsigned long long	ft_strlen(const char *str);
 ssize_t	ft_putstr_fd(char *str, int fd);
+void	ft_putnbr_fd(long long n, int fd);
 
 void	free_philo_array(void **thread_array);
 void	free_philo_fork(t_philo_fork **fork);

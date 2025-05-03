@@ -18,7 +18,7 @@ static void create_philo_fork_errmsg2(void);
 /* return an array of mutex fork*/
 int	create_philo_fork(t_philo_info *info)
 {
-	size_t	i;
+	unsigned long long	i;
 
 	if (info == NULL)
 		return (0);
@@ -30,7 +30,7 @@ int	create_philo_fork(t_philo_info *info)
 	i = 0;
 	while (i < info->philo_num)
 	{
-		(info->fork)[i] = (t_philo_fork *)malloc(sizeof(pthread_mutex_t));
+		(info->fork)[i] = (t_philo_fork *)malloc(sizeof(t_philo_fork));
 		if ((info->fork)[i] == NULL)
 			return (free_philo_fork(info->fork), \
 			create_philo_fork_errmsg1(), 0);

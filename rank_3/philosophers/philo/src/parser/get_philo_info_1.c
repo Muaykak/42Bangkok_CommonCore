@@ -12,9 +12,9 @@
 
 #include "philo.h"
 
-void	convert_to_timeval(struct timeval *time, size_t time_ms)
+void	convert_to_timeval(struct timeval *time, unsigned long long time_ms)
 {
-	size_t	sec;
+	unsigned long long	sec;
 
 	if (time == NULL)
 		return ;

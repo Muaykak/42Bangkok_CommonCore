@@ -12,30 +12,6 @@
 
 #include "philo.h"
 
-void	*hello(void *philo)
-{
-	t_philo		*phi;
-	size_t		i;
-
-	phi = (t_philo *)(philo);
-	printf("thread ID: %ld\n", (long)(phi->thread));
-	printf("start looping\n");
-	i = 0;
-	while (i < 10000000)
-	{
-		i++;
-	}
-	printf("thread %ld finished looping\n", (long)(phi->thread));
-	return (NULL);
-}
-
-void	philo_init(t_philo *philo, size_t thread_num)
-{
-	if (philo == NULL)
-		return ;
-	philo->thread_num = thread_num;
-	return ;
-}
 
 int	time_taken_cal(t_perform_time *time)
 {
@@ -73,7 +49,80 @@ void	display_timesec(struct timeval time)
 	}
 	while (i++ < 5)
 		printf("0");
-	printf("%d\n", time.tv_usec);
+	printf("%ld\n", time.tv_usec);
+}
+
+void	display_allthread(t_philo_thread **threads)
+{
+	unsigned long long	i;
+
+	if (threads == NULL)
+		return ;
+	i = 0;
+	while (threads[i] != NULL)
+	{
+		printf("philo[%llu] rightfork: %p leftfork: %p\n", i, (threads[i])->fork_right, (threads[i])->fork_left);
+		i++;
+	}
+}
+
+void	*philo_routine(void *phi_thread)
+{
+	unsigned long long	i;
+	t_philo_thread	*thread;
+
+	if (phi_thread == NULL)
+		return (NULL);
+	thread = (t_philo_thread *)phi_thread;
+	i = 0;
+	printf("thread_num : %llu started\n", thread->thread_num);
+	while (i < 100000000)
+	{
+//		if (i % 10000000 == 0)
+//			printf("thread_num : %llu i: %llu\n", thread->thread_num, i);
+		i++;
+	}
+	printf(GREEN_COLOR "thread_num : %llu SUCCESS!\n" RESET_COLOR, thread->thread_num);
+	return (NULL);
+}
+
+int	run_all_philo(t_philo_thread **threads, void *philo_routine(void *))
+{
+	unsigned long long	i;
+
+	if (threads == NULL)
+		return (0);
+	i = 0;
+	while (threads[i] != NULL)
+	{
+		if (pthread_create(&((threads[i])->thread), NULL, \
+		philo_routine, (void *)(threads[i])) != 0)
+		{
+			(*threads)->philo_info->death_flag = TRUE;
+			ft_putstr_fd(RED_COLOR "\nERROR " RESET_COLOR \
+			": pthread_create(); cannot put all philo threads to routines\n\n", 2);
+			return (0);
+		}
+		(threads[i])->run_flag = TRUE;
+		i++;
+	}
+	return (1);
+}
+
+int	join_all_philo(t_philo_thread **threads)
+{
+	unsigned long long	i;
+
+	if (threads == NULL)
+		return (0);
+	i = 0;
+	while (threads[i] != NULL && (threads[i])->run_flag == TRUE)
+	{
+		if (pthread_join((threads[i])->thread, NULL) != 0)
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -85,13 +134,18 @@ int	main(int argc, char **argv)
 	|| create_philo_fork(&philo_info) == 0 \
 	|| create_philo_thread(&philo_info, &threads) == 0)
 		return (1);
-	printf("philo num: %zu\n" \
+	printf("philo num: %llu\n" \
 	"time_to_die : ", philo_info.philo_num);
 	display_timesec(philo_info.time_to_die);
 	printf("time_to_eat : ");
 	display_timesec(philo_info.time_to_eat);
 	printf("time_to_sleep : ");
 	display_timesec(philo_info.time_to_sleep);
-	printf("eat_count_max: %zu\n", philo_info.eat_count_max);
+	printf("eat_count_max: %llu\n", philo_info.eat_count_max);
+	display_allthread(threads);
+	run_all_philo(threads, &philo_routine);
+	join_all_philo(threads);
+	free_philo_array((void **)threads);
+	free_philo_fork(philo_info.fork);
     return (0);
 }

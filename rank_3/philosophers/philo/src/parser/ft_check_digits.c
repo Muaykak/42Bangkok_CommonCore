@@ -49,17 +49,18 @@ static void	error_message1(void)
 {
 	ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
 	": the number in the argument exceeds the max this program allowed\n"\
-	"\tshould not exceeds the ssize_t_max (in 64bit it's" YELLOW_COLOR \
-	" 9223372036854775807 " RESET_COLOR ")\n\n", 2);
+	"\tshould not exceeds the LLONG_MAX (it's " YELLOW_COLOR, 2);
+	ft_putnbr_fd((long long)LLONG_MAX, 2);
+	ft_putstr_fd(RESET_COLOR " )\n\n", 2);
 }
 
 static int	get_ssize_t_digit(void)
 {
-	int		digits;
-	ssize_t	num;
+	int			digits;
+	long long	num;
 
 	digits = 1;
-	num = SSIZE_MAX;
+	num = LLONG_MAX;
 	while (num / 10 > 0)
 	{
 		digits++;

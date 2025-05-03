@@ -36,7 +36,7 @@ void	free_philo_fork(t_philo_fork **fork)
 
 void	free_philo_array(void **thread_array)
 {
-	size_t	i;
+	unsigned long long	i;
 
 	i = 0;
 	if (thread_array == NULL)
@@ -48,5 +48,6 @@ void	free_philo_array(void **thread_array)
 		thread_array[i] = NULL;
 		i++;
 	}
+	free(thread_array);
 	return ;
 }

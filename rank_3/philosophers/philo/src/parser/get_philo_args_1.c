@@ -23,7 +23,8 @@ void	parser_message1(void)
 	return ;
 }
 
-/* First function to pass from argv 
+/*
+	First function to pass from argv 
 	this function will check all the argv
 		it will check
 	- valid number of arguments (4 - 5)
@@ -46,14 +47,14 @@ int	get_philo_args(t_philo_args *philo_args, int argc, char **argv)
 	- return FALSE if philo_num exceeds PTHREAD_MAX which is defined in header */
 static int	convert_to_args(t_philo_args *philo_args, int argc, char **argv)
 {
-	philo_args->philo_num = ft_atos(argv[1]);
-	philo_args->time_to_die = ft_atos(argv[2]);
-	philo_args->time_to_eat = ft_atos(argv[3]);
-	philo_args->time_to_sleep = ft_atos(argv[4]);
+	philo_args->philo_num = ft_atollu(argv[1]);
+	philo_args->time_to_die = ft_atollu(argv[2]);
+	philo_args->time_to_eat = ft_atollu(argv[3]);
+	philo_args->time_to_sleep = ft_atollu(argv[4]);
 	if (argc > 5)
 	{
 		philo_args->optional_flag = 1;
-		philo_args->eat_count_max = ft_atos(argv[5]);
+		philo_args->eat_count_max = ft_atollu(argv[5]);
 	}
 	if (check_ssize_limit(philo_args) == 0)
 		return (0);
@@ -61,7 +62,9 @@ static int	convert_to_args(t_philo_args *philo_args, int argc, char **argv)
 	{
 		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
 		": the philosopher number exceed the PTHREAD_MAX defined in the header\n"\
-		"default " YELLOW_COLOR "PTHREAD_MAX = 1024\n" RESET_COLOR, 2);
+		YELLOW_COLOR "\tPTHREAD_MAX = ", 2);
+		ft_putnbr_fd((long long)PTHREAD_MAX, 2);
+		ft_putstr_fd(RESET_COLOR "\n\n", 2);
 		return (0);
 	}
 	return (1);
@@ -71,12 +74,13 @@ static int	check_ssize_limit(t_philo_args *philo_args)
 {
 	if (philo_args->philo_num > SSIZE_MAX || philo_args->time_to_die > SSIZE_MAX \
 	|| philo_args->time_to_eat > SSIZE_MAX || philo_args->time_to_sleep > SSIZE_MAX \
-	|| philo_args->eat_count_max > SSIZE_MAX)
+	|| philo_args->eat_count_max > ULONG_MAX)
 	{
 		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
 		": the number in the argument exceeds the max this program allowed\n"\
-		"\tshould not exceeds the ssize_t_max (in 64bit it's" YELLOW_COLOR \
-		" 9223372036854775807 " RESET_COLOR ")\n\n", 2);
+		"\tshould not exceeds the LLONG_MAX ( it's " YELLOW_COLOR, 2);
+		ft_putnbr_fd((long long)LLONG_MAX, 2);
+		ft_putstr_fd(RESET_COLOR " )\n\n", 2);
 		return (0);
 	}
 	return (1);

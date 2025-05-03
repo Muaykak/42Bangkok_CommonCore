@@ -19,7 +19,8 @@ UTILS_SRC_FILE =	exact_delay.c \
 					ft_isspace.c \
 					ft_putstr_fd.c \
 					ft_strlen.c \
-					ft_atos.c \
+					ft_atollu.c \
+					ft_putnbr_fd.c
 
 PHILO_THREAD_FILE =	create_philo_thread_1.c \
 					create_philo_fork.c \

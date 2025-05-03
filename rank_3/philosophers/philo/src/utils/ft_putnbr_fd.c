@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 10:50:53 by srussame          #+#    #+#             */
-/*   Updated: 2025/04/28 10:51:04 by srussame         ###   ########.fr       */
+/*   Created: 2024/08/28 00:07:35 by srussame          #+#    #+#             */
+/*   Updated: 2024/08/28 00:07:37 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-unsigned long long	ft_strlen(const char *str)
+void	ft_putnbr_fd(long long n, int fd)
 {
-	unsigned long long	i;
+	char	c;
 
-	i = 0;
-	while (str != NULL && str[i] != '\0')
-		i++;
-	return (i);
+	if (fd < 0)
+		return ;
+	if (n < -9223372036854775807)
+	{
+		write(fd, "-9223372036854775807", 20);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = n * -1;
+	}
+	if (n / 10 != 0)
+	{
+		ft_putnbr_fd((n / 10), fd);
+	}
+	c = (n % 10) + 48;
+	write(fd, &c, 1);
 }
