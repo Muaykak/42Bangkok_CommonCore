@@ -76,7 +76,29 @@ void	*philo_routine(void *phi_thread)
 	thread = (t_philo_thread *)phi_thread;
 	i = 0;
 	printf("thread_num : %llu started\n", thread->thread_num);
-	while (i < 100000000)
+	if (pthread_mutex_lock(&(thread->philo_info->main_lock)) != 0)
+	{
+		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
+		": philo_routine(); pthread_mutex_lock ERROR\n\n", 2);
+		return (0);
+	}
+	if (thread->philo_info->death_flag == TRUE)
+	{
+		if (pthread_mutex_unlock(&(thread->philo_info->main_lock)) != 0)
+		{
+			ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
+			": philo_routine(); pthread_mutex_unlock ERROR\n\n", 2);
+			return (0);
+		}
+		return (0);
+	}
+	if (pthread_mutex_unlock(&(thread->philo_info->main_lock)) != 0)
+	{
+		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
+		": philo_routine(); pthread_mutex_unlock ERROR\n\n", 2);
+		return (0);
+	}
+	while (i < 10000)
 	{
 //		if (i % 10000000 == 0)
 //			printf("thread_num : %llu i: %llu\n", thread->thread_num, i);
@@ -93,6 +115,12 @@ int	run_all_philo(t_philo_thread **threads, void *philo_routine(void *))
 	if (threads == NULL)
 		return (0);
 	i = 0;
+	if (pthread_mutex_lock(&((*threads)->philo_info->main_lock)) != 0)
+	{
+		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
+		": run_all_philo(); pthread_mutex_lock ERROR\n\n", 2);
+		return (0);
+	}
 	while (threads[i] != NULL)
 	{
 		if (pthread_create(&((threads[i])->thread), NULL, \
@@ -100,11 +128,26 @@ int	run_all_philo(t_philo_thread **threads, void *philo_routine(void *))
 		{
 			(*threads)->philo_info->death_flag = TRUE;
 			ft_putstr_fd(RED_COLOR "\nERROR " RESET_COLOR \
-			": pthread_create(); cannot put all philo threads to routines\n\n", 2);
+			": pthread_create(); cannot put all philo threads to routines\n" \
+			"thread_num :", 2);
+			ft_putnbr_fd((long long)(threads[i])->thread_num, 2);
+			ft_putstr_fd("\n\n", 2);
+			if (pthread_mutex_unlock(&((*threads)->philo_info->main_lock)) != 0)
+			{
+				ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
+				": run_all_philo(); pthread_mutex_unlock ERROR\n\n", 2);
+				return (0);
+			}
 			return (0);
 		}
 		(threads[i])->run_flag = TRUE;
 		i++;
+	}
+	if (pthread_mutex_unlock(&((*threads)->philo_info->main_lock)) != 0)
+	{
+		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
+		": run_all_philo(); pthread_mutex_unlock ERROR\n\n", 2);
+		return (0);
 	}
 	return (1);
 }
@@ -142,9 +185,11 @@ int	main(int argc, char **argv)
 	printf("time_to_sleep : ");
 	display_timesec(philo_info.time_to_sleep);
 	printf("eat_count_max: %llu\n", philo_info.eat_count_max);
-	display_allthread(threads);
+//	display_allthread(threads);
 	run_all_philo(threads, &philo_routine);
 	join_all_philo(threads);
+	if (philo_info.death_flag == TRUE)
+		printf(RED_COLOR "It's dead!\n" RESET_COLOR);
 	free_philo_array((void **)threads);
 	free_philo_fork(philo_info.fork);
     return (0);

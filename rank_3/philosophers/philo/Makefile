@@ -62,6 +62,12 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c ${HEADERS} | ${OBJ_DIR}
 	@mkdir -p ${dir $@}
 	@${CC} ${FLAG} -c $< -o $@
 
+asan: ${OBJ} Makefile
+	@clang ${FLAG} -g3 -O0 -fsanitize=address ${OBJ} -o ${NAME}
+
+tsan: ${OBJ} Makefile
+	@clang ${FLAG} -g3 -O0 -fsanitize=thread ${OBJ} -o ${NAME}
+
 clean:
 	@rm -f ${OBJ}
 	@rm -f ${DEP}
@@ -90,5 +96,5 @@ compile_flags:
 
 -include ${DEP}
 
-.PHONY: clean fclean re all compile_flags
+.PHONY: clean fclean re all compile_flags asan tsan
 

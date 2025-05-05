@@ -37,6 +37,38 @@
 #  define SSIZE_MAX 9223372036854775807
 # endif
 
+/* HOW THE PROGRAM WORKS
+
+	1. start with checking the arguments
+		the arguments must be a number in the given range.
+
+	2. then put the infomation into the philo_info variable in the main()
+		THIS philo_info also have mutex : main_lock initialized to use
+		in the next steps.
+
+	3. then allocate the fork, the fock is simply the pthread_mutex_t 
+		with the init_flag to determine if the mutex is initialized or not
+		(for when all the fork is not fully able to initialized, it will be
+		easy to pthread_mutex_destroy all the mutex(s))
+		- is located at philo_info->fork  pointer to all the forks.
+
+	4. allocated all the philosophers up to the number given in the argument
+		- the t_philo_thread struct contain pointers that point to its left fork
+		and its right fork also have access to philo_info BUT HAVE NO ACCESS TO
+			OTHER THREADS (because both t_philo_thread and t_philo_info dont contain
+			any pointer that can have access the other threads 
+			-> ALSO the parameter that passed to the routine also doesn't contain any
+			pointers that have access to check on another thread. (I HOPE SO LOL))
+	5. start all the philosophers using the pthread_create() and loop until it reach
+		to all the threads
+	  5.1 also use pthread_join() to wait all the threads
+		- use the MUTEX (main_lock) to make all the threads waits 
+			until i pthread_create() and pthread_join all the philosophers successfully
+		- if the pthread_create() is failed (not returning 0)
+			the death_flag in philo_info is set to TRUE and all the threads will not go
+			into routine and just quit ad return ERROR
+*/
+
 typedef enum e_bool
 {
 	FALSE,
@@ -51,6 +83,7 @@ typedef struct	s_philo_fork
 
 typedef struct	s_philo_info
 {
+	pthread_mutex_t		main_lock;
 	unsigned long long	philo_num;
 	struct timeval		time_to_die;
 	struct timeval		time_to_eat;

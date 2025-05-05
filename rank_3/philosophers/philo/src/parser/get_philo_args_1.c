@@ -72,6 +72,15 @@ static int	convert_to_args(t_philo_args *philo_args, int argc, char **argv)
 
 static int	check_ssize_limit(t_philo_args *philo_args)
 {
+	if (philo_args->philo_num < 1 || philo_args->time_to_die < 1 \
+	|| philo_args->time_to_eat < 1 || philo_args->time_to_sleep < 1)
+	{
+		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
+		": this program will not work if the " YELLOW_COLOR \
+		"arguments" RESET_COLOR " is less than " \
+		YELLOW_COLOR "1 \n\n" RESET_COLOR, 2);
+		return (0);
+	}
 	if (philo_args->philo_num > SSIZE_MAX || philo_args->time_to_die > SSIZE_MAX \
 	|| philo_args->time_to_eat > SSIZE_MAX || philo_args->time_to_sleep > SSIZE_MAX \
 	|| philo_args->eat_count_max > ULONG_MAX)
