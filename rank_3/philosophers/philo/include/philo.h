@@ -29,6 +29,10 @@
 # define YELLOW_COLOR "\033[33m"
 /**/
 
+# ifndef UTC_TIMEZONE_PHILO
+#  define UTC_TIMEZONE_PHILO +7
+# endif
+
 # ifndef PTHREAD_MAX
 #  define PTHREAD_MAX 1000000
 # endif
@@ -123,6 +127,18 @@ typedef struct s_perform_time
 	struct timeval	cal;
 }				t_perform_time;
 
+typedef struct s_datetime
+{
+	struct timeval	snap_time;
+	unsigned int	year;
+	unsigned int	month;
+	unsigned int	day;
+	unsigned int	hour;
+	unsigned int	minute;
+	unsigned int	sec;
+	unsigned int	ms;
+}				t_datetime;
+
 /* ** MAIN PART ** */
 int	create_philo_fork(t_philo_info *info);
 int	create_philo_thread(t_philo_info *info, t_philo_thread ***thread_array);
@@ -133,9 +149,12 @@ int	get_philo_args(t_philo_args *philo_args, int argc, char **argv);
 int	ft_check_digits(char *str);
 int	ft_check_strnum(char *str);
 
-
 //Error message
 void	parser_message1(void);
+
+/* ****     GETTIME    **** */
+int	print_timestamp(void);
+int	convert_timedate(t_datetime *time);
 
 /* ****     UTILITY    **** */
 int	ft_isspace(char c);

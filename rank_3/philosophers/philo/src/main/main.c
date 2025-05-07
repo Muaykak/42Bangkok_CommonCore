@@ -186,10 +186,10 @@ int	main(int argc, char **argv)
 	display_timesec(philo_info.time_to_sleep);
 	printf("eat_count_max: %llu\n", philo_info.eat_count_max);
 //	display_allthread(threads);
-	run_all_philo(threads, &philo_routine);
-	join_all_philo(threads);
-	if (philo_info.death_flag == TRUE)
-		printf(RED_COLOR "It's dead!\n" RESET_COLOR);
+//	run_all_philo(threads, &philo_routine);
+//	join_all_philo(threads);
+//	if (philo_info.death_flag == TRUE)
+//		printf(RED_COLOR "It's dead!\n" RESET_COLOR);
 	free_philo_array((void **)threads);
 	free_philo_fork(philo_info.fork);
     return (0);

@@ -6,6 +6,8 @@ MAIN_SRC_DIR = main/
 UTILS_SRC_DIR = utils/
 PARSER_SRC_DIR = parser/
 PHILO_THREAD_DIR = philo_thread/
+GETTIME_SRC_DIR = gettime/
+PHILO_ROUTINE_SRC_DIR = philo_routine/
 
 #SRC FILE
 MAIN_SRC_FILE =		main.c
@@ -26,11 +28,18 @@ PHILO_THREAD_FILE =	create_philo_thread_1.c \
 					create_philo_fork.c \
 					free_philo_array.c
 
+PHILO_ROUTINE_SRC_FILE =	
+
+GETTIME_SRC_FILE =	print_timestamp_1.c \
+					convert_timedate_1.c
+
 #FILE
 SRC	=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 		${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}} \
 		${addprefix ${SRC_DIR}${PARSER_SRC_DIR}, ${PARSER_SRC_FILE}} \
-		${addprefix ${SRC_DIR}${PHILO_THREAD_DIR}, ${PHILO_THREAD_FILE}}
+		${addprefix ${SRC_DIR}${PHILO_THREAD_DIR}, ${PHILO_THREAD_FILE}} \
+		${addprefix ${SRC_DIR}${PHILO_ROUTINE_SRC_DIR}, ${PHILO_ROUTINE_SRC_FILE}} \
+		${addprefix ${SRC_DIR}${GETTIME_SRC_DIR}, ${GETTIME_SRC_FILE}}
 
 
 OBJ	= ${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC}}
