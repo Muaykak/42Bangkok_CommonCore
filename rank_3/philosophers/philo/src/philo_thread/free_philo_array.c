@@ -24,9 +24,12 @@ void	free_philo_fork(t_philo_fork **fork)
 	printf("freeing fork\n");
 	while (fork[i] != NULL)
 	{
-		if ((fork[i])->init_flag == 1)
-			pthread_mutex_destroy(&(fork[i]->fork));
-		fork[i]->init_flag = 0;
+		if ((fork[i])->fork_mutex_init == TRUE)
+			pthread_mutex_destroy(&(fork[i]->fork_mutex));
+		fork[i]->fork_mutex_init = FALSE;
+		if ((fork[i])->status_mutex_init == TRUE)
+			pthread_mutex_destroy(&(fork[i]->status_mutex));
+		fork[i]->status_mutex_init = FALSE;
 		free(fork[i]);
 		i++;
 	}

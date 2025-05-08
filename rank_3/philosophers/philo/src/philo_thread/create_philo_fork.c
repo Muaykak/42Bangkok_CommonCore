@@ -35,10 +35,14 @@ int	create_philo_fork(t_philo_info *info)
 			return (free_philo_fork(info->fork), \
 			create_philo_fork_errmsg1(), 0);
 		memset((info->fork)[i], 0, sizeof(t_philo_fork));
-		if (pthread_mutex_init(&(((info->fork)[i])->fork), NULL) != 0)
+		if (pthread_mutex_init(&(((info->fork)[i])->fork_mutex), NULL) != 0)
 			return (free_philo_fork(info->fork), \
 			create_philo_fork_errmsg2(), 0);
-		((info->fork)[i])->init_flag = 1;
+		((info->fork)[i])->fork_mutex_init = TRUE;
+		if (pthread_mutex_init(&(((info->fork)[i])->status_mutex), NULL) != 0)
+			return (free_philo_fork(info->fork), \
+			create_philo_fork_errmsg2(), 0);
+		((info->fork)[i])->status_mutex_init = TRUE;
 		i++;
 	}
 	printf(YELLOW_COLOR "create philo_fork success\n" RESET_COLOR);

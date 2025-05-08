@@ -28,7 +28,10 @@ PHILO_THREAD_FILE =	create_philo_thread_1.c \
 					create_philo_fork.c \
 					free_philo_array.c
 
-PHILO_ROUTINE_SRC_FILE =	
+PHILO_ROUTINE_SRC_FILE =	routine_odd_1.c \
+							put_routine_1.c \
+							philo_lock_1.c \
+							philo_unlock_1.c
 
 GETTIME_SRC_FILE =	print_timestamp_1.c \
 					convert_timedate_1.c

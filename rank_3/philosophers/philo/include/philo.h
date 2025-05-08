@@ -81,13 +81,16 @@ typedef enum e_bool
 
 typedef struct	s_philo_fork
 {
-	int				init_flag;
-	pthread_mutex_t	fork;
+	t_bool			fork_mutex_init;
+	t_bool			status_mutex_init;
+	pthread_mutex_t	status_mutex;
+	t_bool			status;
+	pthread_mutex_t	fork_mutex;
 }				t_philo_fork;
 
 typedef struct	s_philo_info
 {
-	pthread_mutex_t		main_lock;
+	t_philo_fork		main_lock;
 	unsigned long long	philo_num;
 	struct timeval		time_to_die;
 	struct timeval		time_to_eat;
@@ -103,8 +106,8 @@ typedef struct	s_philo_thread
 	unsigned long long	thread_num;
 	pthread_t			thread;
 	t_bool				run_flag;
-	pthread_mutex_t		*fork_left;
-	pthread_mutex_t		*fork_right;
+	t_philo_fork		*fork_left;
+	t_philo_fork		*fork_right;
 	t_philo_info		*philo_info;
 	unsigned long long	eat_max;
 	t_bool				success_flag;
@@ -140,23 +143,30 @@ typedef struct s_datetime
 }				t_datetime;
 
 /* ** MAIN PART ** */
+
+int	philo_lock(t_philo_fork *fork);
+int	philo_unlock(t_philo_fork *fork);
 int	create_philo_fork(t_philo_info *info);
 int	create_philo_thread(t_philo_info *info, t_philo_thread ***thread_array);
 
 /* PARSER */
+
 int	get_philo_info(t_philo_info *philo_info, int argc, char **argv);
 int	get_philo_args(t_philo_args *philo_args, int argc, char **argv);
 int	ft_check_digits(char *str);
 int	ft_check_strnum(char *str);
 
 //Error message
+
 void	parser_message1(void);
 
 /* ****     GETTIME    **** */
+
 int	print_timestamp(void);
 int	convert_timedate(t_datetime *time);
 
 /* ****     UTILITY    **** */
+
 int	ft_isspace(char c);
 int	exact_delay_usec(int usec);
 

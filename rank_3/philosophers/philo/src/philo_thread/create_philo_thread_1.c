@@ -40,9 +40,9 @@ int	create_philo_thread(t_philo_info *info, t_philo_thread ***thread_array)
 		memset((*thread_array)[i], 0, sizeof(t_philo_thread));
 		((*thread_array)[i])->philo_info = info;
 		((*thread_array)[i])->thread_num = i + 1;
-		((*thread_array)[i])->fork_right = &((info->fork)[i]->fork);
+		((*thread_array)[i])->fork_right = ((info->fork)[i]);
 		if (info->philo_num > 1)
-			((*thread_array)[i])->fork_left = &((info->fork)[(i + 1) % info->philo_num]->fork);
+			((*thread_array)[i])->fork_left = ((info->fork)[(i + 1) % info->philo_num]);
 		((*thread_array)[i])->eat_max = info->eat_count_max;
 		i++;
 	}

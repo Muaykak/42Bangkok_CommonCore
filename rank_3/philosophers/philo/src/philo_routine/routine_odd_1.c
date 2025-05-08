@@ -1,0 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine_odd_1.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/07 17:33:14 by srussame          #+#    #+#             */
+/*   Updated: 2025/05/07 17:33:16 by srussame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+/*
+	routine for philosophers that is a odd number
+	the odd number will *grab* their LEFT fork THEN RIGHT fork respectively
+*/
+void	*routine_odd(void *p)
+{
+	t_philo_thread	*thread;
+
+	if (p == NULL)
+		return (NULL);
+	thread = (t_philo_thread *)p;
+	(void)thread;
+	return (NULL);
+}

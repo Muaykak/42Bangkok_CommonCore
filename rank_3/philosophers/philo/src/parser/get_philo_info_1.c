@@ -43,11 +43,19 @@ int	get_philo_info(t_philo_info *philo_info, int argc, char **argv)
 	convert_to_timeval(&(philo_info->time_to_sleep), philo_args.time_to_sleep);
 	philo_info->optional_flag = philo_args.optional_flag;
 	philo_info->eat_count_max = philo_args.eat_count_max;
-	if (pthread_mutex_init(&(philo_info->main_lock), NULL) != 0)
+	if (pthread_mutex_init(&(philo_info->main_lock.fork_mutex), NULL) != 0)
 	{
 		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
 		": get_philo_info; pthread_mutex_init() ERROR\n\n", 2);
 		return (0);
 	}
+	philo_info->main_lock.fork_mutex_init = TRUE;
+	if (pthread_mutex_init(&(philo_info->main_lock.status_mutex), NULL) != 0)
+	{
+		ft_putstr_fd(RED_COLOR "\nError " RESET_COLOR \
+		": get_philo_info; pthread_mutex_init() ERROR\n\n", 2);
+		return (0);
+	}
+	philo_info->main_lock.status_mutex_init = TRUE;
 	return (1);
 }
