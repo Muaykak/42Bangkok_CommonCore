@@ -23,6 +23,15 @@ void	*routine_odd(void *p)
 	if (p == NULL)
 		return (NULL);
 	thread = (t_philo_thread *)p;
-	(void)thread;
+	if (philo_lock(&(thread->philo_info->main_lock)) == 0)
+		return (0);
+	if (thread->philo_info->death_flag == TRUE)
+	{
+		philo_unlock(&(thread->philo_info->main_lock));
+		return (0);
+	}
+	if (philo_unlock(&(thread->philo_info->main_lock)) == 0)
+		return (0);
+	
 	return (NULL);
 }
