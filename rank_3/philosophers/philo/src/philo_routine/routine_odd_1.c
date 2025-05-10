@@ -19,10 +19,12 @@
 void	*routine_odd(void *p)
 {
 	t_philo_thread	*thread;
+	t_rountine_data	data;
 
 	if (p == NULL)
 		return (NULL);
 	thread = (t_philo_thread *)p;
+	memset(&data, 0, sizeof(t_rountine_data));
 	if (philo_lock(&(thread->philo_info->main_lock)) == 0)
 		return (0);
 	if (thread->philo_info->death_flag == TRUE)
@@ -31,7 +33,6 @@ void	*routine_odd(void *p)
 		return (0);
 	}
 	if (philo_unlock(&(thread->philo_info->main_lock)) == 0)
-		return (0);
-	
+		return (0);	
 	return (NULL);
 }
