@@ -76,7 +76,8 @@
 typedef enum e_bool
 {
 	FALSE,
-	TRUE
+	TRUE,
+	ERROR
 }			t_bool;
 
 typedef struct	s_philo_fork
@@ -142,8 +143,15 @@ typedef struct s_datetime
 	unsigned int	ms;
 }				t_datetime;
 
+typedef struct s_routine_data
+{
+	t_perform_time		deathtime;
+	unsigned long long	current_eat;
+}				t_routine_data;
+
 /* ** MAIN PART ** */
 
+t_bool	check_deathflag(t_philo_info *philo_info);
 int	philo_lock(t_philo_fork *fork);
 int	philo_unlock(t_philo_fork *fork);
 int	create_philo_fork(t_philo_info *info);

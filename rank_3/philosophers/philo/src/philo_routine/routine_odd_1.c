@@ -19,20 +19,15 @@
 void	*routine_odd(void *p)
 {
 	t_philo_thread	*thread;
-	t_rountine_data	data;
+	t_routine_data	data;
 
 	if (p == NULL)
 		return (NULL);
 	thread = (t_philo_thread *)p;
-	memset(&data, 0, sizeof(t_rountine_data));
-	if (philo_lock(&(thread->philo_info->main_lock)) == 0)
-		return (0);
-	if (thread->philo_info->death_flag == TRUE)
+	memset(&data, 0, sizeof(t_routine_data));
+	if (check_deathflag(thread->philo_info) == TRUE)
+		return (NULL);
+	while (data.current_eat < thread->philo_info->eat_count_max)
 	{
-		philo_unlock(&(thread->philo_info->main_lock));
-		return (0);
 	}
-	if (philo_unlock(&(thread->philo_info->main_lock)) == 0)
-		return (0);	
-	return (NULL);
 }
