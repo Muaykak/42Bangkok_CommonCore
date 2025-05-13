@@ -158,6 +158,6 @@ int	main(int argc, char **argv)
 	time_taken_cal(&time_take);
 	printf("\n\n time taken: %ld.%06ld Seconds\n", time_take.cal.tv_sec, time_take.cal.tv_usec);
 	free_philo_array((void **)threads);
-	free_philo_fork(philo_info.fork);
+//	free_philo_fork(philo_info.fork);
     return (0);
 }

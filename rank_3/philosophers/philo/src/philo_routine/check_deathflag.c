@@ -12,12 +12,6 @@
 
 #include "philo.h"
 
-static void	check_deathflag_errmsg1(void)
-{
-	ft_putstr_fd(RED_COLOR "\nERROR " RESET_COLOR \
-	" : \n\n", 2);
-}
-
 t_bool	check_deathflag(t_philo_info *philo_info)
 {
 	t_bool	ret;

@@ -27,7 +27,5 @@ void	*routine_odd(void *p)
 	memset(&data, 0, sizeof(t_routine_data));
 	if (check_deathflag(thread->philo_info) == TRUE)
 		return (NULL);
-	while (data.current_eat < thread->philo_info->eat_count_max)
-	{
-	}
+	return (NULL);
 }
