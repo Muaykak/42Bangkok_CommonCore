@@ -70,7 +70,7 @@
 			until i pthread_create() and pthread_join all the philosophers successfully
 		- if the pthread_create() is failed (not returning 0)
 			the death_flag in philo_info is set to TRUE and all the threads will not go
-			into routine and just quit ad return ERROR
+			into routine and just quit and return ERROR
 */
 
 typedef enum e_bool
@@ -121,14 +121,14 @@ typedef struct	s_philo_args
 	unsigned long long	time_to_die;
 	unsigned long long	time_to_eat;
 	unsigned long long	time_to_sleep;
-	int					optional_flag;
+	t_bool				eat_flag;
 	unsigned long long	eat_count_max;
 }	t_philo_args;
 
 typedef struct s_perform_time
 {
 	struct timeval	start;
-	struct timeval	cal;
+	struct timeval	end;
 }				t_perform_time;
 
 typedef struct s_datetime
@@ -146,6 +146,7 @@ typedef struct s_datetime
 typedef struct s_routine_data
 {
 	t_perform_time		deathtime;
+	t_bool				eat_flag;
 	unsigned long long	current_eat;
 }				t_routine_data;
 
@@ -173,6 +174,8 @@ void	parser_message1(void);
 int	print_timestamp(void);
 int	convert_timedate(t_datetime *time);
 
+t_bool	deathtime_start(t_perform_time *deathtimer, struct timeval time_to_die);
+
 /* ****     UTILITY    **** */
 
 int	ft_isspace(char c);
@@ -187,5 +190,7 @@ void	ft_putnbr_fd(long long n, int fd);
 
 void	free_philo_array(void **thread_array);
 void	free_philo_fork(t_philo_fork **fork);
+
+t_bool	ft_gettime(struct timeval *datetime);
 
 #endif

@@ -22,7 +22,8 @@ UTILS_SRC_FILE =	exact_delay.c \
 					ft_putstr_fd.c \
 					ft_strlen.c \
 					ft_atollu.c \
-					ft_putnbr_fd.c
+					ft_putnbr_fd.c \
+					ft_getttime_1.c
 
 PHILO_THREAD_FILE =	create_philo_thread_1.c \
 					create_philo_fork.c \
@@ -35,7 +36,8 @@ PHILO_ROUTINE_SRC_FILE =	routine_odd_1.c \
 							check_deathflag.c
 
 GETTIME_SRC_FILE =	print_timestamp_1.c \
-					convert_timedate_1.c
+					convert_timedate_1.c \
+					deathtime_start.c
 
 #FILE
 SRC	=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \

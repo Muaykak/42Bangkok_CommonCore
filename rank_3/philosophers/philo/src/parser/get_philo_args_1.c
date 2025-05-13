@@ -53,7 +53,7 @@ static int	convert_to_args(t_philo_args *philo_args, int argc, char **argv)
 	philo_args->time_to_sleep = ft_atollu(argv[4]);
 	if (argc > 5)
 	{
-		philo_args->optional_flag = 1;
+		philo_args->eat_flag = TRUE;
 		philo_args->eat_count_max = ft_atollu(argv[5]);
 	}
 	if (check_ssize_limit(philo_args) == 0)
