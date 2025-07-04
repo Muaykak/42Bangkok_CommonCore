@@ -6,15 +6,18 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 07:02:06 by srussame          #+#    #+#             */
-/*   Updated: 2025/06/28 20:10:18 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:24:36 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
-static int	ft_do_printf_sub1(const char *str, va_list args, t_ft_printf *data);
-static int	ft_do_printf_sub2(const char *str, va_list args, t_ft_printf *data, int i);
-static int	ft_do_printf(const char *str, va_list args, t_ft_printf *data);
+static int	ft_do_printf_sub1(const char *str,
+				va_list args, t_ft_printf *data);
+static int	ft_do_printf_sub2(const char *str,
+				va_list args, t_ft_printf *data, int i);
+static int	ft_do_printf(const char *str,
+				va_list args, t_ft_printf *data);
 
 int	ft_printf(int fd, const char *str, ...)
 {
@@ -58,7 +61,8 @@ static int	ft_do_printf(const char *str, va_list args, t_ft_printf *data)
 	return (data->count);
 }
 
-static int	ft_do_printf_sub2(const char *str, va_list args, t_ft_printf *data, int i)
+static int	ft_do_printf_sub2(const char *str, va_list args,
+				t_ft_printf *data, int i)
 {
 	int	sub1_ret;
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puthex_big_count.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:44:13 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:25:31 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:12:38 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	ft_puthex_big_count(unsigned int num, t_ft_printf *data)
 {

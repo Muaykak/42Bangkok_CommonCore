@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:09:55 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/26 16:09:56 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:21:02 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -22,7 +22,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	while (i < n)
 	{
 		if (*((unsigned char *)(s1 + i)) != *((unsigned char *)(s2 + i)))
-			return (*((unsigned char *)(s1 + i)) \
+			return (*((unsigned char *)(s1 + i))
 			- *((unsigned char *)(s2 + i)));
 		i++;
 	}

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:04:23 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:28:16 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:12:52 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	ft_putnbr_count(int num, t_ft_printf *data)
 {

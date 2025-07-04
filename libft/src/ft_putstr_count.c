@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:51:47 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:31:44 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:36:19 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	ft_putstr_count(char *str, t_ft_printf *data)
 {
@@ -26,7 +26,7 @@ int	ft_putstr_count(char *str, t_ft_printf *data)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (write(1, &str[i], 1) == -1)
+		if (write(data->fd, &str[i], 1) == -1)
 			return (-1);
 		data->count += 1;
 		i++;

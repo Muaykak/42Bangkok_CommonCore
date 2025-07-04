@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:22:47 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/26 14:22:50 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:19:36 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
@@ -24,8 +24,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	if (*(dst + index[0]) != '\0')
 		return (index[0] + ft_strlen(src));
 	index[1] = 0;
-	while (index[0] + index[1] < size - 1 \
-	&& *(src + index[1]) != '\0')
+	while (index[0] + index[1] < size - 1
+		&& *(src + index[1]) != '\0')
 	{
 		*(dst + index[0] + index[1]) = *(src + index[1]);
 		index[1]++;

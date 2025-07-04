@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:31:17 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/27 11:31:18 by srussame         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:22:34 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 static size_t	ft_index_no_set(char const *s1, char const *set);
 static int		ft_check_isset(char c, char const *set);
@@ -22,6 +22,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	i;
 	size_t	k;
 
+	if (!s1)
+		return (NULL);
 	k = ft_index_no_set(s1, set);
 	i = 0;
 	while (ft_check_isset(*(s1 + i), set) == 1 && i < k)

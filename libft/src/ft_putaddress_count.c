@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putaddress_count.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:33:55 by muaykak           #+#    #+#             */
-/*   Updated: 2025/04/11 17:20:27 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:11:45 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 static int	ft_puthexaddress_count(unsigned long ptr, t_ft_printf *data);
 

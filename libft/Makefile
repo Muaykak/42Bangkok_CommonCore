@@ -1,4 +1,4 @@
-SRC_FILE	= ft_isalpha.c ft_isdigit.c ft_isalnum.c \
+SRC_FILE	= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isspace.c \
 			ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c \
 			ft_bzero.c ft_memcpy.c  ft_memmove.c ft_strlcpy.c \
 			ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
@@ -40,9 +40,10 @@ ${OBJ_DIR}%.o:${SRC_DIR}%.c | ${OBJ_DIR}
 
 ${NAME}:	${OBJS}
 			@ar -rcs ${NAME} ${OBJS}
+			@echo Built ${NAME} Success!
 
 clean:
-			@rm -f ${OBJS}
+			@rm -rf ${OBJ_DIR}
 
 fclean:		clean
 			@rm -f ${NAME}

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:55:21 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/20 20:55:22 by srussame         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:22:31 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 size_t		check_newline(char *buffer);
-static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
-			t_check_leftover_data *cl);
+static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl,
+				t_check_leftover_data *cl);
 int			put_leftover(t_goread_data *gr, char **leftover,
 				t_gnl_data *gnl);
 
@@ -59,8 +59,8 @@ int	check_leftover(char **leftover, t_gnl_data *gnl)
 	return (check_leftover_sub1(leftover, gnl, &cl));
 }
 
-static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
-			t_check_leftover_data *cl)
+static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl,
+				t_check_leftover_data *cl)
 {
 	gnl->return_line = (char *)malloc(cl->old_l - cl->new_l + 1);
 	if (!gnl->return_line)
@@ -97,8 +97,8 @@ int	put_leftover(t_goread_data *gr, char **leftover,
 		return (0);
 	pl.new_i = 0;
 	while (pl.new_i < pl.new_len)
-		(*leftover)[pl.new_i++] \
-		= gnl->read_buffer[gr->checkline_ret++];
+		(*leftover)[pl.new_i++] = gnl->read_buffer\
+[gr->checkline_ret++];
 	(*leftover)[pl.new_i] = '\0';
 	return (1);
 }

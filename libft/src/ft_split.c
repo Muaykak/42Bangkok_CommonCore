@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:05:33 by srussame          #+#    #+#             */
-/*   Updated: 2024/08/27 12:05:34 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:13:14 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 static size_t	ft_countsplit(char const *s, char c);
 static int		ft_malloc_string(char **temp, char const *s, char c);
