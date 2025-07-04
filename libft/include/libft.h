@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 13:56:55 by srussame          #+#    #+#             */
-/*   Updated: 2025/04/11 17:40:10 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:10:35 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_ft_printf
 	int	count;
 }				t_ft_printf;
 
-int		ft_printf(const char *str, int fd, ...);
+int		ft_printf(int fd, const char *str, ...);
 int		ft_putchar_count(char c, t_ft_printf *data);
 int		ft_putstr_count(char *str, t_ft_printf *data);
 int		ft_putnbr_count(int num, t_ft_printf *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 07:02:06 by srussame          #+#    #+#             */
-/*   Updated: 2025/04/11 17:39:36 by srussame         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:10:18 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_do_printf_sub1(const char *str, va_list args, t_ft_printf *data);
 static int	ft_do_printf_sub2(const char *str, va_list args, t_ft_printf *data, int i);
 static int	ft_do_printf(const char *str, va_list args, t_ft_printf *data);
 
-int	ft_printf(const char *str, int fd, ...)
+int	ft_printf(int fd, const char *str, ...)
 {
 	va_list		args;
 	t_ft_printf	data;
@@ -27,7 +27,7 @@ int	ft_printf(const char *str, int fd, ...)
 		return (-1);
 	data.count = 0;
 	data.fd = fd;
-	va_start(args, fd);
+	va_start(args, str);
 	if (ft_do_printf(str, args, &data) == -1)
 		return (-1);
 	va_end(args);
