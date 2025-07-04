@@ -6,7 +6,7 @@
 /*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:29:13 by srussame          #+#    #+#             */
-/*   Updated: 2025/04/21 20:35:54 by srussame         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:02:45 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,179 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <string.h>
+# include <errno.h>
+# include <limits.h>
+# include <stdlib.h>
+
+/* ******** ANSI COLOR CODES ******** */
+# define RESET_COLOR "\033[0m"
+# define RED_COLOR "\033[31m"
+# define GREEN_COLOR "\033[32m"
+# define YELLOW_COLOR "\033[33m"
+/**/
+
+# ifndef UTC_TIMEZONE_PHILO
+#  define UTC_TIMEZONE_PHILO +7
+# endif
+
+# ifndef PTHREAD_MAX
+#  define PTHREAD_MAX 1000000
+# endif
+
+# ifndef SSIZE_MAX
+#  define SSIZE_MAX 9223372036854775807
+# endif
+
+/* HOW THE PROGRAM WORKS
+
+	1. start with checking the arguments
+		the arguments must be a number in the given range.
+
+	2. then put the infomation into the philo_info variable in the main()
+		THIS philo_info also have mutex : main_lock initialized to use
+		in the next steps.
+
+	3. then allocate the fork, the fock is simply the pthread_mutex_t 
+		with the init_flag to determine if the mutex is initialized or not
+		(for when all the fork is not fully able to initialized, it will be
+		easy to pthread_mutex_destroy all the mutex(s))
+		- is located at philo_info->fork  pointer to all the forks.
+
+	4. allocated all the philosophers up to the number given in the argument
+		- the t_philo_thread struct contain pointers that point to its left fork
+		and its right fork also have access to philo_info BUT HAVE NO ACCESS TO
+			OTHER THREADS (because both t_philo_thread and t_philo_info dont contain
+			any pointer that can have access the other threads 
+			-> ALSO the parameter that passed to the routine also doesn't contain any
+			pointers that have access to check on another thread. (I HOPE SO LOL))
+	5. start all the philosophers using the pthread_create() and loop until it reach
+		to all the threads
+	  5.1 also use pthread_join() to wait all the threads
+		- use the MUTEX (main_lock) to make all the threads waits 
+			until i pthread_create() and pthread_join all the philosophers successfully
+		- if the pthread_create() is failed (not returning 0)
+			the death_flag in philo_info is set to TRUE and all the threads will not go
+			into routine and just quit and return ERROR
+*/
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE,
+	ERROR
+}			t_bool;
+
+typedef struct	s_philo_fork
+{
+	t_bool			fork_mutex_init;
+	t_bool			status_mutex_init;
+	pthread_mutex_t	status_mutex;
+	t_bool			status;
+	pthread_mutex_t	fork_mutex;
+}				t_philo_fork;
+
+typedef struct	s_philo_info
+{
+	t_philo_fork		main_lock;
+	unsigned long long	philo_num;
+	struct timeval		time_to_die;
+	struct timeval		time_to_eat;
+	struct timeval		time_to_sleep;
+	int					optional_flag;
+	unsigned long long	eat_count_max;
+	t_philo_fork		**fork;
+	t_bool				death_flag;
+}				t_philo_info;
+
+typedef struct	s_philo_thread
+{
+	unsigned long long	thread_num;
+	pthread_t			thread;
+	t_bool				run_flag;
+	t_philo_fork		*fork_left;
+	t_philo_fork		*fork_right;
+	t_philo_info		*philo_info;
+	unsigned long long	eat_max;
+	t_bool				success_flag;
+}				t_philo_thread;
+
+typedef struct	s_philo_args
+{
+
+	unsigned long long	philo_num;
+	unsigned long long	time_to_die;
+	unsigned long long	time_to_eat;
+	unsigned long long	time_to_sleep;
+	t_bool				eat_flag;
+	unsigned long long	eat_count_max;
+}	t_philo_args;
+
+typedef struct s_perform_time
+{
+	struct timeval	start;
+	struct timeval	end;
+}				t_perform_time;
+
+typedef struct s_datetime
+{
+	struct timeval	snap_time;
+	unsigned int	year;
+	unsigned int	month;
+	unsigned int	day;
+	unsigned int	hour;
+	unsigned int	minute;
+	unsigned int	sec;
+	unsigned int	ms;
+}				t_datetime;
+
+typedef struct s_routine_data
+{
+	t_perform_time		deathtime;
+	t_bool				eat_flag;
+	unsigned long long	current_eat;
+}				t_routine_data;
+
+/* ** MAIN PART ** */
+
+t_bool	check_deathflag(t_philo_info *philo_info);
+int	philo_lock(t_philo_fork *fork);
+int	philo_unlock(t_philo_fork *fork);
+int	create_philo_fork(t_philo_info *info);
+int	create_philo_thread(t_philo_info *info, t_philo_thread ***thread_array);
+
+/* PARSER */
+
+int	get_philo_info(t_philo_info *philo_info, int argc, char **argv);
+int	get_philo_args(t_philo_args *philo_args, int argc, char **argv);
+int	ft_check_digits(char *str);
+int	ft_check_strnum(char *str);
+
+//Error message
+
+void	parser_message1(void);
+
+/* ****     GETTIME    **** */
+
+int	print_timestamp(void);
+int	convert_timedate(t_datetime *time);
+
+t_bool	deathtime_start(t_perform_time *deathtimer, struct timeval time_to_die);
+
+/* ****     UTILITY    **** */
+
+int	ft_isspace(char c);
+int	exact_delay_usec(int usec);
+
+int	time_taken_cal(t_perform_time *time);
+
+unsigned long long	ft_atollu(char *str);
+unsigned long long	ft_strlen(const char *str);
+ssize_t	ft_putstr_fd(char *str, int fd);
+void	ft_putnbr_fd(long long n, int fd);
+
+void	free_philo_array(void **thread_array);
+void	free_philo_fork(t_philo_fork **fork);
+
+t_bool	ft_gettime(struct timeval *datetime);
 
 #endif
-
