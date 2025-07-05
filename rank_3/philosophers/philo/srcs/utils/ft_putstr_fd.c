@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 18:42:50 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/05 18:00:31 by srussame         ###   ########.fr       */
+/*   Created: 2025/07/05 15:55:36 by srussame          #+#    #+#             */
+/*   Updated: 2025/07/05 16:06:16 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
-int	main(int argc, char **argv)
+void	ft_putstr_fd(char *str, int fd)
 {
-	t_philo_info	*info;
-
-	philo_parser(&info, argc, argv);
-	ft_putstr_fd(RED"HELLO WORLD\n"RESET, 2);
-	return (0);
+	if (!str)
+		return ;
+	write(fd, str, ft_strlen(str));
 }
-

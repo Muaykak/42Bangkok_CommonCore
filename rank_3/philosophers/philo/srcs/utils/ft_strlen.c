@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 18:42:50 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/05 18:00:31 by srussame         ###   ########.fr       */
+/*   Created: 2025/07/05 15:57:47 by srussame          #+#    #+#             */
+/*   Updated: 2025/07/05 16:06:49 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
-int	main(int argc, char **argv)
+int	ft_strlen(char *str)
 {
-	t_philo_info	*info;
+	int	i;
 
-	philo_parser(&info, argc, argv);
-	ft_putstr_fd(RED"HELLO WORLD\n"RESET, 2);
-	return (0);
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
-

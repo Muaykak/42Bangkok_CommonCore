@@ -7,6 +7,8 @@ OBJ_DIR = obj/
 OBJ		=	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC_FILE}}
 
 SRC_FILE	=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
+				${addprefix ${SRC_DIR}${PARSER_SRC_DIR}, ${PARSER_SRC_FILE}} \
+				${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}}
 
 
 #------  SRC_FILE -------#
@@ -15,7 +17,10 @@ MAIN_SRC_DIR	=
 MAIN_SRC_FILE	=	main.c
 
 PARSER_SRC_DIR	=	parser/
-PARSER_SRC_FILE	=	
+PARSER_SRC_FILE	=	parser.c
+
+UTILS_SRC_DIR	=	utils/
+UTILS_SRC_FILE	=	ft_putstr_fd.c ft_strlen.c
 
 #-------  HEADER --------#
 
