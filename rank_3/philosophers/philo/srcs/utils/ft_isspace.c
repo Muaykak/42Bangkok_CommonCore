@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 18:42:50 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/05 23:31:31 by srussame         ###   ########.fr       */
+/*   Created: 2025/07/05 20:59:36 by srussame          #+#    #+#             */
+/*   Updated: 2025/07/05 21:11:24 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
-int	main(int argc, char **argv)
+int	ft_isspace(int c)
 {
-	t_philo_info	info;
-
-	philo_parser(&info, argc, argv);
+	if (c == ' ' || c == '\f' || c == '\n' 
+		|| c == '\r' || c == '\t' || c == '\v')
+		return (1);
+	return (0);
 }
-

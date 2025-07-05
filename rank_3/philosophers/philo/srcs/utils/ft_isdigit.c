@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 18:42:50 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/05 23:31:31 by srussame         ###   ########.fr       */
+/*   Created: 2025/07/05 21:31:00 by srussame          #+#    #+#             */
+/*   Updated: 2025/07/05 21:32:12 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
-int	main(int argc, char **argv)
+int	ft_isdigit(int c)
 {
-	t_philo_info	info;
-
-	philo_parser(&info, argc, argv);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
-

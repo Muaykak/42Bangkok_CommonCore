@@ -20,7 +20,8 @@ PARSER_SRC_DIR	=	parser/
 PARSER_SRC_FILE	=	parser.c
 
 UTILS_SRC_DIR	=	utils/
-UTILS_SRC_FILE	=	ft_putstr_fd.c ft_strlen.c
+UTILS_SRC_FILE	=	ft_putstr_fd.c ft_strlen.c ft_isspace.c  ft_philo_atoi.c \
+					ft_isdigit.c ft_putnbr_fd.c
 
 #-------  HEADER --------#
 
