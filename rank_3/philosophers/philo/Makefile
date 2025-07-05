@@ -6,12 +6,16 @@ SRC_DIR = srcs/
 OBJ_DIR = obj/
 OBJ		=	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC_FILE}}
 
-SRC_FILE	=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} 
+SRC_FILE	=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
+
 
 #------  SRC_FILE -------#
 
 MAIN_SRC_DIR	=	
 MAIN_SRC_FILE	=	main.c
+
+PARSER_SRC_DIR	=	parser/
+PARSER_SRC_FILE	=	
 
 #-------  HEADER --------#
 
@@ -36,15 +40,16 @@ INCLUDE	= -I ${PHILO_HEADER}
 
 all: ${NAME}
 
-${NAME}: ${OBJ}
-	${CC} ${CFLAGS} ${OBJ} ${INCLUDE} ${LIB} -o ${NAME}
+${NAME}: ${OBJ} ${PHILO_HEADER}
+	@${CC} ${CFLAGS} ${OBJ} ${INCLUDE} ${LIB} -o ${NAME}
+	@echo built ${NAME}
 
 ${OBJ_DIR}:
-		@mkdir -p ${OBJ_DIR}
+	@mkdir -p ${OBJ_DIR}
 
-${OBJ_DIR}%.o: ${SRC_DIR}%.c ${HEADER} | ${OBJ_DIR}
+${OBJ_DIR}%.o: ${SRC_DIR}%.c ${PHILO_HEADER} | ${OBJ_DIR}
 	@mkdir -p ${dir $@}
-	${CC} ${CFLAGS} -c $< ${INCLUDE} -o $@
+	@${CC} ${CFLAGS} -c $< ${INCLUDE} -o $@
 	@echo built object $@
 
 clean:

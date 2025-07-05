@@ -6,14 +6,17 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:42:50 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/04 18:43:36 by srussame         ###   ########.fr       */
+/*   Updated: 2025/07/05 09:01:24 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	printf("hello world \n");
+	(void)argc;
+	(void)argv;
+	write(1, RED "Hello\n", 13);
 	return (0);
 }
+

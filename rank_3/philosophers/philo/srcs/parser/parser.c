@@ -1,39 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/05 08:58:44 by srussame         ###   ########.fr       */
+/*   Created: 2025/07/05 08:38:33 by srussame          #+#    #+#             */
+/*   Updated: 2025/07/05 08:48:14 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../../include/philo.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/time.h>
-# include <pthread.h>
-# include <stdbool.h>
-
-/* COLORS */
-# ifndef RED
-#  define RED "\033[0;31m"
-# endif
-# ifndef GREEN
-#  define GREEN "\033[0;32m"
-# endif
-# ifndef YELLOW
-#  define YELLOW "\033[0;33m"
-# endif
-# ifndef RESET
-#  define RESET "\033[0;37m"
-# endif
-
-//
-
-#endif
