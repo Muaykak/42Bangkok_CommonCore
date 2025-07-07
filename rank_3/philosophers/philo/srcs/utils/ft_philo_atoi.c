@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philo_atoi.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 20:51:00 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/05 22:32:12 by srussame         ###   ########.fr       */
+/*   Updated: 2025/07/06 16:20:32 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_philo_atoi(char *strnum)
 		strnum++;
 	if ((ft_isdigit(*strnum) == 0 && *strnum != '+')
 	|| (*strnum == '+' && !ft_isdigit(*(strnum + 1))))
-		return	(ft_putstr_fd(PHILO_ERR_MSG_3, 2), 0);	
+		return	(ft_putstr_fd(PHILO_ERR_MSG_1, 2), 0);	
 	if (*strnum == '+')
 		strnum++;
 	while (*strnum != '\0' && *strnum == '0')

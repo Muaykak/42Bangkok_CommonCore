@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/05 23:32:27 by srussame         ###   ########.fr       */
+/*   Updated: 2025/07/07 15:16:26 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,37 @@
 # endif
 
 # ifndef PHILO_ERR_MSG_1
-#  define PHILO_ERR_MSG_1 RED"\nERROR: This program \
-takes only "YELLOW"positive integer.\n"RESET"(each argument can \
+#  define PHILO_ERR_MSG_1 RED"ERROR: This program \
+takes only "YELLOW"positive integer.\n"RESET"(each argument MUST \
 contain only 1 number and should not contain \nany other things accept \
-whitespaces (Eg. the"GREEN" \"      +21 \" is accepted"RESET")\n\n"
+whitespaces (Eg. the"GREEN" \"      +21 \" is accepted"RESET")\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_2
-#  define PHILO_ERR_MSG_2 RED"\nError: philo"\
-":This program takes 5-6 arguments as follows\n\n"RESET \
+#  define PHILO_ERR_MSG_2 RED"Error: philo"\
+":This program takes 4-5 arguments as follows\n\n"RESET \
 YELLOW"1. number_of_philosophers \n"RESET \
 YELLOW"2. time_to_die (in "RESET"milliseconds"YELLOW")\n"RESET \
 YELLOW"3. time_to_eat (in "RESET"milliseconds"YELLOW")\n"RESET \
 YELLOW"4. time_to_sleep (in "RESET"milliseconds"YELLOW")\n"RESET \
-"(optional)"YELLOW"5. each philosophers eat max.\n\n"RESET
+"(optional)"YELLOW"5. each philosophers eat max.\n"RESET
 # endif
 
 # ifndef PHILO_ERR_MSG_3
 #  define PHILO_ERR_MSG_3 \
-RED"\nError: philo: invalid argument.\n"\
-RESET"\tThe argument is empty, or the format is invalid\n"
+RED"Error: philo: initialization failed.\n"RESET
 # endif
 
 # ifndef PHILO_ERR_MSG_4
 #  define PHILO_ERR_MSG_4 \
-RED"\nError: philo: The argument is out of range.\n"\
-RESET"\tThe number should be more than "YELLOW"1"RESET \
-" but not \nexceed MAX INT ("YELLOW"2147483647"RESET")\n\n"
+RED"Error: philo: The argument is out of range.\n"\
+RESET"\tThe number should be MORE THAN "YELLOW"0"RESET \
+" but not \nexceed MAX INT ("YELLOW"2147483647"RESET")\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_5
 #  define PHILO_ERR_MSG_5 \
-RED"\nError: philo: The argument EXCEED the project's defined limit: "RESET
+RED"Error: philo: The argument EXCEED the project's defined limit: "RESET
 # endif
 
 /* STRUCTURE */
@@ -94,13 +93,27 @@ RED"\nError: philo: The argument EXCEED the project's defined limit: "RESET
 
 */
 
+typedef struct	s_thread_arg{
+	pthread_mutex_t	*left;
+	pthread_mutex_t	*right;
+	pthread_mutex_t	*print_lock;
+	pthread_mutex_t	*status_lock;
+	int				*dead_status;
+}				t_thread_arg;
+
 typedef struct	s_philo_info
 {
-	int	p_num;
-	int	t_die;
-	int	t_eat;
-	int	t_slp;
-	int	e_max;
+	int				p_num;
+	int				t_die;
+	int				t_eat;
+	int				t_slp;
+	int				e_max;
+	pthread_mutex_t	*all_fork;
+	int				dead_status;
+	pthread_mutex_t	status_mutex;
+	pthread_mutex_t	print_lock;
+	pthread_t		*all_philo_thread;
+	t_thread_arg	*all_thread_arg;
 }				t_philo_info;
 
 /* ########################################  */
@@ -108,6 +121,11 @@ typedef struct	s_philo_info
 /* parser */
 
 bool	philo_parser(t_philo_info *info, int argc, char **argv);
+
+/* Initialization */
+
+bool	philo_info_init(t_philo_info *info);
+bool	philo_thread_init(t_philo_info *info);
 
 /* utility */
 
@@ -117,5 +135,8 @@ int		ft_isspace(int c);
 void	ft_putstr_fd(char *str, int fd);
 int		ft_isdigit(int c);
 void	ft_putnbr_fd(int n, int fd);
+
+void	free_mutex_array(pthread_mutex_t *mutex_array, int array_size);
+void	free_philo_info(t_philo_info *info);
 
 #endif

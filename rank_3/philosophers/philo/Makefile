@@ -8,6 +8,7 @@ OBJ		=	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC_FILE}}
 
 SRC_FILE	=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 				${addprefix ${SRC_DIR}${PARSER_SRC_DIR}, ${PARSER_SRC_FILE}} \
+				${addprefix ${SRC_DIR}${INIT_SRC_DIR}, ${INIT_SRC_FILE}} \
 				${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}}
 
 
@@ -19,9 +20,13 @@ MAIN_SRC_FILE	=	main.c
 PARSER_SRC_DIR	=	parser/
 PARSER_SRC_FILE	=	parser.c
 
+INIT_SRC_DIR	=	init/
+INIT_SRC_FILE	=	philo_info_init.c philo_thread_init.c
+
 UTILS_SRC_DIR	=	utils/
 UTILS_SRC_FILE	=	ft_putstr_fd.c ft_strlen.c ft_isspace.c  ft_philo_atoi.c \
-					ft_isdigit.c ft_putnbr_fd.c
+					ft_isdigit.c ft_putnbr_fd.c \
+					free_philo_info.c
 
 #-------  HEADER --------#
 
@@ -38,7 +43,7 @@ NAME	= philo
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 LIB		= -lpthread
-INCLUDE	= -I ${PHILO_HEADER}
+INCLUDE	= -I ${PHILO_HEADER_DIR}
 
 #####################################################################################
 
@@ -53,7 +58,7 @@ ${NAME}: ${OBJ} ${PHILO_HEADER}
 ${OBJ_DIR}:
 	@mkdir -p ${OBJ_DIR}
 
-${OBJ_DIR}%.o: ${SRC_DIR}%.c ${PHILO_HEADER} | ${OBJ_DIR}
+${OBJ_DIR}%.o: ${SRC_DIR}%.c ${PHILO_HEADER} Makefile | ${OBJ_DIR}
 	@mkdir -p ${dir $@}
 	@${CC} ${CFLAGS} -c $< ${INCLUDE} -o $@
 	@echo built object $@
