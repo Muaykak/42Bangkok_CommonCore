@@ -63,7 +63,7 @@ bool	philo_parser(t_philo_info *info, int argc, char **argv)
 	if (argc < 5 || argc > 6)	
 		return (ft_putstr_fd(PHILO_ERR_MSG_2, 2), false);
 	memset(info, 0, sizeof(t_philo_info));
-	if (argc == 6)
+	if (argc == 5)
 		info->e_max = -1;
 	if (argv_to_info(info, argc, argv) == false
 	|| check_philo_limit(info) == false)

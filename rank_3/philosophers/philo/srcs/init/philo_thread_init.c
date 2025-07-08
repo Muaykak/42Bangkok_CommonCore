@@ -12,6 +12,19 @@
 
 #include "../../include/philo.h"
 
+static void	philo_thread_arg_init_sub1(t_philo_info *info, int i)
+{
+	(info->all_thread_arg[i]).thread_num = i + 1;
+	(info->all_thread_arg[i]).print_lock = &(info->print_lock);
+	pthread_mutex_init(&(info->all_thread_arg[i].status_lock), NULL);
+	(info->all_thread_arg[i]).status = UNACTIVE;
+	(info->all_thread_arg[i]).start_time = &(info->start_time);
+	(info->all_thread_arg[i]).t_die = info->t_die;
+	(info->all_thread_arg[i]).t_eat = info->t_eat;
+	(info->all_thread_arg[i]).t_slp = info->t_slp;
+	(info->all_thread_arg[i]).e_max = info->e_max;
+}
+
 static void	philo_thread_arg_init(t_philo_info *info)
 {
 	int	i;
@@ -32,11 +45,7 @@ static void	philo_thread_arg_init(t_philo_info *info)
 			(info->all_thread_arg[i]).right =
 			&(info->all_fork[(i + 1) % info->p_num]);
 		}
-		(info->all_thread_arg[i]).thread_num = i + 1;
-		(info->all_thread_arg[i]).print_lock = &(info->print_lock);
-		pthread_mutex_init(&(info->all_thread_arg[i].status_lock), NULL);
-		(info->all_thread_arg[i]).status = ACTIVE;
-		(info->all_thread_arg[i]).start_time = &(info->start_time);
+		philo_thread_arg_init_sub1(info, i);
 		i++;
 	}
 }

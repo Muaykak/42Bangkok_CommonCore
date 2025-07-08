@@ -101,6 +101,7 @@ or pthread_mutex_unlock()\n"RESET
 
 typedef enum	e_philo_status
 {
+	UNACTIVE,
 	ACTIVE,
 	FINISH,
 	DEAD,
@@ -112,11 +113,14 @@ typedef struct	s_thread_arg
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*left;
 	int				thread_num;
+	int				t_die;
+	int				t_eat;
+	int				t_slp;
+	int				e_max;
 	pthread_mutex_t	*print_lock;
 	pthread_mutex_t	status_lock;
 	t_philo_status	status;
 	struct timeval	*start_time;
-
 }				t_thread_arg;
 
 typedef struct	s_philo_info
@@ -137,23 +141,28 @@ typedef struct	s_philo_info
 
 /* parser */
 
-bool	philo_parser(t_philo_info *info, int argc, char **argv);
+bool			philo_parser(t_philo_info *info, int argc, char **argv);
 
 /* Initialization */
 
-bool	philo_info_init(t_philo_info *info);
-bool	philo_thread_init(t_philo_info *info);
+bool			philo_info_init(t_philo_info *info);
+bool			philo_thread_init(t_philo_info *info);
+
+/* Thread Management */
+t_philo_status	get_philo_status(t_thread_arg *thread_arg);
+bool			set_philo_routine(t_thread_arg \
+*arg, t_philo_status new_status);
 
 /* utility */
 
-int		ft_philo_atoi(char *strnum);
-int		ft_strlen(char *str);
-int		ft_isspace(int c);
-void	ft_putstr_fd(char *str, int fd);
-int		ft_isdigit(int c);
-void	ft_putnbr_fd(int n, int fd);
+int				ft_philo_atoi(char *strnum);
+int				ft_strlen(char *str);
+int				ft_isspace(int c);
+void			ft_putstr_fd(char *str, int fd);
+int				ft_isdigit(int c);
+void			ft_putnbr_fd(int n, int fd);
 
-void	free_mutex_array(pthread_mutex_t *mutex_array, int array_size);
-void	free_philo_info(t_philo_info *info);
+void			free_mutex_array(pthread_mutex_t *mutex_array, int array_size);
+void			free_philo_info(t_philo_info *info);
 
 #endif
