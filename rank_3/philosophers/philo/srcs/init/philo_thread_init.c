@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 13:13:59 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/07 15:43:42 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/08 09:11:21 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ static void	philo_thread_arg_init(t_philo_info *info)
 			(info->all_thread_arg[i]).right =
 			&(info->all_fork[(i + 1) % info->p_num]);
 		}
+		(info->all_thread_arg[i]).thread_num = i + 1;
 		(info->all_thread_arg[i]).print_lock = &(info->print_lock);
-		(info->all_thread_arg[i]).status_lock = &(info->status_mutex);
-		(info->all_thread_arg[i]).dead_status = &(info->dead_status);
+		pthread_mutex_init(&(info->all_thread_arg[i].status_lock), NULL);
+		(info->all_thread_arg[i]).status = ACTIVE;
+		(info->all_thread_arg[i]).start_time = &(info->start_time);
 		i++;
 	}
 }

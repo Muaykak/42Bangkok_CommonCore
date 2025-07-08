@@ -9,6 +9,7 @@ OBJ		=	${patsubst ${SRC_DIR}%.c, ${OBJ_DIR}%.o, ${SRC_FILE}}
 SRC_FILE	=	${addprefix ${SRC_DIR}${MAIN_SRC_DIR}, ${MAIN_SRC_FILE}} \
 				${addprefix ${SRC_DIR}${PARSER_SRC_DIR}, ${PARSER_SRC_FILE}} \
 				${addprefix ${SRC_DIR}${INIT_SRC_DIR}, ${INIT_SRC_FILE}} \
+				${addprefix ${SRC_DIR}${THREAD_MANAGE_SRC_DIR}, ${THREAD_MANAGE_SRC_FILE}} \
 				${addprefix ${SRC_DIR}${UTILS_SRC_DIR}, ${UTILS_SRC_FILE}}
 
 
@@ -19,6 +20,9 @@ MAIN_SRC_FILE	=	main.c
 
 PARSER_SRC_DIR	=	parser/
 PARSER_SRC_FILE	=	parser.c
+
+THREAD_MANAGE_SRC_DIR	=	thread_manage/
+THREAD_MANAGE_SRC_FILE	=	check_dead_status.c
 
 INIT_SRC_DIR	=	init/
 INIT_SRC_FILE	=	philo_info_init.c philo_thread_init.c

@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/07 15:16:26 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/08 09:14:05 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,12 @@ RESET"\tThe number should be MORE THAN "YELLOW"0"RESET \
 RED"Error: philo: The argument EXCEED the project's defined limit: "RESET
 # endif
 
+# ifndef PHILO_ERR_MSG_6
+#  define PHILO_ERR_MSG_6 \
+RED"Error: philo: having some errors on pthread_mutex_lock() \
+or pthread_mutex_unlock()\n"RESET
+# endif
+
 /* STRUCTURE */
 /*
 	p_num = number of philosophers
@@ -93,12 +99,24 @@ RED"Error: philo: The argument EXCEED the project's defined limit: "RESET
 
 */
 
-typedef struct	s_thread_arg{
-	pthread_mutex_t	*left;
+typedef enum	e_philo_status
+{
+	ACTIVE,
+	FINISH,
+	DEAD,
+	ERROR
+}				t_philo_status;
+
+typedef struct	s_thread_arg
+{
 	pthread_mutex_t	*right;
+	pthread_mutex_t	*left;
+	int				thread_num;
 	pthread_mutex_t	*print_lock;
-	pthread_mutex_t	*status_lock;
-	int				*dead_status;
+	pthread_mutex_t	status_lock;
+	t_philo_status	status;
+	struct timeval	*start_time;
+
 }				t_thread_arg;
 
 typedef struct	s_philo_info
@@ -109,11 +127,10 @@ typedef struct	s_philo_info
 	int				t_slp;
 	int				e_max;
 	pthread_mutex_t	*all_fork;
-	int				dead_status;
-	pthread_mutex_t	status_mutex;
-	pthread_mutex_t	print_lock;
 	pthread_t		*all_philo_thread;
 	t_thread_arg	*all_thread_arg;
+	struct timeval	start_time;
+	pthread_mutex_t	print_lock;
 }				t_philo_info;
 
 /* ########################################  */
