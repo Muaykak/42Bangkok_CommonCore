@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   set_philo_status.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            #+#  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-08 12:06:51 by muaykak           #+#    #+#             */
-/*   Updated: 2025-07-08 12:06:51 by muaykak          ###   ########.fr       */
+/*   Created: 2025/07/08 12:06:51 by muaykak           #+#    #+#             */
+/*   Updated: 2025/07/08 14:17:04 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-bool	set_philo_routine(t_thread_arg *arg, t_philo_status new_status)
+bool	set_philo_status(t_thread_arg *arg, t_philo_status new_status)
 {
 
 	if (!arg)

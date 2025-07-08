@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/08 09:14:05 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/08 14:17:33 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ bool			philo_thread_init(t_philo_info *info);
 
 /* Thread Management */
 t_philo_status	get_philo_status(t_thread_arg *thread_arg);
-bool			set_philo_routine(t_thread_arg \
+bool			set_philo_status(t_thread_arg \
 *arg, t_philo_status new_status);
 
 /* utility */
