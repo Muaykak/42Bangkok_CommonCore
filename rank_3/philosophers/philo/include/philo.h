@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/09 10:39:37 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/09 14:34:39 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,16 @@ GREEN"is finished eating"RESET
 
 */
 
+typedef enum	e_log_status
+{
+	LOG_THINK,
+	LOG_TAKE_FORK,
+	LOG_EAT,
+	LOG_SLEEP,
+	LOG_FINISH,
+	LOG_DEAD
+}				t_log_status;
+
 typedef enum	e_philo_status
 {
 	UNACTIVE,
@@ -153,6 +163,7 @@ typedef struct	s_thread_arg
 	int				t_eat;
 	int				t_slp;
 	int				e_max;
+	size_t			eat_count;
 	pthread_mutex_t	*print_lock;
 	bool			*print_status;
 	pthread_mutex_t	status_lock;
@@ -193,7 +204,8 @@ bool			set_philo_status(t_thread_arg \
 *arg, t_philo_status new_status);
 bool			set_print_status(t_thread_arg *arg, bool new_status);
 
-bool			print_philo_log(char *str, t_thread_arg *arg);
+bool			print_philo_log(char *str, t_thread_arg *arg,
+					t_log_status status);
 
 /* utility */
 
@@ -206,5 +218,7 @@ void			ft_putnbr_fd(int n, int fd);
 
 void			free_mutex_array(pthread_mutex_t *mutex_array, int array_size);
 void			free_philo_info(t_philo_info *info);
+
+void			ft_philo_wait(int time_ms, t_thread_arg *arg);
 
 #endif
