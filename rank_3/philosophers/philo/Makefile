@@ -28,7 +28,7 @@ PHILO_ROUTINE_SRC_FILE	=	philo_routine.c philo_eat.c
 THREAD_MANAGE_SRC_DIR	=	thread_manage/
 THREAD_MANAGE_SRC_FILE	=	check_dead_status.c get_philo_status.c \
 							create_all_philo.c philo_routine_1.c \
-							set_philo_status.c
+							set_philo_status.c set_print_status.c
 
 INIT_SRC_DIR	=	init/
 INIT_SRC_FILE	=	philo_info_init.c philo_thread_init.c

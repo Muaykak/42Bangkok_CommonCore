@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 10:44:09 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/07 15:43:45 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/09 05:24:02 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,9 @@ bool	all_fork_init(t_philo_info *info)
 
 bool	main_lock_init(t_philo_info *info)
 {
-	if (pthread_mutex_init(&(info->status_mutex), NULL) != 0)
-		return (free_mutex_array(info->all_fork, info->p_num), false);
 	if (pthread_mutex_init(&(info->print_lock), NULL) != 0)
-	{
-		pthread_mutex_destroy(&(info->status_mutex));
 		return (free_mutex_array(info->all_fork, info->p_num), false);
-	}
+	info->print_status = true;
 	return (true);
 }
 

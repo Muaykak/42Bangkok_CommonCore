@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/08 14:17:33 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/09 10:39:37 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,11 @@ RED"Error: philo: having some errors on pthread_mutex_lock() \
 or pthread_mutex_unlock()\n"RESET
 # endif
 
+# ifndef PHILO_ERR_MSG_7
+#  define PHILO_ERR_MSG_7 \
+RED"Error: philo: gettimeofday(): Error occurred\n"RESET
+# endif
+
 /* STRUCTURE */
 /*
 	p_num = number of philosophers
@@ -118,6 +123,7 @@ typedef struct	s_thread_arg
 	int				t_slp;
 	int				e_max;
 	pthread_mutex_t	*print_lock;
+	bool			*print_status;
 	pthread_mutex_t	status_lock;
 	t_philo_status	status;
 	struct timeval	*start_time;
@@ -134,6 +140,7 @@ typedef struct	s_philo_info
 	pthread_t		*all_philo_thread;
 	t_thread_arg	*all_thread_arg;
 	struct timeval	start_time;
+	bool			print_status;
 	pthread_mutex_t	print_lock;
 }				t_philo_info;
 
@@ -149,9 +156,11 @@ bool			philo_info_init(t_philo_info *info);
 bool			philo_thread_init(t_philo_info *info);
 
 /* Thread Management */
-t_philo_status	get_philo_status(t_thread_arg *thread_arg);
+t_philo_status	get_philo_status(t_thread_arg *arg);
+bool			get_print_status(t_thread_arg *arg);
 bool			set_philo_status(t_thread_arg \
 *arg, t_philo_status new_status);
+bool			set_print_status(t_thread_arg *arg, bool new_status);
 
 /* utility */
 
