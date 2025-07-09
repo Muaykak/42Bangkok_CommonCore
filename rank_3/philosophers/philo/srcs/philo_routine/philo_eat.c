@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:37:55 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 14:38:12 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/09 18:29:14 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ bool	is_philo_alive(struct timeval *death_timer, t_thread_arg *arg)
 	return (true);
 }
 
+bool	handle_one_philo(t_thread_arg *arg)
+{
+	ft_philo_wait(arg->t_die, arg);
+	pthread_mutex_unlock(arg->right);
+	print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD);
+	return (false);
+}
+
 bool	philo_take_fork(t_thread_arg *arg)
 {
 	struct timeval	death_timer;
@@ -47,7 +55,9 @@ bool	philo_take_fork(t_thread_arg *arg)
 	if (is_philo_alive(&death_timer, arg) == false)
 		return (print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD),
 		pthread_mutex_unlock(arg->right), false);
-	print_philo_log(PHILO_LOG_TAKE_FORK, arg, LOG_DEAD);
+	print_philo_log(PHILO_LOG_TAKE_FORK, arg, LOG_TAKE_FORK);
+	if (arg->left == NULL)
+		return (handle_one_philo(arg));
 	if (pthread_mutex_lock(arg->left) != 0)
 		return (set_philo_status(arg, ERROR),
 		pthread_mutex_unlock(arg->right), false);	
@@ -56,6 +66,17 @@ bool	philo_take_fork(t_thread_arg *arg)
 		pthread_mutex_unlock(arg->right),
 		pthread_mutex_unlock(arg->left), false);
 	print_philo_log(PHILO_LOG_TAKE_FORK, arg, LOG_TAKE_FORK);
+	return (true);
+}
+
+bool	place_down_fork(t_thread_arg *arg)
+{
+	if (!arg)
+		return (false);
+	if (pthread_mutex_unlock(arg->right) != 0)
+		ft_putstr_fd(PHILO_ERR_MSG_6, 2);
+	if (pthread_mutex_unlock(arg->left) != 0)
+		ft_putstr_fd(PHILO_ERR_MSG_6, 2);
 	return (true);
 }
 
@@ -69,6 +90,7 @@ void	philo_eat(t_thread_arg *arg)
 		return ;
 	print_philo_log(PHILO_LOG_EAT, arg, LOG_EAT);
 	ft_philo_wait(arg->t_eat, arg);
+	place_down_fork(arg);
 	if (arg->e_max != -1)
 		arg->eat_count++;
 	if (arg->e_max != -1 && arg->eat_count >= (size_t)arg->e_max)

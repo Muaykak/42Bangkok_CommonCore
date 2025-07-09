@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/09 14:34:39 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/09 17:28:00 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,16 @@ or pthread_mutex_unlock()\n"RESET
 # ifndef PHILO_ERR_MSG_7
 #  define PHILO_ERR_MSG_7 \
 RED"Error: philo: gettimeofday(): Error occurred\n"RESET
+# endif
+
+# ifndef PHILO_ERR_MSG_8
+#  define PHILO_ERR_MSG_8 \
+RED"Error: philo: phtread_create(): Error occurred\n"RESET
+# endif
+
+# ifndef PHILO_ERR_MSG_9
+#  define PHILO_ERR_MSG_9 \
+RED"Error: philo: phtread_join(): Error occurred\n"RESET
 # endif
 
 # ifndef PHILO_LOG_TAKE_FORK
@@ -187,6 +197,15 @@ typedef struct	s_philo_info
 }				t_philo_info;
 
 /* ########################################  */
+
+/* MAIN PART */
+
+void	*philo_routine(void *ptr);
+void	philo_eat(t_thread_arg *arg);
+void	philo_sleep(t_thread_arg *arg);
+bool	create_all_philo(t_philo_info *info);
+bool	join_all_philo(t_philo_info *info);
+bool	philo_simulation(t_philo_info *info);
 
 /* parser */
 

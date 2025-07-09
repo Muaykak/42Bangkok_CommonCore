@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 13:58:54 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 14:24:45 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/09 18:44:21 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static bool	finish_time(struct timeval *result, int time_ms)
 {
-	struct timeval	curr_time;
-
 	if (!result)
 		return (false);
 	if (gettimeofday(result, NULL) != 0)
@@ -34,14 +32,20 @@ static bool	finish_time(struct timeval *result, int time_ms)
 	return (true);
 }
 
-static bool	is_finish_wait(struct timeval *end_wait)
+bool	is_finish_wait(struct timeval *end_wait)
 {
 	struct timeval	curr_time;
 
-	if (!end_wait || gettimeofday(&curr_time, NULL) != 0)
+	if (!end_wait)
+		return (false);
+	if (gettimeofday(&curr_time, NULL) != 0)
 		return (ft_putstr_fd(PHILO_ERR_MSG_7, 2), false);
-	if ((curr_time.tv_sec > end_wait->tv_sec)
-	|| (curr_time.tv_usec >= end_wait->tv_usec))
+	if (curr_time.tv_sec < end_wait->tv_sec)
+		return (false);
+	if (curr_time.tv_sec > end_wait->tv_sec)
+		return (true);
+	if ((curr_time.tv_sec == end_wait->tv_sec)
+	&& (curr_time.tv_usec >= end_wait->tv_usec))
 		return (true);
 	return (false);
 }

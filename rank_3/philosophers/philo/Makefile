@@ -23,12 +23,11 @@ PARSER_SRC_DIR	=	parser/
 PARSER_SRC_FILE	=	parser.c
 
 PHILO_ROUTINE_SRC_DIR	=	philo_routine/
-PHILO_ROUTINE_SRC_FILE	=	philo_routine.c philo_eat.c
+PHILO_ROUTINE_SRC_FILE	=	philo_routine.c philo_eat.c philo_sleep.c print_log.c
 
 THREAD_MANAGE_SRC_DIR	=	thread_manage/
-THREAD_MANAGE_SRC_FILE	=	check_dead_status.c get_philo_status.c \
-							create_all_philo.c philo_routine_1.c \
-							set_philo_status.c set_print_status.c
+THREAD_MANAGE_SRC_FILE	=	create_all_philo.c get_status.c \
+							philo_simulation.c set_status.c
 
 INIT_SRC_DIR	=	init/
 INIT_SRC_FILE	=	philo_info_init.c philo_thread_init.c
@@ -36,7 +35,7 @@ INIT_SRC_FILE	=	philo_info_init.c philo_thread_init.c
 UTILS_SRC_DIR	=	utils/
 UTILS_SRC_FILE	=	ft_putstr_fd.c ft_strlen.c ft_isspace.c  ft_philo_atoi.c \
 					ft_isdigit.c ft_putnbr_fd.c \
-					free_philo_info.c
+					free_philo_info.c ft_philo_wait.c
 
 #-------  HEADER --------#
 

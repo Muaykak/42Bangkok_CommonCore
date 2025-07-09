@@ -3,16 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   create_all_philo.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            #+#  +:+       +#+        */
+/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-08 10:40:32 by muaykak           #+#    #+#             */
-/*   Updated: 2025-07-08 10:40:32 by muaykak          ###   ########.fr       */
+/*   Created: 2025/07/08 10:40:32 by muaykak           #+#    #+#             */
+/*   Updated: 2025/07/09 17:23:54 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-bool	create_all_philo(t_philo_info *info)
+bool	clear_philo_create_error(t_philo_info *info)
+{
+	int	i;
+
+	i = 0;
+	info->print_status = false;
+	if (pthread_mutex_unlock(&info->print_lock) != 0)
+		return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
+	while (i < info->p_num)
+	{
+		if ((info->all_thread_arg)[i].status == UNACTIVE)
+			break ;
+		if	(pthread_join((info->all_philo_thread)[i], NULL) != 0)
+			return (ft_putstr_fd(PHILO_ERR_MSG_9, 2), false);
+		i++;
+	}
+	return (true);
+}
+
+bool	join_all_philo(t_philo_info *info)
 {
 	int	i;
 
@@ -21,6 +40,36 @@ bool	create_all_philo(t_philo_info *info)
 	i = 0;
 	while (i < info->p_num)
 	{
-		pthread_create(&(info->all_philo_thread[i]), NULL, )
+		if	(pthread_join((info->all_philo_thread)[i], NULL) != 0)
+			return (ft_putstr_fd(PHILO_ERR_MSG_9, 2), false);
+		i++;
 	}
+	return (true);
+}
+
+bool	create_all_philo(t_philo_info *info)
+{
+	int	i;
+
+	if (!info)
+		return (false);
+	i = 0;
+	if (pthread_mutex_lock(&info->print_lock) != 0)
+		return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
+	printf("creating all the thread...\n");
+	while (i < info->p_num)
+	{
+		if (pthread_create(&(info->all_philo_thread[i]), NULL,
+		&philo_routine, (void *)(&(info->all_thread_arg)[i])) != 0)
+			return (clear_philo_create_error(info), false);
+		(info->all_thread_arg)[i].status = ACTIVE;
+		i++;
+	}
+	printf("simulation start\n\n");
+	if (gettimeofday(&info->start_time, NULL) != 0)
+		return (pthread_mutex_unlock(&info->print_lock),
+		ft_putstr_fd(PHILO_ERR_MSG_7, 2), false);
+	if (pthread_mutex_unlock(&info->print_lock) != 0)
+		set_print_status(&((info->all_thread_arg)[0]), false);
+	return (true);
 }

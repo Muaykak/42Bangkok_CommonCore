@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:32:29 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 14:54:25 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/09 18:32:05 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void	*philo_routine(void *ptr)
 		return (NULL);
 	arg = (t_thread_arg *)ptr;
 	wait_all_thread(arg);
-	while (get_philo_status(arg) == ACTIVE || get_print_status(arg) == false)
+	while (get_philo_status(arg) == ACTIVE && get_print_status(arg) == true)
 	{
-
+		philo_eat(arg);
+		philo_sleep(arg);
 	}
+	return (NULL);
 }

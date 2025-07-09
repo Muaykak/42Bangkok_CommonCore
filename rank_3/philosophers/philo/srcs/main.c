@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:42:50 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/08 09:17:05 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/09 17:28:27 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@ void	display_info(t_philo_info *info)
 int	main(int argc, char **argv)
 {
 	t_philo_info	info;
+	bool			ret;
 
 	if (philo_parser(&info, argc, argv) == false)
 		return (1);
 	if (philo_info_init(&info) == true)
 		printf("FORK created succesfully!\n");
+	ret = philo_simulation(&info);
 	free_philo_info(&info);
+	if (ret == false)
+		return (1);
 	return (0);
 }
 
