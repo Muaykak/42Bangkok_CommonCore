@@ -30,8 +30,6 @@ bool	set_philo_status(t_thread_arg *arg, t_philo_status new_status)
 	if (!arg)
 		return (ft_putstr_fd(RED"Error: philo: set_philo_status(): \
 The argument is null\n"RESET, 2), false);
-	if (new_status == DEAD || new_status == ERROR)
-		set_print_status(arg, false);
 	if (pthread_mutex_lock(&arg->status_lock) != 0)
 		return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
 	arg->status = new_status;

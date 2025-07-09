@@ -22,6 +22,7 @@
 # include <stdbool.h>
 
 /*   ARGUMENT LIMIT */
+
 # ifndef MAX_PHILO_NUM
 #  define MAX_PHILO_NUM 199
 # endif
@@ -94,6 +95,36 @@ or pthread_mutex_unlock()\n"RESET
 RED"Error: philo: gettimeofday(): Error occurred\n"RESET
 # endif
 
+# ifndef PHILO_LOG_TAKE_FORK
+#  define PHILO_LOG_TAKE_FORK \
+"has taken a fork"
+# endif
+
+# ifndef PHILO_LOG_EAT
+#  define PHILO_LOG_EAT \
+"is eating"
+# endif
+
+# ifndef PHILO_LOG_SLEEP
+#  define PHILO_LOG_SLEEP \
+"is sleeping"
+# endif
+
+# ifndef PHILO_LOG_THINK
+#  define PHILO_LOG_THINK \
+"is thinking"
+# endif
+
+# ifndef PHILO_LOG_DEAD
+#  define PHILO_LOG_DEAD \
+RED"died"RESET
+# endif
+
+# ifndef PHILO_LOG_FINISH
+#  define PHILO_LOG_FINISH \
+GREEN"is finished eating"RESET
+# endif
+
 /* STRUCTURE */
 /*
 	p_num = number of philosophers
@@ -161,6 +192,8 @@ bool			get_print_status(t_thread_arg *arg);
 bool			set_philo_status(t_thread_arg \
 *arg, t_philo_status new_status);
 bool			set_print_status(t_thread_arg *arg, bool new_status);
+
+bool			print_philo_log(char *str, t_thread_arg *arg);
 
 /* utility */
 

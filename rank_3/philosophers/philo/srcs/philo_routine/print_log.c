@@ -34,7 +34,7 @@ static size_t	timestamp_calculation(t_thread_arg *arg)
 	return (return_value);
 }
 
-bool	print_philo_log(int philo_num, char *str, t_thread_arg *arg)
+bool	print_philo_log(char *str, t_thread_arg *arg)
 {
 	if (!str || !arg)
 		return (ft_putstr_fd(RED"Error: philo: print_philo_log: arguments \
@@ -42,8 +42,15 @@ cannot be null\n"RESET, 2), false);
 	if (pthread_mutex_lock(arg->print_lock) != 0)
 		return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
 	if (*(arg->print_status) == true)
+	{
+		if (str == PHILO_LOG_DEAD)
+		{
+			*(arg->print_status) = false;
+			set_philo_status(arg, DEAD);
+		}
 		printf("%zu ms\t:"YELLOW"%d"RESET" %s\n",
-			timestamp_calculation(arg), philo_num, str);
+			timestamp_calculation(arg), arg->thread_num, str);
+	}
 	if (pthread_mutex_unlock(arg->print_lock) != 0)	
 		return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
 	return (true);

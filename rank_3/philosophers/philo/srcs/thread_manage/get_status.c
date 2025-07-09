@@ -37,7 +37,5 @@ Error occurred\n"RESET, 2), ERROR);
 	ret = arg->status;
 	if (pthread_mutex_unlock(&arg->status_lock) != 0)
 		return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), ret);
-	if (ret != ACTIVE)
-		set_print_status(arg, false);
 	return (ret);
 }

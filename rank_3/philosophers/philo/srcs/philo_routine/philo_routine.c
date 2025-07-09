@@ -12,6 +12,11 @@
 
 #include "../../include/philo.h"
 
+void	wait_all_thread(t_thread_arg *arg)
+{
+	if (pthread_mutex_lock(&))
+}
+
 void	*philo_routine(void *ptr)
 {
 	t_thread_arg	*arg;
