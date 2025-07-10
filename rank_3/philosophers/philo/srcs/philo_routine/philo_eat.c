@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:37:55 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/10 07:39:27 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/10 08:16:22 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	philo_eat(t_thread_arg *arg, struct timeval *death_timer)
 	|| philo_take_fork(arg, death_timer) == false)
 		return ;
 	print_philo_log(PHILO_LOG_EAT, arg, LOG_EAT);
+	set_deathtimer(death_timer, arg);
 	ft_philo_wait(arg->t_eat, arg);
 	place_down_fork(arg);
-	set_deathtimer(death_timer, arg);
 	if (arg->e_max != -1)
 		arg->eat_count++;
 	if (arg->e_max != -1 && arg->eat_count >= (size_t)arg->e_max)
