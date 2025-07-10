@@ -23,7 +23,9 @@ PARSER_SRC_DIR	=	parser/
 PARSER_SRC_FILE	=	parser.c
 
 PHILO_ROUTINE_SRC_DIR	=	philo_routine/
-PHILO_ROUTINE_SRC_FILE	=	philo_routine.c philo_eat.c philo_sleep.c print_log.c
+PHILO_ROUTINE_SRC_FILE	=	philo_routine.c philo_eat.c \
+							philo_sleep.c print_log.c \
+							death_timer.c
 
 THREAD_MANAGE_SRC_DIR	=	thread_manage/
 THREAD_MANAGE_SRC_FILE	=	create_all_philo.c get_status.c \

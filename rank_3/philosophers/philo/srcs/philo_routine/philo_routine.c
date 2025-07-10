@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:32:29 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 18:32:05 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/10 07:41:34 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ void	wait_all_thread(t_thread_arg *arg)
 		return (ft_putstr_fd(PHILO_ERR_MSG_6, 2));
 }
 
-void	set_deathtimer(struct timeval *death_timer)
-{
-	if (gettimeofday(&death_timer, NULL) != 0)
-		ft_putstr_fd(PHILO_ERR_MSG_7, 2);
-}
-
 void	*philo_routine(void *ptr)
 {
 	t_thread_arg	*arg;
@@ -35,11 +29,11 @@ void	*philo_routine(void *ptr)
 		return (NULL);
 	arg = (t_thread_arg *)ptr;
 	wait_all_thread(arg);
-	set_deathtimer(&death_timer);
+	set_deathtimer(&death_timer, arg);
 	while (get_philo_status(arg) == ACTIVE && get_print_status(arg) == true)
 	{
-		philo_eat(arg);
-		philo_sleep(arg);
+		philo_eat(arg, &death_timer);
+		philo_sleep(arg, &death_timer);
 	}
 	return (NULL);
 }

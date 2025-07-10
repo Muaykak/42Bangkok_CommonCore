@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 13:58:54 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 18:44:21 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/10 08:04:10 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,8 @@ bool	finish_time(struct timeval *result, int time_ms)
 		return (false);
 	if (gettimeofday(result, NULL) != 0)
 		return (ft_putstr_fd(PHILO_ERR_MSG_7, 2), false);
-	if (time_ms >= 1000)
-	{
-		result->tv_sec += (time_ms / 1000);
-		time_ms = time_ms % 1000;
-	}
-	result->tv_usec += time_ms * 1000;
+	result->tv_sec += (time_ms / 1000);
+	result->tv_usec += (time_ms % 1000) * 1000;
 	if (result->tv_usec >= 1000000)
 	{
 		result->tv_sec++;
@@ -60,7 +56,6 @@ void	ft_philo_wait(int time_ms, t_thread_arg *arg)
 		return ;
 	while (get_print_status(arg) == true && is_finish_wait(&end_wait) == false)
 	{
-		usleep(200);
 	}
 	return ;
 }
