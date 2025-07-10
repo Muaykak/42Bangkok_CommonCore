@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 10:05:09 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 18:23:42 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:21:42 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ cannot be null\n"RESET, 2), false);
 			arg->status = FINISH;
 		if (pthread_mutex_lock(arg->print_lock) != 0)
 			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
-		printf("%zu ms\t:"YELLOW"%d"RESET" %s\n",
+		printf("%zu "YELLOW"%d"RESET" %s\n",
 			timestamp_calculation(arg), arg->thread_num, str);
 		if (pthread_mutex_unlock(arg->print_lock) != 0)	
 			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
