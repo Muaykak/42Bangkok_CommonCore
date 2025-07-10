@@ -6,45 +6,32 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 13:42:16 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 17:33:53 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/10 08:29:17 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-void	free_mutex_array(pthread_mutex_t *mutex_array, int array_size)
+void	free_philo_fork(t_philo_fork *fork_array, int array_size)
 {
 	int	i;
 
-	if (!mutex_array)
+	if (!fork_array)
 		return ;
 	i = 0;
-	while (i < array_size)	
+	while (i < array_size)
 	{
-		pthread_mutex_destroy(&(mutex_array[i]));
+		pthread_mutex_destroy(&(fork_array[i].lock));
 		i++;
 	}
-	free(mutex_array);
-}
-
-void	destroy_all_thread_arg_status_lock(t_philo_info *info)
-{
-	int	i;
-
-	i = 0;
-	while (i < info->p_num)
-	{
-		pthread_mutex_destroy(&(info->all_thread_arg)[i].status_lock);
-		i++;
-	}
+	free(fork_array);
 }
 
 void	free_philo_info(t_philo_info *info)
 {
 	if (!info)
 		return ;
-	free_mutex_array(info->all_fork, info->p_num);
-	destroy_all_thread_arg_status_lock(info);
+	free_philo_fork(info->all_fork, info->p_num);
 	if (info->all_philo_thread)
 		free(info->all_philo_thread);
 	info->all_philo_thread = NULL;

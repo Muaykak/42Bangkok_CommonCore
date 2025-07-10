@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 10:44:09 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 05:24:02 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/10 08:31:40 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ bool	all_fork_init(t_philo_info *info)
 
 	if (info->all_fork != 0)
 		return (false);
-	info->all_fork = (pthread_mutex_t *)malloc\
-(info->p_num * sizeof(pthread_mutex_t));
+	info->all_fork = malloc(info->p_num * sizeof(t_philo_fork));
 	if (info->all_fork == NULL)
 		return (false);
-	memset(info->all_fork, 0, sizeof(pthread_mutex_t) * info->p_num);
+	memset(info->all_fork, 0, sizeof(t_philo_fork) * info->p_num);
 	i = 0;
 	while (i < info->p_num)
 	{
-		if (pthread_mutex_init(&(info->all_fork[i]), NULL) != 0)
-			return (free_mutex_array(info->all_fork, info->p_num), false);
+		if (pthread_mutex_init(&((info->all_fork)[i].lock), NULL) != 0)
+			return (free_philo_fork(info->all_fork, i), false);
+		(info->all_fork)[i].is_using = false;
 		i++;
 	}
 	return (true);
@@ -37,7 +37,7 @@ bool	all_fork_init(t_philo_info *info)
 bool	main_lock_init(t_philo_info *info)
 {
 	if (pthread_mutex_init(&(info->print_lock), NULL) != 0)
-		return (free_mutex_array(info->all_fork, info->p_num), false);
+		return (free_philo_fork(info->all_fork, info->p_num), false);
 	info->print_status = true;
 	return (true);
 }

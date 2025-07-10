@@ -6,42 +6,54 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:37:55 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/10 08:16:22 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/10 09:15:05 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
 
-bool	handle_one_philo(t_thread_arg *arg)
+bool	handle_one_philo(t_thread_arg *arg, struct timeval *death_timer)
 {
-	ft_philo_wait(arg->t_die, arg);
-	pthread_mutex_unlock(arg->right);
+	while (is_philo_alive(death_timer) == true)
+	{
+	}
 	print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD);
 	return (false);
 }
 
-bool	philo_take_fork(t_thread_arg *arg, struct timeval *death_timer)
+bool	grabbing_fork(t_philo_fork *fork, struct timeval *death_timer, t_thread_arg *arg)
+{
+	while (is_philo_alive(death_timer) == true && get_print_status(arg) == true)
+	{
+		if (pthread_mutex_lock(&(fork->lock)) != 0)
+			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
+		if (fork->is_using == false)
+		{
+			fork->is_using = true;
+			if (pthread_mutex_unlock(&(fork->lock)) != 0)
+				return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
+			return (true);
+		}
+		if (pthread_mutex_unlock(&(fork->lock)) != 0)
+			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
+	}
+	return (false);
+}
+
+bool	taking_fork(t_thread_arg *arg, struct timeval *death_timer)
 {
 	if (!arg || get_philo_status(arg) != ACTIVE
 	|| get_print_status(arg) == false)
 		return (false);
 	print_philo_log(PHILO_LOG_THINK, arg, LOG_THINK);
-	if (pthread_mutex_lock(arg->right) != 0)
-		return (set_philo_status(arg, ERROR), false);	
-	if (is_philo_alive(death_timer) == false)
-		return (print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD),
-		pthread_mutex_unlock(arg->right), false);
+	if (grabbing_fork(arg->right, death_timer, arg) == false)
+		return (print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD), false);
 	print_philo_log(PHILO_LOG_TAKE_FORK, arg, LOG_TAKE_FORK);
 	if (arg->left == NULL)
-		return (handle_one_philo(arg));
-	if (pthread_mutex_lock(arg->left) != 0)
-		return (set_philo_status(arg, ERROR),
-		pthread_mutex_unlock(arg->right), false);	
-	if (is_philo_alive(death_timer) == false)
-		return (print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD),
-		pthread_mutex_unlock(arg->right),
-		pthread_mutex_unlock(arg->left), false);
+		return (handle_one_philo(arg, death_timer));
+	if (grabbing_fork(arg->left, death_timer, arg) == false)
+		return (print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD), false);
 	print_philo_log(PHILO_LOG_TAKE_FORK, arg, LOG_TAKE_FORK);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/10 07:40:52 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/10 08:29:12 by muaykak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,10 +164,16 @@ typedef enum	e_philo_status
 	ERROR
 }				t_philo_status;
 
+typedef struct s_philo_fork
+{
+	bool			is_using;
+	pthread_mutex_t	lock;
+}				t_philo_fork;
+
 typedef struct	s_thread_arg
 {
-	pthread_mutex_t	*right;
-	pthread_mutex_t	*left;
+	t_philo_fork	*right;
+	t_philo_fork	*left;
 	int				thread_num;
 	int				t_die;
 	int				t_eat;
@@ -176,7 +182,6 @@ typedef struct	s_thread_arg
 	size_t			eat_count;
 	pthread_mutex_t	*print_lock;
 	bool			*print_status;
-	pthread_mutex_t	status_lock;
 	t_philo_status	status;
 	struct timeval	*start_time;
 }				t_thread_arg;
@@ -188,7 +193,7 @@ typedef struct	s_philo_info
 	int				t_eat;
 	int				t_slp;
 	int				e_max;
-	pthread_mutex_t	*all_fork;
+	t_philo_fork	*all_fork;
 	pthread_t		*all_philo_thread;
 	t_thread_arg	*all_thread_arg;
 	struct timeval	start_time;
@@ -238,7 +243,7 @@ void			ft_putstr_fd(char *str, int fd);
 int				ft_isdigit(int c);
 void			ft_putnbr_fd(int n, int fd);
 
-void			free_mutex_array(pthread_mutex_t *mutex_array, int array_size);
+void			free_philo_fork(t_philo_fork *fork_array, int array_size);
 void			free_philo_info(t_philo_info *info);
 
 void			ft_philo_wait(int time_ms, t_thread_arg *arg);
