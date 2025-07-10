@@ -12,7 +12,7 @@
 
 #include "../../include/philo.h"
 
-static bool	finish_time(struct timeval *result, int time_ms)
+bool	finish_time(struct timeval *result, int time_ms)
 {
 	if (!result)
 		return (false);
@@ -60,7 +60,7 @@ void	ft_philo_wait(int time_ms, t_thread_arg *arg)
 		return ;
 	while (get_print_status(arg) == true && is_finish_wait(&end_wait) == false)
 	{
-		usleep(1000);
+		usleep(200);
 	}
 	return ;
 }

@@ -20,14 +20,22 @@ void	wait_all_thread(t_thread_arg *arg)
 		return (ft_putstr_fd(PHILO_ERR_MSG_6, 2));
 }
 
+void	set_deathtimer(struct timeval *death_timer)
+{
+	if (gettimeofday(&death_timer, NULL) != 0)
+		ft_putstr_fd(PHILO_ERR_MSG_7, 2);
+}
+
 void	*philo_routine(void *ptr)
 {
 	t_thread_arg	*arg;
+	struct timeval	death_timer;
 
 	if (!ptr)
 		return (NULL);
 	arg = (t_thread_arg *)ptr;
 	wait_all_thread(arg);
+	set_deathtimer(&death_timer);
 	while (get_philo_status(arg) == ACTIVE && get_print_status(arg) == true)
 	{
 		philo_eat(arg);

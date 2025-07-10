@@ -80,7 +80,7 @@ bool	place_down_fork(t_thread_arg *arg)
 	return (true);
 }
 
-void	philo_eat(t_thread_arg *arg)
+void	philo_eat(t_thread_arg *arg, struct timeval *death_timer)
 {
 	if (!arg)
 		return ;

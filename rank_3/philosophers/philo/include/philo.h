@@ -201,7 +201,7 @@ typedef struct	s_philo_info
 /* MAIN PART */
 
 void	*philo_routine(void *ptr);
-void	philo_eat(t_thread_arg *arg);
+void	philo_eat(t_thread_arg *arg, struct timeval *death_timer);
 void	philo_sleep(t_thread_arg *arg);
 bool	create_all_philo(t_philo_info *info);
 bool	join_all_philo(t_philo_info *info);
