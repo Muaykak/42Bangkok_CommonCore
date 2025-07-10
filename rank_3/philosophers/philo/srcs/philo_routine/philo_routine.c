@@ -30,7 +30,7 @@ void	*philo_routine(void *ptr)
 	arg = (t_thread_arg *)ptr;
 	wait_all_thread(arg);
 	set_deathtimer(&death_timer, arg);
-	while (get_philo_status(arg) == ACTIVE && get_print_status(arg) == true)
+	while (arg->status == ACTIVE && get_print_status(arg) == true)
 	{
 		philo_eat(arg, &death_timer);
 		philo_sleep(arg, &death_timer);

@@ -225,10 +225,7 @@ bool			philo_info_init(t_philo_info *info);
 bool			philo_thread_init(t_philo_info *info);
 
 /* Thread Management */
-t_philo_status	get_philo_status(t_thread_arg *arg);
 bool			get_print_status(t_thread_arg *arg);
-bool			set_philo_status(t_thread_arg \
-*arg, t_philo_status new_status);
 bool			set_print_status(t_thread_arg *arg, bool new_status);
 
 bool			print_philo_log(char *str, t_thread_arg *arg,
@@ -246,6 +243,6 @@ void			ft_putnbr_fd(int n, int fd);
 void			free_philo_fork(t_philo_fork *fork_array, int array_size);
 void			free_philo_info(t_philo_info *info);
 
-void			ft_philo_wait(int time_ms, t_thread_arg *arg);
+void			ft_philo_wait(int time_ms, t_thread_arg *arg, struct timeval *death_timer);
 
 #endif

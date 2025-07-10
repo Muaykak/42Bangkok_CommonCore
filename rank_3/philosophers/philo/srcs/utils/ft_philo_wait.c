@@ -46,7 +46,7 @@ bool	is_finish_wait(struct timeval *end_wait)
 	return (false);
 }
 
-void	ft_philo_wait(int time_ms, t_thread_arg *arg)
+void	ft_philo_wait(int time_ms, t_thread_arg *arg, struct timeval *death_timer)
 {
 	struct timeval	end_wait;
 
@@ -56,6 +56,8 @@ void	ft_philo_wait(int time_ms, t_thread_arg *arg)
 		return ;
 	while (get_print_status(arg) == true && is_finish_wait(&end_wait) == false)
 	{
+		if (death_timer != NULL && is_philo_alive(death_timer) == false)
+			return ;
 	}
 	return ;
 }

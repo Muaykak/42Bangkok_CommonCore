@@ -43,7 +43,7 @@ bool	grabbing_fork(t_philo_fork *fork, struct timeval *death_timer, t_thread_arg
 
 bool	taking_fork(t_thread_arg *arg, struct timeval *death_timer)
 {
-	if (!arg || get_philo_status(arg) != ACTIVE
+	if (!arg || arg->status != ACTIVE
 	|| get_print_status(arg) == false)
 		return (false);
 	print_philo_log(PHILO_LOG_THINK, arg, LOG_THINK);
@@ -62,9 +62,15 @@ bool	place_down_fork(t_thread_arg *arg)
 {
 	if (!arg)
 		return (false);
-	if (pthread_mutex_unlock(arg->right) != 0)
+	if (pthread_mutex_lock(&arg->right->lock) != 0)
 		ft_putstr_fd(PHILO_ERR_MSG_6, 2);
-	if (pthread_mutex_unlock(arg->left) != 0)
+	arg->right->is_using = false;
+	if (pthread_mutex_unlock(&arg->right->lock) != 0)
+		ft_putstr_fd(PHILO_ERR_MSG_6, 2);
+	if (pthread_mutex_lock(&arg->left->lock) != 0)
+		ft_putstr_fd(PHILO_ERR_MSG_6, 2);
+	arg->left->is_using = false;
+	if (pthread_mutex_unlock(&arg->left->lock) != 0)
 		ft_putstr_fd(PHILO_ERR_MSG_6, 2);
 	return (true);
 }
@@ -73,13 +79,15 @@ void	philo_eat(t_thread_arg *arg, struct timeval *death_timer)
 {
 	if (!arg)
 		return ;
-	if (get_philo_status(arg) != ACTIVE
+	if (arg->status != ACTIVE
 	|| (arg->e_max != -1 && arg->eat_count >= (size_t)arg->e_max)
-	|| philo_take_fork(arg, death_timer) == false)
+	|| taking_fork(arg, death_timer) == false)
 		return ;
 	print_philo_log(PHILO_LOG_EAT, arg, LOG_EAT);
 	set_deathtimer(death_timer, arg);
-	ft_philo_wait(arg->t_eat, arg);
+	ft_philo_wait(arg->t_eat, arg, NULL);
+	if (is_philo_alive(death_timer) == false)
+		return ((void)print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD));
 	place_down_fork(arg);
 	if (arg->e_max != -1)
 		arg->eat_count++;

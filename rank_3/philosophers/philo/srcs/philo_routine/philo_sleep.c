@@ -14,13 +14,13 @@
 
 void	philo_sleep(t_thread_arg *arg, struct timeval *death_timer)
 {
-	if (!arg || get_philo_status(arg) != ACTIVE
+	if (!arg || arg->status != ACTIVE
 	|| get_print_status(arg) == false)
 		return ;
 	if (is_philo_alive(death_timer) == false)	
 		return ((void)print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD));
 	print_philo_log(PHILO_LOG_SLEEP, arg, LOG_SLEEP);
-	ft_philo_wait(arg->t_slp, arg);
+	ft_philo_wait(arg->t_slp, arg, death_timer);
 	if (is_philo_alive(death_timer) == false)	
 		return ((void)print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD));
 	return ;

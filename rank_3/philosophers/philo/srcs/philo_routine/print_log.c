@@ -44,10 +44,10 @@ cannot be null\n"RESET, 2), false);
 		if (status == LOG_DEAD)
 		{
 			*(arg->print_status) = false;
-			set_philo_status(arg, DEAD);
+			arg->status = DEAD;
 		}
 		else if (status == LOG_FINISH)
-			set_philo_status(arg, FINISH);
+			arg->status = FINISH;
 		if (pthread_mutex_lock(arg->print_lock) != 0)
 			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
 		printf("%zu ms\t:"YELLOW"%d"RESET" %s\n",
