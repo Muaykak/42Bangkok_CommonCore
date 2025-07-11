@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/10 08:29:12 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 00:52:17 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ typedef struct	s_philo_info
 /* MAIN PART */
 
 void	*philo_routine(void *ptr);
+void	philo_think(t_thread_arg *arg, struct timeval *death_timer);
 void	philo_eat(t_thread_arg *arg, struct timeval *death_timer);
 void	philo_sleep(t_thread_arg *arg, struct timeval *death_timer);
 bool	create_all_philo(t_philo_info *info);

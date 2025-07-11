@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:32:29 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/10 17:16:06 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 00:57:20 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ void	*philo_routine(void *ptr)
 	arg = (t_thread_arg *)ptr;
 	wait_all_thread(arg);
 	set_deathtimer(&death_timer, arg);
+	if (arg->thread_num % 2 != 0)
+		philo_think(arg, &death_timer);
 	while (arg->status == ACTIVE && get_print_status(arg) == true)
 	{
 		philo_eat(arg, &death_timer);
 		philo_sleep(arg, &death_timer);
+		philo_think(arg, &death_timer);
 	}
 	return (NULL);
 }

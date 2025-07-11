@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_eat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:37:55 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/10 18:00:23 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 00:48:35 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,9 @@
 bool	handle_one_philo(t_thread_arg *arg, struct timeval *death_timer)
 {
 	while (is_philo_alive(death_timer) == true)
-	{
-	}
+		continue;
 	print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD);
 	return (false);
-}
-
-void	wait_algorithm(t_thread_arg *arg, struct timeval *death_timer)
-{
-	struct timeval	curr_time;
-	int				result;
-
-	if (gettimeofday(&curr_time, NULL) != 0)
-		return (ft_putstr_fd(PHILO_ERR_MSG_7, 2));
-	if (curr_time.tv_usec < death_timer->tv_usec)	
-	{
-		curr_time.tv_sec--;
-		result = (curr_time.tv_usec + 1000000 - death_timer->tv_usec) / 1000;
-	}
-	else
-		result = (curr_time.tv_usec - death_timer->tv_usec) / 1000;
-	result += (curr_time.tv_sec - death_timer->tv_sec) * 1000;
-	result = (result - (arg->t_eat + arg->t_slp)) / 5;
-	if (result < 1)
-		return ;
-	printf("result: %d\n", result);
-	ft_philo_wait(result, arg, death_timer);
 }
 
 bool	grabbing_fork(t_philo_fork *fork, struct timeval *death_timer, t_thread_arg *arg)
@@ -68,7 +45,7 @@ bool	taking_fork(t_thread_arg *arg, struct timeval *death_timer)
 	if (!arg || arg->status != ACTIVE
 	|| get_print_status(arg) == false)
 		return (false);
-	print_philo_log(PHILO_LOG_THINK, arg, LOG_THINK);
+//	print_philo_log(PHILO_LOG_THINK, arg, LOG_THINK);
 	if (grabbing_fork(arg->right, death_timer, arg) == false)
 		return (print_philo_log(PHILO_LOG_DEAD, arg, LOG_DEAD), false);
 	print_philo_log(PHILO_LOG_TAKE_FORK, arg, LOG_TAKE_FORK);
