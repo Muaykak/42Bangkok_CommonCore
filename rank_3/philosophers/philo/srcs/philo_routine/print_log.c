@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_log.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 10:05:09 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 18:23:42 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/11 21:38:32 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ cannot be null\n"RESET, 2), false);
 			set_philo_status(arg, FINISH);
 		if (pthread_mutex_lock(arg->print_lock) != 0)
 			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
-		printf("%zu ms\t:"YELLOW"%d"RESET" %s\n",
+		printf("%zu "YELLOW"%d"RESET" %s\n",
 			timestamp_calculation(arg), arg->thread_num, str);
 		if (pthread_mutex_unlock(arg->print_lock) != 0)	
 			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
