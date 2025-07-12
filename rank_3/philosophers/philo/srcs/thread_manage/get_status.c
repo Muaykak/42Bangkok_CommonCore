@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_status.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 09:19:18 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 17:58:19 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 06:22:34 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 bool	get_print_status(t_thread_arg *arg)
 {
 	bool	ret;
+
 	if (!arg)
 		return (false);
 	if (pthread_mutex_lock(arg->print_lock) != 0)

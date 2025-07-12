@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_thread_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 13:13:59 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/10 08:32:23 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 06:18:23 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static void	philo_thread_arg_init(t_philo_info *info)
 		{
 			(info->all_thread_arg[i]).right = &(info->all_fork[i]);
 			if (info->p_num > 1)
-				(info->all_thread_arg[i]).left =
-				&(info->all_fork[(i + 1) % info->p_num]);
+				(info->all_thread_arg[i]).left
+					= &(info->all_fork[(i + 1) % info->p_num]);
 		}
 		else
 		{
 			(info->all_thread_arg[i]).left = &(info->all_fork[i]);
-			(info->all_thread_arg[i]).right =
-			&(info->all_fork[(i + 1) % info->p_num]);
+			(info->all_thread_arg[i]).right
+				= &(info->all_fork[(i + 1) % info->p_num]);
 		}
 		philo_thread_arg_init_sub1(info, i);
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_log.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 10:05:09 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/10 13:21:42 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 06:28:09 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	timestamp_calculation(t_thread_arg *arg)
 
 	if (!arg)
 		return (0);
-	if(gettimeofday(&curr_time, NULL) != 0)
+	if (gettimeofday(&curr_time, NULL) != 0)
 		return (ft_putstr_fd(PHILO_ERR_MSG_7, 2), 0);
 	return_value = 0;
 	if (curr_time.tv_usec < (arg->start_time->tv_usec))
@@ -52,7 +52,7 @@ cannot be null\n"RESET, 2), false);
 			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
 		printf("%zu "YELLOW"%d"RESET" %s\n",
 			timestamp_calculation(arg), arg->thread_num, str);
-		if (pthread_mutex_unlock(arg->print_lock) != 0)	
+		if (pthread_mutex_unlock(arg->print_lock) != 0)
 			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
 	}
 	return (true);

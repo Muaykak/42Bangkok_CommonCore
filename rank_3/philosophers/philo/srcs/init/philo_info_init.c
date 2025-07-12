@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_info_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 10:44:09 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/10 08:31:40 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 06:17:13 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	philo_info_init(t_philo_info *info)
 	if (info == NULL)
 		return (false);
 	if (all_fork_init(info) == false
-	|| main_lock_init(info) == false || philo_thread_init(info) == false)
+		|| main_lock_init(info) == false || philo_thread_init(info) == false)
 		return (ft_putstr_fd(PHILO_ERR_MSG_3, 2), false);
 	return (true);
 }

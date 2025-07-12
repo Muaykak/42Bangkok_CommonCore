@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:41:26 by srussame          #+#    #+#             */
-/*   Updated: 2025/07/12 00:52:17 by srussame         ###   ########.fr       */
+/*   Updated: 2025/07/12 06:16:30 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 #  define MAX_EAT 20000
 # endif
 
-
 /* COLORS */
 # ifndef RED
 #  define RED "\033[0;31m"
@@ -51,58 +50,58 @@
 # endif
 
 # ifndef PHILO_ERR_MSG_1
-#  define PHILO_ERR_MSG_1 RED"ERROR: This program \
-takes only "YELLOW"positive integer.\n"RESET"(each argument MUST \
+#  define PHILO_ERR_MSG_1 "ERROR: This program \
+takes only positive integer.\n(each argument MUST \
 contain only 1 number and should not contain \nany other things accept \
-whitespaces (Eg. the"GREEN" \"      +21 \" is accepted"RESET")\n"
+whitespaces (Eg. the \"      +21 \" is accepted)\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_2
-#  define PHILO_ERR_MSG_2 RED"Error: philo"\
-":This program takes 4-5 arguments as follows\n\n"RESET \
-YELLOW"1. number_of_philosophers \n"RESET \
-YELLOW"2. time_to_die (in "RESET"milliseconds"YELLOW")\n"RESET \
-YELLOW"3. time_to_eat (in "RESET"milliseconds"YELLOW")\n"RESET \
-YELLOW"4. time_to_sleep (in "RESET"milliseconds"YELLOW")\n"RESET \
-"(optional)"YELLOW"5. each philosophers eat max.\n"RESET
+#  define PHILO_ERR_MSG_2 "Error: philo\
+:This program takes 4-5 arguments as follows\n\n\
+1. number_of_philosophers \n\
+2. time_to_die (in milliseconds)\n\
+3. time_to_eat (in milliseconds)\n\
+4. time_to_sleep (in milliseconds)\n\
+(optional)5. each philosophers eat max.\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_3
 #  define PHILO_ERR_MSG_3 \
-RED"Error: philo: initialization failed.\n"RESET
+"Error: philo: initialization failed.\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_4
 #  define PHILO_ERR_MSG_4 \
-RED"Error: philo: The argument is out of range.\n"\
-RESET"\tThe number should be MORE THAN "YELLOW"0"RESET \
-" but not \nexceed MAX INT ("YELLOW"2147483647"RESET")\n"
+"Error: philo: The argument is out of range.\n\
+\tThe number should be MORE THAN 0 \
+but not \nexceed MAX INT (2147483647)\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_5
 #  define PHILO_ERR_MSG_5 \
-RED"Error: philo: The argument EXCEED the project's defined limit: "RESET
+"Error: philo: The argument EXCEED the project's defined limit: "
 # endif
 
 # ifndef PHILO_ERR_MSG_6
 #  define PHILO_ERR_MSG_6 \
-RED"Error: philo: having some errors on pthread_mutex_lock() \
-or pthread_mutex_unlock()\n"RESET
+"Error: philo: having some errors on pthread_mutex_lock() \
+or pthread_mutex_unlock()\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_7
 #  define PHILO_ERR_MSG_7 \
-RED"Error: philo: gettimeofday(): Error occurred\n"RESET
+"Error: philo: gettimeofday(): Error occurred\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_8
 #  define PHILO_ERR_MSG_8 \
-RED"Error: philo: phtread_create(): Error occurred\n"RESET
+"Error: philo: phtread_create(): Error occurred\n"
 # endif
 
 # ifndef PHILO_ERR_MSG_9
 #  define PHILO_ERR_MSG_9 \
-RED"Error: philo: phtread_join(): Error occurred\n"RESET
+"Error: philo: phtread_join(): Error occurred\n"
 # endif
 
 # ifndef PHILO_LOG_TAKE_FORK
@@ -127,12 +126,12 @@ RED"Error: philo: phtread_join(): Error occurred\n"RESET
 
 # ifndef PHILO_LOG_DEAD
 #  define PHILO_LOG_DEAD \
-RED"died"RESET
+"died"
 # endif
 
 # ifndef PHILO_LOG_FINISH
 #  define PHILO_LOG_FINISH \
-GREEN"is finished eating"RESET
+"is finished eating"
 # endif
 
 /* STRUCTURE */
@@ -145,7 +144,7 @@ GREEN"is finished eating"RESET
 
 */
 
-typedef enum	e_log_status
+typedef enum e_log_status
 {
 	LOG_THINK,
 	LOG_TAKE_FORK,
@@ -155,7 +154,7 @@ typedef enum	e_log_status
 	LOG_DEAD
 }				t_log_status;
 
-typedef enum	e_philo_status
+typedef enum e_philo_status
 {
 	UNACTIVE,
 	ACTIVE,
@@ -170,7 +169,7 @@ typedef struct s_philo_fork
 	pthread_mutex_t	lock;
 }				t_philo_fork;
 
-typedef struct	s_thread_arg
+typedef struct s_thread_arg
 {
 	t_philo_fork	*right;
 	t_philo_fork	*left;
@@ -186,7 +185,7 @@ typedef struct	s_thread_arg
 	struct timeval	*start_time;
 }				t_thread_arg;
 
-typedef struct	s_philo_info
+typedef struct s_philo_info
 {
 	int				p_num;
 	int				t_die;
@@ -205,16 +204,16 @@ typedef struct	s_philo_info
 
 /* MAIN PART */
 
-void	*philo_routine(void *ptr);
-void	philo_think(t_thread_arg *arg, struct timeval *death_timer);
-void	philo_eat(t_thread_arg *arg, struct timeval *death_timer);
-void	philo_sleep(t_thread_arg *arg, struct timeval *death_timer);
-bool	create_all_philo(t_philo_info *info);
-bool	join_all_philo(t_philo_info *info);
-bool	philo_simulation(t_philo_info *info);
+void			*philo_routine(void *ptr);
+void			philo_think(t_thread_arg *arg, struct timeval *death_timer);
+void			philo_eat(t_thread_arg *arg, struct timeval *death_timer);
+void			philo_sleep(t_thread_arg *arg, struct timeval *death_timer);
+bool			create_all_philo(t_philo_info *info);
+bool			join_all_philo(t_philo_info *info);
+bool			philo_simulation(t_philo_info *info);
 
-bool	is_philo_alive(struct timeval *death_timer);
-void	set_deathtimer(struct timeval *death_timer, t_thread_arg *arg);
+bool			is_philo_alive(struct timeval *death_timer);
+void			set_deathtimer(struct timeval *death_timer, t_thread_arg *arg);
 
 /* parser */
 
@@ -244,6 +243,7 @@ void			ft_putnbr_fd(int n, int fd);
 void			free_philo_fork(t_philo_fork *fork_array, int array_size);
 void			free_philo_info(t_philo_info *info);
 
-void			ft_philo_wait(int time_ms, t_thread_arg *arg, struct timeval *death_timer);
+void			ft_philo_wait(int time_ms, t_thread_arg *arg,
+					struct timeval *death_timer);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_all_philo.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:40:32 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 17:23:54 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 06:22:04 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	clear_philo_create_error(t_philo_info *info)
 	{
 		if ((info->all_thread_arg)[i].status == UNACTIVE)
 			break ;
-		if	(pthread_join((info->all_philo_thread)[i], NULL) != 0)
+		if (pthread_join((info->all_philo_thread)[i], NULL) != 0)
 			return (ft_putstr_fd(PHILO_ERR_MSG_9, 2), false);
 		i++;
 	}
@@ -40,7 +40,7 @@ bool	join_all_philo(t_philo_info *info)
 	i = 0;
 	while (i < info->p_num)
 	{
-		if	(pthread_join((info->all_philo_thread)[i], NULL) != 0)
+		if (pthread_join((info->all_philo_thread)[i], NULL) != 0)
 			return (ft_putstr_fd(PHILO_ERR_MSG_9, 2), false);
 		i++;
 	}
@@ -60,7 +60,7 @@ bool	create_all_philo(t_philo_info *info)
 	while (i < info->p_num)
 	{
 		if (pthread_create(&(info->all_philo_thread[i]), NULL,
-		&philo_routine, (void *)(&(info->all_thread_arg)[i])) != 0)
+				&philo_routine, (void *)(&(info->all_thread_arg)[i])) != 0)
 			return (clear_philo_create_error(info), false);
 		(info->all_thread_arg)[i].status = ACTIVE;
 		i++;
@@ -68,7 +68,7 @@ bool	create_all_philo(t_philo_info *info)
 	printf("simulation start\n\n");
 	if (gettimeofday(&info->start_time, NULL) != 0)
 		return (pthread_mutex_unlock(&info->print_lock),
-		ft_putstr_fd(PHILO_ERR_MSG_7, 2), false);
+			ft_putstr_fd(PHILO_ERR_MSG_7, 2), false);
 	if (pthread_mutex_unlock(&info->print_lock) != 0)
 		set_print_status(&((info->all_thread_arg)[0]), false);
 	return (true);

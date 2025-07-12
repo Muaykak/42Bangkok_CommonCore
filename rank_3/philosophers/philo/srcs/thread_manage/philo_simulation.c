@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_simulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muaykak <muaykak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:22:21 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/09 17:26:58 by muaykak          ###   ########.fr       */
+/*   Updated: 2025/07/12 06:22:20 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	philo_simulation(t_philo_info *info)
 {
 	if (!info)
 		return (false);
-	if (create_all_philo(info) == false)	
+	if (create_all_philo(info) == false)
 		return (false);
 	return (join_all_philo(info));
 }
