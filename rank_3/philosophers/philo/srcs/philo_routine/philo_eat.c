@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:37:55 by muaykak           #+#    #+#             */
-/*   Updated: 2025/07/12 07:41:13 by srussame         ###   ########.fr       */
+/*   Updated: 2025/07/12 08:52:12 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ bool	grabbing_fork(t_philo_fork *fork,
 			if (pthread_mutex_unlock(&(fork->lock)) != 0)
 				return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
 			return (true);
-			usleep(10);
 		}
 		if (pthread_mutex_unlock(&(fork->lock)) != 0)
 			return (ft_putstr_fd(PHILO_ERR_MSG_6, 2), false);
+		usleep(10);
 	}
 	return (false);
 }
