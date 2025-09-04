@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:20:10 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/04 13:51:27 by srussame         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:10:35 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class	Contact
 		std::string	_nickname;
 		std::string	_phone_number;
 		std::string	_darkest_secret;
-		time_t		create_time;
+		time_t		_create_time;
 
 	public:
 		Contact();
@@ -34,7 +34,12 @@ class	Contact
 			const std::string &nickname,
 			const std::string &p_number,
 			const std::string &secret);
-
+		std::string	getFirstName(void);
+		std::string	getLastName(void);
+		std::string	getNickName(void);
+		std::string	getPhoneNum(void);
+		std::string	getSecret(void);
+		std::string	getTime(void);
 };
 
 #endif
