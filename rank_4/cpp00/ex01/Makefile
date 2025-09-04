@@ -1,30 +1,37 @@
+SRC_FILE = src/main.cpp \
+		   src/Contact.cpp \
+		   src/PhoneBook.cpp
 
-SRC =	main.cpp \
-		Contact.cpp
+OBJ_DIR = obj/
 
-OBJ = ${SRC:.cpp=.o}
+OBJ = $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILE:.cpp=.o)))
 
 CC = c++
 
-C_FLAG = -Wall -Wextra -Werror -std=c++98
+C_DEFINE = -DPROGRAM_NAME='"$(NAME)"'
 
-INCL = -I./ 
+C_FLAG = -Wall -Wextra -Werror -std=c++98 $(C_DEFINE)
 
-NAME = crappy_phonebook
+INCL = -Iinclude
 
-all: ${NAME}
+NAME = happy_phonebook
 
-${NAME}: ${OBJ}
-	${CC} ${C_FLAG} ${OBJ} ${INCL} -o ${NAME}
+all: $(NAME)
 
-%.o: %.cpp
-	${CC} ${C_FLAG} ${INCL} -c $< -o $@
+$(NAME): $(OBJ_DIR) $(OBJ)
+	$(CC) $(C_FLAG) $(OBJ) $(INCL) -o $(NAME)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: src/%.cpp | $(OBJ_DIR)
+	$(CC) $(C_FLAG) $(INCL) -c $< -o $@
 
 clean:
-	rm -rf ${OBJ}
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -rf ${NAME}
+	rm -f $(NAME)
 
 re: fclean all
 
