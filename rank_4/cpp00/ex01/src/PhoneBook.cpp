@@ -4,7 +4,7 @@ PhoneBook::PhoneBook(void){
 	_oldest_index = 0;
 }
 
-bool	PhoneBook::addContact(const std::string &firstname,
+int	PhoneBook::addContact(const std::string &firstname,
 			const std::string &lastname,
 			const std::string &nickname,
 			const std::string &phone_num,
@@ -15,23 +15,26 @@ bool	PhoneBook::addContact(const std::string &firstname,
 	if (firstname.empty() || lastname.empty() || nickname.empty() || phone_num.empty() || secret.empty())
 	{
 		std::cout << "you should not add emptystring to Contact" << std::endl;
-		return (false);
+		return (0);
 	}
 	for (int i = 0; i < 8; i++)
 	{
 		if (_contact_list[i].isEmpty() == true)
 		{
 			target = &(_contact_list[i]);
+			_newest_index = i + 1;
 			break;
 		}
 	}
 	if (target == NULL)
 	{
 		target = &(_contact_list[_oldest_index]);
+		_newest_index = _oldest_index + 1;
 		_oldest_index = (_oldest_index + 1) % 7;
 	}
 	target->setInfo(firstname, lastname, nickname, phone_num, secret);
-	return (true);
+	std::cout << "_newest_index: " << _newest_index << std::endl;
+	return (_newest_index);
 }
 
 bool	PhoneBook::isEmpty(void)
@@ -41,7 +44,6 @@ bool	PhoneBook::isEmpty(void)
 		if (this->_contact_list[i].isEmpty() == false)
 			return (false);
 	}
-	std::cout << "No Contact." << std::endl;
 	return (true);
 }
 
