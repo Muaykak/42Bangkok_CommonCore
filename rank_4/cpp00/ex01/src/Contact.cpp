@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:20:02 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/04 23:30:12 by srussame         ###   ########.fr       */
+/*   Updated: 2025/09/06 01:38:42 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,17 @@ std::string	Contact::getNickName(void) const
 	return (_nickname);
 }
 
-static bool	isEmptyOrWhitespace(const std::string &str)
-{
-	if (str.empty() == true)
-		return (true);
-	for (size_t i = 0; i < str.length(); i++)
-	{
-		if (str[i] != '\t'
-		&& str[i] != '\v'
-		&& str[i] != '\n'
-		&& str[i] != '\f'
-		&& str[i] != '\r'
-		&& str[i] != ' ')
-			return (false);
-	}
-	return (true);
-}
-
-static void	ftStrTrim(std::string &str)
-{
-	size_t	first = str.find_first_not_of("\t\v\n\f\r ");
-	size_t	last = str.find_last_not_of("\t\v\n\f\r ");
-	str = str.substr(first, last - first + 1);
-}
-
 bool	Contact::setInfo(const std::string &firstname,
 			const std::string &lastname,
 			const std::string &nickname,
 			const std::string &phone_num,
 			const std::string &secret)
 {
-	if (isEmptyOrWhitespace(firstname)
-	|| isEmptyOrWhitespace(lastname)
-	|| isEmptyOrWhitespace(nickname)
-	|| isEmptyOrWhitespace(phone_num)
-	|| isEmptyOrWhitespace(secret))
+	if (firstname.empty() || lastname.empty()
+		|| nickname.empty() || phone_num.empty()
+		|| secret.empty())
 	{
-		std::cout << "Each field must not be an empty string,\
-or contained only whitespaces" << std::endl;
+		std::cout << "Each field must not be an empty string" << std::endl;
 		return (false);
 	}
 	this->_firstname = firstname;
@@ -74,11 +47,6 @@ or contained only whitespaces" << std::endl;
 	this-> _nickname = nickname;
 	this->_phone_number = phone_num;
 	this->_darkest_secret = secret;
-	ftStrTrim(this->_firstname);
-	ftStrTrim(this->_lastname);
-	ftStrTrim(this->_nickname);
-	ftStrTrim(this->_phone_number);
-	ftStrTrim(this->_darkest_secret);
 	return (true);
 }
 
