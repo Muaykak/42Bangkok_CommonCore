@@ -1,8 +1,7 @@
 #include "main.hpp"
 
-static std::string userInputPromt(const std::string &str)
+static bool userInputPromt(const std::string &str, std::string &recieve_string)
 {
-	std::string user_input;
 	bool		flag;
 
 	std::cout << std::endl << str << std::endl;
@@ -10,13 +9,15 @@ static std::string userInputPromt(const std::string &str)
 	while (flag == false)
 	{
 		std::cout << "> ";
-		std::getline(std::cin, user_input);
-		if (user_input.find_first_not_of(" \t\n\v\f\r") == user_input.npos)
+		std::getline(std::cin, recieve_string);
+		if (!std::cin.good())
+			return (false);
+		if (recieve_string.find_first_not_of(" \t\n\v\f\r") == recieve_string.npos)
 			flag = false;
 		else
 			flag = true;
 	}
-	return (user_input);
+	return (true);
 }
 
 static bool	ftConvertToNumber(std::string &str, int &number)
@@ -49,7 +50,12 @@ static void searchCommand(PhoneBook &book)
 	int number;
 	while (true)
 	{
-		user_input = userInputPromt("Enter the index (1 - 8) [0 to exit to go back]");
+		if (!userInputPromt("Enter the index (1 - 8) [0 to exit to go back]", user_input))
+		{
+			std::cout << "EOF detected, or fail std::cin, SEARCH failed" << std::endl;
+			return ;
+		}
+
 		if (ftConvertToNumber(user_input, number) == true)
 		{
 			if (number == 0)
@@ -69,11 +75,16 @@ static bool	addCommand(PhoneBook &book)
 
 	std::string	user_input[5];
 
-	user_input[0] = userInputPromt("Enter your firstname");
-	user_input[1] = userInputPromt("Enter your lastname");
-	user_input[2] = userInputPromt("Enter your nickname");
-	user_input[3] = userInputPromt("Enter your phone number");
-	user_input[4] = userInputPromt("Enter your Darkest Secret");
+	if (!userInputPromt("Enter your firstname", user_input[0])
+		|| !userInputPromt("Enter your lastname", user_input[1])
+		|| !userInputPromt("Enter your nickname", user_input[2])
+		|| !userInputPromt("Enter your phone number", user_input[3])
+		|| !userInputPromt("Enter your Darkest Secret", user_input[4])
+	)
+	{
+		std::cout << "EOF detected, or fail std::cin, ADD failed" << std::endl;
+		return (false);
+	}
 
 	int	contact_index = book.addContact(user_input[0], user_input[1], user_input[2], user_input[3], user_input[4]);
 
@@ -92,12 +103,13 @@ static void mainPrompt(PhoneBook &book)
 
 	while (true)
 	{
-		user_input = userInputPromt("type ('ADD', 'SEARCH', or 'EXIT')");
-		if (user_input == "ADD")
+		if (!userInputPromt("type ('ADD', 'SEARCH', or 'EXIT')", user_input))
 		{
-			if (addCommand(book) == false)
-				return ;
+			std::cout << "EOF detected, or fail std::cin, Exiting the program" << std::endl;
+			return ;
 		}
+		if (user_input == "ADD")
+			addCommand(book);
 		else if (user_input == "SEARCH")	
 			searchCommand(book);
 		else if (user_input == "EXIT")
