@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 23:42:11 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/11 18:40:20 by srussame         ###   ########.fr       */
+/*   Created: 2025/09/11 01:03:43 by srussame          #+#    #+#             */
+/*   Updated: 2025/09/11 01:20:50 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
-int	main(void)
+# include <iostream>
+
+class	Fixed
 {
-	Harl	jimmy;
+	private:
+		int	_value;
+		static const int _fractional_bits = 8;
+	public:
+		Fixed();
+		Fixed( const Fixed &copy );
+		Fixed	&operator=(const Fixed &other);
+		~Fixed();
+		int		getRawBits( void ) const;
+		void	setRawBits( int const raw );
+};
 
-	jimmy.complain("DEBUG");
-	jimmy.complain("INFO");
-	jimmy.complain("WARNING");
-	jimmy.complain("ERROR");
-	jimmy.complain("CALM");
-}
+#endif
