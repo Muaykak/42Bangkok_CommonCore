@@ -5,28 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 02:10:17 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 00:12:27 by srussame         ###   ########.fr       */
+/*   Created: 2025/09/13 15:06:56 by srussame          #+#    #+#             */
+/*   Updated: 2025/09/13 16:17:41 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "../include/Animal.hpp"
+#include "../include/Dog.hpp"
+#include "../include/Cat.hpp"
+#include "../include/WrongAnimal.hpp"
+#include "../include/WrongCat.hpp"
 
 int	main(void)
 {
-	ClapTrap	John("John");
-	ClapTrap	Default;
+	const Animal* meta = new Animal();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
 
-	for (int i = 0; i < 11; i++)
-		John.attack("Kid");
-	for (int i = 0; i < 3; i++)
-		John.takeDamage(7);
-	Default = John;
-	Default.beRepaired(1);
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl;
+	j->makeSound();
+	i->makeSound();
+	meta->makeSound();
+	delete i;
+	delete j;
+	delete meta;
 
-	ClapTrap	Roboid("Juliet");
+	const WrongAnimal* wrong_meta = new WrongCat();
 
-	for (int i = 0; i < 11; i++)
-		Roboid.beRepaired(10);
-	return (0);
+	wrong_meta->makeSound();
+	delete wrong_meta;
 }

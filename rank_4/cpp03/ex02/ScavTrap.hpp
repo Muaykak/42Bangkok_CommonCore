@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 02:10:17 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 00:12:27 by srussame         ###   ########.fr       */
+/*   Created: 2025/09/13 00:20:52 by srussame          #+#    #+#             */
+/*   Updated: 2025/09/13 13:25:07 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
 
-int	main(void)
+# include "ClapTrap.hpp"
+
+class	ScavTrap : public ClapTrap
 {
-	ClapTrap	John("John");
-	ClapTrap	Default;
+	private:
+		bool	_gate_keeper_mode;
+	public:
+		ScavTrap();
+		ScavTrap( const std::string &name );
+		ScavTrap( const ScavTrap &other );
+		ScavTrap	&operator=( const ScavTrap &other );
+		~ScavTrap();
 
-	for (int i = 0; i < 11; i++)
-		John.attack("Kid");
-	for (int i = 0; i < 3; i++)
-		John.takeDamage(7);
-	Default = John;
-	Default.beRepaired(1);
+		void	attack( const std::string &target );
+		void	guardGate();
+};
 
-	ClapTrap	Roboid("Juliet");
-
-	for (int i = 0; i < 11; i++)
-		Roboid.beRepaired(10);
-	return (0);
-}
+#endif

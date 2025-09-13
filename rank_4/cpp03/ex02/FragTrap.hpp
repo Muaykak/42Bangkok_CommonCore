@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 02:10:17 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 00:12:27 by srussame         ###   ########.fr       */
+/*   Created: 2025/09/13 13:39:49 by srussame          #+#    #+#             */
+/*   Updated: 2025/09/13 13:49:01 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
-int	main(void)
-{
-	ClapTrap	John("John");
-	ClapTrap	Default;
+# include "ClapTrap.hpp"
 
-	for (int i = 0; i < 11; i++)
-		John.attack("Kid");
-	for (int i = 0; i < 3; i++)
-		John.takeDamage(7);
-	Default = John;
-	Default.beRepaired(1);
+class	FragTrap : public ClapTrap {
+	public:
+		FragTrap();
+		FragTrap( const std::string &name );
+		FragTrap( const FragTrap &other );
+		FragTrap &operator=( const FragTrap &other );
+		~FragTrap();
 
-	ClapTrap	Roboid("Juliet");
+		void	highFivesGuys( void );
+};
 
-	for (int i = 0; i < 11; i++)
-		Roboid.beRepaired(10);
-	return (0);
-}
+#endif 

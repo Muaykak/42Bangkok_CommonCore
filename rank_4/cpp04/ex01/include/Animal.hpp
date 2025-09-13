@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 02:10:17 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 00:12:27 by srussame         ###   ########.fr       */
+/*   Created: 2025/09/13 14:50:02 by srussame          #+#    #+#             */
+/*   Updated: 2025/09/13 15:54:03 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
-int	main(void)
-{
-	ClapTrap	John("John");
-	ClapTrap	Default;
+# include <iostream>
 
-	for (int i = 0; i < 11; i++)
-		John.attack("Kid");
-	for (int i = 0; i < 3; i++)
-		John.takeDamage(7);
-	Default = John;
-	Default.beRepaired(1);
+class	Animal {
+	protected:
+		std::string type;
+	public:
+		Animal();
+		Animal( const Animal &other );
+		Animal( const std::string &type );
+		Animal &operator=( const Animal &other );
+		virtual ~Animal();
 
-	ClapTrap	Roboid("Juliet");
-
-	for (int i = 0; i < 11; i++)
-		Roboid.beRepaired(10);
-	return (0);
-}
+		std::string	getType() const;
+		virtual void	makeSound() const;
+};
+#endif

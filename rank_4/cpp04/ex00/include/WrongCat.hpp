@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 02:10:17 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 00:12:27 by srussame         ###   ########.fr       */
+/*   Created: 2025/09/13 14:52:50 by srussame          #+#    #+#             */
+/*   Updated: 2025/09/13 16:17:19 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef WRONG_CAT_HPP
+# define WRONG_CAT_HPP
 
-int	main(void)
+# include "WrongAnimal.hpp"
+
+class WrongCat : public WrongAnimal 
 {
-	ClapTrap	John("John");
-	ClapTrap	Default;
+	public:
+		WrongCat();
+		WrongCat( const WrongCat &other );
+		WrongCat &operator=( const WrongCat &other );
+		~WrongCat();
 
-	for (int i = 0; i < 11; i++)
-		John.attack("Kid");
-	for (int i = 0; i < 3; i++)
-		John.takeDamage(7);
-	Default = John;
-	Default.beRepaired(1);
+		void	makeSound(void) const;
+};
 
-	ClapTrap	Roboid("Juliet");
-
-	for (int i = 0; i < 11; i++)
-		Roboid.beRepaired(10);
-	return (0);
-}
+#endif

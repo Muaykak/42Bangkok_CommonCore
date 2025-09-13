@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 02:10:21 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 13:33:57 by srussame         ###   ########.fr       */
+/*   Updated: 2025/09/13 14:19:58 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class	ClapTrap
 		ClapTrap( const std::string &new_name);
 		ClapTrap( const ClapTrap &other );
 		ClapTrap &operator=(const ClapTrap &other);
-		~ClapTrap();
+		virtual ~ClapTrap();
 
 		std::string		getName( void ) const ;
 		unsigned int	getHP( void ) const ;
