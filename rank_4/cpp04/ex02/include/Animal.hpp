@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:50:02 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 20:50:04 by srussame         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:49:05 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ class	Animal {
 		virtual ~Animal();
 
 		std::string	getType() const;
-		virtual void	makeSound() const;
+		virtual void	makeSound() const = 0;
 };
 #endif

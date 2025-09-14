@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 15:06:56 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 20:50:29 by srussame         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:28:35 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 int	main(void)
 {
+	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 
@@ -26,7 +27,9 @@ int	main(void)
 	std::cout << i->getType() << " " << std::endl;
 	j->makeSound();
 	i->makeSound();
+	meta->makeSound();
 	delete i;
 	delete j;
+	delete meta;
 
 }
