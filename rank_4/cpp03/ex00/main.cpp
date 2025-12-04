@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 02:10:17 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 00:12:27 by srussame         ###   ########.fr       */
+/*   Updated: 2025/12/04 21:47:18 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	ClapTrap	John("John");
 	ClapTrap	Default;
+	ClapTrap	Copy(John);
 
 	for (int i = 0; i < 11; i++)
 		John.attack("Kid");

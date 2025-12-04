@@ -5,33 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 12:12:01 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/09 13:11:46 by srussame         ###   ########.fr       */
+/*   Created: 2025/11/28 22:26:27 by srussame          #+#    #+#             */
+/*   Updated: 2025/11/28 22:35:59 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
 Zombie::Zombie(){
-	this->_name = "default_name";
+	name = "defaultName";
+	std::cout << name << ": Default Constructor Called." << std::endl;
 }
 
 Zombie::~Zombie(){
+	std::cout << name << ": Destructor Called." << std::endl;
 }
 
-Zombie::Zombie(const std::string &new_name){
-	this->_name = new_name;
+Zombie::Zombie(std::string newName){
+	name = newName;
+	std::cout << name << ": Parameter Constructor Called." << std::endl;
 }
 
-void	Zombie::announce(void){
-	std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-}
-
-std::string	Zombie::getName(void){
-	return (this->_name);
-}
-
-void	Zombie::setName(const std::string &new_name)
-{
-	this->_name = new_name;
+void	Zombie::announce( void ){
+	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }

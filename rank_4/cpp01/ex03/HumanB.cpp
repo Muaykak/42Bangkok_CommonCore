@@ -1,41 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/29 21:01:53 by srussame          #+#    #+#             */
+/*   Updated: 2025/11/29 21:01:56 by srussame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "HumanB.hpp"
 
 HumanB::HumanB(){
-	this->_weapon = NULL;
-	this->_name = "HumanB_defaultName";
+	name = "defaultName";
+	weapon = NULL;
+	std::cout << name << ": default constructor called" << std::endl;
 }
 
-HumanB::HumanB( const Weapon &weapon_type ){
-	this->_weapon = new Weapon(weapon_type.getType());
-	this->_name = "HumanB_defaultName";
+HumanB::HumanB(std::string newName){
+	name = newName;
+	weapon = NULL;
+	std::cout << name << ": 1 parameter constructor called" << std::endl;
 }
 
-HumanB::HumanB( const std::string &human_name, const Weapon &weapon_type ){
-	this->_name = human_name;
-	this->_weapon = new Weapon(weapon_type.getType());
+HumanB::HumanB(std::string newName, Weapon &newWeapon){
+	name = newName;
+	setWeapon(newWeapon);
+	std::cout << name << ": 2 parameters constructor called" << std::endl;
 }
-
-HumanB::HumanB( const std::string &human_name)
-{
-	this->_name = human_name;
-	this->_weapon = NULL;
-}
-
 
 HumanB::~HumanB(){
-	delete this->_weapon;
+	std::cout << name << ": destructor called" << std::endl;
 }
 
-void	HumanB::attack( void ){
-	if (this->_weapon == NULL)
-		std::cout << this->_name << " attack with their bare hands(no weapon)" << std::endl;
+void	HumanB::setWeapon(Weapon &newWeapon){
+	weapon = &newWeapon;
+}
+
+void	HumanB::attack(){
+	std::cout << name << " attacks with their ";
+	if (weapon == NULL)
+		std::cout << "bare hands (no weapon).";
 	else
-		std::cout << this->_name << " attack with their " << this->_weapon->getType() << std::endl;
-}
-
-void	HumanB::setWeapon( const Weapon &new_weapon ){
-	if (this->_weapon == NULL)
-		this->_weapon = new Weapon;
-	this->_weapon->setType(new_weapon.getType());
+		std::cout << weapon->getType();
+	std::cout << std::endl;
 }

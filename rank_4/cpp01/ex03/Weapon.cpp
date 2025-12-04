@@ -1,18 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/29 21:02:04 by srussame          #+#    #+#             */
+/*   Updated: 2025/11/29 21:02:08 by srussame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Weapon.hpp"
 
 Weapon::Weapon(){
-
+	type = "defaultWeapon";
+	std::cout << type << ": default constructor called" << std::endl;
 }
 
-Weapon::Weapon( const std::string &weapon_name ){
-	this->_type = weapon_name;
+Weapon::~Weapon(){
+	std::cout << type << ": destructor called" << std::endl;
 }
 
-const std::string &Weapon::getType( void ) const{
-	return (this->_type);
+Weapon::Weapon(std::string newType){
+	setType(newType);
+	std::cout << type << ": parameterized constructor called" << std::endl;
 }
 
-void	Weapon::setType( const std::string &new_type ){
-	this->_type = new_type;
+
+const std::string &Weapon::getType(){
+	return (type);
+}
+
+void Weapon::setType(std::string newType){
+	type = newType;
 }

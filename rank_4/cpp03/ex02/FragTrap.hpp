@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/13 13:39:49 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 13:49:01 by srussame         ###   ########.fr       */
+/*   Created: 2025/12/04 23:13:27 by srussame          #+#    #+#             */
+/*   Updated: 2025/12/04 23:23:23 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 # include "ClapTrap.hpp"
 
-class	FragTrap : public ClapTrap {
+class	FragTrap : public ClapTrap{
 	public:
 		FragTrap();
-		FragTrap( const std::string &name );
-		FragTrap( const FragTrap &other );
-		FragTrap &operator=( const FragTrap &other );
+		FragTrap(const FragTrap& obj);
+		FragTrap&	operator=(const FragTrap& obj);
 		~FragTrap();
+		FragTrap(const std::string& newName);
 
-		void	highFivesGuys( void );
+		void highFivesGuys(void);
 };
 
-#endif 
+#endif

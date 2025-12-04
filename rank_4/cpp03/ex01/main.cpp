@@ -6,22 +6,48 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 02:10:17 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 13:33:18 by srussame         ###   ########.fr       */
+/*   Updated: 2025/12/04 23:28:24 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
-int	main(void)
-{
-	ScavTrap	Test("Johnny");
-	ClapTrap	*ptr;
+// // no virtual on Parent destructor test
+// int	main(void)
+// {
+// 	ClapTrap *ptr = new ScavTrap("John");
+// 	delete ptr;
+// 	return (0);
+// }
 
-	Test.guardGate();
-	Test.beRepaired(200);
-	Test.attack("Prayut");
-	Test.guardGate();
-	ptr = &Test;
-	ptr->attack("Me");
-	return (0);
+// // check constructor
+// int main(void){
+// 	ScavTrap	a("Zim");
+// 	ScavTrap	b;
+// 	ScavTrap	c(b);
+// 	ScavTrap	e;
+
+// 	e = a;
+// }
+
+// test each override function
+int main(void){
+	ScavTrap t("Jiggy");
+	ScavTrap j("Ling");
+
+	for (int i = 0; i < 10; i ++){
+		j.attack("Jiggy");
+		t.takeDamage(20);
+		t.beRepaired(5);
+	}
 }
+
+// // test guardGate()
+// int main(void){
+// 	ScavTrap	a("Steve");
+// 	ScavTrap	b("Heok");
+// 	a.guardGate();
+// 	b = a;
+// 	b.guardGate();
+// }
