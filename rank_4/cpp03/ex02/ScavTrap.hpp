@@ -5,28 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/13 00:20:52 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 13:25:07 by srussame         ###   ########.fr       */
+/*   Created: 2025/12/04 21:50:51 by srussame          #+#    #+#             */
+/*   Updated: 2025/12/04 23:21:59 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCAVTRAP_HPP
 # define SCAVTRAP_HPP
-
 # include "ClapTrap.hpp"
 
-class	ScavTrap : public ClapTrap
-{
+class	ScavTrap : public ClapTrap{
 	private:
-		bool	_gate_keeper_mode;
+		bool	guardStatus;
 	public:
 		ScavTrap();
-		ScavTrap( const std::string &name );
-		ScavTrap( const ScavTrap &other );
-		ScavTrap	&operator=( const ScavTrap &other );
+		ScavTrap(const ScavTrap& obj);
+		ScavTrap&	operator=(const ScavTrap& obj);
 		~ScavTrap();
+		ScavTrap(const std::string& newName);
 
-		void	attack( const std::string &target );
+		void	attack(const std::string& target);
 		void	guardGate();
 };
 

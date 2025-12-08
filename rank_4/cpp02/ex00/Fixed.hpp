@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:03:43 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/11 20:22:21 by srussame         ###   ########.fr       */
+/*   Updated: 2025/12/04 00:47:41 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@
 class	Fixed
 {
 	private:
-		int	_value;
-		static const int _fractional_bits = 8;
+		int	num;
+		static const int fractionalBits = 8;
 	public:
-		//Orthodox Constructor
-		Fixed();
-		Fixed( const Fixed &copy );
-		Fixed	&operator=(const Fixed &other);
-		~Fixed();
-		int		getRawBits( void ) const;
-		void	setRawBits( int const raw );
+		Fixed(); // default constructor 
+		Fixed(Fixed &copy); // copy constructor 
+		Fixed	&operator=(const Fixed &copy); // copy assignment operator
+		~Fixed(); // destructor 
+
+		/* const here is to promise that this member 
+		function does not modify any member variables*/
+		int	getRawBits( void ) const;
+		void setRawBits( int const raw );
 };
 
 #endif

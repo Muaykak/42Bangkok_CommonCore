@@ -1,39 +1,40 @@
-SRC =	main.cpp \
-		newZombie.cpp \
-		Zombie.cpp \
-		randomChump.cpp
+# CPP01 Makefile Compilation
 
-OBJ_DIR = obj/
+# the source files target to compile the program
+SRC_FILE = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
-OBJ = ${addprefix ${OBJ_DIR}, ${SRC:.cpp=.o}}
+# object  target before compiling to the program
+OBJ = ${SRC_FILE:.cpp=.o}
 
-INCLUDE = -I./
+# Header file target
+HEADER_FILE = Zombie.hpp
+HEADER_DIR = ./
 
-HEADER = Zombie.hpp
+# Name of the program
+NAME = ZombieTest
 
-CFLAG = -Wall -Wextra -Werror -std=c++98
-
+#Compiler and flags
 CC = c++
-
-NAME = test
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	${CC} ${CFLAG} ${INCLUDE} ${OBJ} -o $@
+	${CC} ${FLAGS} ${OBJ} -I${HEADER_DIR} -o ${NAME}
 
-${OBJ_DIR}:
-	@mkdir -p $@
-
-${OBJ_DIR}%.o: %.cpp ${HEADER} | ${OBJ_DIR}
-	${CC} ${CFLAG} ${INCLUDE} -c $< -o $@
+%.o:%.cpp ${HEADER_FILE} Makefile
+	${CC} ${FLAGS} -c $< -o $@
 
 clean:
-	rm -rf ${OBJ_DIR}
+	rm -rf ${NAME}
 
 fclean: clean
-	rm -rf ${NAME}
+	rm -rf ${OBJ}
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+# Note: C++ can use both .h and .hpp
+# Actually the file extension is not important in C or C++
+# To **C PREPROCESSOR** the #include simply means "copy the text from that file and paste it right here"

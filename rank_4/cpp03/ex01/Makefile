@@ -8,8 +8,7 @@ OBJ = ${addprefix ${OBJ_DIR}, ${SRC:.cpp=.o}}
 CC = c++
 CFLAG = -Wall -Wextra -Werror -std=c++98
 INCLUDE = -I./
-HEADER =	ClapTrap.hpp \
-			ScavTrap.hpp
+HEADER = ClapTrap.hpp ScavTrap.hpp
 
 NAME = program
 

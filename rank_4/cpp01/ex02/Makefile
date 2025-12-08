@@ -1,33 +1,25 @@
 SRC =	main.cpp
 
-OBJ_DIR = obj/
-
-OBJ = ${addprefix ${OBJ_DIR}, ${SRC:.cpp=.o}}
-
-INCLUDE = -I./
-
-CFLAG = -Wall -Wextra -Werror -std=c++98
+OBJ = ${SRC:.cpp=.o}
 
 CC = c++
+CFLAG = -Wall -Wextra -Werror -std=c++98
 
-NAME = test
+NAME = Brain
 
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	${CC} ${CFLAG} ${INCLUDE} ${OBJ} -o $@
+	${CC} ${CFLAG} ${OBJ} -o ${NAME}
 
-${OBJ_DIR}:
-	@mkdir -p $@
-
-${OBJ_DIR}%.o: %.cpp | ${OBJ_DIR}
+%.o:%.cpp Makefile
 	${CC} ${CFLAG} -c $< -o $@
 
 clean:
-	rm -rf ${OBJ_DIR}
+	rm -rf ${NAME}
 
 fclean: clean
-	rm -rf ${NAME}
+	rm -rf ${OBJ}
 
 re: fclean all
 
