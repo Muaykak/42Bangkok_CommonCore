@@ -1,29 +1,20 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/13 19:34:55 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 20:07:27 by srussame         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef BRAIN_HPP
 # define BRAIN_HPP
 
 # include <iostream>
 
-class	Brain
-{
+class Brain {
 	public:
 		Brain();
-		Brain( const Brain &other );
-		Brain &operator=( const Brain &other );
+		Brain(const Brain& obj);
+		Brain&	operator=(const Brain& obj);
 		~Brain();
 
-		std::string ideas[100];
+		void	setIdea(const std::string& newIdea, const int& index);
+		std::string getIdea(const int& index) const;
+
+	private:
+		std::string	idea[100];
 };
 
 #endif

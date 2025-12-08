@@ -1,46 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/13 14:57:31 by srussame          #+#    #+#             */
-/*   Updated: 2025/09/13 15:54:12 by srussame         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/Animal.hpp"
 
 Animal::Animal(){
-	std::cout << "Animal Default Constructor Called" << std::endl;
+	std::cout << "Animal Default Constructor"  << std::endl;
+	type = "noType";
 }
-
-Animal::Animal( const Animal &other ){
-	std::cout << "Animal Copy Constructor Called by " << other.getType() << std::endl;
-	this->operator=(other);
+Animal::Animal(const Animal& obj){
+	std::cout << "Animal Copy Constructor" << std::endl;
+	operator=(obj);
 }
-
-Animal::Animal( const std::string &type ){
-	std::cout << "Animal Parameterized Constructor Called by " << type << std::endl;
-	this->type = type;
-}
-
-
-Animal &Animal::operator=( const Animal &other ){
-	std::cout << "Animal Copy Assignment Operator Called by " << other.getType() << std::endl;
-	this->type = other.getType();
+Animal& Animal::operator=(const Animal& obj){
+	std::cout << "Animal Copy Assignment Operator" << std::endl;
+	type = obj.type;
 	return (*this);
 }
-
 Animal::~Animal(){
-	std::cout << "Animal Destructor Called by " << this->getType() << std::endl;
-}
-
-std::string	Animal::getType() const{
-	return (this->type);
+	std::cout << "Animal Destructor" << std::endl;
 }
 
 void	Animal::makeSound() const {
-	std::cout << "Animal " << this->type << " makes animal sounds" << std::endl;
+	std::cout << type << " makes generic animal sounds" << std::endl;
+}
+
+const std::string& Animal::getType() const {
+	return (type);
 }
