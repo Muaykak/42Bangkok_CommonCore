@@ -6,35 +6,36 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 23:22:30 by srussame          #+#    #+#             */
-/*   Updated: 2025/12/04 23:25:32 by srussame         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:27:05 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap() : ClapTrap(){
-	std::cout << "FragTrap " << name << ": Default constructor called" << std::endl;
+	std::cout << "FragTrap Default constructor called" << std::endl;
 	hitPoint = 100;
 	energyPoint = 100;
 	attackDmg = 30;
 }
 FragTrap::FragTrap(const FragTrap& obj) : ClapTrap(obj){
-	std::cout << "FragTrap " << name << ": Copy constructor called" << std::endl;
-	operator=(obj);
+	std::cout << "FragTrap Copy constructor called" << std::endl;
 }
 FragTrap&	FragTrap::operator=(const FragTrap& obj) {
-	std::cout << "FragTrap " << obj.name << ": Copy asignment operator called" << std::endl;
-	name = obj.name;
-	hitPoint = obj.hitPoint;
-	energyPoint = obj.energyPoint;
-	attackDmg = obj.attackDmg;
+	std::cout << "FragTrap Copy asignment operator called" << std::endl;
+	if (this != &obj){
+		name = obj.name;
+		hitPoint = obj.hitPoint;
+		energyPoint = obj.energyPoint;
+		attackDmg = obj.attackDmg;
+	}
 	return (*this);
 }
 FragTrap::~FragTrap() {
-	std::cout << "FragTrap " << name << ": Destructor called" << std::endl;
+	std::cout << "FragTrap Destructor called" << std::endl;
 }
 FragTrap::FragTrap(const std::string& newName) : ClapTrap(newName){
-	std::cout << "FragTrap " << name << ": Parameter constructor called" << std::endl;
+	std::cout << "FragTrap Parameter constructor called" << std::endl;
 	hitPoint = 100;
 	energyPoint = 100;
 	attackDmg = 30;

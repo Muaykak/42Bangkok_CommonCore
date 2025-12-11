@@ -9,8 +9,10 @@ Brain::Brain( const Brain& obj){
 }
 Brain& Brain::operator=(const Brain& obj){
 	std::cout << "Brain Copy Assignment Operator" << std::endl;
-	for (int i = 0; i < 100; i++){
-		idea[i] = obj.idea[i];
+	if (this != &obj){
+		for (int i = 0; i < 100; i++){
+			idea[i] = obj.idea[i];
+		}
 	}
 	return (*this);
 }

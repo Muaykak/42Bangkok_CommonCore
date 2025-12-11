@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 02:10:24 by srussame          #+#    #+#             */
-/*   Updated: 2025/12/04 23:09:31 by srussame         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:19:38 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Default Constructor
 ClapTrap::ClapTrap(){
-	std::cout << "defaultName" << ": Default constructor called" << std::endl;
+	std::cout << "ClapTrap Default constructor called" << std::endl;
 	name = "defaultName";
 	hitPoint = 10;
 	energyPoint = 10;
@@ -22,25 +22,32 @@ ClapTrap::ClapTrap(){
 }
 // Copy constructor
 ClapTrap::ClapTrap( const ClapTrap &obj){
-	std::cout << obj.name << ": Copy constructor operator called" << std::endl;
-	operator=(obj);
+	std::cout << "ClapTrap Copy constructor operator called" << std::endl;
+	if (this != &obj){
+		name = obj.name;
+		hitPoint = obj.hitPoint;
+		energyPoint = obj.energyPoint;
+		attackDmg = obj.attackDmg;
+	}
 }
 // Copy assignment operator
 ClapTrap	&ClapTrap::operator=(const ClapTrap &obj){
-	std::cout << obj.name << ": Copy assignment operator called" << std::endl;
-	name = obj.name;
-	hitPoint = obj.hitPoint;
-	energyPoint = obj.energyPoint;
-	attackDmg = obj.attackDmg;
+	std::cout << "ClapTrap Copy assignment operator called" << std::endl;
+	if (this != &obj){
+		name = obj.name;
+		hitPoint = obj.hitPoint;
+		energyPoint = obj.energyPoint;
+		attackDmg = obj.attackDmg;
+	}
 	return (*this);
 }
 //Destructor
 ClapTrap::~ClapTrap(){
-	std::cout << name << ": Destructor called" << std::endl;
+	std::cout << "ClapTrap Destructor called" << std::endl;
 }
 // Parameter constructor
 ClapTrap::ClapTrap(const std::string &newName){
-	std::cout << newName << ": Parameter constructor called" << std::endl;
+	std::cout << "ClapTrap Parameter constructor called" << std::endl;
 	name = newName;
 	hitPoint = 10;
 	energyPoint = 10;
@@ -69,9 +76,26 @@ void	ClapTrap::takeDamage(unsigned int amount){
 
 void	ClapTrap::beRepaired(unsigned int amount){
 	if (hitPoint > 0 && energyPoint > 0){
-		hitPoint += amount;
-		std::cout << "ClapTrap " << name << " repairs itself by " << amount
-		<< " hitpoints. (HP remaining: " << hitPoint << ")" << std::endl;
+		energyPoint--;
+		// 0xFFFFFFFF == 11111111 11111111 11111111 11111111  MAX UINT32 value
+		if (static_cast<unsigned long>(hitPoint) + amount <= 0xFFFFFFFF)
+		{
+			hitPoint += amount;
+			std::cout << "ClapTrap " << name << " repairs itself by " << amount
+			<< " hitpoints. (HP remaining: " << hitPoint << ")" << std::endl;
+		}
+		else
+		{
+			amount = 0xFFFFFFFF - hitPoint;
+			hitPoint = 0xFFFFFFFF;
+			if (amount == 0)
+				std::cout << "ClapTrap " << name << " reach max HP and won't repair itself (HP remaining: "
+				<< hitPoint << ")" << std::endl;
+			else
+				std::cout << "ClapTrap " << name << " repairs itself by " << amount
+				<< " hitpoints. (HP remaining: " << hitPoint << ")" << std::endl;
+		}
+		
 	}
 	else {
 		if (hitPoint > 0)
@@ -79,4 +103,20 @@ void	ClapTrap::beRepaired(unsigned int amount){
 		else
 			std::cout << "ClapTrap " << name << " has no hitpoints and cannot repair itself." << std::endl;
 	}
+}
+
+std::string	ClapTrap::getName(void) const {
+	return (name);
+}
+
+unsigned int	ClapTrap::getHP(void) const {
+	return (hitPoint);
+}
+
+unsigned int	ClapTrap::getEP(void) const {
+	return (energyPoint);
+}
+
+unsigned int	ClapTrap::getATK(void) const {
+	return (attackDmg);
 }

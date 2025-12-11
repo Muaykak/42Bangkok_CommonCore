@@ -6,37 +6,40 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 22:13:27 by srussame          #+#    #+#             */
-/*   Updated: 2025/12/04 23:18:39 by srussame         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:21:15 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() : ClapTrap(){
-	std::cout << "ScavTrap " << name << ": Default constructor called" << std::endl;
+	std::cout << "ScavTrap Default constructor called" << std::endl;
 	hitPoint = 100;
 	energyPoint = 50;
 	attackDmg = 20;
 	guardStatus = false;
 }
 ScavTrap::ScavTrap(const ScavTrap& obj) : ClapTrap(obj){
-	std::cout << "ScavTrap " << name << ": Copy constructor called" << std::endl;
-	operator=(obj);
+	std::cout << "ScavTrap  Copy constructor called" << std::endl;
+	if (this != &obj)
+		guardStatus = obj.guardStatus;
 }
 ScavTrap&	ScavTrap::operator=(const ScavTrap& obj) {
-	std::cout << "ScavTrap " << obj.name << ": Copy asignment operator called" << std::endl;
-	name = obj.name;
-	hitPoint = obj.hitPoint;
-	energyPoint = obj.energyPoint;
-	attackDmg = obj.attackDmg;
-	guardStatus = obj.guardStatus;
+	std::cout << "ScavTrap Copy asignment operator called" << std::endl;
+	if (this != &obj){
+		name = obj.name;
+		hitPoint = obj.hitPoint;
+		energyPoint = obj.energyPoint;
+		attackDmg = obj.attackDmg;
+		guardStatus = obj.guardStatus;
+	}
 	return (*this);
 }
 ScavTrap::~ScavTrap() {
-	std::cout << "ScavTrap " << name << ": Destructor called" << std::endl;
+	std::cout << "ScavTrap Destructor called" << std::endl;
 }
 ScavTrap::ScavTrap(const std::string& newName) : ClapTrap(newName){
-	std::cout << "ScavTrap " << name << ": Parameter constructor called" << std::endl;
+	std::cout << "ScavTrap Parameter constructor called" << std::endl;
 	hitPoint = 100;
 	energyPoint = 50;
 	attackDmg = 20;
@@ -64,4 +67,8 @@ void	ScavTrap::guardGate(){
 		std::cout << "ScavTrap " << name << " turn on Gate keeper mode." << std::endl;
 		guardStatus = true;
 	}
+}
+
+bool	ScavTrap::getGuardStatus() const {
+	return (guardStatus);
 }

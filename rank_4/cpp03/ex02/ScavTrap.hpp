@@ -6,7 +6,7 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 21:50:51 by srussame          #+#    #+#             */
-/*   Updated: 2025/12/04 23:21:59 by srussame         ###   ########.fr       */
+/*   Updated: 2025/12/11 13:47:23 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class	ScavTrap : public ClapTrap{
 
 		void	attack(const std::string& target);
 		void	guardGate();
+		bool	getGuardStatus(void) const;
 };
 
 #endif

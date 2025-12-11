@@ -20,7 +20,7 @@ ${NAME}: ${OBJ}
 ${OBJ_DIR}:
 	@mkdir -p $@
 
-${OBJ_DIR}%.o: %.cpp ${HEADER} | ${OBJ_DIR}
+${OBJ_DIR}%.o: %.cpp ${HEADER} Makefile | ${OBJ_DIR}
 	${CC} ${CFLAG} ${INCLUDE} -c $< -o $@
 
 clean:

@@ -7,7 +7,7 @@ OBJ_DIR = obj/
 OBJ = ${addprefix ${OBJ_DIR}, ${SRC:.cpp=.o}}
 
 CC = c++
-CFLAG = -Wall -Wextra -Werror -std=c++98
+CFLAG = -Wall -Wextra -Werror -std=c++98 #-Wshadow
 INCLUDE = -I./
 HEADER = ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
 
@@ -21,7 +21,7 @@ ${NAME}: ${OBJ}
 ${OBJ_DIR}:
 	@mkdir -p $@
 
-${OBJ_DIR}%.o: %.cpp ${HEADER} | ${OBJ_DIR}
+${OBJ_DIR}%.o: %.cpp ${HEADER} Makefile | ${OBJ_DIR}
 	${CC} ${CFLAG} ${INCLUDE} -c $< -o $@
 
 clean:

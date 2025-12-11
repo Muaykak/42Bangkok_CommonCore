@@ -1,16 +1,16 @@
 #include "../include/Animal.hpp"
 
-Animal::Animal(){
+Animal::Animal() : type("noType"){
 	std::cout << "Animal Default Constructor"  << std::endl;
-	type = "noType";
 }
-Animal::Animal(const Animal& obj){
+Animal::Animal(const Animal& obj) : type(obj.type){
 	std::cout << "Animal Copy Constructor" << std::endl;
-	operator=(obj);
 }
 Animal& Animal::operator=(const Animal& obj){
 	std::cout << "Animal Copy Assignment Operator" << std::endl;
-	type = obj.type;
+	if (this != &obj){
+		type = obj.type;
+	}
 	return (*this);
 }
 Animal::~Animal(){

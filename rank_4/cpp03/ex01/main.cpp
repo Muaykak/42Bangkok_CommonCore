@@ -6,48 +6,145 @@
 /*   By: srussame <sutawith@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 02:10:17 by srussame          #+#    #+#             */
-/*   Updated: 2025/12/04 23:28:24 by srussame         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:28:32 by srussame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
-// // no virtual on Parent destructor test
-// int	main(void)
-// {
-// 	ClapTrap *ptr = new ScavTrap("John");
-// 	delete ptr;
-// 	return (0);
-// }
+#include <iomanip>
 
-// // check constructor
-// int main(void){
-// 	ScavTrap	a("Zim");
-// 	ScavTrap	b;
-// 	ScavTrap	c(b);
-// 	ScavTrap	e;
+void	printStatus(ClapTrap &obj){
+	std::cout << std::setw(40) << std::setfill('-') << "" << std::endl;
+	std::cout << "Name: " << obj.getName() << std::endl;
+	std::cout << "HP: " << obj.getHP() << std::endl;
+	std::cout << "EP: " << obj.getEP() << std::endl;
+	std::cout << "ATK: " << obj.getATK() << std::endl;
+	std::cout << std::setw(40) << std::setfill('-') << "" << std::endl;
+}
 
-// 	e = a;
-// }
+void	printStatus(ScavTrap &obj){
+	std::cout << std::setw(40) << std::setfill('-') << "" << std::endl;
+	std::cout << "Name: " << obj.getName() << std::endl;
+	std::cout << "HP: " << obj.getHP() << std::endl;
+	std::cout << "EP: " << obj.getEP() << std::endl;
+	std::cout << "ATK: " << obj.getATK() << std::endl;
+	std::cout << "Guardgate: " << (obj.getGuardStatus()  == true ? "ON" : "OFF") << std::endl;
+	std::cout << std::setw(40) << std::setfill('-') << "" << std::endl;
+}
 
-// test each override function
-int main(void){
-	ScavTrap t("Jiggy");
-	ScavTrap j("Ling");
+void printSection(const std::string &toPrint){
+	std::cout << std::endl << std::left << std::setw(50) << std::setfill('-')
+	<< "---- " + toPrint << std::endl;
+	return ;
+}
 
-	for (int i = 0; i < 10; i ++){
-		j.attack("Jiggy");
-		t.takeDamage(20);
-		t.beRepaired(5);
+void claptrapTest(void){
+
+	printSection("ClapTrap john(\"John\"); instantiate");
+	ClapTrap	john("John");
+	printSection("ClapTrap d; instantiate");
+	ClapTrap	d;
+	printSection("ClapTrap copy(john); instantiate");
+	ClapTrap	copy(john);
+	printSection("Check Copy Constructor");
+	printStatus(copy);
+	printStatus(john);
+
+	printSection("john.attack() until no energy");
+	for (int i = 0; i < 11; i++)
+		john.attack("Kid");
+	for (int i = 0; i < 3; i++)
+		john.takeDamage(8);
+	d = john;
+	printSection("Check Copy Assignment Operator");
+	printStatus(john);
+	printStatus(d);
+	printSection("d = john; then check b.beRepaired");
+	d.beRepaired(1); // Should not repair because no hp
+
+	printSection("ClapTrap roboid(\"Juliet\"); instantiate");
+	ClapTrap	roboid("Juliet");
+
+	printSection("roboid.beRepaired until no energy");
+	for (int i = 0; i < 11; i++)
+		roboid.beRepaired(0xFFFFFFFF / 2);
+
+	printSection("4 Destructor should called for 4 objects");
+
+}
+
+void scavtrapTest(){
+	{
+		printSection("ScavTrap a; Default Constructor");
+		ScavTrap a;
+
+		printSection("Check ScavTrap a status");
+		printStatus(a);
+		printSection("ScavTrap a Destructor");
+	}
+	{
+		// parameter constructor
+		printSection("ScavTrap b(\"John\"); Parameter Constructor");
+		ScavTrap b("John");
+
+		printSection("Check ScavTrap b status");
+		printStatus(b);
+		printSection("ScavTrap b Destructor");
+	}
+	{
+		printSection("Copy constructor test");
+		//copy constructor
+		ScavTrap a;
+
+		a.takeDamage(20);
+		a.guardGate();
+		printSection("ScavTrap b copy constructor");
+		ScavTrap b(a);
+		printStatus(a);
+		printStatus(b);
+		printSection("Destructor a b");
+	}
+	{
+		//Allocation test
+		printSection("allocation test #1");
+		printSection("ScavTrap *ptr = new ScavTrap(\"Tom\");");
+		ScavTrap *ptr = new ScavTrap("Tom");
+		ptr->attack("Thailand");
+		printSection("delete ptr");
+		delete ptr;
+	}
+	{
+		// Allocation test # 2
+		printSection("allocation test #2");
+		printSection("ClapTrap *ptr = new ScavTrap(\"Tom\");");
+		ClapTrap *ptr = new ScavTrap("Tom");
+		ptr->attack("Thailand");
+		printSection("delete ptr");
+		delete ptr;
+	}
+	{
+		// test all functionality
+		printSection("test more functions");
+		
+		ScavTrap	a("Smith");
+		ScavTrap	b("Pad");
+
+		a.getGuardStatus();
+		a.getGuardStatus();
+		b = a;
+		while (b.getHP() > 0){
+			b.takeDamage(50);
+		}
+		a.attack("Jelly");
+		b.beRepaired(100);
+		printSection("a and b Destructor");
 	}
 }
 
-// // test guardGate()
-// int main(void){
-// 	ScavTrap	a("Steve");
-// 	ScavTrap	b("Heok");
-// 	a.guardGate();
-// 	b = a;
-// 	b.guardGate();
-// }
+int	main(void)
+{
+	scavtrapTest();
+	return (0);
+}
