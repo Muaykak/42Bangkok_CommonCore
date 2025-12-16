@@ -67,12 +67,6 @@ submit all the files in the <u>root</u> your 42 git repository of this project.
 
 ## Resources
 
-*This is the first time for me writing Readme.md file for a 42 project. I don't know how much i should put in this file.*
-
-*This time I will give the referenced sites that I studied from for each topic. And also I will briefly explain about each of it in my own words.*
-
-*Just making sure lol.*
-
 ### Studied Concepts
 For this project, I studied these concepts: **TCP/IP addressing, subnet mask, default gateway, routers and switches, and OSI layers**.
 
