@@ -88,7 +88,7 @@ void Bureaucrat::downGrade()
 		throw GradeTooLowException();
 }
 
-bool Bureaucrat::signForm(Form& form)
+bool Bureaucrat::signForm(Form& form) const
 {
 	try
 	{

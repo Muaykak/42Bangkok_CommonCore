@@ -3,6 +3,7 @@ SRC_FILE =	Bureaucrat.cpp \
 			RobotomyRequestForm.cpp \
 			ShrubberyCreationForm.cpp \
 			AForm.cpp \
+			Intern.cpp \
 			main.cpp
 
 OBJ = ${SRC_FILE:.cpp=.o}
@@ -11,7 +12,8 @@ HEADER_FILE =	AForm.hpp \
 				Bureaucrat.hpp \
 				PresidentialPardonForm.hpp \
 				RobotomyRequestForm.hpp \
-				ShrubberyCreationForm.hpp
+				ShrubberyCreationForm.hpp \
+				Intern.hpp
 
 CC = c++
 CFLAGS = -std=c++98 -pedantic-errors -Wall -Wextra -Werror
