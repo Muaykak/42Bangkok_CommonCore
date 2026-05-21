@@ -8,7 +8,7 @@ HEADER_FILE = ScalarConverter.hpp
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -pedantic-errors -std=c++98
 
-NAME = scalarConverter
+NAME = converter
 
 all: ${NAME}
 

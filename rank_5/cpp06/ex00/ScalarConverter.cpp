@@ -114,7 +114,13 @@ void ScalarConverter::convert(const std::string& stringLiteral)
 		size_t backPos = stringLiteral.find_last_not_of(" \t\n\v\f\r");
 
 		if (frontPos != std::string::npos && backPos != std::string::npos)
+		{
 			trimmedString = stringLiteral.substr(frontPos, backPos - frontPos + 1);
+
+			/* then convert tolower */
+			for (size_t i = 0; i < trimmedString.size(); i++)
+				trimmedString[i] = static_cast<unsigned char>(std::tolower(trimmedString[i]));
+		}
 	}
 
 	if (trimmedString.empty())
@@ -123,6 +129,13 @@ void ScalarConverter::convert(const std::string& stringLiteral)
 	if (trimmedString.size() == 1)
 	{
 		oneCharConvert(trimmedString[0]);
+		return ;
+	}
+
+	if (trimmedString == "nan")
+	{
+		std::cout << "char: impossible" << std::endl << "int: impossible" << std::endl << "float: nanf" << std::endl << "double: nan"<<	std::endl;
+		return ;
 	}
 
 
