@@ -5,7 +5,7 @@ void testExceptions();
 
 int main()
 {
-	bool isTestNormal = false;
+	bool isTestNormal = true;
 	bool isTestException = true;
 
 	if (isTestNormal || isTestException)

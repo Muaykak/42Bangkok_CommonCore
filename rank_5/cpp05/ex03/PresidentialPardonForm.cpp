@@ -37,5 +37,5 @@ _target(target.empty() ? "default_target" : target)
 
 void PresidentialPardonForm::executeApply() const
 {
-	std::cout << _target << " has beed pardoned by Zaphod Beeblebrox" << std::endl;
+	std::cout << _target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }

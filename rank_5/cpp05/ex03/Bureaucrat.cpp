@@ -112,11 +112,11 @@ bool Bureaucrat::executeForm(AForm const & form) const
 	}
 	catch(const std::exception& e)
 	{
-		std::cout << _name << "failed to execute" << form.getName() << std::endl;
+		std::cout << _name << " failed to execute " << form.getName() << std::endl;
 		return (false);
 	}
 
-	std::cout << _name << "executed" << form.getName() << std::endl;
+	std::cout << _name << " executed " << form.getName() << std::endl;
 	return (true);
 }
 
