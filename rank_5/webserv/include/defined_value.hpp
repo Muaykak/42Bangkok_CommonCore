@@ -1,0 +1,69 @@
+#ifndef DEFINED_VALUE_HPP
+# define DEFINED_VALUE_HPP
+
+# include <string>
+# include <map>
+# include <vector>
+
+// CONSTANT VALUE
+
+//----------- LIMITS
+// Soft limit of file descriptor allowed in this project
+#define MAX_FD 1024
+#define MAX_LISTENSOCKET_CONNECTION 100
+#define MAX_EPOLL_EVENT 300
+#define HTTP_RECV_BUFFER 4096 * 16
+#define HTTP_SEND_BUFFER 4096 * 16
+#define HTTP_READ_FROM_CGI_BUFFER_SIZE 4096 * 16
+#define HTTP_WRITE_TO_CGI_BUFFER_SIZE 4096 * 16
+
+#define WEBSERV_EPOLL_WAIT_MILLISEC 1000
+#define WEBSERV_CLIENT_SOCKET_TIMEOUT_SECOND 60.0
+#define WEBSERV_CGI_SOCKET_TIMEOUT_SECOND 10.0
+#define WEBSERV_HTTP_REQUEST_TIMEOUT_SECOND 180.0
+
+/* max seconds to force SIGKILL to the CGI process
+ usually, after we send SIGTERM to the process for a while*/
+ /* in seconds */
+#define MAX_HTTP_CGI_PROCESS_WAIT_SIGTERM 10.0
+
+// limit to prevent client sending too much request
+#define	MAX_REQUEST_BUFFER_SIZE HTTP_RECV_BUFFER * 2
+
+// number of char / byte on each element
+#define MAX_FIELDNAME_LENGTH 4096
+#define MAX_FIELDVALUE_LENGTH 4096
+#define MAX_HTTP_HEADER_LINE_LENGTH 500
+#define MAX_HTTP_HEADER_BUFFER_LIMIT HTTP_RECV_BUFFER * 2
+#define MAX_HTTP_REQUEST_LINE_LENGTH 4096
+
+#define MAX_HTTP_LOCAL_REDIRECT_COUNT 10
+
+// Color Text
+#define LC_RED "\033[31m"
+#define LC_YELLOW "\033[33m"
+#define LC_BOLD "\033[1m"
+#define LC_RESET "\033[0m"
+#define LC_ERROR "\033[31m\033[1m"
+#define LC_DEBUG "\033[1m\033[34m"
+
+#define LC_SYSTEM "\033[34m\033[1m"
+#define LC_MINOR_SYSTEM "\033[34m\033[1m"
+#define LC_INFO "\033[36m"
+#define LC_NOTE "\033[33m"
+#define LC_MINOR_NOTE "\033[30m "
+
+#define LC_REQ_LOG "\033[33m"
+#define LC_RES_OK_LOG "\033[32m"
+#define LC_RES_NOK_LOG "\033[31m"
+#define LC_RES_INT_LOG "\033[36m"
+#define LC_RES_FND_LOG "\033[34m"
+#define LC_CON_FAIL "\033[31m"
+#define LC_CONN_LOG "\033[35m"
+
+# ifndef TEMP_FILE_DIR
+# 	 define TEMP_FILE_DIR "./temp/"
+# endif
+
+
+#endif

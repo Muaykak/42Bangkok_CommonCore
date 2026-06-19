@@ -1,0 +1,74 @@
+#ifndef SERVERCONFIG_HPP
+# define SERVERCONFIG_HPP
+
+# include <map>
+# include <string>
+# include <vector>
+# include <set>
+# include <iostream>
+
+// for uint32_t
+# include <netinet/in.h>
+# include "WebservException.hpp"
+# include "../defined_value.hpp"
+# include "../utility_function.hpp"
+# include "../webserv_structs.hpp"
+
+class ServerConfig
+{
+private:
+	t_config_map _serverConfig;
+	t_location_map _locationsConfig;
+	int				_listenPort;
+	std::vector<std::string> _serverNameVec;
+	std::map<unsigned int, std::string> _errorPageMap;
+
+	// set of ipv4 address host server
+	std::set<in_addr_t>	_host_ip_set;
+	// there are helper functions in utility_function.hpp
+
+	void	checkIfPathIsDirectory(const std::string& path, const t_config_map* targetLocationBlock);
+	void	checkIfPathIsRegularReadable(const std::string& path, const t_config_map* targetLocationBlock);
+	void	checkIfPathIsRegularExecutable(const std::string& path, const t_config_map* targetLocationBlock);
+
+	void	checkConfigBlock(t_config_map& configBlock);
+
+	void	checkMustExistDirective(const std::vector<std::string>& directiveKeyVec, const t_config_map& mapToFind);
+	void	checkMustNotExistDirective(const std::vector<std::string>& directiveKeyVec, const t_config_map& mapToFind);
+
+	std::map<std::string, void(ServerConfig::*)(std::vector<std::string>&, const t_config_map*)> buildConfigCheckMap();
+	void	(ServerConfig::*getDirectiveCheckFunction(const std::string& directiveKey))(std::vector<std::string>&, const t_config_map*);
+
+	void	checkDirectiveRoot(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveServerName(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveClientMaxBodySize(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveErrorPage(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveIndex(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveAllowedMethods(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveUploadStore(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveAutoIndex(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveReturn(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveCGIpass(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+	void	checkDirectiveHost(std::vector<std::string>& valueVec, const t_config_map* targetLocationBLock);
+
+public:
+	ServerConfig();
+	ServerConfig(const ServerConfig &obj);
+	ServerConfig &operator=(const ServerConfig &obj);
+	~ServerConfig();
+	ServerConfig(const t_config_map& serverConfig, const t_location_map& locationsConfig, int listenPort);
+	bool operator==(const ServerConfig& obj) const;
+	const std::vector<std::string>* getServerData(const std::string &keyToFind) const;
+	// ####################  AI GEN -> Make sure to understand logic ########
+	const t_config_map *findLocationBlock(std::string locationPath) const;
+	// ##############################################################
+	const std::vector<std::string>* getLocationData(const t_config_map* targetLocationBlock, const std::string &keytoFind) const;
+	const std::vector<std::string>* getLocationDataNoRollBack(const t_config_map* targetLocationBlock, const std::string &keytoFind) const;
+	int	getPort() const;
+	const std::vector<std::string> &getServerNameVec() const;
+	const std::set<in_addr_t>&	getHostIp() const;
+
+	void	printServerConfig() const;
+};
+
+#endif

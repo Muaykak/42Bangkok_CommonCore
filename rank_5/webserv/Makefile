@@ -1,0 +1,124 @@
+# ========= DIRECTORIES =============
+SRC_DIR = src/
+OBJ_DIR = obj/
+HEADERS_DIR = include/
+
+# ========== HEADER FILES ============
+
+HEADER_FILE =	${addprefix ${HEADERS_DIR}, ${MAIN_HEADER_FILE}} \
+				${addprefix ${HEADERS_DIR}${CLASS_HEADER_DIR}, ${CLASS_HEADER_FILE}}
+
+CLASS_HEADER_DIR = classes/
+CLASS_HEADER_FILE =	ConfigData.hpp \
+					EnvpWrapper.hpp \
+					FileDescriptor.hpp \
+					Http.hpp \
+					CgiProcess.hpp \
+					ContentTypeTable.hpp \
+					Logger.hpp \
+					ServerConfig.hpp \
+					HttpCgi.hpp \
+					HttpRequest.hpp \
+					HttpResponse.hpp \
+					HttpThrowStatus.hpp \
+					OptionalData.hpp \
+					Socket.hpp \
+					Shared.hpp \
+					TempFileManager.hpp \
+					WebServ.hpp \
+					WebservException.hpp \
+					CharTable.hpp
+
+MAIN_HEADER_FILE =	defined_value.hpp \
+					utility_function.hpp \
+					webserv_structs.hpp
+
+
+# ========== SOURCE  FILES ===========
+
+SRC_MAIN =	${addprefix ${SRC_DIR}, ${SOURCE_MAIN_FILE}} \
+			${SRC_FILE}
+
+SRC_FILE =	${addprefix ${SRC_DIR}${SRC_CLASS_DIR}, ${SRC_CLASSES_FILE}} \
+			${addprefix ${SRC_DIR}${SRC_FUNC_DIR}, ${SRC_FUNC_FILE}}
+
+
+SRC_CLASS_DIR = classes_definition/
+SRC_CLASSES_FILE =	ConfigData.cpp \
+					CgiProcess.cpp \
+					CharTable.cpp \
+					ContentTypeTable.cpp \
+					EnvpWrapper.cpp \
+					FileDescriptor.cpp \
+					Http.cpp \
+					HttpCgi.cpp \
+					HttpResponse.cpp \
+					HttpRequest.cpp \
+					HttpThrowStatus.cpp \
+					Logger.cpp \
+					ServerConfig.cpp \
+					Socket.cpp \
+					TempFileManager.cpp \
+					WebServ.cpp \
+					WebservException.cpp \
+
+SRC_FUNC_DIR = functions/
+SRC_FUNC_FILE = chartables.cpp \
+				split.cpp \
+				signal_handler.cpp \
+				tolower.cpp \
+				ip_conversion.cpp \
+				string_to_size_t.cpp \
+				ft_trim.cpp \
+				size_t_to_hex.cpp \
+				hex_to_size_t.cpp \
+				contentTypeTable.cpp \
+				envData.cpp \
+				tempFileManager.cpp \
+				stringCapital.cpp \
+				my_find.cpp \
+				getStatusCodeMessage.cpp \
+				findNextCRLF.cpp
+
+				
+
+SOURCE_MAIN_FILE = main.cpp
+
+# =========== OBJECT FILES ==========
+
+OBJ_MAIN = ${patsubst ${SRC_DIR}%.cpp, ${OBJ_DIR}%.o, ${SRC_MAIN}}
+
+# ========== COMPILE DIRECTIVES ======
+CC = c++
+
+CFLAGS = -std=c++98 -pedantic-errors -I./${HEADERS_DIR} -DTEMP_FILE_DIR='"${TEMP_DIR}"' -Wall -Wextra -Werror
+
+NAME = webserv
+
+TEMP_DIR = ./temp/
+
+all: ${NAME}
+
+${NAME}: ${OBJ_MAIN}
+	${CC} ${CFLAGS} ${OBJ_MAIN} -o $@
+
+${OBJ_DIR}:
+	@mkdir -p $@
+
+${TEMP_DIR}:
+	@mkdir -p $@
+
+${OBJ_DIR}%.o: ${SRC_DIR}%.cpp ${HEADER_FILE} Makefile | ${OBJ_DIR} ${TEMP_DIR}
+	@mkdir -p ${dir $@}
+	${CC} ${CFLAGS} -c $< -o $@
+
+clean:
+	rm -rf ${OBJ_DIR}
+	rm -rf ${TEMP_DIR}*
+
+fclean: clean
+	rm -rf ${NAME} ${TEMP_DIR}
+
+re: fclean all
+
+.PHONY: all clean fclean re
