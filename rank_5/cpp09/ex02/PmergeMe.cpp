@@ -1,103 +1,245 @@
 #include "PmergeMe.hpp"
 
-void PmergeMe::vectorsortRecursive(std::vector<PmergeMe::VecNode>& nodeVec)
-{
-	if (nodeVec.size() <= 1)
-		return ;
-
-	std::vector<PmergeMe::VecNode> bigVec;
-	std::vector<PmergeMe::VecNode> smallVec;
-	bool isLeftover = false;
-
-	if (nodeVec.size() % 2 != 0)
-	{
-		isLeftover = true;
-	}
-
-	for (size_t i = 0; i * 2 < nodeVec.size(); i++)
-	{
-		bigVec.push_back(PmergeMe::VecNode(nodeVec[i].value, nodeVec[i].original_index, i));
-		smallVec.push_back(PmergeMe::VecNode(nodeVec[i + 1].value, nodeVec[i + 1].original_index, i + 1));
-	}
-	/* two vector act as breaking into pairs */
-
-	unsigned temp;
-	for (size_t i = 0; i < bigVec.size(); i++)
-	{
-		/*  This is to make left side of pair bigger than right side*/
-		if (bigVec[i].value < smallVec[i].value)
-		{
-			temp = bigVec[i].value;
-			bigVec[i].value = smallVec[i].value;
-			smallVec[i].value = temp;
-		}
-	}
-
-	/* recursion of merge until we reach the smallest*/
-	PmergeMe::vectorsortRecursive(bigVec);
-
-	size_t jacobIndex = 1;
-	size_t end;
-	size_t start;
-	while (true)
-	{
-		start =  jacobsthalValue(jacobIndex);
-		end = jacobsthalValue(jacobIndex - 1);
-		while (start > end)
-		{
-			if (start > smallVec.size())
-			{
-
-			}
-			else
-			{
-				
-			}
-		}
-	}
-	/* according to document i need to do it with specific
-	sequence */
-
-}
+#include <iostream>
 
 void PmergeMe::vectorsort(const std::vector<unsigned int>& inputVec, std::vector<unsigned int>& outVec)
 {
+	comparison_count() = 0;
 
 	if (inputVec.size() == 0)
 		return ;
 
-	std::vector<PmergeMe::VecNode> nodeVec;
+	std::vector<std::vector<unsigned> > nodeVec;
 
 	/* put into dedicated structure */
+	std::vector<unsigned int> temp(1);
 	for (size_t i = 0; i < inputVec.size(); i++)
-		nodeVec.push_back(PmergeMe::VecNode(inputVec[i], i , i));
+	{
+		temp[0] = inputVec[i];
+		nodeVec.push_back(temp);
+	}
 
 	vectorsortRecursive(nodeVec);
 
 	/* copy the sorted to outvec*/
 	for (size_t i = 0; i < nodeVec.size(); i++)
-		outVec.push_back(nodeVec[i].value);
+	{
+		outVec.push_back(nodeVec[i][0]);
+	}
 
 	return ;
-
-	std::vector<PmergeMe::VecNode> smallVec;
-	bool isLeftover = false;
-	unsigned int leftnum = 0;
-
-	if (inputVec.size() % 2 != 0)
-	{
-		isLeftover = true;
-		leftnum = inputVec[inputVec.size() - 1];
-	}
-
-	for (size_t i = 0; i * 2 < inputVec.size(); i++)
-	{
-		bigVec.push_back(PmergeMe::VecNode(inputVec[i], i));
-		smallVec.push_back(PmergeMe::VecNode(inputVec[i + 1], i + 1));
-	}
-
-
 }
+
+void PmergeMe::dequesort(const std::vector<unsigned int>& inputVec, std::vector<unsigned int>& outVec)
+{
+	comparison_count() = 0;
+
+	if (inputVec.size() == 0)
+		return ;
+
+	std::deque<std::deque<unsigned> > nodeList;
+
+	/* put into dedicated structure */
+	std::deque<unsigned int> temp(1);
+	for (size_t i = 0; i < inputVec.size(); i++)
+	{
+		temp[0] = inputVec[i];
+		nodeList.push_back(temp);
+	}
+
+	dequesortRecursive(nodeList);
+
+	/* copy the sorted to outvec*/
+	std::deque<std::deque<unsigned int> >::const_iterator it = nodeList.begin();
+	while (it != nodeList.end())
+	{
+		outVec.push_back(it->front());
+		++it;
+	}
+	return ;
+}
+
+void PmergeMe::vectorsortRecursive(std::vector<std::vector<unsigned int> >& sortVec)
+{
+	if (sortVec.size() <= 1)
+		return ;
+
+	bool isLeftover = sortVec.size() % 2 == 1;
+	std::vector<unsigned int> leftover;
+	if (isLeftover)
+		leftover = sortVec[sortVec.size() - 1];
+
+	std::vector<std::vector<unsigned int> > temp(1);
+	std::vector<std::vector<unsigned int> > newPairVec;
+	for (size_t i = 0; i + 1 < sortVec.size(); i+=2)
+	{
+		if (sortVec[i][0] < sortVec[i + 1][0])
+		{
+			temp[0].insert(temp[0].end(), sortVec[i + 1].begin(), sortVec[i + 1].end());
+			temp[0].insert(temp[0].end(), sortVec[i].begin(), sortVec[i].end());
+			newPairVec.push_back(temp[0]);
+			temp[0].clear();
+		}
+		else
+		{
+			temp[0].insert(temp[0].end(), sortVec[i].begin(), sortVec[i].end());
+			temp[0].insert(temp[0].end(), sortVec[i + 1].begin(), sortVec[i + 1].end());
+			newPairVec.push_back(temp[0]);
+			temp[0].clear();
+		}
+		comparison_count()++;
+	}
+	sortVec.clear();
+
+	vectorsortRecursive(newPairVec);
+
+	std::vector<std::vector<unsigned int> > mainChain(1);
+	std::vector<std::vector<unsigned int> > sideChain(newPairVec.size());
+
+	/* add the b1 first*/
+	mainChain[0].insert(mainChain[0].end(), newPairVec[0].begin() + (newPairVec[0].size() / 2), newPairVec[0].end());
+	/*iterate through newPairVec*/
+	for (size_t j = 0; j < newPairVec.size(); j++)
+	{
+		temp[0].insert(temp[0].end(), newPairVec[j].begin(), newPairVec[j].begin() + (newPairVec[j].size() / 2));
+		mainChain.push_back(temp[0]);
+		temp[0].clear();
+		// mainChain[i].insert(mainChain[i].end(), newPairVec[j].begin(), newPairVec[j].begin() + (newPairVec[j].size() / 2));
+		sideChain[j].insert(sideChain[j].end(), newPairVec[j].begin() + (newPairVec[j].size() / 2), newPairVec[j].end());
+	}
+
+
+	size_t jacobIndex = 3;
+	size_t end;
+	size_t start;
+	size_t maxBinarySearch;
+	std::vector<std::vector<unsigned int> >::iterator found;
+	bool stop = false;
+	while (stop == false)
+	{
+		end = jacobsthalValue(jacobIndex - 1);
+		start = jacobsthalValue(jacobIndex);
+		maxBinarySearch = end + start;
+		while (start > end)
+		{
+			if (start > sideChain.size())
+			{
+				if (isLeftover)
+				{
+					found = binarySearchToInsert(mainChain, leftover[0], mainChain.size());
+					temp[0].insert(temp[0].end(), leftover.begin(), leftover.end());
+					mainChain.insert(found, temp.begin(), temp.end());
+					temp[0].clear();
+				}
+				start = sideChain.size();
+				stop = true;
+			}
+			--start;
+			if (start + 1 > end)
+			{
+				found = binarySearchToInsert(mainChain, sideChain[start][0], maxBinarySearch);
+				temp[0].insert(temp[0].end(), sideChain[start].begin(), sideChain[start].end());
+				mainChain.insert(found, temp.begin(), temp.end());
+				temp[0].clear();
+			}
+		}
+		jacobIndex++;
+	}
+
+	sortVec = mainChain;
+}
+
+void PmergeMe::dequesortRecursive(std::deque<std::deque<unsigned int> >& sortVec)
+{
+	if (sortVec.size() <= 1)
+		return ;
+
+	bool isLeftover = sortVec.size() % 2 == 1;
+	std::deque<unsigned int> leftover;
+	if (isLeftover)
+		leftover = sortVec[sortVec.size() - 1];
+
+	std::deque<std::deque<unsigned int> > temp(1);
+	std::deque<std::deque<unsigned int> > newPairVec;
+	for (size_t i = 0; i + 1 < sortVec.size(); i+=2)
+	{
+		if (sortVec[i][0] < sortVec[i + 1][0])
+		{
+			temp[0].insert(temp[0].end(), sortVec[i + 1].begin(), sortVec[i + 1].end());
+			temp[0].insert(temp[0].end(), sortVec[i].begin(), sortVec[i].end());
+			newPairVec.push_back(temp[0]);
+			temp[0].clear();
+		}
+		else
+		{
+			temp[0].insert(temp[0].end(), sortVec[i].begin(), sortVec[i].end());
+			temp[0].insert(temp[0].end(), sortVec[i + 1].begin(), sortVec[i + 1].end());
+			newPairVec.push_back(temp[0]);
+			temp[0].clear();
+		}
+		comparison_count()++;
+	}
+	sortVec.clear();
+
+	dequesortRecursive(newPairVec);
+
+	std::deque<std::deque<unsigned int> > mainChain(1);
+	std::deque<std::deque<unsigned int> > sideChain(newPairVec.size());
+
+	/* add the b1 first*/
+	mainChain[0].insert(mainChain[0].end(), newPairVec[0].begin() + (newPairVec[0].size() / 2), newPairVec[0].end());
+	/*iterate through newPairVec*/
+	for (size_t j = 0; j < newPairVec.size(); j++)
+	{
+		temp[0].insert(temp[0].end(), newPairVec[j].begin(), newPairVec[j].begin() + (newPairVec[j].size() / 2));
+		mainChain.push_back(temp[0]);
+		temp[0].clear();
+		// mainChain[i].insert(mainChain[i].end(), newPairVec[j].begin(), newPairVec[j].begin() + (newPairVec[j].size() / 2));
+		sideChain[j].insert(sideChain[j].end(), newPairVec[j].begin() + (newPairVec[j].size() / 2), newPairVec[j].end());
+	}
+
+
+	size_t jacobIndex = 3;
+	size_t end;
+	size_t start;
+	size_t maxBinarySearch;
+	std::deque<std::deque<unsigned int> >::iterator found;
+	bool stop = false;
+	while (stop == false)
+	{
+		end = jacobsthalValue(jacobIndex - 1);
+		start = jacobsthalValue(jacobIndex);
+		maxBinarySearch = end + start;
+		while (start > end)
+		{
+			if (start > sideChain.size())
+			{
+				if (isLeftover)
+				{
+					found = binarySearchToInsert(mainChain, leftover[0], mainChain.size());
+					temp[0].insert(temp[0].end(), leftover.begin(), leftover.end());
+					mainChain.insert(found, temp.begin(), temp.end());
+					temp[0].clear();
+				}
+				start = sideChain.size();
+				stop = true;
+			}
+			--start;
+			if (start + 1 > end)
+			{
+				found = binarySearchToInsert(mainChain, sideChain[start][0], maxBinarySearch);
+				temp[0].insert(temp[0].end(), sideChain[start].begin(), sideChain[start].end());
+				mainChain.insert(found, temp.begin(), temp.end());
+				temp[0].clear();
+			}
+		}
+		jacobIndex++;
+	}
+
+	sortVec = mainChain;
+}
+
+
 
 void PmergeMe::extractUINTfromStringVec(const std::vector<std::string>& numstring, std::vector<unsigned int>& outContainer)
 {
@@ -152,45 +294,57 @@ void PmergeMe::stringsplit(const std::string& toSplit, const std::string& charSe
 	}
 }
 
+size_t& comparison_count()
+{
+	static size_t count = 0;
+	return (count);
+}
+
 size_t PmergeMe::jacobsthalValue(size_t index)
 {
 	return (((1 << index) - (index % 2 == 0 ? 1 : - 1)) / 3);
 }
 
-/* ###################################################### */
-
-PmergeMe::VecNode::VecNode()
-:
-value(0),
-original_index(0),
-array_index(0)
-{}
-PmergeMe::VecNode::VecNode(const PmergeMe::VecNode& obj)
-:
-value(obj.value),
-original_index(obj.original_index),
-array_index(obj.array_index)
-{}
-PmergeMe::VecNode& PmergeMe::VecNode::operator=(const PmergeMe::VecNode& obj)
+/* return the iterator to immediately use with std::vector::insert()*/
+std::vector<std::vector<unsigned int> >::iterator PmergeMe::binarySearchToInsert(std::vector<std::vector<unsigned int> >& toSearch, unsigned int number, size_t size)
 {
-	if (this != &obj)
+	size_t left = 0;
+	size_t right = size > toSearch.size() ? toSearch.size() : size;
+	size_t mid;
+	while (left < right)
 	{
-		value = obj.value;
-		original_index = obj.original_index;
-		array_index = obj.array_index;
+		mid = left + ((right - left) / 2);
+		comparison_count()++;
+		if (toSearch[mid][0] < number)
+		{
+			left = mid + 1;
+		}
+		else
+			right = mid;
 	}
-	return (*this);
-}
-PmergeMe::VecNode::~VecNode()
-{}
-PmergeMe::VecNode::VecNode(unsigned int newvalue, size_t neworiginal_index, size_t newarrayindex)
-:
-value(newvalue),
-original_index(neworiginal_index),
-array_index(newarrayindex)
-{}
 
-/* ############################################ */
+	return (toSearch.begin() + left);
+}
+
+std::deque<std::deque<unsigned int> >::iterator PmergeMe::binarySearchToInsert(std::deque<std::deque<unsigned int> >& toSearch, unsigned int number, size_t size)
+{
+	size_t left = 0;
+	size_t right = size > toSearch.size() ? toSearch.size() : size;
+	size_t mid;
+	while (left < right)
+	{
+		mid = left + ((right - left) / 2);
+		comparison_count()++;
+		if (toSearch[mid].front() < number)
+			left = mid + 1;
+		else
+			right = mid;
+	}
+
+	return (toSearch.begin() + left);
+}
+
+/* ###################################################### */
 
 PmergeMe::PmergeMe()
 {}

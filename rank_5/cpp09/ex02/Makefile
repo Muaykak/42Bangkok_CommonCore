@@ -6,7 +6,7 @@ OBJ = ${SRC_FILE:.cpp=.o}
 HEADER_FILE =	PmergeMe.hpp \
 
 CC = c++
-CFLAGS = -pedantic-errors -std=c++98 -Wall -Wextra -Werror
+CFLAGS = -pedantic-errors -std=c++98 -Wall -Wextra -Werror # -fsanitize=address -fsanitize=undefined -g3
 
 NAME = PmergeMe
 
