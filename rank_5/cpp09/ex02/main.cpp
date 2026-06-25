@@ -26,7 +26,6 @@ int main(int argc, char** argv)
 {
 	try
 	{
-
 		std::vector<std::string> stringVec;
 		for (int i = 1; i < argc; i++)
 		{
@@ -35,6 +34,12 @@ int main(int argc, char** argv)
 
 		std::vector<unsigned int> out;
 		PmergeMe::extractUINTfromStringVec(stringVec, out);
+
+		if (out.size() == 0)
+		{
+			std::cerr << "Error: program takes atleast 1 number\n";
+			return (1);
+		}
 
 		std::cout << "Before:\t";
 		for (size_t i = 0; i < out.size(); i++)
@@ -82,5 +87,11 @@ int main(int argc, char** argv)
 		std::cerr << "Error\n";
 		return (1);
 	}
+
+}
+
+/* should provide some test */
+void test()
+{
 
 }

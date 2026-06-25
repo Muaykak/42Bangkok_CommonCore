@@ -28,12 +28,16 @@ BitcoinExchange::~BitcoinExchange()
 BitcoinExchange::BitcoinExchange(const std::string& databasePath)
 {
 	if (databasePath.empty())
-		throw BitcoinExchange::Exception(std::string("BitcoinExchange::databasePath: ") + databasePath + " must not empty");
+	{
+		return ;
+	}
 	_databasePath = databasePath;
 
 	std::ifstream file(databasePath.c_str());
 	if (file.is_open() == false)
-		throw BitcoinExchange::Exception(std::string("BitcoinExchange::databasePath: ") + databasePath + " cannot open to read");
+	{
+		return ;
+	}
 
 	std::string tempLine;
 	double value;
@@ -63,21 +67,20 @@ BitcoinExchange::BitcoinExchange(const std::string& databasePath)
 				lineCount++;
 				continue;
 			}
-			throw BitcoinExchange::Exception("line[" + toString(lineCount) + "]: " + e.what());
+			std::cerr << "line " << lineCount << ": " << e.what() << '\n';
 		}
 		lineCount++;
 	}
 	file.close();
-	if (_database.empty())
-		throw BitcoinExchange::Exception(std::string("BitcoinExchange::database file must not empty"));
+
+	// if (_database.empty())
+	// 	throw BitcoinExchange::Exception(std::string("BitcoinExchange::database file must not empty"));
 }
 
 void BitcoinExchange::executeExchangeRate(const std::string& exchangeRateDataFilePath) const
 {
 	try
 	{
-		if (_database.empty())
-
 		if (exchangeRateDataFilePath.empty())
 			throw BitcoinExchange::Exception(exchangeRateDataFilePath + " must not empty");
 
@@ -100,16 +103,24 @@ void BitcoinExchange::executeExchangeRate(const std::string& exchangeRateDataFil
 			}
 			try
 			{
+
 				splitdateandvalue(tempLine, " | ", date, value, checkExchangeValue);
-				found = _database.upper_bound(date);
-				/* upperbound step down by 1 would reach to
-				what we want*/
-				if (found == _database.begin())
-					std::cout << "Error: date too old\n";
+				if (!_database.empty())
+				{
+					found = _database.upper_bound(date);
+					/* upperbound step down by 1 would reach to
+					what we want*/
+					if (found == _database.begin())
+						std::cerr << "Error: \"" << date << "\" => date too old\n";
+					else
+					{
+						--found;
+						printExchangeRate(date, value, found->second);
+					}
+				}
 				else
 				{
-					--found;
-					printExchangeRate(date, value, found->second);
+					std::cerr << "Error: \"" << date << "\" => database is empty\n";
 				}
 			}
 			catch (const BitcoinExchange::Exception &e)
@@ -119,7 +130,7 @@ void BitcoinExchange::executeExchangeRate(const std::string& exchangeRateDataFil
 					lineCount++;
 					continue;
 				}
-				std::cout << "Error: " << e.what() << '\n';
+				std::cout << "Error: \"" << tempLine << "\" => " << e.what() << '\n';
 			}
 			lineCount++;
 		}
